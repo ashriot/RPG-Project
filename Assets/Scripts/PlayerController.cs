@@ -14,6 +14,8 @@ public class PlayerController : MonoBehaviour {
     private Vector3 bottomLeftLimit;
     private Vector3 topRightLimit;
 
+    private Vector2 movement;
+
     // Start is called before the first frame update
     void Start() {
         if (instance == null) {
@@ -28,12 +30,10 @@ public class PlayerController : MonoBehaviour {
 
     // Update is called once per frame
     void Update() {
-        if (canMove) {
-            rb.velocity = new Vector2(Input.GetAxisRaw("Horizontal"), Input.GetAxisRaw("Vertical")) * movementSpeed;
-        }
-        else {
-            rb.velocity = Vector2.zero;
-        }
+        if (!canMove) return;
+        
+        movement.x = Input.GetAxisRaw("Horizontal");
+        movement.y = Input.GetAxisRaw("Vertical");
 
         animator.SetFloat("moveX", rb.velocity.x);
         animator.SetFloat("moveY", rb.velocity.y);
@@ -50,6 +50,14 @@ public class PlayerController : MonoBehaviour {
         transform.position = new Vector3(Mathf.Clamp(transform.position.x, bottomLeftLimit.x, topRightLimit.x),
         Mathf.Clamp(transform.position.y, bottomLeftLimit.y,
         topRightLimit.y), transform.position.z);
+    }
+
+    private void FixedUpdate() {
+        if (!canMove) {
+            rb.velocity = Vector2.zero;
+            return;
+        }
+        rb.MovePosition(rb.position + movement * movementSpeed * Time.fixedDeltaTime);
     }
 
     public void SetBounds(Vector3 bottomLeft, Vector3 topRight) {

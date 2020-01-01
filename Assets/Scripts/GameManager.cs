@@ -6,6 +6,7 @@ public class GameManager : MonoBehaviour {
     public static GameManager instance;
 
     public CharacterStats[] playerStats;
+    public BattleCharacter[] heroes;
     public bool gameMenuOpen, dialogActive, fadingBetweenAreas, shopActive, battleActive;
 
 
@@ -146,19 +147,19 @@ public class GameManager : MonoBehaviour {
         PlayerPrefs.SetFloat("Player_Position_z", PlayerController.instance.transform.position.z);
 
         // character data
-        for (var i = 0; i < playerStats.Length; i++) {
-            PlayerPrefs.SetInt("Player_" + playerStats[i].characterName + "_Active", playerStats[i].gameObject.activeInHierarchy ? 1 : 0);
+        for (var i = 0; i < heroes.Length; i++) {
+            PlayerPrefs.SetInt("Player_" + heroes[i].name + "_Active", heroes[i].gameObject.activeInHierarchy ? 1 : 0);
 
-            PlayerPrefs.SetInt("Player_" + playerStats[i].characterName + "_Level", playerStats[i].level);
-            PlayerPrefs.SetInt("Player_" + playerStats[i].characterName + "_CurrentXp", playerStats[i].currentXp);
-            PlayerPrefs.SetInt("Player_" + playerStats[i].characterName + "_CurrentHp", playerStats[i].currentHp);
-            PlayerPrefs.SetInt("Player_" + playerStats[i].characterName + "_MaxHp", playerStats[i].maxHp);
-            PlayerPrefs.SetInt("Player_" + playerStats[i].characterName + "_CurrentMp", playerStats[i].currentMp);
-            PlayerPrefs.SetInt("Player_" + playerStats[i].characterName + "_MaxMp", playerStats[i].maxMp);
-            PlayerPrefs.SetInt("Player_" + playerStats[i].characterName + "_Attack", playerStats[i].attack);
-            PlayerPrefs.SetInt("Player_" + playerStats[i].characterName + "_Defense", playerStats[i].defense);
-            PlayerPrefs.SetInt("Player_" + playerStats[i].characterName + "_Magic", playerStats[i].magic);
-            PlayerPrefs.SetInt("Player_" + playerStats[i].characterName + "_Speed", playerStats[i].speed);
+            PlayerPrefs.SetInt("Player_" + heroes[i].name + "_Level", heroes[i].level);
+            PlayerPrefs.SetInt("Player_" + heroes[i].name + "_CurrentXp", heroes[i].currentXp);
+            PlayerPrefs.SetInt("Player_" + heroes[i].name + "_CurrentHp", heroes[i].currentHp);
+            PlayerPrefs.SetInt("Player_" + heroes[i].name + "_MaxHp", heroes[i].maxHp);
+            PlayerPrefs.SetInt("Player_" + heroes[i].name + "_CurrentMp", heroes[i].currentMp);
+            PlayerPrefs.SetInt("Player_" + heroes[i].name + "_MaxMp", heroes[i].maxMp);
+            PlayerPrefs.SetInt("Player_" + heroes[i].name + "_Attack", heroes[i].attack);
+            PlayerPrefs.SetInt("Player_" + heroes[i].name + "_Defense", heroes[i].defense);
+            PlayerPrefs.SetInt("Player_" + heroes[i].name + "_Magic", heroes[i].magic);
+            PlayerPrefs.SetInt("Player_" + heroes[i].name + "_Speed", heroes[i].speed);
         }
 
         // inventory data

@@ -67,7 +67,7 @@ public class GameMenu : MonoBehaviour {
                 levelTexts[i].text = "Lv: " + playerStats[i].level;
                 xpSliders[i].maxValue = playerStats[i].xpToNextLevel[playerStats[i].level];
                 xpSliders[i].value = playerStats[i].currentXp;
-                characterImages[i].sprite = playerStats[i].characterImage;
+                characterImages[i].sprite = playerStats[i].image.sprite;
              } else {
                  characterStats[i].SetActive(false);
              }
@@ -122,7 +122,7 @@ public class GameMenu : MonoBehaviour {
         statusArmorPower.text = playerStats[id].speed.ToString();
 
         statusXp.text = (playerStats[id].xpToNextLevel[playerStats[id].level] - playerStats[id].currentXp).ToString("N0");
-        statusImage.sprite = playerStats[id].characterImage;
+        statusImage.sprite = playerStats[id].image.sprite;
     }
 
     public void ShowItems() {

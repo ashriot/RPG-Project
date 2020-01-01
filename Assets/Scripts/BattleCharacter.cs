@@ -3,12 +3,13 @@ using UnityEngine;
 
 public class BattleCharacter : MonoBehaviour {
 
-    public bool isPlayer;
-    public string[] battleActions;
-    public string characterName;
-    public int currentHp, maxHp, currentMp, maxMp, attack, defense, magic, speed;
+    public new string name;
+    public int level, currentXp, currentHp, maxHp, currentMp, maxMp, attack, defense, magic, speed;
     public float timeTillTurn;
+    public bool isPlayer;
+    public bool isActive;
     public bool isDead;
+    public string[] battleActions;
     public List<StatusEffect> statusEffects;
 
     public SpriteRenderer spriteRenderer;
@@ -19,10 +20,9 @@ public class BattleCharacter : MonoBehaviour {
 
     private bool shouldFade;
 
-
     // Start is called before the first frame update
     void Start() {
-        
+
     }
 
     // Update is called once per frame

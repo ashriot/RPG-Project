@@ -53,6 +53,9 @@ MonoBehaviour:
   - {fileID: 2794116393275220981}
   - {fileID: 6058270437722462381}
   - {fileID: 6845884762394909995}
+  heroes:
+  - {fileID: 7062032898853685758, guid: 0516b0096df868f419be368bee80226a, type: 3}
+  - {fileID: 7062032898853685758, guid: 10777fc4ecc50704d8d7a3981a2e510e, type: 3}
   gameMenuOpen: 0
   dialogActive: 0
   fadingBetweenAreas: 0
@@ -181,12 +184,10 @@ MonoBehaviour:
   currentMp: 0
   maxMp: 10
   mpLevelBonus: 
-  strength: 15
+  attack: 0
   defense: 12
-  weaponPower: 0
-  armorPower: 0
-  equippedWeapon: 
-  equippedArmor: 
+  magic: 0
+  speed: 0
   characterImage: {fileID: 21300000, guid: e0ddba6d3fcf21f49949fcc95c849aac, type: 3}
 --- !u!1 &2971220234566456335
 GameObject:
@@ -242,12 +243,10 @@ MonoBehaviour:
   currentMp: 35
   maxMp: 35
   mpLevelBonus: 
-  strength: 20
+  attack: 0
   defense: 25
-  weaponPower: 0
-  armorPower: 0
-  equippedWeapon: 
-  equippedArmor: 
+  magic: 0
+  speed: 0
   characterImage: {fileID: 21300000, guid: e0ddba6d3fcf21f49949fcc95c849aac, type: 3}
 --- !u!1 &4939151122915199544
 GameObject:
@@ -303,12 +302,10 @@ MonoBehaviour:
   currentMp: 0
   maxMp: 10
   mpLevelBonus: 
-  strength: 15
+  attack: 0
   defense: 12
-  weaponPower: 0
-  armorPower: 0
-  equippedWeapon: 
-  equippedArmor: 
+  magic: 0
+  speed: 0
   characterImage: {fileID: 21300000, guid: e0ddba6d3fcf21f49949fcc95c849aac, type: 3}
 --- !u!1 &6883138967183158572
 GameObject:
@@ -364,11 +361,9 @@ MonoBehaviour:
   currentMp: 20
   maxMp: 20
   mpLevelBonus: 
-  strength: 15
+  attack: 0
   defense: 15
-  weaponPower: 0
-  armorPower: 0
-  equippedWeapon: 
-  equippedArmor: 
+  magic: 0
+  speed: 0
   characterImage: {fileID: 7152930139536384079, guid: 5c39a1b1ee50f2c4ab3ecf8bd7ab4280,
     type: 3}

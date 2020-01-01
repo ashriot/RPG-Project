@@ -1,0 +1,31 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1f4411be0abc1a642b41a3d9a5265b59, type: 3}
+  m_Name: Woody
+  m_EditorClassIdentifier: 
+  name: Woody
+  level: 1
+  currentXp: 0
+  currentHp: 250
+  maxHp: 250
+  currentMp: 0
+  maxMp: 0
+  attack: 10
+  defense: 15
+  magic: 12
+  speed: 8
+  timeTillTurn: 0
+  isPlayer: 1
+  isActive: 1
+  isDead: 0
+  battleActions:
+  - Ice

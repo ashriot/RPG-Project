@@ -1,4 +1,5 @@
 ﻿using UnityEngine;
+using UnityEngine.UI;
 
 public class CharacterStats : MonoBehaviour {
 
@@ -18,7 +19,7 @@ public class CharacterStats : MonoBehaviour {
     public int defense;
     public int magic;
     public int speed;
-    public Sprite characterImage;
+    public Image image;
 
     // Start is called before the first frame update
     void Start() {
