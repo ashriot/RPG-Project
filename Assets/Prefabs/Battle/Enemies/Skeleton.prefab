@@ -96,21 +96,22 @@ MonoBehaviour:
   name: Skeleton
   level: 1
   currentXp: 0
-  currentHp: 75
-  maxHp: 75
+  currentHp: 150
+  maxHp: 150
   currentMp: 0
   maxMp: 0
-  attack: 4
-  defense: 6
-  magic: 5
-  speed: 5
+  attack: 7
+  defense: 10
+  magic: 6
+  speed: 7
   timeTillTurn: 0
   isPlayer: 0
   isActive: 1
   isDead: 0
   battleActions:
-  - Plasma
-  - Fire
+  - Power Attack
+  - Attack
+  - Attack
   statusEffects: []
   spriteRenderer: {fileID: 3776686873378311067}
   aliveSprite: {fileID: 6634202828824015816, guid: 5c39a1b1ee50f2c4ab3ecf8bd7ab4280,

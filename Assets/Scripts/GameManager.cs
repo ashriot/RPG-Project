@@ -29,9 +29,9 @@ public class GameManager : MonoBehaviour {
     // Update is called once per frame
     void Update() {
         if (gameMenuOpen || dialogActive || fadingBetweenAreas || shopActive || battleActive) {
-            PlayerController.instance.canMove = false;
+            // PlayerController.instance.canMove = false;
         } else {
-            PlayerController.instance.canMove = true;
+            // PlayerController.instance.canMove = true;
         }
 
         if (Input.GetKeyDown(KeyCode.J)) {
@@ -53,7 +53,7 @@ public class GameManager : MonoBehaviour {
 
     public Item GetItemDetails(string itemName) {
         for (var i = 0; i < referenceItems.Length; i++) {
-            if (referenceItems[i].itemName == itemName) {
+            if (referenceItems[i].itemName.ToLower() == itemName.ToLower()) {
                 return referenceItems[i];
             }
         }

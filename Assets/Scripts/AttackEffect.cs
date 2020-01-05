@@ -7,7 +7,7 @@ public class AttackEffect : MonoBehaviour {
 
     // Start is called before the first frame update
     void Start() {
-        AudioManager.instance.PlaySfx(sfxId);
+        AudioManager.instance.PlaySfx("blocked");
     }
 
     // Update is called once per frame

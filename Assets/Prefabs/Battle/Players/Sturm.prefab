@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 3776686873378311067}
   - component: {fileID: 7062032898853685758}
   m_Layer: 0
-  m_Name: Erdrick
+  m_Name: Sturm
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -26,7 +26,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 9090969631251775434}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 5, y: 1.74, z: 0}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
@@ -70,7 +70,7 @@ SpriteRenderer:
   m_SortingLayerID: 437314879
   m_SortingLayer: 4
   m_SortingOrder: 0
-  m_Sprite: {fileID: -4445699719359273135, guid: 5c39a1b1ee50f2c4ab3ecf8bd7ab4280,
+  m_Sprite: {fileID: 1649148736485151496, guid: 610fefa795371464083c0cb9f59ba31e,
     type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
@@ -95,26 +95,26 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   name: Sturm
-  level: 1
+  level: 12
   currentXp: 0
-  currentHp: 200
-  maxHp: 200
-  currentMp: 15
-  maxMp: 15
-  attack: 15
-  defense: 12
-  magic: 10
-  speed: 12
+  currentHp: 250
+  maxHp: 250
+  currentMp: 40
+  maxMp: 40
+  attack: 20
+  defense: 15
+  magic: 7
+  speed: 10
   timeTillTurn: 0
   isPlayer: 1
   isActive: 1
   isDead: 0
   battleActions:
-  - Slash
+  - Power Attack
   statusEffects: []
   spriteRenderer: {fileID: 3776686873378311067}
-  aliveSprite: {fileID: -2554384418998969393, guid: 610fefa795371464083c0cb9f59ba31e,
-    type: 3}
+  portrait: {fileID: 21300000, guid: dc94ec32f14f6314697b5b99489cccb8, type: 3}
+  aliveSprite: {fileID: 21300000, guid: 1bdf2187e85b0d84c8518105b806fc6e, type: 3}
   deadSprite: {fileID: 8888318505984086984, guid: 5c39a1b1ee50f2c4ab3ecf8bd7ab4280,
     type: 3}
   fadeSpeed: 1

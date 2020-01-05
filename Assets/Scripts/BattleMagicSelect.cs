@@ -4,6 +4,7 @@ using UnityEngine.UI;
 public class BattleMagicSelect : MonoBehaviour {
 
     public string magicName;
+    public string description;
     public int mpCost;
     public Image image;
     public Text nameText;
@@ -26,13 +27,9 @@ public class BattleMagicSelect : MonoBehaviour {
             Debug.Log(currentTurn.name + " doesn't have enough MP. (Cost: " + mpCost + ")");
             BattleManager.instance.battleNotification.text.text = "Not Enough MP!";
             BattleManager.instance.battleNotification.Activate();
-            BattleManager.instance.magicMenu.SetActive(false);
             return;
         }
 
-        BattleManager.instance.magicMenu.SetActive(false);
         BattleManager.instance.OpenTargetMenu(magicName);
-
-        currentTurn.currentMp -= mpCost;
     }
 }

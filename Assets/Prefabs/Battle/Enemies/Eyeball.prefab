@@ -96,20 +96,20 @@ MonoBehaviour:
   name: Eyeball
   level: 1
   currentXp: 0
-  currentHp: 50
-  maxHp: 50
+  currentHp: 80
+  maxHp: 80
   currentMp: 0
   maxMp: 0
-  attack: 7
-  defense: 4
-  magic: 5
-  speed: 5
+  attack: 6
+  defense: 5
+  magic: 11
+  speed: 9
   timeTillTurn: 0
   isPlayer: 0
   isActive: 1
   isDead: 0
   battleActions:
-  - Plasma
+  - Ice
   - Fire
   statusEffects: []
   spriteRenderer: {fileID: 3776686873378311067}

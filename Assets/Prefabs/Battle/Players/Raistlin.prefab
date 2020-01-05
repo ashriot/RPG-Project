@@ -26,7 +26,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 9090969631251775434}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 5, y: 1.74, z: 0}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
@@ -70,7 +70,7 @@ SpriteRenderer:
   m_SortingLayerID: 437314879
   m_SortingLayer: 4
   m_SortingOrder: 0
-  m_Sprite: {fileID: 2319226659321874777, guid: 610fefa795371464083c0cb9f59ba31e,
+  m_Sprite: {fileID: -4455212021498299619, guid: 04854a5f96e25cf4fbef374e1965bd3b,
     type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
@@ -99,23 +99,24 @@ MonoBehaviour:
   currentXp: 0
   currentHp: 180
   maxHp: 180
-  currentMp: 45
-  maxMp: 45
-  attack: 11
-  defense: 15
-  magic: 12
-  speed: 8
+  currentMp: 120
+  maxMp: 120
+  attack: 9
+  defense: 7
+  magic: 25
+  speed: 14
   timeTillTurn: 0
   isPlayer: 1
   isActive: 1
   isDead: 0
   battleActions:
-  - Ice
   - Fire
+  - Ice
   - Plasma
   statusEffects: []
   spriteRenderer: {fileID: 3776686873378311067}
-  aliveSprite: {fileID: 2319226659321874777, guid: 610fefa795371464083c0cb9f59ba31e,
+  portrait: {fileID: 21300000, guid: f19999ea541682646a218b9b2b5936fa, type: 3}
+  aliveSprite: {fileID: -4455212021498299619, guid: 04854a5f96e25cf4fbef374e1965bd3b,
     type: 3}
-  deadSprite: {fileID: 21300046, guid: e0ddba6d3fcf21f49949fcc95c849aac, type: 3}
+  deadSprite: {fileID: 21300000, guid: 360c58bc87f61df49ada0a877e99a13b, type: 3}
   fadeSpeed: 1

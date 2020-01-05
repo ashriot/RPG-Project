@@ -22,7 +22,7 @@ public class BattleStarter : MonoBehaviour {
 
     // Update is called once per frame
     void Update() {
-        if (inZone && PlayerController.instance.canMove) {
+        if (inZone /* && PlayerController.instance.canMove */) {
             if (Input.GetAxisRaw("Horizontal") != 0 || Input.GetAxisRaw("Vertical") != 0) {
                 betweenBattlesCounter -= Time.deltaTime;
             }

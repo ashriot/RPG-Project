@@ -42,13 +42,13 @@ public class GameMenu : MonoBehaviour {
             if (gameMenu.activeInHierarchy) {
                 gameMenu.GetComponent<MenuFade>().FadeOut();
                 CloseMenu();
-                AudioManager.instance.PlaySfx(4);
+                AudioManager.instance.PlaySfx("test");
             } else {
                 gameMenu.SetActive(true);
                 gameMenu.GetComponent<MenuFade>().FadeIn();
                 UpdateMainStats();
                 GameManager.instance.gameMenuOpen = true;
-                AudioManager.instance.PlaySfx(5);
+                AudioManager.instance.PlaySfx("test");
             }
         }
     }
@@ -192,6 +192,6 @@ public class GameMenu : MonoBehaviour {
     }
     
     public void PlayButtonSound() {
-        AudioManager.instance.PlaySfx(4);
+        AudioManager.instance.PlaySfx("test");
     }
 }

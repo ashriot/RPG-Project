@@ -77,9 +77,3 @@ public class Item : MonoBehaviour {
         GameManager.instance.RemoveItem(itemName);
     }
 }
-
-public enum ItemType {
-    item,
-    weapon,
-    armor
-}

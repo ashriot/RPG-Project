@@ -13,6 +13,7 @@ public class BattleCharacter : MonoBehaviour {
     public List<StatusEffect> statusEffects;
 
     public SpriteRenderer spriteRenderer;
+    public Sprite portrait;
     public Sprite aliveSprite;
     public Sprite deadSprite;
 

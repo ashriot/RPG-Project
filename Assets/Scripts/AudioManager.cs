@@ -1,9 +1,10 @@
-﻿using UnityEngine;
+﻿using System;
+using UnityEngine;
 
 public class AudioManager : MonoBehaviour {
 
-    public AudioSource[] bgm;
-    public AudioSource[] sfx;
+    public AudioSource[] bgms;
+    public AudioSource[] sfxs;
 
     public static AudioManager instance;
 
@@ -11,6 +12,7 @@ public class AudioManager : MonoBehaviour {
     void Start() {
         instance = this;
         DontDestroyOnLoad(gameObject);
+        PlayBgm(0);
     }
 
     // Update is called once per frame
@@ -19,27 +21,51 @@ public class AudioManager : MonoBehaviour {
     }
 
     public void PlayBgm(int id) {
-        if (!bgm[id].isPlaying) {
+        if (!bgms[id].isPlaying) {
             StopMusic();
-            if (id < bgm.Length) {
-                bgm[id].Play();
+            if (id < bgms.Length) {
+                bgms[id].volume = 0.15f;
+                bgms[id].Play();
             } else {
                 Debug.LogError("BGM id '" + id + "' does not exist!");
             }
         }
     }
 
-    public void PlaySfx(int id) {
-        if (id < sfx.Length) {
-            sfx[id].Play();
-        } else {
-            Debug.LogError("SFX id '" + id + "' does not exist!");
-        }
+    public void PlaySfx(string name) {
+        // var sfx = Array.Find(sfxs, s => s.name == name);
+         if (name == "grass") {
+            sfxs[2].Play();
+         } else if (name == "blocked") {
+            sfxs[1].Play();
+         } else if (name == "door") {
+            sfxs[4].Play();
+         } else if (name == "chest") {
+            sfxs[5].Play();
+         } else if (name == "loot") {
+            sfxs[6].Play();
+         }
+        // } else {
+        //     Debug.LogError("SFX named '" + name + "' does not exist!");
+        // }
     }
 
     public void StopMusic() {
-        for (var i = 0; i < bgm.Length; i++) {
-            bgm[i].Stop();
+        for (var i = 0; i < bgms.Length; i++) {
+            bgms[i].Stop();
+        }
+    }
+
+    public void Mute(string name) {
+        if (name == "blocked") {
+            sfxs[1].mute = true;
+        }
+    }
+
+    public void UnMute(string name) {
+        if (name == "blocked") {
+            sfxs[1].Stop();
+            sfxs[1].mute = false;
         }
     }
 }

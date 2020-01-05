@@ -96,20 +96,20 @@ MonoBehaviour:
   name: Spider
   level: 1
   currentXp: 0
-  currentHp: 100
-  maxHp: 100
+  currentHp: 125
+  maxHp: 125
   currentMp: 0
   maxMp: 0
-  attack: 7
-  defense: 4
-  magic: 5
-  speed: 5
+  attack: 14
+  defense: 6
+  magic: 2
+  speed: 11
   timeTillTurn: 0
   isPlayer: 0
   isActive: 1
   isDead: 0
   battleActions:
-  - Plasma
+  - Attack
   - Fire
   statusEffects: []
   spriteRenderer: {fileID: 3776686873378311067}

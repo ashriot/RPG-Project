@@ -70,7 +70,8 @@ SpriteRenderer:
   m_SortingLayerID: 254992725
   m_SortingLayer: 2
   m_SortingOrder: -5
-  m_Sprite: {fileID: 21300014, guid: 0bc4ed27aef38a44bb72e80f9beb5326, type: 3}
+  m_Sprite: {fileID: 3298885011294875820, guid: 8c500e45b904a74468ea62831fc2b0dc,
+    type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -97,11 +98,14 @@ MonoBehaviour:
   itemName: Iron Armor
   description: Armor made of iron.
   goldValue: 125
-  itemSprite: {fileID: 21300014, guid: 0bc4ed27aef38a44bb72e80f9beb5326, type: 3}
+  itemSprite: {fileID: 3298885011294875820, guid: 8c500e45b904a74468ea62831fc2b0dc,
+    type: 3}
   potencyValue: 0
   affectHp: 0
   affectMp: 0
-  affectStrength: 0
-  affectDefense: 0
+  boostAttack: 0
+  boostDefense: 0
+  boostMagic: 0
+  boostSpeed: 0
   weaponPower: 0
   armorPower: 10

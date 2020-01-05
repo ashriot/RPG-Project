@@ -9,7 +9,7 @@ public class GameOver : MonoBehaviour {
     // Start is called before the first frame update
     void Start() {
         UIFade.instance.FadeFromBlack();
-        AudioManager.instance.PlayBgm(4);
+        AudioManager.instance.PlaySfx("test");
 
         PlayerController.instance.gameObject.SetActive(false);
         GameMenu.instance.gameObject.SetActive(false);
