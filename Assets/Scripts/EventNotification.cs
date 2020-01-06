@@ -20,8 +20,6 @@ public class EventNotification : MonoBehaviour {
         var bottomLeftLimit = PlayerController.instance.groundTilemap.localBounds.min;
         var topRightLimit = PlayerController.instance.groundTilemap.localBounds.max;
 
-        Debug.Log("bottom-left: " + bottomLeftLimit + ", top-right: " + topRightLimit);
-        Debug.Log("position: " + transform.localPosition);
         if (transform.position.y > 900f) {
             direction = -1;
         }
@@ -37,18 +35,22 @@ public class EventNotification : MonoBehaviour {
             notificationText.color = fade;
 
             if(fade.a <=.1) {
+                PlayerController.instance.noteCooldown = false;
                 Destroy (gameObject);
             }
         }
         transform.position += new Vector3(0f, direction * moveSpeed * Time.deltaTime, 0f);
     }
 
-    public void GenerateNote(string message, string itemName = null) {
-        if (string.IsNullOrEmpty(itemName)) {
-            image.sprite = null;
-        } else {
-            image.sprite = GameManager.instance.GetItemDetails(itemName).GetComponent<SpriteRenderer>().sprite;
-        }
+    public void GenerateLootNote(string itemId) {
+        var item = InventoryManager.instance.FindItemReference(itemId);
+
+        image.sprite = item.sprite;
+        notificationText.text = item.name;
+    }
+
+    public void GenerateNote(string message) {
+        image.color = Color.clear;
         notificationText.text = message;
     }
 }

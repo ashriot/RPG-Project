@@ -1,30 +1,45 @@
 ﻿using System.Collections;
 using UnityEngine;
+using UnityEngine.EventSystems;
 using UnityEngine.Tilemaps;
 
 public class PlayerController : MonoBehaviour {
 
     public static PlayerController instance;
 
-    public Tilemap groundTilemap;
-    public Tilemap obstaclesTilemap;
     public Animator animator;
     public GameObject[] partyMembers;
+    public EventNotification note;
+    public Tilemap groundTilemap;
+    public Tilemap obstaclesTilemap;
     public bool isMoving = false;
     public bool onCooldown = false;
     public bool onExit = false;
-    public int keyCount = 0;
+    public bool uiOpen = false;
     public string areaTransitionName;
-    public EventNotification note;
+    public bool noteCooldown;
 
+    private int goldKeyCount;
     private int unitsMoving = 0;
     private float moveTime = .2f;
     private const float COOLDOWN = .2f;
     private Vector3 bottomLeftLimit;
     private Vector3 topRightLimit;
 
+    private static StandaloneInputModuleV2 currentInput;
+    private StandaloneInputModuleV2 CurrentInput {
+        get {
+            if (currentInput == null) {
+                currentInput = EventSystem.current.currentInputModule as StandaloneInputModuleV2;
+                if (currentInput == null) {
+                    Debug.LogError("Missing StandaloneInputModuleV2.");
+                    // some error handling
+                }
+            }
+            return currentInput;
+        }
+    }
     void Awake () {
-        //Singleton
         if (instance == null) {
             instance = this;
         } else {
@@ -36,12 +51,66 @@ public class PlayerController : MonoBehaviour {
     }
 
     void Start() {
-        StatusManager.instance.keyCount.text = keyCount.ToString();
+        goldKeyCount = GameManager.instance.currentGoldKeys;
     }
-	
-	void FixedUpdate () {
+
+    void Update() {
+        if (isMoving || onCooldown || onExit || uiOpen ) return;
+
+        if (Input.GetMouseButton(0)) {
+            if (FindObjectOfType<EventSystem>().IsPointerOverGameObject()){
+                var currentGO = CurrentInput.GameObjectUnderPointer();
+                if (currentGO.layer == 8) { // Clickables Layer
+                    // if (noteCooldown) return;
+                    // noteCooldown = true;
+                    // var clickable = currentGO.GetComponent<Clickable>();
+                    // StatusManager.instance.Notification(clickable.GetInfo());
+                    // return;
+                } else if (currentGO.layer == 5 || currentGO.layer == 2) { // UI & Ignore Raycast Layers
+                    return;
+                }
+            }
+
+            var position = Camera.main.ScreenToWorldPoint(Input.mousePosition);
+
+            var horizontal = 0;
+            var variance = .75f;
+            var deltaX = position.x - transform.position.x;
+            if (deltaX > variance) {
+                horizontal = 1;
+            } else if (deltaX < -variance) {
+                horizontal = -1;
+            }
+
+            var vertical = 0;
+            var deltaY = position.y - transform.position.y;
+            if (deltaY > variance) {
+                vertical = 1;
+            } else if (deltaY < -variance) {
+                vertical = -1;
+            }
+
+            //We can't go in both directions at the same time
+            var comparison = Mathf.Abs(deltaX) - Mathf.Abs(deltaY);
+            if ( Mathf.Abs(deltaX) > Mathf.Abs(deltaY) ) {
+                vertical = 0;
+            } else if (Mathf.Abs(deltaY) > Mathf.Abs(deltaX)) {
+                horizontal = 0;
+            }
+
+            //If there's a direction, we are trying to move.
+            if (horizontal != 0 || vertical != 0) {
+                animator.SetFloat("moveX", horizontal);
+                animator.SetFloat("moveY", vertical);
+                Move(horizontal, vertical);
+            }
+
+        }
+    }
+
+	private void FixedUpdate () {
         //We do nothing if the player is still moving.
-        if (isMoving || onCooldown || onExit ) return;
+        if (isMoving || onCooldown || onExit || uiOpen ) return;
 
         //To store move directions.
         int horizontal = 0;
@@ -60,12 +129,12 @@ public class PlayerController : MonoBehaviour {
         if (horizontal != 0 || vertical != 0) {
             animator.SetFloat("moveX", horizontal);
             animator.SetFloat("moveY", vertical);
-
             Move(horizontal, vertical);
         }
 	}
 
     private void Move(int xDir, int yDir) {
+        // Debug.Log("(" + xDir + ", " + yDir + ")");
         var cd = COOLDOWN;
         Vector2 startTile = transform.position;
         Vector2 endTile = startTile + new Vector2(xDir, yDir);
@@ -135,7 +204,7 @@ public class PlayerController : MonoBehaviour {
 
         end = transform.position + ((end - transform.position) / 5);
         float sqrRemainingDistance = (transform.position - end).sqrMagnitude;
-        float inverseMoveTime = (1 / (moveTime*2) );
+        float inverseMoveTime = (1 / (moveTime * 3) );
 
         while (sqrRemainingDistance > float.Epsilon) {
             Vector3 newPosition = Vector3.MoveTowards(transform.position, end, inverseMoveTime * Time.deltaTime);
@@ -258,7 +327,7 @@ public class PlayerController : MonoBehaviour {
             Door door = coll.gameObject.GetComponent<Door>();
             //If the door is locked and we can unlock it
             if (door.isLocked) {
-                if (keyCount > 0) {
+                if (goldKeyCount > 0) {
                     AdjustKeys(-1);
                     door.Unlock();
                 }
@@ -289,7 +358,7 @@ public class PlayerController : MonoBehaviour {
             // if (!chest.isUnlocked) {
             //     chest.Unlock();
             if (!chest.isOpened) {
-                if (chest.isLocked && keyCount > 0) {
+                if (chest.isLocked && goldKeyCount > 0) {
                     AdjustKeys(-1);
                     chest.Unlock();
                 } else if (!chest.isLocked) {
@@ -336,7 +405,7 @@ public class PlayerController : MonoBehaviour {
         // }
         else if ( coll.tag == "Key" ) {
             Debug.Log("Key picked up!");
-            StatusManager.instance.LootNotification("Gold Key");
+            GameMenu.instance.LootNotification("goldKey");
             AdjustKeys(1);
             if (AudioManager.instance != null)
                 AudioManager.instance.PlaySfx("loot");
@@ -379,7 +448,6 @@ public class PlayerController : MonoBehaviour {
     }
 
     public void AdjustKeys(int amount) {
-        keyCount += amount;
-        StatusManager.instance.keyCount.text = keyCount.ToString();
+        GameManager.instance.AdjustKeys(amount);
     }
 }

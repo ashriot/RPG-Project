@@ -6,176 +6,161 @@ public class GameMenu : MonoBehaviour {
 
     public static GameMenu instance;
 
-    public string mainMenuSceneName;
-    public GameObject gameMenu;
-    public GameObject itemCharacterSelect;
-    public GameObject[] windows;
-    public GameObject[] statusButtons;
-
-    private CharacterStats[] playerStats;
-
-    public Text[] nameTexts, hpTexts, mpTexts, levelTexts, xpTexts;
-    public Slider[] xpSliders;
-    public Image[] characterImages;
-    public GameObject[] characterStats;
-
-    public Text statusName, statusLevel, statusHp, statusMp, statusStrength, statusDefense, statusEquippedWeapon,
-        statusWeaponPower, statusEquippedArmor, statusArmorPower, statusXp;
-    public Image statusImage;
-
-    public ItemButton[] itemButtons;
-    public Item selectedItem;
-    public string selectedItemName;
-    public Text itemName, itemDescription, useButtonText;
-    public Text[] itemCharacterSelectNames;
-
+    [Header("Object References")]
+    public Canvas canvas;
+    public EventNotification note;
+    public GameObject statsWindow;
+    public Text tooltip;
+    public Text goldKeyText;
+    public Text silverKeyText;
     public Text goldText;
+    public string mainMenuSceneName;
+    public Image mainMenuButtonImage;
+    public Sprite buttonPressedSprite;
+    public Sprite buttonReadySprite;
+    public GameObject menuButtonsPanel;
+    public GameObject menuWindow;
+    public Hero selectedHero;
+    public GameObject[] heroStatPanels;
+    public GameObject[] windows;
+    public Button[] menuButtons;
+    public Text[] nameTexts, hpTexts, mpTexts;
+    public Image[] hpSliders, mpSliders;
+    public Image[] heroImages;
+    public HeroDisplay heroDisplayStatus;
 
-    // Start is called before the first frame update
+    [Header("Data Trackers")]
+    public int currentWindowId = 0;
+    public int currentHeroId = 0;
+
+    private Hero[] heroes;
+
+
+    void Awake () {
+        if (instance == null) {
+            instance = this;
+        } else {
+            Destroy(gameObject);
+            return;
+        }
+        DontDestroyOnLoad(gameObject);
+    }
+
     void Start() {
-        instance = this;
+        UpdateSideStats();
+        UpdateKeys();
+        UpdateGold();
+        if (menuButtonsPanel.activeInHierarchy) {
+            CloseMenu();
+        }
     }
 
     // Update is called once per frame
     void Update() {
-        if (Input.GetButtonDown("Fire2")) {
-            if (gameMenu.activeInHierarchy) {
-                gameMenu.GetComponent<MenuFade>().FadeOut();
-                CloseMenu();
-                AudioManager.instance.PlaySfx("test");
-            } else {
-                gameMenu.SetActive(true);
-                gameMenu.GetComponent<MenuFade>().FadeIn();
-                UpdateMainStats();
-                GameManager.instance.gameMenuOpen = true;
-                AudioManager.instance.PlaySfx("test");
-            }
-        }
+
     }
 
-    public void UpdateMainStats() {
-        playerStats = GameManager.instance.playerStats;
-
-         for (var i = 0; i < playerStats.Length; i++) {
-             if (playerStats[i].gameObject.activeInHierarchy) {
-                characterStats[i].SetActive(true);
-                nameTexts[i].text = playerStats[i].characterName;
-                levelTexts[i].text = playerStats[i].level.ToString();
-                hpTexts[i].text = "HP: " + playerStats[i].currentHp + "/" + playerStats[i].maxHp;
-                mpTexts[i].text = "MP: " + playerStats[i].currentMp + "/" + playerStats[i].maxMp;
-                xpTexts[i].text = playerStats[i].currentXp.ToString("N0") + "/" + playerStats[i].xpToNextLevel[playerStats[i].level].ToString("N0");
-                levelTexts[i].text = "Lv: " + playerStats[i].level;
-                xpSliders[i].maxValue = playerStats[i].xpToNextLevel[playerStats[i].level];
-                xpSliders[i].value = playerStats[i].currentXp;
-                characterImages[i].sprite = playerStats[i].image.sprite;
-             } else {
-                 characterStats[i].SetActive(false);
-             }
-         }
-
-         goldText.text = GameManager.instance.currentGold.ToString("N0");
+    public void UpdateSideStats() {
+        heroes = GameManager.instance.heroes;
+        for (var i = 0; i < heroes.Length; i++) {
+            if (heroes[i].isActive) {
+                heroStatPanels[i].SetActive(true);
+                nameTexts[i].text = heroes[i].name;
+                hpTexts[i].text = heroes[i].hp.current.ToString();
+                mpTexts[i].text = heroes[i].mp.current.ToString();
+                hpSliders[i].fillAmount = heroes[i].hp.GetPercent();
+                mpTexts[i].text = heroes[i].mp.current.ToString();
+                mpSliders[i].fillAmount = heroes[i].mp.GetPercent();
+            } else {
+                heroStatPanels[i].SetActive(false);
+            }
+        }
     }
 
     public void ToggleWindow(int windowId) {
-        UpdateMainStats();
-
+        currentWindowId = windowId;
         for (var i = 0; i < windows.Length; i++) {
             if (i == windowId) {
-                windows[i].SetActive(!windows[i].activeInHierarchy);
+                if (!windows[i].activeInHierarchy) {
+                    if (i == 0) {
+                        OpenStatus();
+                    }
+                    menuButtons[i].GetComponent<Image>().sprite = buttonPressedSprite;
+                    menuWindow.SetActive(true);
+                    windows[i].SetActive(true);
+                    PlayOpenSound();
+                } else {
+                    ResetAllHeroButtons();
+                    currentWindowId = -1;
+                    menuButtons[i].GetComponent<Image>().sprite = buttonReadySprite;
+                    menuWindow.SetActive(false);
+                    windows[i].SetActive(false);
+                }
             } else {
+                menuButtons[i].GetComponent<Image>().sprite = buttonReadySprite;
                 windows[i].SetActive(false);
             }
         }
-        itemCharacterSelect.SetActive(false);
+        // itemCharacterSelect.SetActive(false);
     }
 
     public void CloseMenu() {
+        ResetAllHeroButtons();
+        ResetAllMenuButtons();
+        menuButtonsPanel.SetActive(false);
+        menuWindow.SetActive(false);
+        GameManager.instance.menuButtonsOpen = false;
         foreach (var window in windows) {
             window.SetActive(false);
         }
-
-        itemCharacterSelect.SetActive(false);
-
-        GameManager.instance.gameMenuOpen = false;
     }
 
-    public void OpenStatus() {
-        UpdateMainStats();
-        DisplayCharacterStatus(0);
-
-        for (var i = 0; i < statusButtons.Length; i++) {
-            statusButtons[i].SetActive(playerStats[i].gameObject.activeInHierarchy);
-            statusButtons[i].GetComponentInChildren<Text>().text = playerStats[i].characterName;
+    public void ClickHeroPanel(int heroId) {
+        currentHeroId = heroId;
+        if (!menuButtonsPanel.activeInHierarchy) return;
+        var hero = heroes[heroId];
+        ResetAllHeroButtons();
+        for (var i = 0; i < heroStatPanels.Length; i++) {
+            if (i == heroId) {
+                heroStatPanels[i].GetComponent<Image>().sprite = buttonPressedSprite;
+                break;
+            }
         }
-    }
+        if (currentWindowId == 0) { // status
+            PlayOpenSound();
+            heroDisplayStatus.name.text = hero.name;
+            heroDisplayStatus.level.text = hero.GetLevelAndClass();
+            heroDisplayStatus.xp.text = "XP: " + hero.xp + "/" + hero.level * 100;
+            heroDisplayStatus.hp.text = hero.hp.GetDisplay();
+            heroDisplayStatus.mp.text = hero.mp.GetDisplay();
+            heroDisplayStatus.attack.text = hero.attack.GetTotalValue().ToString();
+            heroDisplayStatus.defense.text = hero.defense.GetTotalValue().ToString();
+            heroDisplayStatus.magic.text = hero.magic.GetTotalValue().ToString();
+            heroDisplayStatus.speed.text = hero.speed.GetTotalValue().ToString();
+            heroDisplayStatus.armor.text = hero.armor.GetTotalValue().ToString();
+            heroDisplayStatus.resist.text = hero.resist.GetTotalValue().ToString();
+            heroDisplayStatus.critPower.text = hero.critPower.GetTotalValue().ToString();
 
-    public void DisplayCharacterStatus(int id) {
-        statusName.text = playerStats[id].characterName;
-        statusLevel.text = playerStats[id].level.ToString();
-        statusHp.text = playerStats[id].currentHp + "/" + playerStats[id].maxHp;
-        statusMp.text = playerStats[id].currentMp + "/" + playerStats[id].maxMp;
-        statusStrength.text = playerStats[id].attack.ToString();
-        statusDefense.text = playerStats[id].defense.ToString();
-
-        statusWeaponPower.text = playerStats[id].magic.ToString();
-        
-        statusArmorPower.text = playerStats[id].speed.ToString();
-
-        statusXp.text = (playerStats[id].xpToNextLevel[playerStats[id].level] - playerStats[id].currentXp).ToString("N0");
-        statusImage.sprite = playerStats[id].image.sprite;
-    }
-
-    public void ShowItems() {
-        GameManager.instance.SortItems();
-        for (var i = 0; i < itemButtons.Length; i++ ) {
-            itemButtons[i].buttonId = i;
-
-            if (GameManager.instance.inventory[i] != "") {
-                itemButtons[i].buttonImage.gameObject.SetActive(true);
-                itemButtons[i].buttonImage.sprite = GameManager.instance.GetItemDetails(GameManager.instance.inventory[i]).itemSprite;
-                itemButtons[i].quantityText.text = GameManager.instance.inventoryQuantity[i].ToString();
+            if (hero.mainHand != null) {
+                heroDisplayStatus.MainHandAtkOrBlk.text = hero.mainHand.GetAtkOrBlk();
+                heroDisplayStatus.MainHandDmgOrAmt.text = hero.mainHand.GetDmgOrAmt();
             } else {
-                itemButtons[i].buttonImage.gameObject.SetActive(false);
-                itemButtons[i].quantityText.text = string.Empty;
+                heroDisplayStatus.MainHandAtkOrBlk.text = "-";
+                heroDisplayStatus.MainHandDmgOrAmt.text = "-";
+            }
+            if (hero.offHand != null) {
+                heroDisplayStatus.OffHandAtkOrBlk.text = hero.offHand.GetAtkOrBlk();
+                heroDisplayStatus.OffHandDmgOrAmt.text = hero.offHand.GetDmgOrAmt();
+            } else {
+                heroDisplayStatus.OffHandAtkOrBlk.text = "-";
+                heroDisplayStatus.OffHandDmgOrAmt.text = "-";
             }
         }
     }
 
-    public void SelectItem(Item item) {
-        selectedItem = item;
-
-        if (selectedItem.itemType == ItemType.item) {
-            useButtonText.text = "Use";
-        } else if (selectedItem.itemType == ItemType.armor || selectedItem.itemType == ItemType.weapon ) {
-            useButtonText.text = "Equip";
-        }
-
-        itemName.text = selectedItem.itemName;
-        itemDescription.text = selectedItem.description;
-    }
-
-    public void DiscardItem() {
-        if (selectedItem != null) {
-            GameManager.instance.RemoveItem(selectedItem.name);
-        }
-    }
-
-    public void OpenItemCharacterSelect() {
-        itemCharacterSelect.SetActive(true);
-        for (var i = 0; i < itemCharacterSelectNames.Length; i++) {
-            itemCharacterSelectNames[i].text = GameManager.instance.playerStats[i].characterName;
-            itemCharacterSelectNames[i].transform.parent.gameObject.SetActive(GameManager.instance.playerStats[i].gameObject.activeInHierarchy);
-        }
-    }
-
-    public void CloseItemCharacterSelect() {
-        itemCharacterSelect.SetActive(false);
-        
-    }
-
-    public void UseItem(int selectedCharacterId) {
-        selectedItem.Use(selectedCharacterId);
-        CloseItemCharacterSelect();
+    public void OpenStatus() {
+        UpdateSideStats();
+        ClickHeroPanel(currentHeroId);
     }
 
     public void SaveGame() {
@@ -185,13 +170,89 @@ public class GameMenu : MonoBehaviour {
 
     public void QuitGame() {
         SceneManager.LoadScene(mainMenuSceneName);
-        Destroy(GameManager.instance.gameObject);
+        Destroy(InventoryManager.instance.gameObject);
         Destroy(PlayerController.instance.gameObject);
         Destroy(AudioManager.instance.gameObject);
         Destroy(gameObject);
     }
+
+    public void ToggleMainMenu() {
+        if (menuButtonsPanel.activeInHierarchy) {
+            CloseAllWindows();
+            ResetAllHeroButtons();
+            PlayCloseSound();
+            PlayerController.instance.uiOpen = false;
+            menuWindow.SetActive(false);
+            menuButtonsPanel.SetActive(false);
+            mainMenuButtonImage.sprite = buttonReadySprite;
+        } else {
+            UpdateSideStats();
+            PlayOpenSound();
+            PlayerController.instance.uiOpen = true;
+            menuWindow.SetActive(true);
+            menuButtonsPanel.SetActive(true);
+            mainMenuButtonImage.sprite = buttonPressedSprite;
+            if (currentWindowId > -1) {
+                ToggleWindow(currentWindowId);
+            }
+        }
+    }
+
+    public void LootNotification(string itemId) {
+        var position = Camera.main.WorldToScreenPoint(PlayerController.instance.transform.position);
+        Instantiate(note, position, transform.rotation, canvas.transform).GenerateLootNote(itemId);
+    }
+
+    public void Notification(string message) {
+        var position = Camera.main.WorldToScreenPoint(PlayerController.instance.transform.position);
+        Instantiate(note, position, transform.rotation, canvas.transform).GenerateNote(message);
+    }
+
+    public void UpdateGold() {
+        goldText.text = GameManager.instance.currentGoldPieces.ToString("N0");
+    }
+
+    public void UpdateKeys() {
+        goldKeyText.text = GameManager.instance.currentGoldKeys.ToString();
+        silverKeyText.text = GameManager.instance.currentSilverKeys.ToString();
+    }
+
+    private void CloseAllWindows() {
+        for (var i = 0; i < windows.Length; i++) {
+            windows[i].SetActive(false);
+        }
+    }
+
+    private void ResetAllHeroButtons() {
+        for (var i = 0; i < heroStatPanels.Length; i++) {
+            if (heroStatPanels[i].activeInHierarchy) {
+                heroStatPanels[i].GetComponent<Image>().sprite = buttonReadySprite;
+            }
+        }
+    }
+
+    private void ResetAllMenuButtons() {
+        for (var i = 0; i < menuButtons.Length; i++) {
+            menuButtons[i].GetComponent<Image>().sprite = buttonReadySprite;
+        }
+    }
+
+    private string GetArticle(string text) {
+        string[] vowels = {"a", "e", "i", "o", "u" };
+        var startingLetter = text.Substring(0, 1);
+        foreach(var vowel in vowels) {
+            if (vowel == startingLetter) {
+                return "an ";
+            }
+        }
+        return "a ";
+    }
     
-    public void PlayButtonSound() {
-        AudioManager.instance.PlaySfx("test");
+    private void PlayOpenSound() {
+        AudioManager.instance.PlaySfx("loot");
+    }
+    
+    private void PlayCloseSound() {
+        AudioManager.instance.PlaySfx("chest");
     }
 }

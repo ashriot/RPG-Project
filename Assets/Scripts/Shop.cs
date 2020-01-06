@@ -37,7 +37,7 @@ public class Shop : MonoBehaviour {
 
         GameManager.instance.shopActive = true;
 
-        goldText.text = GameManager.instance.currentGold.ToString("N0");
+        goldText.text = GameManager.instance.currentGoldPieces.ToString("N0");
     }
 
     public void CloseShop() {
@@ -57,7 +57,7 @@ public class Shop : MonoBehaviour {
 
             if (itemsForSale[i] != string.Empty) {
                 buyItemButtons[i].buttonImage.gameObject.SetActive(true);
-                buyItemButtons[i].buttonImage.sprite = GameManager.instance.GetItemDetails(itemsForSale[i]).itemSprite;
+                buyItemButtons[i].buttonImage.sprite = InventoryManager.instance.FindItemReference(itemsForSale[i]).sprite;
                 buyItemButtons[i].quantityText.text = string.Empty;
             } else {
                 buyItemButtons[i].buttonImage.gameObject.SetActive(false);
@@ -75,14 +75,12 @@ public class Shop : MonoBehaviour {
     }
 
     private void ShowSellItems() {
-        GameManager.instance.SortItems();
         for (var i = 0; i < sellItemButtons.Length; i++ ) {
             sellItemButtons[i].buttonId = i;
 
-            if (GameManager.instance.inventory[i] != "") {
+            if (InventoryManager.instance.inventory[i].id != "") {
                 sellItemButtons[i].buttonImage.gameObject.SetActive(true);
-                sellItemButtons[i].buttonImage.sprite = GameManager.instance.GetItemDetails(GameManager.instance.inventory[i]).itemSprite;
-                sellItemButtons[i].quantityText.text = GameManager.instance.inventoryQuantity[i].ToString();
+                sellItemButtons[i].buttonImage.sprite = InventoryManager.instance.FindItemReference(InventoryManager.instance.inventory[i].id).sprite;
             } else {
                 sellItemButtons[i].buttonImage.gameObject.SetActive(false);
                 sellItemButtons[i].quantityText.text = string.Empty;
@@ -92,34 +90,34 @@ public class Shop : MonoBehaviour {
 
     public void SelectBuyItem(Item item) {
         selectedItem = item;
-        buyItemName.text = selectedItem.itemName;
+        buyItemName.text = selectedItem.name;
         buyItemDescription.text = selectedItem.description;
         buyItemValue.text = "Cost: " + selectedItem.goldValue + " gold";
     }
 
     public void SelectSellItem(Item item) {
         selectedItem = item;
-        sellItemName.text = selectedItem.itemName;
+        sellItemName.text = selectedItem.name;
         sellItemDescription.text = selectedItem.description;
         sellItemValue.text = "Value: " + Mathf.FloorToInt(selectedItem.goldValue * 0.5f) + " gold";
     }
 
     public void BuyItem() {
         if (selectedItem != null) {
-            if (GameManager.instance.currentGold >= selectedItem.goldValue) {
-                GameManager.instance.currentGold -= selectedItem.goldValue;
-                GameManager.instance.AddItem(selectedItem.itemName);
+            if (GameManager.instance.currentGoldPieces >= selectedItem.goldValue) {
+                GameManager.instance.currentGoldPieces -= selectedItem.goldValue;
+                InventoryManager.instance.AddItem(selectedItem.id);
             }
 
-            goldText.text = GameManager.instance.currentGold.ToString("N0");
+            goldText.text = GameManager.instance.currentGoldPieces.ToString("N0");
         }
     }
 
     public void SellItem() {
         if (selectedItem != null) {
-            GameManager.instance.currentGold += Mathf.FloorToInt(selectedItem.goldValue * .5f);
-            GameManager.instance.RemoveItem(selectedItem.itemName);
-            goldText.text = GameManager.instance.currentGold.ToString("N0");
+            GameManager.instance.currentGoldPieces += Mathf.FloorToInt(selectedItem.goldValue * .5f);
+            InventoryManager.instance.RemoveItem(selectedItem.name);
+            goldText.text = GameManager.instance.currentGoldPieces.ToString("N0");
             ShowSellItems();
         }
     }

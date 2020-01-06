@@ -22,7 +22,7 @@ public class GameOver : MonoBehaviour {
     }
 
     public void QuitToMain() {
-        Destroy(GameManager.instance.gameObject);
+        Destroy(InventoryManager.instance.gameObject);
         Destroy(PlayerController.instance.gameObject);
         Destroy(GameMenu.instance.gameObject);
         Destroy(AudioManager.instance.gameObject);
@@ -32,7 +32,7 @@ public class GameOver : MonoBehaviour {
     }
 
     public void LoadLastSave() {
-        Destroy(GameManager.instance.gameObject);
+        Destroy(InventoryManager.instance.gameObject);
         Destroy(PlayerController.instance.gameObject);
         Destroy(GameMenu.instance.gameObject);
         Destroy(BattleManager.instance.gameObject);

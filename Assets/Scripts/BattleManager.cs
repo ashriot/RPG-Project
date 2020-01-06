@@ -134,15 +134,15 @@ public class BattleManager : MonoBehaviour {
             var newPlayer = Instantiate(activeHeroes[i], playerPositions[i].position, playerPositions[i].rotation);
             newPlayer.transform.parent = playerPositions[i];
                         
-                        activeBattleCharacters.Add(newPlayer);
-                        activeBattleCharacters[i].currentHp = activeHeroes[i].currentHp;
-                        activeBattleCharacters[i].maxHp = activeHeroes[i].maxHp;
-                        activeBattleCharacters[i].currentMp = activeHeroes[i].currentMp;
-                        activeBattleCharacters[i].maxMp = activeHeroes[i].maxMp;
-                        activeBattleCharacters[i].attack = activeHeroes[i].attack;
-                        activeBattleCharacters[i].defense = activeHeroes[i].defense;
-                        activeBattleCharacters[i].magic = activeHeroes[i].magic;
-                        activeBattleCharacters[i].speed = activeHeroes[i].speed;
+                        // activeBattleCharacters.Add(newPlayer);
+                        // activeBattleCharacters[i].currentHp = activeHeroes[i].currentHp;
+                        // activeBattleCharacters[i].maxHp = activeHeroes[i].maxHp;
+                        // activeBattleCharacters[i].currentMp = activeHeroes[i].currentMp;
+                        // activeBattleCharacters[i].maxMp = activeHeroes[i].maxMp;
+                        // activeBattleCharacters[i].attack = activeHeroes[i].attack;
+                        // activeBattleCharacters[i].defense = activeHeroes[i].defense;
+                        // activeBattleCharacters[i].magic = activeHeroes[i].magic;
+                        // activeBattleCharacters[i].speed = activeHeroes[i].speed;
         }
 
         // for (var i = 0; i < playerPositions.Length; i++) {
@@ -513,25 +513,6 @@ public class BattleManager : MonoBehaviour {
         // }
     }
 
-    public void OpenItemMenu() {
-        itemMenu.SetActive(true);
-        selectedItem = GameManager.instance.GetItemDetails(GameManager.instance.inventory[0]);
-
-        GameManager.instance.SortItems();
-        for (var i = 0; i < itemButtons.Length; i++ ) {
-            itemButtons[i].buttonId = i;
-
-            if (GameManager.instance.inventory[i] != "") {
-                itemButtons[i].buttonImage.gameObject.SetActive(true);
-                itemButtons[i].buttonImage.sprite = GameManager.instance.GetItemDetails(GameManager.instance.inventory[i]).itemSprite;
-                itemButtons[i].quantityText.text = GameManager.instance.inventoryQuantity[i].ToString();
-            } else {
-                itemButtons[i].buttonImage.gameObject.SetActive(false);
-                itemButtons[i].quantityText.text = string.Empty;
-            }
-        }
-    }
-
     public void Flee() {
         if (cannotFlee) {
             battleNotification.text.text = "Cannot flee!";
@@ -550,69 +531,6 @@ public class BattleManager : MonoBehaviour {
         }
     }
     
-    public void SelectItem(Item item) {
-        selectedItem = item;
-
-        if (selectedItem.itemType == ItemType.item) {
-            useButtonText.text = "Use";
-        } else if (selectedItem.itemType == ItemType.armor || selectedItem.itemType == ItemType.weapon ) {
-            useButtonText.text = "Equip";
-        }
-
-        itemName.text = selectedItem.itemName;
-        itemDescription.text = selectedItem.description;
-    }
-
-    public void OpenItemCharacterSelect() {
-        characterSelectMenu.SetActive(true);
-        for (var i = 0; i < itemCharacterSelectNames.Length; i++) {
-            itemCharacterSelectNames[i].text = GameManager.instance.playerStats[i].characterName;
-            itemCharacterSelectNames[i].transform.parent.gameObject.SetActive(GameManager.instance.playerStats[i].gameObject.activeInHierarchy);
-        }
-    }
-
-    public void UseItem(int selectedCharacterId) {
-        // selectedItem.Use(selectedCharacterId);
-
-        // var currentTurn = activeBattleCharacters[currentTurnId];
-        // var selectedTarget = activeBattleCharacters[selectedCharacterId];
-
-        // Instantiate(enemyAttackEffect, currentTurn.transform.position, currentTurn.transform.rotation);
-        // DealDamage(selectedCharacterId, selectedItem.potencyValue, true);
-        
-        // var playerStats = GameManager.instance.playerStats;
-        // for (var i = 0; i < playerPositions.Length; i++) {
-        //     if (playerStats[i].gameObject.activeInHierarchy) {
-        //         for (var j = 0; j < playerPrefabs.Length; j++) {
-        //             if (playerPrefabs[j].name == playerStats[i].characterName) {
-        //                 var newPlayer = Instantiate(playerPrefabs[j], playerPositions[i].position, playerPositions[i].rotation);
-        //                 newPlayer.transform.parent = playerPositions[i];
-                        
-        //                 activeBattleCharacters.Add(newPlayer);
-        //                 activeBattleCharacters[i].currentHp = playerStats[i].currentHp;
-        //                 activeBattleCharacters[i].maxHp = playerStats[i].maxHp;
-        //                 activeBattleCharacters[i].currentMp = playerStats[i].currentMp;
-        //                 activeBattleCharacters[i].maxMp = playerStats[i].maxMp;
-        //                 activeBattleCharacters[i].attack = playerStats[i].attack;
-        //                 activeBattleCharacters[i].defense = playerStats[i].defense;
-        //                 activeBattleCharacters[i].magic = playerStats[i].magic;
-        //                 activeBattleCharacters[i].speed = playerStats[i].speed;
-        //             }
-        //         }
-        //     }
-        // }
-
-        // UpdateBattle();
-        // itemMenu.SetActive(false);
-        // characterSelectMenu.SetActive(false);
-        // NextTurn();
-    }
-
-    public void ItemBack() {
-        itemMenu.SetActive(false);
-        characterSelectMenu.SetActive(false);
-    }
-
     public IEnumerator<WaitForSeconds> EndBattleCoroutine() {
         battleActive = false;
         battleNotification.text.text = "You win!";
@@ -631,10 +549,10 @@ public class BattleManager : MonoBehaviour {
 
         for (var i = 0; i < activeBattleCharacters.Count; i++) {
             if (activeBattleCharacters[i].isPlayer) {
-                for (var j = 0; j < GameManager.instance.playerStats.Length; j++) {
-                    if (activeBattleCharacters[i].name == GameManager.instance.playerStats[j].characterName) {
-                        GameManager.instance.playerStats[j].currentHp = activeBattleCharacters[i].currentHp;
-                        GameManager.instance.playerStats[j].currentMp = activeBattleCharacters[i].currentMp;
+                for (var j = 0; j < GameManager.instance.heroes.Length; j++) {
+                    if (activeBattleCharacters[i].name == GameManager.instance.heroes[j].name) {
+                        GameManager.instance.heroes[j].hp.current = activeBattleCharacters[i].currentHp;
+                        GameManager.instance.heroes[j].mp.current = activeBattleCharacters[i].currentMp;
                         break;
                     }
                 }
@@ -687,8 +605,6 @@ public class BattleManager : MonoBehaviour {
     }
 }
 
-
-
 [CustomEditor(typeof(BattleManager))]
 public class BattleManagerEditor : Editor {
     public override void OnInspectorGUI(){
@@ -708,8 +624,8 @@ public class BattleManagerEditor : Editor {
             manager.BattleStart(new string[] { "Eyeball", "Spider", "Skeleton", "Eyeball", "Eyeball", "Spider" }, false);
         }
         if(GUILayout.Button("Set all players' HP to 1")) {
-            foreach(var player in GameManager.instance.playerStats) {
-                player.currentHp = 1;
+            foreach(var player in GameManager.instance.heroes) {
+                player.hp.current = 1;
             }
             foreach(var player in BattleManager.instance.activeBattleCharacters) {
                 if (player.isPlayer) {
@@ -718,13 +634,13 @@ public class BattleManagerEditor : Editor {
             }
         }
         if(GUILayout.Button("God Mode!!")) {
-            foreach(var player in GameManager.instance.playerStats) {
-                player.currentHp = 999;
-                player.maxHp = 999;
-                player.currentMp = 999;
-                player.maxMp = 999;
-                player.attack = 5000;
-                player.defense = 500;
+            foreach(var player in GameManager.instance.heroes) {
+                // player.currentHp = 999;
+                // player.maxHp = 999;
+                // player.currentMp = 999;
+                // player.maxMp = 999;
+                // player.attack = 5000;
+                // player.defense = 500;
             }
             foreach(var player in BattleManager.instance.activeBattleCharacters) {
                 if (player.isPlayer) {

@@ -25,7 +25,7 @@ public class Chest : MonoBehaviour {
 	public void Loot() {
         isLooted = true;
         GetComponent<SpriteRenderer>().sprite = looted;
-        StatusManager.instance.LootNotification(contents[0]);
+        GameMenu.instance.LootNotification(contents[0]);
         PlaySfx("loot");
     }
 

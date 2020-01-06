@@ -20,7 +20,7 @@ public class EssentialsLoader : MonoBehaviour {
             PlayerController.instance = Instantiate(player, new Vector3(0, 0, 0), transform.rotation).GetComponent<PlayerController>();
         }
 
-        if (GameManager.instance == null) {
+        if (InventoryManager.instance == null) {
             Instantiate(gameManager);
         }
 
