@@ -17,11 +17,15 @@ public class BattleStarter : MonoBehaviour {
 
     // Start is called before the first frame update
     void Start() {
+        if (!activateOnStay) return;
+        
         betweenBattlesCounter = Random.Range(timeBetweenBattles * .5f, timeBetweenBattles * 1.5f);
     }
 
     // Update is called once per frame
     void Update() {
+        if (!activateOnStay) return;
+
         if (inZone /* && PlayerController.instance.canMove */) {
             if (Input.GetAxisRaw("Horizontal") != 0 || Input.GetAxisRaw("Vertical") != 0) {
                 betweenBattlesCounter -= Time.deltaTime;
