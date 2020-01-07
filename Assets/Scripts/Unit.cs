@@ -6,7 +6,6 @@ public abstract class Unit : MonoBehaviour {
     public string id;
     public new string name;
     public string className;
-    public UnitType unitType;
     public bool isActive;
     public bool isDead;
 

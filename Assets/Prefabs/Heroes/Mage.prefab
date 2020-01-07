@@ -11,6 +11,7 @@ GameObject:
   - component: {fileID: 6244683275033936154}
   - component: {fileID: 6244683275033936157}
   - component: {fileID: 1337129469}
+  - component: {fileID: 1800476428718349295}
   m_Layer: 0
   m_Name: Mage
   m_TagString: Untagged
@@ -68,8 +69,8 @@ SpriteRenderer:
   m_AutoUVMaxDistance: 0.5
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
-  m_SortingLayerID: 254992725
-  m_SortingLayer: 2
+  m_SortingLayerID: 437314879
+  m_SortingLayer: 4
   m_SortingOrder: 0
   m_Sprite: {fileID: -2455071688165594703, guid: 04854a5f96e25cf4fbef374e1965bd3b,
     type: 3}
@@ -102,6 +103,60 @@ Animator:
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorControllerStateOnDisable: 0
+--- !u!114 &1800476428718349295
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6244683275033936156}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a899e1fa9d87d4446aeb2e8444feadd2, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  id: mage
+  name: Raistlin
+  className: Mage
+  isActive: 1
+  isDead: 0
+  level: 1
+  xp: 0
+  skillPoints: 0
+  hp:
+    current: 25
+    max: 25
+  mp:
+    current: 35
+    max: 35
+  attack:
+    baseValue: 4
+    totalBonus: 0
+  defense:
+    baseValue: 3
+    totalBonus: 0
+  magic:
+    baseValue: 12
+    totalBonus: 0
+  speed:
+    baseValue: 6
+    totalBonus: 0
+  armor:
+    baseValue: 0
+    totalBonus: 0
+  resist:
+    baseValue: 0
+    totalBonus: 0
+  critPower:
+    baseValue: 0
+    totalBonus: 0
+  body: {fileID: 0}
+  feet: {fileID: 0}
+  fingerL: {fileID: 0}
+  fingerR: {fileID: 0}
+  head: {fileID: 0}
+  mainHand: {fileID: 0}
+  offHand: {fileID: 0}
 --- !u!1 &9217047177654531079
 GameObject:
   m_ObjectHideFlags: 0

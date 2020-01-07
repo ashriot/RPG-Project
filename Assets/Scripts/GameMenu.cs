@@ -16,6 +16,7 @@ public class GameMenu : MonoBehaviour {
     public Text goldText;
     public string mainMenuSceneName;
     public Image mainMenuButtonImage;
+    public Text mainMenuButtonText;
     public Sprite buttonPressedSprite;
     public Sprite buttonReadySprite;
     public GameObject menuButtonsPanel;
@@ -50,10 +51,8 @@ public class GameMenu : MonoBehaviour {
         UpdateStats();
         UpdateKeys();
         UpdateGold();
-        if (menuButtonsPanel.activeInHierarchy) {
-            CloseMainMenu();
-            CloseAllWindows();
-        }
+        CloseMainMenu();
+        CloseAllWindows();
     }
 
     public void CloseMainMenu() {
@@ -61,6 +60,7 @@ public class GameMenu : MonoBehaviour {
         ReadyHeroButtons();
         menuButtonsPanel.SetActive(false);
         mainMenuButtonImage.sprite = buttonReadySprite;
+        mainMenuButtonText.text = "Menu";
         GameManager.instance.menuButtonsOpen = false;
         PlayerController.instance.uiOpen = false;
     }
@@ -91,8 +91,8 @@ public class GameMenu : MonoBehaviour {
     public void ClickMainMenuButton() {
         if (!menuButtonsPanel.activeInHierarchy) {
             PlayOpenSound();
-            OpenMainMenu();
             UpdateHeroButtons();
+            OpenMainMenu();
         } else {
             PlayCloseSound();
             CloseMainMenu();
@@ -119,8 +119,8 @@ public class GameMenu : MonoBehaviour {
     }
 
     public void OpenMainMenu() {
-        UpdateStats();
         menuButtonsPanel.SetActive(true);
+        mainMenuButtonText.text = "Close";
         mainMenuButtonImage.sprite = buttonPressedSprite;
         GameManager.instance.menuButtonsOpen = true;
         PlayerController.instance.uiOpen = true;
@@ -151,8 +151,8 @@ public class GameMenu : MonoBehaviour {
         heroDisplayStatus.name.text = hero.name;
         heroDisplayStatus.level.text = hero.GetLevelAndClass();
         heroDisplayStatus.xp.text = "XP: " + hero.xp + "/" + hero.level * 100;
-        heroDisplayStatus.hp.text = hero.hp.GetDisplay();
-        heroDisplayStatus.mp.text = hero.mp.GetDisplay();
+        heroDisplayStatus.hp.text = hero.hp.display;
+        heroDisplayStatus.mp.text = hero.mp.display;
         heroDisplayStatus.attack.text = hero.attack.GetTotalValue().ToString();
         heroDisplayStatus.defense.text = hero.defense.GetTotalValue().ToString();
         heroDisplayStatus.magic.text = hero.magic.GetTotalValue().ToString();
@@ -211,9 +211,9 @@ public class GameMenu : MonoBehaviour {
                 nameTexts[i].text = heroes[i].name;
                 hpTexts[i].text = heroes[i].hp.current.ToString();
                 mpTexts[i].text = heroes[i].mp.current.ToString();
-                hpSliders[i].fillAmount = heroes[i].hp.GetPercent();
+                hpSliders[i].fillAmount = heroes[i].hp.percent;
                 mpTexts[i].text = heroes[i].mp.current.ToString();
-                mpSliders[i].fillAmount = heroes[i].mp.GetPercent();
+                mpSliders[i].fillAmount = heroes[i].mp.percent;
             } else {
                 heroStatPanels[i].SetActive(false);
             }

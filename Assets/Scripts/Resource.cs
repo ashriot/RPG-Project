@@ -6,6 +6,9 @@ public class Resource {
     public int current;
     public int max;
 
+    public string display { get => current + "/" + max; }
+    public float percent { get => current / max; }
+
     public void Increase(int amount) {
         current = Mathf.Clamp(current + amount, 0, max);
     }
@@ -16,13 +19,5 @@ public class Resource {
 
     public void SetToMax() {
         current = max;
-    }
-
-    public string GetDisplay() {
-        return current + "/" + max;
-    }
-
-    public float GetPercent() {
-        return (float) current / max;
     }
 }

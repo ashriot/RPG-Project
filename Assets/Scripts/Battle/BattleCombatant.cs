@@ -1,10 +1,11 @@
 ﻿using System.Collections.Generic;
 using UnityEngine;
 
-public class BattleCharacter : MonoBehaviour {
+public class BattleCombatant : MonoBehaviour {
 
     public new string name;
-    public int level, currentXp, currentHp, maxHp, currentMp, maxMp, attack, defense, magic, speed;
+    public int level, currentXp, attack, defense, magic, speed;
+    public Resource hp, mp;
     public float timeTillTurn;
     public bool isPlayer;
     public bool isActive;

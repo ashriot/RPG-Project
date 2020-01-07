@@ -59,6 +59,10 @@ public class BattleStarter : MonoBehaviour {
     }
 
     public IEnumerator<WaitForSeconds> StartBattleCoroutine() {
+        AudioManager.instance.PlayBgm("battle");
+        yield return new WaitForSeconds(.5f);
+        UIFade.instance.FlashScreen(2);
+        yield return new WaitForSeconds(.25f);
         UIFade.instance.FadeToBlack();
         GameManager.instance.battleActive = true;
 
@@ -67,7 +71,7 @@ public class BattleStarter : MonoBehaviour {
         BattleManager.instance.itemsReceived = potentialBattles[selectedBattleId].itemRewards;
         BattleManager.instance.xpEarned = potentialBattles[selectedBattleId].xpReward;
 
-        yield return new WaitForSeconds(1.5f);
+        yield return new WaitForSeconds(.5f);
 
         BattleManager.instance.BattleStart(potentialBattles[selectedBattleId].enemies, cannotFlee);
         UIFade.instance.FadeFromBlack();

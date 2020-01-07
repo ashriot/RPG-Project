@@ -52,6 +52,9 @@ public class PlayerController : MonoBehaviour {
 
     void Start() {
         goldKeyCount = GameManager.instance.currentGoldKeys;
+        foreach(var member in partyMembers) {
+            member.GetComponent<SpriteRenderer>().sortingLayerName = "Player";
+        }
     }
 
     void Update() {
@@ -371,6 +374,9 @@ public class PlayerController : MonoBehaviour {
             //We interact with the chest, but can't move there, so we return false.
             return false;
         } else if (coll.tag == "Key") {
+            return true;
+        } else if (coll.tag == "Enemy") {
+            Debug.Log("enemy");
             return true;
         } else
             return false;

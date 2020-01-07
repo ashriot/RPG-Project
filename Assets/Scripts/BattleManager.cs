@@ -12,11 +12,11 @@ public class BattleManager : MonoBehaviour {
     [Header("Object References")]
     public Canvas canvas;
     public GameObject battleScene;
+    public GameObject enemyWindows;
     public GameObject enemyAttackEffect;
     public DamageNumber damageNumber;
     public BattleActionDisplay battleActionDisplay;
     public BattleTargetButton targetButton;
-    public GameObject statsWindow;
     public GameObject battleMenu;
     public GameObject targetMenu;
     public GameObject magicMenu;
@@ -52,8 +52,8 @@ public class BattleManager : MonoBehaviour {
     public Transform[] enemyPositions;
 
     public Image[] statWindows;
-    public BattleCharacter[] playerPrefabs;
-    public BattleCharacter[] enemyPrefabs;
+    public BattleCombatant[] playerPrefabs;
+    public BattleCombatant[] enemyPrefabs;
     public BattleAction[] battleActions;
 
     public BattleTargetButton[] targetButtons;
@@ -65,7 +65,7 @@ public class BattleManager : MonoBehaviour {
     public Text itemName, itemDescription, useButtonText;
     public Text[] itemCharacterSelectNames;
 
-    public List<BattleCharacter> activeBattleCharacters = new List<BattleCharacter>();
+    public List<BattleCombatant> activeBattleCharacters = new List<BattleCombatant>();
 
     public Image[] playerImages;
     public Text[] playerNames, playerHpValues, playerMpValues;
@@ -76,45 +76,44 @@ public class BattleManager : MonoBehaviour {
         DontDestroyOnLoad(gameObject);
     }
     void Start() {
-        // keyCount.text = PlayerController.instance.keyCount.ToString();
     }
 
     // Update is called once per frame
-    void Update() {
-        if (waitTimer > 0) {
-            waitTimer -= Time.deltaTime;
-        }
-    }
+    // void Update() {
+    //     if (waitTimer > 0) {
+    //         waitTimer -= Time.deltaTime;
+    //     }
+    // }
 
-    void FixedUpdate() {
-        if (turnWaiting) {
-            UpdateBattle();
-            while (activeBattleCharacters[currentTurnId].isDead) {
-                    currentTurnId++;
-                    if (currentTurnId >= activeBattleCharacters.Count) {
-                        currentTurnId = 0;
-                    }
-                }
-            if (!waitingForInput) {
-                if (activeBattleCharacters.Count == 0) return;
-                if (activeBattleCharacters[currentTurnId].isPlayer) {
-                    // TODO: FIX THIS
-                    menuPlayerName.text = activeBattleCharacters[currentTurnId].name;
-                    if (activeBattleCharacters.All(x => x.isDead && !x.isPlayer)) return;
-                    StartCoroutine(MoveWindow(statWindows[currentTurnId].gameObject, UI_WINDOW_DISTANCE));
+    // void FixedUpdate() {
+    //     if (turnWaiting) {
+    //         UpdateBattle();
+    //         while (activeBattleCharacters[currentTurnId].isDead) {
+    //                 currentTurnId++;
+    //                 if (currentTurnId >= activeBattleCharacters.Count) {
+    //                     currentTurnId = 0;
+    //                 }
+    //             }
+    //         if (!waitingForInput) {
+    //             if (activeBattleCharacters.Count == 0) return;
+    //             if (activeBattleCharacters[currentTurnId].isPlayer) {
+    //                 // TODO: FIX THIS
+    //                 menuPlayerName.text = activeBattleCharacters[currentTurnId].name;
+    //                 if (activeBattleCharacters.All(x => x.isDead && !x.isPlayer)) return;
+    //                 StartCoroutine(MoveWindow(statWindows[currentTurnId].gameObject, UI_WINDOW_DISTANCE));
                     
-                    AudioManager.instance.PlaySfx("test");
-                    battleMenuDisabled.SetActive(false);
-                    battleMenu.SetActive(true);
-                    waitingForInput = true;
-                } else { // enemy turn
-                    battleMenu.SetActive(false);
-                    // enemy should attack
-                    StartCoroutine(EnemyMoveCoroutine());
-                }
-            }
-        }
-    }
+    //                 AudioManager.instance.PlaySfx("test");
+    //                 battleMenuDisabled.SetActive(false);
+    //                 battleMenu.SetActive(true);
+    //                 waitingForInput = true;
+    //             } else { // enemy turn
+    //                 battleMenu.SetActive(false);
+    //                 // enemy should attack
+    //                 StartCoroutine(EnemyMoveCoroutine());
+    //             }
+    //         }
+    //     }
+    // }
 
     public void BattleStart(string[] enemyNames, bool unableToFlee) {
         if (battleActive) return;
@@ -124,9 +123,9 @@ public class BattleManager : MonoBehaviour {
         GameManager.instance.battleActive = true;
         transform.position = new Vector3(Camera.main.transform.position.x, Camera.main.transform.position.y, transform.position.z);
         battleScene.SetActive(true);
-        statsWindow.SetActive(true);
-
-        AudioManager.instance.PlaySfx("test");
+        enemyWindows.SetActive(true);
+        battleMenu.SetActive(true);
+        actionTooltip.gameObject.SetActive(true);
 
         var activeHeroes = GameManager.instance.heroes.Where(h => h.isActive).ToArray();
 
@@ -135,10 +134,10 @@ public class BattleManager : MonoBehaviour {
             newPlayer.transform.parent = playerPositions[i];
                         
                         // activeBattleCharacters.Add(newPlayer);
-                        // activeBattleCharacters[i].currentHp = activeHeroes[i].currentHp;
-                        // activeBattleCharacters[i].maxHp = activeHeroes[i].maxHp;
-                        // activeBattleCharacters[i].currentMp = activeHeroes[i].currentMp;
-                        // activeBattleCharacters[i].maxMp = activeHeroes[i].maxMp;
+                        // activeBattleCharacters[i].hp.current = activeHeroes[i].hp.current;
+                        // activeBattleCharacters[i].hp.max = activeHeroes[i].hp.max;
+                        // activeBattleCharacters[i].mp.current = activeHeroes[i].mp.current;
+                        // activeBattleCharacters[i].mp.max = activeHeroes[i].mp.max;
                         // activeBattleCharacters[i].attack = activeHeroes[i].attack;
                         // activeBattleCharacters[i].defense = activeHeroes[i].defense;
                         // activeBattleCharacters[i].magic = activeHeroes[i].magic;
@@ -153,10 +152,10 @@ public class BattleManager : MonoBehaviour {
         //                 newPlayer.transform.parent = playerPositions[i];
                         
         //                 activeBattleCharacters.Add(newPlayer);
-        //                 activeBattleCharacters[i].currentHp = activeHeroes[i].currentHp;
-        //                 activeBattleCharacters[i].maxHp = activeHeroes[i].maxHp;
-        //                 activeBattleCharacters[i].currentMp = activeHeroes[i].currentMp;
-        //                 activeBattleCharacters[i].maxMp = activeHeroes[i].maxMp;
+        //                 activeBattleCharacters[i].hp.current = activeHeroes[i].hp.current;
+        //                 activeBattleCharacters[i].hp.max = activeHeroes[i].hp.max;
+        //                 activeBattleCharacters[i].mp.current = activeHeroes[i].mp.current;
+        //                 activeBattleCharacters[i].mp.max = activeHeroes[i].mp.max;
         //                 activeBattleCharacters[i].attack = activeHeroes[i].attack;
         //                 activeBattleCharacters[i].defense = activeHeroes[i].defense;
         //                 activeBattleCharacters[i].magic = activeHeroes[i].magic;
@@ -204,11 +203,11 @@ public class BattleManager : MonoBehaviour {
         bool allPlayersDead = true;
 
         for (var i = 0; i < activeBattleCharacters.Count; i++) {
-            if (activeBattleCharacters[i].currentHp < 0) {
-                activeBattleCharacters[i].currentHp = 0;
+            if (activeBattleCharacters[i].hp.current < 0) {
+                activeBattleCharacters[i].hp.current = 0;
             }
 
-            if (activeBattleCharacters[i].currentHp == 0 && !activeBattleCharacters[i].isDead) {
+            if (activeBattleCharacters[i].hp.current == 0 && !activeBattleCharacters[i].isDead) {
                 activeBattleCharacters[i].isDead = true; 
                 AudioManager.instance.PlaySfx("test");
                 if (activeBattleCharacters[i].isPlayer) {
@@ -353,10 +352,10 @@ public class BattleManager : MonoBehaviour {
         var damageCalculation = ((float)attackPower / defensePower) * battleAction.power * Random.Range(.9f, 1.1f);
         damageToDeal = Mathf.RoundToInt(damageCalculation);
 
-        selectedTarget.currentHp -= battleAction.actionType != BattleActionType.Healing ? damageToDeal : damageToDeal * -1;
+        selectedTarget.hp.current -= battleAction.actionType != BattleActionType.Healing ? damageToDeal : damageToDeal * -1;
 
         Debug.Log(currentTurn.name + " deals " + damageToDeal + "(" + damageCalculation + ") to "
-            + selectedTarget.name + " [HP: " + selectedTarget.currentHp + "/" + selectedTarget.maxHp + "]");
+            + selectedTarget.name + " [HP: " + selectedTarget.hp.current + "/" + selectedTarget.hp.max + "]");
 
         Instantiate(damageNumber, selectedTarget.transform.position, selectedTarget.transform.rotation).SetDamage(damageToDeal);
 
@@ -364,26 +363,7 @@ public class BattleManager : MonoBehaviour {
     }
 
     public void UpdateUiStats() {
-        for (var i = 0; i < playerNames.Length; i++) {
-            if (activeBattleCharacters.Count <= i) {
-                playerNames[i].gameObject.transform.parent.gameObject.SetActive(false);
-                break;
-            }
-            if (activeBattleCharacters[i].isPlayer) {
-                var playerData = activeBattleCharacters[i];
-
-                playerNames[i].gameObject.SetActive(true);
-                playerNames[i].text = playerData.name;
-                playerHpValues[i].text = Mathf.Clamp(playerData.currentHp, 0, int.MaxValue).ToString();
-                playerMpValues[i].text = Mathf.Clamp(playerData.currentMp, 0, int.MaxValue).ToString();
-                playerHpSliders[i].value = (float)playerData.currentHp / playerData.maxHp;
-                playerMpSliders[i].value = (float)playerData.currentMp / playerData.maxMp;
-                playerImages[i].sprite = playerData.portrait;
-            }
-            else {
-                playerNames[i].gameObject.transform.parent.gameObject.SetActive(false);
-            }
-        }
+        GameMenu.instance.UpdateStats();
     }
 
     public void PlayerAttack(string actionName, int selectedTargetId) {
@@ -401,7 +381,7 @@ public class BattleManager : MonoBehaviour {
             }
         }
 
-        currentTurn.currentMp -= action.mpCost;
+        currentTurn.mp.current -= action.mpCost;
 
         var position = Camera.main.WorldToScreenPoint(currentTurn.transform.position + new Vector3(0, +1.5f, 0f));
         // Instantiate(battleActionDisplay, position, currentTurn.transform.rotation, canvas.transform).SetText(action.actionName);
@@ -437,7 +417,7 @@ public class BattleManager : MonoBehaviour {
         }
 
         for (var i = 0; i < targetButtons.Length; i++) {
-            if (enemyIds.Count > i && activeBattleCharacters[enemyIds[i]].currentHp > 0) {
+            if (enemyIds.Count > i && activeBattleCharacters[enemyIds[i]].hp.current > 0) {
                 var enemy = activeBattleCharacters[enemyIds[i]];
 
                 targetButtons[i].transform.position = Camera.main.WorldToScreenPoint(enemy.transform.position + new Vector3(0, -1.2f, 0f));
@@ -447,7 +427,7 @@ public class BattleManager : MonoBehaviour {
                 targetButtons[i].targetId = enemyIds[i];
                 targetButtons[i].targetName.text = enemy.name;
 
-                var hpPercent = (float)enemy.currentHp / enemy.maxHp;
+                var hpPercent = (float)enemy.hp.current / enemy.hp.max;
 
                 var color = new Color(.51f, .86f, .2f);
 
@@ -535,7 +515,6 @@ public class BattleManager : MonoBehaviour {
         battleActive = false;
         battleNotification.text.text = "You win!";
         battleMenu.SetActive(false);
-        statsWindow.SetActive(false);
         targetMenu.SetActive(false);
         magicMenu.SetActive(false);
         itemMenu.SetActive(false);
@@ -551,8 +530,8 @@ public class BattleManager : MonoBehaviour {
             if (activeBattleCharacters[i].isPlayer) {
                 for (var j = 0; j < GameManager.instance.heroes.Length; j++) {
                     if (activeBattleCharacters[i].name == GameManager.instance.heroes[j].name) {
-                        GameManager.instance.heroes[j].hp.current = activeBattleCharacters[i].currentHp;
-                        GameManager.instance.heroes[j].mp.current = activeBattleCharacters[i].currentMp;
+                        GameManager.instance.heroes[j].hp.current = activeBattleCharacters[i].hp.current;
+                        GameManager.instance.heroes[j].mp.current = activeBattleCharacters[i].mp.current;
                         break;
                     }
                 }
@@ -563,6 +542,7 @@ public class BattleManager : MonoBehaviour {
 
         UIFade.instance.FadeFromBlack();
         battleScene.SetActive(false);
+        enemyWindows.SetActive(false);
         activeBattleCharacters.Clear();
         currentTurnId = 0;
         if (fleeing) {
@@ -579,11 +559,11 @@ public class BattleManager : MonoBehaviour {
         battleNotification.text.text = "Game Over!";
         battleNotification.Activate();
         battleActive = false;
-        statsWindow.SetActive(false);
         yield return new WaitForSeconds(2f);
         UIFade.instance.FadeToBlack();
         yield return new WaitForSeconds(.5f);
         battleScene.SetActive(false);
+        enemyWindows.SetActive(false);
         SceneManager.LoadScene(gameOverScene);
     }
 
@@ -629,25 +609,25 @@ public class BattleManagerEditor : Editor {
             }
             foreach(var player in BattleManager.instance.activeBattleCharacters) {
                 if (player.isPlayer) {
-                    player.currentHp = 1;
+                    player.hp.current = 1;
                 }
             }
         }
         if(GUILayout.Button("God Mode!!")) {
             foreach(var player in GameManager.instance.heroes) {
-                // player.currentHp = 999;
-                // player.maxHp = 999;
-                // player.currentMp = 999;
-                // player.maxMp = 999;
+                // player.hp.current = 999;
+                // player.hp.max = 999;
+                // player.mp.current = 999;
+                // player.mp.max = 999;
                 // player.attack = 5000;
                 // player.defense = 500;
             }
             foreach(var player in BattleManager.instance.activeBattleCharacters) {
                 if (player.isPlayer) {
-                    player.currentHp = 999;
-                    player.maxHp = 999;
-                    player.currentMp = 999;
-                    player.maxMp = 999;
+                    player.hp.current = 999;
+                    player.hp.max = 999;
+                    player.mp.current = 999;
+                    player.mp.max = 999;
                     player.attack = 5000;
                     player.defense = 500;
                 }
