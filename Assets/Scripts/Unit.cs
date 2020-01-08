@@ -6,6 +6,8 @@ public abstract class Unit : MonoBehaviour {
     public string id;
     public new string name;
     public string className;
+    public Animator animator;
+    public Sprite aliveSprite, deadSprite;
     public bool isActive;
     public bool isDead;
 

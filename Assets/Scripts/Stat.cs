@@ -5,10 +5,7 @@ public class Stat {
     
     public int baseValue;
     public int totalBonus;
-
-    public int GetTotalValue() {
-        return baseValue + totalBonus;
-    }
+    public int value { get => baseValue + totalBonus; }
 
     public void IncreaseBaseValue(int amount) {
         baseValue += amount;

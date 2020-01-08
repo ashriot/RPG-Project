@@ -16,6 +16,7 @@ public class PlayerController : MonoBehaviour {
     public bool onCooldown = false;
     public bool onExit = false;
     public bool uiOpen = false;
+    public bool inBattle = false;
     public string areaTransitionName;
     public bool noteCooldown;
 
@@ -113,7 +114,7 @@ public class PlayerController : MonoBehaviour {
 
 	private void FixedUpdate () {
         //We do nothing if the player is still moving.
-        if (isMoving || onCooldown || onExit || uiOpen ) return;
+        if (isMoving || onCooldown || onExit || uiOpen || inBattle ) return;
 
         //To store move directions.
         int horizontal = 0;
@@ -376,8 +377,8 @@ public class PlayerController : MonoBehaviour {
         } else if (coll.tag == "Key") {
             return true;
         } else if (coll.tag == "Enemy") {
-            Debug.Log("enemy");
-            return true;
+            inBattle = true;
+            return false;
         } else
             return false;
     }

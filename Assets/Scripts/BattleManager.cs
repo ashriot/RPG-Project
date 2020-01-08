@@ -51,9 +51,9 @@ public class BattleManager : MonoBehaviour {
     public Transform[] playerPositions;
     public Transform[] enemyPositions;
 
-    public Image[] statWindows;
     public BattleCombatant[] playerPrefabs;
     public BattleCombatant[] enemyPrefabs;
+    public Image[] enemyStatWindows;
     public BattleAction[] battleActions;
 
     public BattleTargetButton[] targetButtons;
@@ -85,43 +85,43 @@ public class BattleManager : MonoBehaviour {
     //     }
     // }
 
-    // void FixedUpdate() {
-    //     if (turnWaiting) {
-    //         UpdateBattle();
-    //         while (activeBattleCharacters[currentTurnId].isDead) {
-    //                 currentTurnId++;
-    //                 if (currentTurnId >= activeBattleCharacters.Count) {
-    //                     currentTurnId = 0;
-    //                 }
-    //             }
-    //         if (!waitingForInput) {
-    //             if (activeBattleCharacters.Count == 0) return;
-    //             if (activeBattleCharacters[currentTurnId].isPlayer) {
-    //                 // TODO: FIX THIS
-    //                 menuPlayerName.text = activeBattleCharacters[currentTurnId].name;
-    //                 if (activeBattleCharacters.All(x => x.isDead && !x.isPlayer)) return;
-    //                 StartCoroutine(MoveWindow(statWindows[currentTurnId].gameObject, UI_WINDOW_DISTANCE));
+    void FixedUpdate() {
+        if (turnWaiting) {
+            UpdateBattle();
+            while (activeBattleCharacters[currentTurnId].isDead) {
+                    currentTurnId++;
+                    if (currentTurnId >= activeBattleCharacters.Count) {
+                        currentTurnId = 0;
+                    }
+                }
+            if (!waitingForInput) {
+                if (activeBattleCharacters.Count == 0) return;
+                if (activeBattleCharacters[currentTurnId].isPlayer) {
+                    // TODO: FIX THIS
+                    menuPlayerName.text = activeBattleCharacters[currentTurnId].name;
+                    if (activeBattleCharacters.All(x => x.isDead && !x.isPlayer)) return;
                     
-    //                 AudioManager.instance.PlaySfx("test");
-    //                 battleMenuDisabled.SetActive(false);
-    //                 battleMenu.SetActive(true);
-    //                 waitingForInput = true;
-    //             } else { // enemy turn
-    //                 battleMenu.SetActive(false);
-    //                 // enemy should attack
-    //                 StartCoroutine(EnemyMoveCoroutine());
-    //             }
-    //         }
-    //     }
-    // }
+                    AudioManager.instance.PlaySfx("test");
+                    battleMenuDisabled.SetActive(false);
+                    battleMenu.SetActive(true);
+                    waitingForInput = true;
+                } else { // enemy turn
+                    battleMenu.SetActive(false);
+                    // enemy should attack
+                    StartCoroutine(EnemyMoveCoroutine());
+                }
+            }
+        }
+    }
 
-    public void BattleStart(string[] enemyNames, bool unableToFlee) {
+    public void BattleStart(string[] enemyIds, bool unableToFlee) {
         if (battleActive) return;
 
         cannotFlee = unableToFlee;
         battleActive = true;
         GameManager.instance.battleActive = true;
         transform.position = new Vector3(Camera.main.transform.position.x, Camera.main.transform.position.y, transform.position.z);
+        canvas.gameObject.SetActive(true);
         battleScene.SetActive(true);
         enemyWindows.SetActive(true);
         battleMenu.SetActive(true);
@@ -129,62 +129,48 @@ public class BattleManager : MonoBehaviour {
 
         var activeHeroes = GameManager.instance.heroes.Where(h => h.isActive).ToArray();
 
-        for (var i = 0; i < activeHeroes.Length; i++) {
-            var newPlayer = Instantiate(activeHeroes[i], playerPositions[i].position, playerPositions[i].rotation);
-            newPlayer.transform.parent = playerPositions[i];
+        for (var i = 0; i < playerPositions.Length; i++) {
+            if (activeHeroes[i].isActive) {
+                for (var j = 0; j < playerPrefabs.Length; j++) {
+                    if (playerPrefabs[j].id == activeHeroes[i].id) {
+                        var newPlayer = Instantiate(playerPrefabs[j], playerPositions[i].position, playerPositions[i].rotation);
+                        newPlayer.transform.parent = playerPositions[i];
                         
-                        // activeBattleCharacters.Add(newPlayer);
-                        // activeBattleCharacters[i].hp.current = activeHeroes[i].hp.current;
-                        // activeBattleCharacters[i].hp.max = activeHeroes[i].hp.max;
-                        // activeBattleCharacters[i].mp.current = activeHeroes[i].mp.current;
-                        // activeBattleCharacters[i].mp.max = activeHeroes[i].mp.max;
-                        // activeBattleCharacters[i].attack = activeHeroes[i].attack;
-                        // activeBattleCharacters[i].defense = activeHeroes[i].defense;
-                        // activeBattleCharacters[i].magic = activeHeroes[i].magic;
-                        // activeBattleCharacters[i].speed = activeHeroes[i].speed;
-        }
-
-        // for (var i = 0; i < playerPositions.Length; i++) {
-        //     if (activeHeroes[i].gameObject.activeInHierarchy) {
-        //         for (var j = 0; j < playerPrefabs.Length; j++) {
-        //             if (playerPrefabs[j].name == activeHeroes[i].name) {
-        //                 var newPlayer = Instantiate(playerPrefabs[j], playerPositions[i].position, playerPositions[i].rotation);
-        //                 newPlayer.transform.parent = playerPositions[i];
-                        
-        //                 activeBattleCharacters.Add(newPlayer);
-        //                 activeBattleCharacters[i].hp.current = activeHeroes[i].hp.current;
-        //                 activeBattleCharacters[i].hp.max = activeHeroes[i].hp.max;
-        //                 activeBattleCharacters[i].mp.current = activeHeroes[i].mp.current;
-        //                 activeBattleCharacters[i].mp.max = activeHeroes[i].mp.max;
-        //                 activeBattleCharacters[i].attack = activeHeroes[i].attack;
-        //                 activeBattleCharacters[i].defense = activeHeroes[i].defense;
-        //                 activeBattleCharacters[i].magic = activeHeroes[i].magic;
-        //                 activeBattleCharacters[i].speed = activeHeroes[i].speed;
-        //             }
-        //         }
-        //     }
-        // }
-
-        for (var i = 0; i < enemyNames.Length; i++) {
-            if (enemyNames[i] != string.Empty) {
-                for (var j = 0; j < enemyPrefabs.Length; j++) {
-                    if (enemyPrefabs[j].name == enemyNames[i]) {
-                        var newEnemy = Instantiate(enemyPrefabs[j], enemyPositions[i].position, enemyPositions[i].rotation);
-                        newEnemy.transform.parent = enemyPositions[i];
-                        activeBattleCharacters.Add(newEnemy);
+                        activeBattleCharacters.Add(newPlayer);
+                        activeBattleCharacters[i].hp = activeHeroes[i].hp;
+                        activeBattleCharacters[i].mp = activeHeroes[i].mp;
+                        activeBattleCharacters[i].attack = activeHeroes[i].attack.value;
+                        activeBattleCharacters[i].defense = activeHeroes[i].defense.value;
+                        activeBattleCharacters[i].magic = activeHeroes[i].magic.value;
+                        activeBattleCharacters[i].speed = activeHeroes[i].speed.value;
+                        activeBattleCharacters[i].deadSprite = activeHeroes[i].deadSprite;
                     }
                 }
             }
         }
 
+        for (var i = 0; i < enemyIds.Length; i++) {
+            if (enemyIds[i] != string.Empty) {
+                for (var j = 0; j < enemyPrefabs.Length; j++) {
+                    if (enemyPrefabs[j].id == enemyIds[i]) {
+                        var newEnemy = Instantiate(enemyPrefabs[j], enemyPositions[i].position, enemyPositions[i].rotation);
+                        newEnemy.transform.parent = enemyPositions[i];
+                        enemyStatWindows[i].gameObject.SetActive(true);
+                        enemyStatWindows[i].GetComponent<EnemyStatWindow>().portrait.sprite = newEnemy.portrait;
+                        enemyStatWindows[i].GetComponent<EnemyStatWindow>().animator.runtimeAnimatorController = newEnemy.portraitAnimatorController;
+                        enemyStatWindows[i].GetComponent<EnemyStatWindow>().hpSlider.fillAmount = newEnemy.hp.percent;
+                        enemyStatWindows[i].GetComponent<EnemyStatWindow>().mpSlider.fillAmount = newEnemy.mp.percent;
+                        activeBattleCharacters.Add(newEnemy);
+                    }
+                }
+            }
+        }
         turnWaiting = true;
-        currentTurnId = Random.Range(0, activeBattleCharacters.Count);
-        UpdateUiStats();
     }
 
     public void NextTurn() {
         if (waitingForInput) {
-            statWindows[currentTurnId].color = Color.white;
+            // statWindows[currentTurnId].color = Color.white;
             waitingForInput = false;
         }
         
@@ -217,7 +203,6 @@ public class BattleManager : MonoBehaviour {
                 }
             } else if (activeBattleCharacters[i].isPlayer) {
                 allPlayersDead = false;
-                activeBattleCharacters[i].spriteRenderer.sprite = activeBattleCharacters[i].aliveSprite;
             } else {    // enemy
                 allEnemiesDead = false;
             }
@@ -310,15 +295,15 @@ public class BattleManager : MonoBehaviour {
         }
     }
 
-    public IEnumerator<WaitForSeconds> MoveWindow(GameObject gameObject, float distance) {
-        Vector3 destPos = gameObject.transform.localPosition + new Vector3(distance, 0f, 0f);
+    // public IEnumerator<WaitForSeconds> MoveWindow(GameObject gameObject, float distance) {
+    //     Vector3 destPos = gameObject.transform.localPosition + new Vector3(distance, 0f, 0f);
 
-        while (Vector3.Distance(gameObject.transform.localPosition, destPos)>0.01f) {
-            Debug.Log(destPos);
-            gameObject.transform.localPosition = Vector3.MoveTowards(gameObject.transform.localPosition, destPos, 150f * Time.deltaTime);
-            yield return null;
-        }
-    }
+    //     while (Vector3.Distance(gameObject.transform.localPosition, destPos)>0.01f) {
+    //         Debug.Log(destPos);
+    //         gameObject.transform.localPosition = Vector3.MoveTowards(gameObject.transform.localPosition, destPos, 150f * Time.deltaTime);
+    //         yield return null;
+    //     }
+    // }
 
     public void DealDamage(int selectedTargetId, BattleAction battleAction) {
         var currentTurn = activeBattleCharacters[currentTurnId];
@@ -388,10 +373,6 @@ public class BattleManager : MonoBehaviour {
 
         StartCoroutine(FlashSprite(currentTurn.spriteRenderer, Color.blue));
         DealDamage(selectedTargetId, action);
-
-        if (currentTurn.isPlayer) {
-            StartCoroutine(MoveWindow(statWindows[currentTurnId].gameObject, -UI_WINDOW_DISTANCE));
-        }
 
         actionTooltip.gameObject.SetActive(false);
         battleMenu.SetActive(false);

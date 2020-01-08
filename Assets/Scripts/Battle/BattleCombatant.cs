@@ -3,9 +3,9 @@ using UnityEngine;
 
 public class BattleCombatant : MonoBehaviour {
 
-    public new string name;
-    public int level, currentXp, attack, defense, magic, speed;
+    public string id;
     public Resource hp, mp;
+    public int level, xp, attack, defense, magic, speed;
     public float timeTillTurn;
     public bool isPlayer;
     public bool isActive;
@@ -14,18 +14,13 @@ public class BattleCombatant : MonoBehaviour {
     public List<StatusEffect> statusEffects;
 
     public SpriteRenderer spriteRenderer;
+    public RuntimeAnimatorController portraitAnimatorController;
     public Sprite portrait;
-    public Sprite aliveSprite;
     public Sprite deadSprite;
 
     public float fadeSpeed = 1f;
 
     private bool shouldFade;
-
-    // Start is called before the first frame update
-    void Start() {
-
-    }
 
     // Update is called once per frame
     void Update() {

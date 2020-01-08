@@ -12,10 +12,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a3ba09daef0b1894f8b5c267d9416de9, type: 3}
   m_Name: Gold Key
   m_EditorClassIdentifier: 
-  itemType: 1
   id: goldKey
+  itemType: 1
   name: Gold Key
   description: A key capable of opening any lock.
   goldValue: 10
-  sprite: {fileID: 3449902049257042327, guid: 8c500e45b904a74468ea62831fc2b0dc, type: 3}
+  sprite: {fileID: -2896988864025634025, guid: 8c500e45b904a74468ea62831fc2b0dc, type: 3}
   potency: 0

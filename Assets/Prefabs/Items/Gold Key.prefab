@@ -11,7 +11,8 @@ GameObject:
   - component: {fileID: 8127934177881728286}
   - component: {fileID: 6889729659787356493}
   - component: {fileID: 135761466049647178}
-  m_Layer: 0
+  - component: {fileID: 1253042135}
+  m_Layer: 8
   m_Name: Gold Key
   m_TagString: Key
   m_Icon: {fileID: 0}
@@ -70,7 +71,7 @@ SpriteRenderer:
   m_SortingLayerID: -439459169
   m_SortingLayer: 1
   m_SortingOrder: 1
-  m_Sprite: {fileID: 3449902049257042327, guid: 8c500e45b904a74468ea62831fc2b0dc,
+  m_Sprite: {fileID: -2896988864025634025, guid: 8c500e45b904a74468ea62831fc2b0dc,
     type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
@@ -108,3 +109,24 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 1, y: 1}
   m_EdgeRadius: 0
+--- !u!50 &1253042135
+Rigidbody2D:
+  serializedVersion: 4
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6172067582127435582}
+  m_BodyType: 0
+  m_Simulated: 1
+  m_UseFullKinematicContacts: 0
+  m_UseAutoMass: 0
+  m_Mass: 1
+  m_LinearDrag: 0
+  m_AngularDrag: 0.05
+  m_GravityScale: 0
+  m_Material: {fileID: 0}
+  m_Interpolate: 0
+  m_SleepingMode: 1
+  m_CollisionDetection: 0
+  m_Constraints: 7

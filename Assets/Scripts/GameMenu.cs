@@ -153,13 +153,13 @@ public class GameMenu : MonoBehaviour {
         heroDisplayStatus.xp.text = "XP: " + hero.xp + "/" + hero.level * 100;
         heroDisplayStatus.hp.text = hero.hp.display;
         heroDisplayStatus.mp.text = hero.mp.display;
-        heroDisplayStatus.attack.text = hero.attack.GetTotalValue().ToString();
-        heroDisplayStatus.defense.text = hero.defense.GetTotalValue().ToString();
-        heroDisplayStatus.magic.text = hero.magic.GetTotalValue().ToString();
-        heroDisplayStatus.speed.text = hero.speed.GetTotalValue().ToString();
-        heroDisplayStatus.armor.text = hero.armor.GetTotalValue().ToString();
-        heroDisplayStatus.resist.text = hero.resist.GetTotalValue().ToString();
-        heroDisplayStatus.critPower.text = hero.critPower.GetTotalValue().ToString();
+        heroDisplayStatus.attack.text = hero.attack.value.ToString();
+        heroDisplayStatus.defense.text = hero.defense.value.ToString();
+        heroDisplayStatus.magic.text = hero.magic.value.ToString();
+        heroDisplayStatus.speed.text = hero.speed.value.ToString();
+        heroDisplayStatus.armor.text = hero.armor.value.ToString();
+        heroDisplayStatus.resist.text = hero.resist.value.ToString();
+        heroDisplayStatus.critPower.text = hero.critPower.value.ToString();
 
         if (hero.mainHand != null) {
             heroDisplayStatus.MainHandAtkOrBlk.text = hero.mainHand.GetAtkOrBlk();

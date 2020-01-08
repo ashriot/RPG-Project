@@ -167,6 +167,66 @@ TextureImporter:
   - first:
       213: -4025681734518897009
     second: wee_dungeon_54
+  - first:
+      213: 616690985605281588
+    second: wee_dungeon_55
+  - first:
+      213: -9127811432349937280
+    second: wee_dungeon_56
+  - first:
+      213: 5091309420521078198
+    second: wee_dungeon_57
+  - first:
+      213: -8164989167165242966
+    second: wee_dungeon_58
+  - first:
+      213: -8951020669439005780
+    second: wee_dungeon_59
+  - first:
+      213: 8448556556514676738
+    second: wee_dungeon_60
+  - first:
+      213: -4205743271587067428
+    second: wee_dungeon_61
+  - first:
+      213: 3763710779598420575
+    second: wee_dungeon_62
+  - first:
+      213: 1814850146556007829
+    second: wee_dungeon_63
+  - first:
+      213: 1086285259529317080
+    second: wee_dungeon_64
+  - first:
+      213: -5846748980393473012
+    second: wee_dungeon_65
+  - first:
+      213: -6264498906698890770
+    second: wee_dungeon_66
+  - first:
+      213: 6577966138784394993
+    second: wee_dungeon_67
+  - first:
+      213: 1232535465690288205
+    second: wee_dungeon_68
+  - first:
+      213: 5169561201822665776
+    second: wee_dungeon_69
+  - first:
+      213: -8806201934032340580
+    second: wee_dungeon_70
+  - first:
+      213: 2534157650512097630
+    second: wee_dungeon_71
+  - first:
+      213: -1879745861038908405
+    second: wee_dungeon_72
+  - first:
+      213: 6474851698117802760
+    second: wee_dungeon_73
+  - first:
+      213: 2806998544657961205
+    second: wee_dungeon_74
   externalObjects: {}
   serializedVersion: 10
   mipmaps:
@@ -295,13 +355,13 @@ TextureImporter:
         width: 10
         height: 10
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 5644e782f5e7a8f42aed45abcb06d2f4
+      spriteID: a22e8e91ab2525643b4b339827f4af06
       internalID: 7157644817382225743
       vertices: []
       indices: 
@@ -316,13 +376,13 @@ TextureImporter:
         width: 10
         height: 10
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: d1e66a289843b78428bbd80d37111aa3
+      spriteID: d493365085d578a4c893611b2236d364
       internalID: 8911085056286247665
       vertices: []
       indices: 
@@ -337,13 +397,13 @@ TextureImporter:
         width: 10
         height: 10
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 6cee2101ce1dd04479c347bb05f87d00
+      spriteID: 12ef51d56080092498f7a81aba3f34ac
       internalID: 8654974524761663737
       vertices: []
       indices: 
@@ -358,13 +418,13 @@ TextureImporter:
         width: 10
         height: 10
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: fcc94cf6d182e7b40a5a664a6676fa39
+      spriteID: 11e37add423d2da47a026c8142aa1b8b
       internalID: 816811586845060614
       vertices: []
       indices: 
@@ -379,13 +439,13 @@ TextureImporter:
         width: 10
         height: 10
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 7390dcb2f24afc1449bbdac5c5a98e51
+      spriteID: dc0024af2680e65418923d80d6cf989c
       internalID: -7270820056100654727
       vertices: []
       indices: 
@@ -400,13 +460,13 @@ TextureImporter:
         width: 10
         height: 10
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 2ec7abe709a3c5542a2298746a4404b0
+      spriteID: 85844b65b6d3519449904a6cb28e8daa
       internalID: 8315042624671221146
       vertices: []
       indices: 
@@ -421,13 +481,13 @@ TextureImporter:
         width: 10
         height: 10
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 1dab1735a6d048b41949606677df5a50
+      spriteID: 23e74d0a3258add4c8e89b628b6611ce
       internalID: -5784584504226423408
       vertices: []
       indices: 
@@ -442,13 +502,13 @@ TextureImporter:
         width: 10
         height: 10
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: f9bec70e676aca54aa1badebca97f170
+      spriteID: 46111f30de81dda4db051b72c50effe0
       internalID: -890720087053787059
       vertices: []
       indices: 
@@ -463,13 +523,13 @@ TextureImporter:
         width: 10
         height: 10
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 091b3e86cb0f8f3439b7a925f06d1250
+      spriteID: 6f271676316c4c947997ec4b5ea3cd70
       internalID: 3216721062186891822
       vertices: []
       indices: 
@@ -484,13 +544,13 @@ TextureImporter:
         width: 10
         height: 10
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 4fd385fd20dc71a488ab84cbdc814b15
+      spriteID: 5360c498ff9aa364d8a33b540cadeec8
       internalID: 1778078738432296362
       vertices: []
       indices: 
@@ -505,13 +565,13 @@ TextureImporter:
         width: 10
         height: 10
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 5c0ae16ed81863649a48ba721bc9dfa5
+      spriteID: 0e574a94e74554d4c9e282b669c9f14f
       internalID: -2950764216430204504
       vertices: []
       indices: 
@@ -526,13 +586,13 @@ TextureImporter:
         width: 10
         height: 10
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 74c807dafe97a344da926beabd4184e6
+      spriteID: d6dece3a254e240499e8c79adec7cb2f
       internalID: 8759005431223319757
       vertices: []
       indices: 
@@ -547,13 +607,13 @@ TextureImporter:
         width: 10
         height: 10
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 1d9132fcc91a26e4dbf199773c11a76d
+      spriteID: 1d059d5585a2a8a4eb19ac0ed8abac0a
       internalID: -2650448625864999987
       vertices: []
       indices: 
@@ -568,13 +628,13 @@ TextureImporter:
         width: 10
         height: 10
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 950be56174ae3244c8a7283b9610b506
+      spriteID: adb26f3abce3f0243b819290a4e7b98f
       internalID: 991052030529953693
       vertices: []
       indices: 
@@ -589,13 +649,13 @@ TextureImporter:
         width: 10
         height: 10
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: bc99014958c5bf44ba721e2305cc6e08
+      spriteID: ea74f77b29e7fec4d919303d4f5fdc26
       internalID: 6356210942079519558
       vertices: []
       indices: 
@@ -610,13 +670,13 @@ TextureImporter:
         width: 10
         height: 10
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: bbe257adb79854142b1cdcdadb1ed295
+      spriteID: 2afd82f66ebef794baf5fbb96bebf6cc
       internalID: -4697315509321541208
       vertices: []
       indices: 
@@ -631,13 +691,13 @@ TextureImporter:
         width: 10
         height: 10
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 1a4e8ebc85b64e241a5fc4da6c095841
+      spriteID: 41e16d419dbc4f04e9916c22dbcfb7af
       internalID: -2220995737641616793
       vertices: []
       indices: 
@@ -652,13 +712,13 @@ TextureImporter:
         width: 10
         height: 10
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: d7b06dc793649054899fefff5c561a34
+      spriteID: c33ee75b0b4d145429c2bbfce778c0b9
       internalID: 6685645168037896822
       vertices: []
       indices: 
@@ -673,13 +733,13 @@ TextureImporter:
         width: 10
         height: 10
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 3ae6bb40325b8104bb36896b363b798a
+      spriteID: ab8d03e245612304ab93c8e4808ff795
       internalID: -8026566107805099611
       vertices: []
       indices: 
@@ -694,13 +754,13 @@ TextureImporter:
         width: 10
         height: 10
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 4fe65f38e2562644fad77e51c5211f6b
+      spriteID: 5ebc4133eb6f7a6488186de8b341db90
       internalID: 6837980607377161483
       vertices: []
       indices: 
@@ -715,13 +775,13 @@ TextureImporter:
         width: 10
         height: 10
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: b1df4e11787e01846bb177493454d674
+      spriteID: fd428cc466096324d9aeba6686183920
       internalID: 7938612468715145424
       vertices: []
       indices: 
@@ -731,18 +791,18 @@ TextureImporter:
       name: wee_dungeon_21
       rect:
         serializedVersion: 2
-        x: 30
+        x: 20
         y: 131
         width: 10
         height: 10
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 5a3539a31560888479668becd8a805f0
+      spriteID: 7ea528b041c090b4fb52b94106b81b54
       internalID: 6994897419105450055
       vertices: []
       indices: 
@@ -752,18 +812,18 @@ TextureImporter:
       name: wee_dungeon_22
       rect:
         serializedVersion: 2
-        x: 50
+        x: 30
         y: 131
         width: 10
         height: 10
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: b73f28ed5a841124d8d073e16e406b12
+      spriteID: 0d57c77a7e283e94892828e4df2006ff
       internalID: -5931130452065805702
       vertices: []
       indices: 
@@ -773,18 +833,18 @@ TextureImporter:
       name: wee_dungeon_23
       rect:
         serializedVersion: 2
-        x: 70
+        x: 40
         y: 131
         width: 10
         height: 10
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 0a0d8977336216942b2b466f9c7e40cb
+      spriteID: 84caed5b6a45e354a95c6eb9573d9c80
       internalID: -5106757461824926845
       vertices: []
       indices: 
@@ -794,18 +854,18 @@ TextureImporter:
       name: wee_dungeon_24
       rect:
         serializedVersion: 2
-        x: 90
+        x: 50
         y: 131
         width: 10
         height: 10
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: bf2fd19ad69a4a44391823441f68c59d
+      spriteID: 88aaac51d8d99094c8ac80695d9fee17
       internalID: 9067233583431043777
       vertices: []
       indices: 
@@ -815,18 +875,18 @@ TextureImporter:
       name: wee_dungeon_25
       rect:
         serializedVersion: 2
-        x: 10
-        y: 111
+        x: 70
+        y: 131
         width: 10
         height: 10
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 9596955508fa9f6479bcb53b849f6bfe
+      spriteID: 6f078e6229a451547bffd5c3b5481fe0
       internalID: -5869207457728792189
       vertices: []
       indices: 
@@ -836,18 +896,18 @@ TextureImporter:
       name: wee_dungeon_26
       rect:
         serializedVersion: 2
-        x: 30
-        y: 111
+        x: 90
+        y: 131
         width: 10
         height: 10
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: d49c86df4449f0146acc6dc6f9a4d0a3
+      spriteID: 9aa179877864704419d87a5b2c5c7f4b
       internalID: -3642497917231361194
       vertices: []
       indices: 
@@ -857,18 +917,18 @@ TextureImporter:
       name: wee_dungeon_27
       rect:
         serializedVersion: 2
-        x: 50
-        y: 111
+        x: 30
+        y: 141
         width: 10
         height: 10
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 96759d8faf1580d42b417d611af2e275
+      spriteID: 6633c29dfef103943b04dd1bb61fbd08
       internalID: -3857755357221612779
       vertices: []
       indices: 
@@ -878,18 +938,18 @@ TextureImporter:
       name: wee_dungeon_28
       rect:
         serializedVersion: 2
-        x: 70
+        x: 10
         y: 111
         width: 10
         height: 10
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: d5250a38f2487414b92f4d7c7a2adcdd
+      spriteID: 3cb09569a0d333d4d8636cf0ca968b62
       internalID: -633906601833807510
       vertices: []
       indices: 
@@ -899,18 +959,18 @@ TextureImporter:
       name: wee_dungeon_29
       rect:
         serializedVersion: 2
-        x: 90
+        x: 30
         y: 111
         width: 10
         height: 10
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: cfc5fd2577c67214da66b73033e81dc3
+      spriteID: 41ab659d042c8cd40bbb13e92745f474
       internalID: 4878117874021825802
       vertices: []
       indices: 
@@ -920,18 +980,18 @@ TextureImporter:
       name: wee_dungeon_30
       rect:
         serializedVersion: 2
-        x: 10
-        y: 91
+        x: 50
+        y: 111
         width: 10
         height: 10
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 93e54419c0f0c3248a60b9fc9af6c92d
+      spriteID: dafd9567d498ae4419d9ef96c9968c5d
       internalID: 1880653039307229375
       vertices: []
       indices: 
@@ -941,18 +1001,18 @@ TextureImporter:
       name: wee_dungeon_31
       rect:
         serializedVersion: 2
-        x: 30
-        y: 91
+        x: 70
+        y: 111
         width: 10
         height: 10
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: ce2d5633db3720b4b933400bd1bdaaa0
+      spriteID: 90274aab872769e4bb35e3454be4e1ef
       internalID: -1412964725421390260
       vertices: []
       indices: 
@@ -962,18 +1022,18 @@ TextureImporter:
       name: wee_dungeon_32
       rect:
         serializedVersion: 2
-        x: 50
-        y: 91
+        x: 90
+        y: 111
         width: 10
         height: 10
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 82aae1a8c44b6c44aa67a105f5242424
+      spriteID: becf6492e0628924b977358acc10e112
       internalID: -2698437166647353193
       vertices: []
       indices: 
@@ -983,18 +1043,18 @@ TextureImporter:
       name: wee_dungeon_33
       rect:
         serializedVersion: 2
-        x: 70
+        x: 10
         y: 91
         width: 10
         height: 10
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: b25376c8a32c02e4da314852be4eb72d
+      spriteID: e815dbb5a3c90bb40a2c9b320784c902
       internalID: 3449902049257042327
       vertices: []
       indices: 
@@ -1004,18 +1064,18 @@ TextureImporter:
       name: wee_dungeon_34
       rect:
         serializedVersion: 2
-        x: 90
+        x: 30
         y: 91
         width: 10
         height: 10
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: e2f50ef67c535e946a231162d9476251
+      spriteID: 80903700315aec14b87c796b8ea44043
       internalID: 3173909132428073095
       vertices: []
       indices: 
@@ -1025,18 +1085,18 @@ TextureImporter:
       name: wee_dungeon_35
       rect:
         serializedVersion: 2
-        x: 10
-        y: 71
+        x: 50
+        y: 91
         width: 10
         height: 10
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 5c78e89544b163e4eb446d43d9cce174
+      spriteID: 2467979754ed4284a9356c6c8779b2cc
       internalID: 3396170308952443118
       vertices: []
       indices: 
@@ -1046,18 +1106,18 @@ TextureImporter:
       name: wee_dungeon_36
       rect:
         serializedVersion: 2
-        x: 30
-        y: 71
+        x: 70
+        y: 91
         width: 10
         height: 10
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 0952fecbdb2c8294bb0abcfc83c35b3c
+      spriteID: 2a36b61c5b0df4d4cb88ccb49b1ca1a5
       internalID: -2896988864025634025
       vertices: []
       indices: 
@@ -1067,18 +1127,18 @@ TextureImporter:
       name: wee_dungeon_37
       rect:
         serializedVersion: 2
-        x: 50
-        y: 71
+        x: 90
+        y: 91
         width: 10
         height: 10
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 9a6c26935888651479a63a1d1d82d223
+      spriteID: 152c797d69310134d8940727bae3ff2c
       internalID: -790959769988349048
       vertices: []
       indices: 
@@ -1088,18 +1148,18 @@ TextureImporter:
       name: wee_dungeon_38
       rect:
         serializedVersion: 2
-        x: 70
-        y: 71
+        x: 10
+        y: 81
         width: 10
         height: 10
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 36bedec852090b34f9361e2b76a9ef5b
+      spriteID: d5127f6ff31512b4fa3e52127ffa3e08
       internalID: -3968836210512633132
       vertices: []
       indices: 
@@ -1109,18 +1169,18 @@ TextureImporter:
       name: wee_dungeon_39
       rect:
         serializedVersion: 2
-        x: 90
-        y: 71
+        x: 50
+        y: 81
         width: 10
         height: 10
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 0760fc3265bfca74e97f554f6eb1fe8e
+      spriteID: 378743b83ca7e1e4ca072029ed9226dc
       internalID: 9150189495625051195
       vertices: []
       indices: 
@@ -1130,18 +1190,18 @@ TextureImporter:
       name: wee_dungeon_40
       rect:
         serializedVersion: 2
-        x: 10
-        y: 51
+        x: 0
+        y: 71
         width: 10
         height: 10
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: c03149352cd4cf840a185ea210466c99
+      spriteID: 6ea23409f403a0248a1c466d3ce9e8ee
       internalID: 6140018635264707644
       vertices: []
       indices: 
@@ -1151,18 +1211,18 @@ TextureImporter:
       name: wee_dungeon_41
       rect:
         serializedVersion: 2
-        x: 30
-        y: 51
+        x: 10
+        y: 71
         width: 10
         height: 10
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 03712d0a9d85d9141ad22bcb06733dc9
+      spriteID: 97fd5857a87915b40b2548ade18f9696
       internalID: 964583420314795779
       vertices: []
       indices: 
@@ -1172,18 +1232,18 @@ TextureImporter:
       name: wee_dungeon_42
       rect:
         serializedVersion: 2
-        x: 50
-        y: 51
+        x: 20
+        y: 71
         width: 10
         height: 10
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: aebcbb4bc689e4247a8a2f79a789c931
+      spriteID: a5e4161cc3dc2ce4fbafc70e3cf936d4
       internalID: -3578585665867577350
       vertices: []
       indices: 
@@ -1193,18 +1253,18 @@ TextureImporter:
       name: wee_dungeon_43
       rect:
         serializedVersion: 2
-        x: 70
-        y: 51
+        x: 30
+        y: 71
         width: 10
         height: 10
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: f9ef30ad4e321da458dead5a09be098e
+      spriteID: 56002b418bbbd59459fb3663c7dd4185
       internalID: 2436897677686566156
       vertices: []
       indices: 
@@ -1214,18 +1274,18 @@ TextureImporter:
       name: wee_dungeon_44
       rect:
         serializedVersion: 2
-        x: 90
-        y: 51
+        x: 40
+        y: 71
         width: 10
         height: 10
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 907518f1f32402b49b400f2e5912a333
+      spriteID: badc30bdac024b04aa2336b3e09cecd6
       internalID: 3298885011294875820
       vertices: []
       indices: 
@@ -1235,18 +1295,18 @@ TextureImporter:
       name: wee_dungeon_45
       rect:
         serializedVersion: 2
-        x: 10
-        y: 31
+        x: 50
+        y: 71
         width: 10
         height: 10
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: c94b2dd42f825b448a824abe510cf186
+      spriteID: 9d0120c240c126944aefad8b0dcd91a6
       internalID: -9019017487792071533
       vertices: []
       indices: 
@@ -1256,18 +1316,18 @@ TextureImporter:
       name: wee_dungeon_46
       rect:
         serializedVersion: 2
-        x: 30
-        y: 31
+        x: 70
+        y: 71
         width: 10
         height: 10
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 3fa221928c97e544ba2384ac469ee011
+      spriteID: cd443bac9633e604eae9eb95f5a8f049
       internalID: 28576244589993517
       vertices: []
       indices: 
@@ -1277,18 +1337,18 @@ TextureImporter:
       name: wee_dungeon_47
       rect:
         serializedVersion: 2
-        x: 50
-        y: 31
+        x: 90
+        y: 71
         width: 10
         height: 10
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 5720367d2b6192749a63b9f81b975c0c
+      spriteID: 00e5bf4fe292f7a4288490b150d4de06
       internalID: -5897739935860805592
       vertices: []
       indices: 
@@ -1298,18 +1358,18 @@ TextureImporter:
       name: wee_dungeon_48
       rect:
         serializedVersion: 2
-        x: 70
-        y: 31
+        x: 30
+        y: 61
         width: 10
         height: 10
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: fd21a19b10d0df84692e58168e06a045
+      spriteID: bb88a8d4cc7bf9e4e8084febcf70494c
       internalID: -6908666714487797074
       vertices: []
       indices: 
@@ -1319,18 +1379,18 @@ TextureImporter:
       name: wee_dungeon_49
       rect:
         serializedVersion: 2
-        x: 90
-        y: 31
+        x: 50
+        y: 61
         width: 10
         height: 10
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 1a5aaf946ab4f7e42857ffd86ca303bc
+      spriteID: d65dfbb43a7cb8a4791741e218debe8f
       internalID: -7335202786924632854
       vertices: []
       indices: 
@@ -1340,18 +1400,18 @@ TextureImporter:
       name: wee_dungeon_50
       rect:
         serializedVersion: 2
-        x: 10
-        y: 11
+        x: 70
+        y: 61
         width: 10
         height: 10
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 8d10052f9cf35aa4683a225837deee38
+      spriteID: c4c6329aa6bfc724bb85267e42e350ea
       internalID: 7835131849693276000
       vertices: []
       indices: 
@@ -1361,18 +1421,18 @@ TextureImporter:
       name: wee_dungeon_51
       rect:
         serializedVersion: 2
-        x: 30
-        y: 11
+        x: 90
+        y: 61
         width: 10
         height: 10
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: a2ce1a09405e9a24aa3d96f5e3d3f644
+      spriteID: 7f9f8ef0757795444b4602e27956ac10
       internalID: -7683613693342420304
       vertices: []
       indices: 
@@ -1382,18 +1442,18 @@ TextureImporter:
       name: wee_dungeon_52
       rect:
         serializedVersion: 2
-        x: 50
-        y: 11
+        x: 10
+        y: 51
         width: 10
         height: 10
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 5c473d9b805ebb94896cdda115ea4331
+      spriteID: 11be0285ee5125c4dae8fa0b03b0b5db
       internalID: 2425125559403032947
       vertices: []
       indices: 
@@ -1403,18 +1463,18 @@ TextureImporter:
       name: wee_dungeon_53
       rect:
         serializedVersion: 2
-        x: 70
-        y: 11
+        x: 20
+        y: 51
         width: 10
         height: 10
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: c68a2fe520ef68349b0edda90f044cc2
+      spriteID: 9e20e70e376d9574b9c96a98a5590ffe
       internalID: 8826940480525618638
       vertices: []
       indices: 
@@ -1424,19 +1484,439 @@ TextureImporter:
       name: wee_dungeon_54
       rect:
         serializedVersion: 2
-        x: 90
-        y: 11
+        x: 30
+        y: 51
         width: 10
         height: 10
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 2e81a4769ca83ae43b10ab93e3048ee4
+      spriteID: 063add09ac4e40f4093f7dc7b8b28925
       internalID: -4025681734518897009
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: wee_dungeon_55
+      rect:
+        serializedVersion: 2
+        x: 40
+        y: 51
+        width: 10
+        height: 10
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: dd41d4d48d5e0b2409c7a30c1b6e228b
+      internalID: 616690985605281588
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: wee_dungeon_56
+      rect:
+        serializedVersion: 2
+        x: 50
+        y: 51
+        width: 10
+        height: 10
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 482bfb10e4472c34491c54a7459bdc91
+      internalID: -9127811432349937280
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: wee_dungeon_57
+      rect:
+        serializedVersion: 2
+        x: 60
+        y: 51
+        width: 10
+        height: 10
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: ff735845fcb2bab45b0008369e6e0f3a
+      internalID: 5091309420521078198
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: wee_dungeon_58
+      rect:
+        serializedVersion: 2
+        x: 70
+        y: 51
+        width: 10
+        height: 10
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 951bcc6e2b6420c4d8af5ba970720aae
+      internalID: -8164989167165242966
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: wee_dungeon_59
+      rect:
+        serializedVersion: 2
+        x: 80
+        y: 51
+        width: 10
+        height: 10
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: d1a9940d35df99842ab2e2ff0a27b010
+      internalID: -8951020669439005780
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: wee_dungeon_60
+      rect:
+        serializedVersion: 2
+        x: 90
+        y: 51
+        width: 10
+        height: 10
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: d8c8f9947f9b9c04b87b2b3fc7537009
+      internalID: 8448556556514676738
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: wee_dungeon_61
+      rect:
+        serializedVersion: 2
+        x: 10
+        y: 31
+        width: 10
+        height: 10
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 66a939acfebb7f14da495041e6629821
+      internalID: -4205743271587067428
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: wee_dungeon_62
+      rect:
+        serializedVersion: 2
+        x: 30
+        y: 31
+        width: 10
+        height: 10
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: cb63114e9cec3914ba39ec189279c96f
+      internalID: 3763710779598420575
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: wee_dungeon_63
+      rect:
+        serializedVersion: 2
+        x: 50
+        y: 31
+        width: 10
+        height: 10
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 927b644d8502d9d458c2b10a56043730
+      internalID: 1814850146556007829
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: wee_dungeon_64
+      rect:
+        serializedVersion: 2
+        x: 70
+        y: 31
+        width: 10
+        height: 10
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: e826998e97ee7324184da297b4653622
+      internalID: 1086285259529317080
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: wee_dungeon_65
+      rect:
+        serializedVersion: 2
+        x: 90
+        y: 31
+        width: 10
+        height: 10
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: f116eb4e6245aff47ba17d3c7a064a75
+      internalID: -5846748980393473012
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: wee_dungeon_66
+      rect:
+        serializedVersion: 2
+        x: 30
+        y: 21
+        width: 10
+        height: 10
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 8e67905388995a444a5514004898a9bc
+      internalID: -6264498906698890770
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: wee_dungeon_67
+      rect:
+        serializedVersion: 2
+        x: 50
+        y: 21
+        width: 10
+        height: 10
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 438a3e2783558224d8f72424844b8fd7
+      internalID: 6577966138784394993
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: wee_dungeon_68
+      rect:
+        serializedVersion: 2
+        x: 70
+        y: 21
+        width: 10
+        height: 10
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: eecec779ff3fd2f44812f61685080a01
+      internalID: 1232535465690288205
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: wee_dungeon_69
+      rect:
+        serializedVersion: 2
+        x: 90
+        y: 21
+        width: 10
+        height: 10
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 630cd1c1db363564bb915e6fce3e7eec
+      internalID: 5169561201822665776
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: wee_dungeon_70
+      rect:
+        serializedVersion: 2
+        x: 10
+        y: 11
+        width: 10
+        height: 10
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 894037d44d1c7674baadcdc4d7f117f5
+      internalID: -8806201934032340580
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: wee_dungeon_71
+      rect:
+        serializedVersion: 2
+        x: 30
+        y: 11
+        width: 10
+        height: 10
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 34dba9ba6b5aebf4dbe676c777e0a793
+      internalID: 2534157650512097630
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: wee_dungeon_72
+      rect:
+        serializedVersion: 2
+        x: 50
+        y: 11
+        width: 10
+        height: 10
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 4324063611a7ba24d8415155385d949d
+      internalID: -1879745861038908405
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: wee_dungeon_73
+      rect:
+        serializedVersion: 2
+        x: 70
+        y: 11
+        width: 10
+        height: 10
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 1d438307fc5a21a40817f58ccfa9e0db
+      internalID: 6474851698117802760
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: wee_dungeon_74
+      rect:
+        serializedVersion: 2
+        x: 90
+        y: 11
+        width: 10
+        height: 10
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 22659673797de754cb216a93f2e5e567
+      internalID: 2806998544657961205
       vertices: []
       indices: 
       edges: []

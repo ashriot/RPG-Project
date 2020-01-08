@@ -11,8 +11,9 @@ GameObject:
   - component: {fileID: 8787949426215704519}
   - component: {fileID: 8787949426215704516}
   - component: {fileID: 8787949426215704517}
+  - component: {fileID: 9017432730243066158}
   m_Layer: 0
-  m_Name: SkeletonWarrior
+  m_Name: Skeleton Warrior
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -44,19 +45,19 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1a608e7024d6d2a45ad1815a6a08d3c0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  name: Skeleton Warrior
-  level: 0
-  currentXp: 0
-  attack: 5
-  defense: 5
-  magic: 5
-  speed: 5
+  id: skeletonWarrior
   hp:
     current: 25
     max: 25
   mp:
     current: 0
     max: 0
+  level: 0
+  xp: 0
+  attack: 5
+  defense: 5
+  magic: 5
+  speed: 5
   timeTillTurn: 0
   isPlayer: 0
   isActive: 1
@@ -64,9 +65,9 @@ MonoBehaviour:
   battleActions: []
   statusEffects: []
   spriteRenderer: {fileID: 8787949426215704517}
+  portraitAnimatorController: {fileID: 9100000, guid: 88643cd6fc2ac8847b61efb21da4fe12,
+    type: 2}
   portrait: {fileID: 2159116858117616238, guid: 96bde4b4bb84ff54bb970194b4f379a1,
-    type: 3}
-  aliveSprite: {fileID: 7073020091310324596, guid: 04854a5f96e25cf4fbef374e1965bd3b,
     type: 3}
   deadSprite: {fileID: 9177001904570590583, guid: 04854a5f96e25cf4fbef374e1965bd3b,
     type: 3}
@@ -109,8 +110,7 @@ SpriteRenderer:
   m_SortingLayerID: 437314879
   m_SortingLayer: 4
   m_SortingOrder: 0
-  m_Sprite: {fileID: 7073020091310324596, guid: 04854a5f96e25cf4fbef374e1965bd3b,
-    type: 3}
+  m_Sprite: {fileID: 0}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -118,6 +118,25 @@ SpriteRenderer:
   m_Size: {x: 2, y: 2}
   m_AdaptiveModeThreshold: 0.5
   m_SpriteTileMode: 0
-  m_WasSpriteAssigned: 1
+  m_WasSpriteAssigned: 0
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
+--- !u!95 &9017432730243066158
+Animator:
+  serializedVersion: 3
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8787949426215704514}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: 14052d379bd8bdb4f8c73e18108d309a, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorControllerStateOnDisable: 0

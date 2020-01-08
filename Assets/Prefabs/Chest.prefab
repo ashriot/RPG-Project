@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 5667134867631012509}
   - component: {fileID: 5667134867631012508}
   - component: {fileID: 5667134867631011170}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Chest
   m_TagString: Chest
   m_Icon: {fileID: 0}
@@ -26,7 +26,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 5667134867631011168}
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
@@ -71,7 +71,7 @@ SpriteRenderer:
   m_SortingLayerID: -439459169
   m_SortingLayer: 1
   m_SortingOrder: 1
-  m_Sprite: {fileID: 1880653039307229375, guid: 8c500e45b904a74468ea62831fc2b0dc,
+  m_Sprite: {fileID: 3449902049257042327, guid: 8c500e45b904a74468ea62831fc2b0dc,
     type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
@@ -121,7 +121,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d2b527ef8b1061e4aacd67bf60fc1ee8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  isLocked: 1
   isOpened: 0
   isLooted: 0
-  opened: {fileID: -1412964725421390260, guid: 8c500e45b904a74468ea62831fc2b0dc, type: 3}
-  looted: {fileID: -2698437166647353193, guid: 8c500e45b904a74468ea62831fc2b0dc, type: 3}
+  contents:
+  - shortSword
+  opened: {fileID: 3173909132428073095, guid: 8c500e45b904a74468ea62831fc2b0dc, type: 3}
+  looted: {fileID: 3396170308952443118, guid: 8c500e45b904a74468ea62831fc2b0dc, type: 3}

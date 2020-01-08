@@ -117,6 +117,11 @@ MonoBehaviour:
   id: elfFighter
   name: Drizz't
   className: Elf Fighter
+  animator: {fileID: 7383352328448479878}
+  aliveSprite: {fileID: 8944779272692540031, guid: 04854a5f96e25cf4fbef374e1965bd3b,
+    type: 3}
+  deadSprite: {fileID: 4750745865729764837, guid: 04854a5f96e25cf4fbef374e1965bd3b,
+    type: 3}
   isActive: 1
   isDead: 0
   level: 1

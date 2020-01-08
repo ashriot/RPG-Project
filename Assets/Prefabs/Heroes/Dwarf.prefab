@@ -117,6 +117,11 @@ MonoBehaviour:
   id: dwarf
   name: Flint
   className: Dwarf
+  animator: {fileID: 2945478755862410872}
+  aliveSprite: {fileID: -3154873122853401360, guid: 04854a5f96e25cf4fbef374e1965bd3b,
+    type: 3}
+  deadSprite: {fileID: 1083927990338066198, guid: 04854a5f96e25cf4fbef374e1965bd3b,
+    type: 3}
   isActive: 1
   isDead: 0
   level: 1
