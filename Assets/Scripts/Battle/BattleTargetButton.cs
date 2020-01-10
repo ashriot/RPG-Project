@@ -5,7 +5,6 @@ public class BattleTargetButton : MonoBehaviour {
 
     public string actionName;
     public int targetId;
-    public Text targetName;
 
     // Start is called before the first frame update
     void Start() {
@@ -18,6 +17,8 @@ public class BattleTargetButton : MonoBehaviour {
     }
 
     public void Press() {
-        BattleManager.instance.PlayerAttack(actionName, targetId);
+        GetComponent<EnemyStatWindow>().targetBox.gameObject.SetActive(true);
+        // BattleManager.instance.PlayerAttack(actionName);
+        BattleManager.instance.SetTargetedEnemyId(targetId);
     }
 }

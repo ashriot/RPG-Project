@@ -27,7 +27,7 @@ public class GameMenu : MonoBehaviour {
     public Button[] menuButtons;
     public Text[] nameTexts, hpTexts, mpTexts;
     public Image[] hpSliders, mpSliders;
-    public Image[] heroImages;
+    public Image[] currentTurnOutlines;
     public HeroDisplay heroDisplayStatus;
 
     [Header("Data Trackers")]

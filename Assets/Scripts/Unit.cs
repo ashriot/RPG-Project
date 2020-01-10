@@ -9,7 +9,7 @@ public abstract class Unit : MonoBehaviour {
     public Animator animator;
     public Sprite aliveSprite, deadSprite;
     public bool isActive;
-    public bool isDead;
+    public bool isDead { get { return (hp.current == 0); } }
 
     public int level;
     public int xp;

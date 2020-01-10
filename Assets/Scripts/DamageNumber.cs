@@ -5,10 +5,14 @@ public class DamageNumber : MonoBehaviour {
 
     public Text damageText;
 
-    public float lifetime = 1f;
-    public float moveSpeed = 1f;
+    public float lifetime;
+    public float moveSpeed;
 
-    public float placementJitter = .5f;
+    public float placementJitter;
+    public float angleJitter;
+
+    private float movementAngle;
+    private int direction;
 
     // Start is called before the first frame update
     void Start() {
@@ -18,18 +22,35 @@ public class DamageNumber : MonoBehaviour {
     // Update is called once per frame
     void Update() {
         Destroy(gameObject, lifetime);
-        transform.position += new Vector3(0f, moveSpeed * Time.deltaTime, 0f);
+        transform.position += new Vector3(moveSpeed * Time.deltaTime * direction, moveSpeed * movementAngle * Time.deltaTime, 0f);
     }
 
-    public void SetDamage(int damageValue) {
-        var color = new Color(255f, 255f, 255f, 255f);
-        if (damageValue < 0) { // healing
-            damageText.text = "+" + (-1 * damageValue) + "HP";
-            color = new Color(.2f, 1f, .35f, 1f);
+    public void SetDamage(int damageValue, bool isCrit, bool isGraze, bool isPlayer) {
+        if (isPlayer) {
+            direction = 1;
         } else {
-            damageText.text = damageValue.ToString("N0");
+            direction = -1;
         }
-        transform.position += new Vector3(Random.Range(-placementJitter, placementJitter), Random.Range(-placementJitter, placementJitter), 0f);
-        damageText.color = color;
+
+        damageText.text = damageValue.ToString("N0");
+        movementAngle = Random.Range(0, angleJitter);
+        
+        if (isCrit) {
+            damageText.color = Color.yellow;
+            damageText.transform.localScale = new Vector3(1.25f, 1.25f, 1f);
+            damageText.text += "!";
+            moveSpeed *= 1.25f;
+            movementAngle = 1f;
+        } else if (isGraze) {
+            damageText.color = Color.gray;
+            movementAngle = -.33f;
+        } else if (damageValue == 0) {
+            damageText.color = Color.red;
+            damageText.text = "Miss!";
+            movementAngle = -.9f;
+        }
+
+        var startingOffset = isPlayer ? 30 : -30;
+        transform.position += new Vector3(startingOffset, 0, 0f);
     }
 }

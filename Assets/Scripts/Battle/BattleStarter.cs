@@ -59,12 +59,13 @@ public class BattleStarter : MonoBehaviour {
     }
 
     public IEnumerator<WaitForSeconds> StartBattleCoroutine() {
+        PlayerController.instance.inBattle = true;
+        GameManager.instance.battleActive = true;
         AudioManager.instance.PlayBgm("battle");
         yield return new WaitForSeconds(.5f);
         UIFade.instance.FlashScreen(2);
         yield return new WaitForSeconds(.25f);
         UIFade.instance.FadeToBlack();
-        GameManager.instance.battleActive = true;
 
         var selectedBattleId = Random.Range(0, potentialBattles.Length);
 
@@ -80,7 +81,7 @@ public class BattleStarter : MonoBehaviour {
             gameObject.SetActive(false);
         }
 
-        BattleReward.instance.markQuestComplete = shouldCompleteQuest;
-        BattleReward.instance.questNameToComplete = questNameToComplete;
+        // BattleReward.instance.markQuestComplete = shouldCompleteQuest;
+        // BattleReward.instance.questNameToComplete = questNameToComplete;
     }
 }

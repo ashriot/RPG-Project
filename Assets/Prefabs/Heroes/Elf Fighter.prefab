@@ -123,7 +123,6 @@ MonoBehaviour:
   deadSprite: {fileID: 4750745865729764837, guid: 04854a5f96e25cf4fbef374e1965bd3b,
     type: 3}
   isActive: 1
-  isDead: 0
   level: 1
   xp: 0
   skillPoints: 0
@@ -134,16 +133,16 @@ MonoBehaviour:
     current: 25
     max: 25
   attack:
-    baseValue: 12
+    baseValue: 14
     totalBonus: 0
   defense:
-    baseValue: 6
+    baseValue: 5
     totalBonus: 0
   magic:
-    baseValue: 8
+    baseValue: 5
     totalBonus: 0
   speed:
-    baseValue: 5
+    baseValue: 7
     totalBonus: 0
   armor:
     baseValue: 0
@@ -161,3 +160,6 @@ MonoBehaviour:
   head: {fileID: 0}
   mainHand: {fileID: 0}
   offHand: {fileID: 0}
+  constitution:
+    current: 0
+    max: 0

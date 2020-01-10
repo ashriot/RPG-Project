@@ -12,7 +12,6 @@ public class AudioManager : MonoBehaviour {
     void Start() {
         instance = this;
         DontDestroyOnLoad(gameObject);
-        PlayBgm("dungeon");
     }
 
     // Update is called once per frame
@@ -23,9 +22,10 @@ public class AudioManager : MonoBehaviour {
     public void PlayBgm(string name) {
         if (name == "dungeon") {
             PlayBgmId(0);
-        }
-        if (name == "battle") {
+        } else if (name == "battle") {
             PlayBgmId(1);
+        } else if (name == "victory") {
+            PlayBgmId(2);
         }
     }
 

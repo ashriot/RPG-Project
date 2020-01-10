@@ -56,10 +56,11 @@ public class PlayerController : MonoBehaviour {
         foreach(var member in partyMembers) {
             member.GetComponent<SpriteRenderer>().sortingLayerName = "Player";
         }
+
     }
 
     void Update() {
-        if (isMoving || onCooldown || onExit || uiOpen ) return;
+        if (isMoving || onCooldown || onExit || uiOpen || inBattle) return;
 
         if (Input.GetMouseButton(0)) {
             if (FindObjectOfType<EventSystem>().IsPointerOverGameObject()){

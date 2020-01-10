@@ -18,8 +18,7 @@ public class BattleAttackButton : MonoBehaviour {
     }
 
     public void Press() {
-        var currentTurn = BattleManager.instance.activeBattleCharacters[BattleManager.instance.currentTurnId];
-
-        BattleManager.instance.OpenTargetMenu(name);
+        // BattleManager.instance.OpenTargetMenu(name);
+        BattleManager.instance.PlayerAttack(name);
     }
 }

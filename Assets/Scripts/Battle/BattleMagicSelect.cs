@@ -21,7 +21,7 @@ public class BattleMagicSelect : MonoBehaviour {
     }
 
     public void Press() {
-        var currentTurn = BattleManager.instance.activeBattleCharacters[BattleManager.instance.currentTurnId];
+        var currentTurn = BattleManager.instance.combatants[BattleManager.instance.currentTurnId];
 
         if (currentTurn.mp.current < mpCost) {
             Debug.Log(currentTurn.name + " doesn't have enough MP. (Cost: " + mpCost + ")");
@@ -30,6 +30,6 @@ public class BattleMagicSelect : MonoBehaviour {
             return;
         }
 
-        BattleManager.instance.OpenTargetMenu(magicName);
+        // BattleManager.instance.OpenTargetMenu(magicName);
     }
 }
