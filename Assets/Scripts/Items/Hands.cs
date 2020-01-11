@@ -1,8 +1,7 @@
 ﻿
-using UnityEngine;
-
-public abstract class Hands : EquipableItem
+public abstract class Hands : EquippableItem
 {
+    public abstract int AtkOrBlkValue();
     public abstract string GetAtkOrBlk();
     public abstract string GetDmgOrAmt();
 }

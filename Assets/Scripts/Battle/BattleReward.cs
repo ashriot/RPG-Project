@@ -15,7 +15,6 @@ public class BattleReward : MonoBehaviour {
 
     void Awake() {
         instance = this;
-        DontDestroyOnLoad(gameObject);
     }
 
     public void OpenWindow(int xpEarned) {

@@ -17,19 +17,14 @@ MonoBehaviour:
   name: Leather Armor
   description: Basic leather armor.
   goldValue: 0
-  sprite: {fileID: 3298885011294875820, guid: 8c500e45b904a74468ea62831fc2b0dc, type: 3}
+  sprite: {fileID: -8951020669439005780, guid: 8c500e45b904a74468ea62831fc2b0dc, type: 3}
   equipmentType: 1
-  baseAttack: 0
-  minimumDamage: 0
-  maximumDamage: 0
-  delay: 0
-  blockChance: 0
-  blockAmount: 0
   hpBonus: 20
   mpBonus: 0
-  defenseBonus: 5
+  attackBonus: 0
+  defenseBonus: 2
   magicBonus: 0
   speedBonus: 1
-  armorBonus: 0
+  armorBonus: 2
   resistBonus: 0
   criticalIntensityBonus: 0

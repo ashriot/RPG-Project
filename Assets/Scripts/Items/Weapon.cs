@@ -8,11 +8,15 @@ public class Weapon : Hands {
     public int maximumDamage;
     public float delay;
 
+    public override int AtkOrBlkValue() {
+        return baseAttack;
+    }
+
     public override string GetAtkOrBlk() {
         return baseAttack.ToString();
     }
 
     public override string GetDmgOrAmt() {
-        return minimumDamage + " - " + maximumDamage;
+        return minimumDamage + "-" + maximumDamage;
     }
 }

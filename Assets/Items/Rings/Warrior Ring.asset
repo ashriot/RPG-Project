@@ -1,0 +1,30 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 196ae3416209e94438141c87500d0e5b, type: 3}
+  m_Name: Warrior Ring
+  m_EditorClassIdentifier: 
+  id: warriorRing
+  itemType: 4
+  name: Warrior Ring
+  description: An enchanted ring that boosts Attack.
+  goldValue: 0
+  sprite: {fileID: 1814850146556007829, guid: 8c500e45b904a74468ea62831fc2b0dc, type: 3}
+  equipmentType: 0
+  hpBonus: 0
+  mpBonus: 0
+  attackBonus: 2
+  defenseBonus: 0
+  magicBonus: 0
+  speedBonus: 0
+  armorBonus: 0
+  resistBonus: 0
+  criticalIntensityBonus: 0

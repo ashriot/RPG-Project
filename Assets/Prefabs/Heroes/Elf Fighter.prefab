@@ -125,7 +125,6 @@ MonoBehaviour:
   isActive: 1
   level: 1
   xp: 0
-  skillPoints: 0
   hp:
     current: 35
     max: 35
@@ -163,3 +162,14 @@ MonoBehaviour:
   constitution:
     current: 0
     max: 0
+  attributeSkillNames:
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  attributeSkillValues: 000000000000000000000000000000000000000000000000
+  sp: 0
+  totalSp: 0
+  intialValues: {fileID: 11400000, guid: 16daf9702dd6f664692e3889b5fa0057, type: 2}

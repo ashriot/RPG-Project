@@ -144,9 +144,9 @@ public class BattleManager : MonoBehaviour {
                         
                         combatants.Add(newPlayer);
                         combatants[i].hp.current = heroes[i].hp.current;
-                        combatants[i].hp.max = heroes[i].hp.max;
+                        combatants[i].hp.maximum = heroes[i].hp.max;
                         combatants[i].mp.current = heroes[i].mp.current;
-                        combatants[i].mp.max = heroes[i].mp.max;
+                        combatants[i].mp.maximum = heroes[i].mp.max;
                         combatants[i].attack = heroes[i].attack.value;
                         combatants[i].defense = heroes[i].defense.value;
                         combatants[i].magic = heroes[i].magic.value;
@@ -690,9 +690,9 @@ public class BattleManagerEditor : Editor {
             foreach(var player in BattleManager.instance.combatants) {
                 if (player.isPlayer) {
                     player.hp.current = 999;
-                    player.hp.max = 999;
+                    player.hp.maximum = 999;
                     player.mp.current = 999;
-                    player.mp.max = 999;
+                    player.mp.maximum = 999;
                     player.attack = 5000;
                     player.defense = 500;
                 }

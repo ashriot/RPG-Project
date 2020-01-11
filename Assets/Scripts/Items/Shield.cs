@@ -6,6 +6,10 @@ public class Shield : Hands {
     public float blockChance;
     public int blockAmount;
 
+    public override int AtkOrBlkValue() {
+        return (int)(blockChance * 100);
+    }
+
     public override string GetAtkOrBlk() {
         return (blockChance * 100) + "%";
     }

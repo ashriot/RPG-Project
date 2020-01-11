@@ -124,25 +124,24 @@ MonoBehaviour:
     type: 3}
   isActive: 1
   level: 1
-  xp: 0
-  skillPoints: 0
+  xp: 12000
   hp:
-    current: 30
-    max: 30
+    current: 35
+    max: 35
   mp:
     current: 40
     max: 40
   attack:
-    baseValue: -3
+    baseValue: 4
     totalBonus: 0
   defense:
-    baseValue: 4
+    baseValue: 5
     totalBonus: 0
   magic:
     baseValue: 10
     totalBonus: 0
   speed:
-    baseValue: 5
+    baseValue: 8
     totalBonus: 0
   armor:
     baseValue: 0
@@ -151,7 +150,7 @@ MonoBehaviour:
     baseValue: 0
     totalBonus: 0
   critPower:
-    baseValue: 0
+    baseValue: 150
     totalBonus: 0
   body: {fileID: 0}
   feet: {fileID: 0}
@@ -161,5 +160,16 @@ MonoBehaviour:
   mainHand: {fileID: 0}
   offHand: {fileID: 0}
   constitution:
-    current: 0
-    max: 0
+    current: 3
+    max: 3
+  attributeSkillNames:
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  attributeSkillValues: 000000000000000000000000000000000000000000000000
+  sp: 0
+  totalSp: 0
+  intialValues: {fileID: 11400000, guid: e078487fc5134804abcbabb37a2f0600, type: 2}

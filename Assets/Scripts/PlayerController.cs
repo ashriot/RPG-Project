@@ -63,8 +63,10 @@ public class PlayerController : MonoBehaviour {
         if (isMoving || onCooldown || onExit || uiOpen || inBattle) return;
 
         if (Input.GetMouseButton(0)) {
-            if (FindObjectOfType<EventSystem>().IsPointerOverGameObject()){
-                var currentGO = CurrentInput.GameObjectUnderPointer();
+            var tmp = FindObjectOfType<EventSystem>();
+            var tmp2 = tmp.IsPointerOverGameObject(0);
+            if (tmp2){
+                var currentGO = CurrentInput.GameObjectUnderPointer(0);
                 if (currentGO.layer == 8) { // Clickables Layer
                     // if (noteCooldown) return;
                     // noteCooldown = true;

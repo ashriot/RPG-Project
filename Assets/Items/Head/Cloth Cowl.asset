@@ -17,19 +17,14 @@ MonoBehaviour:
   name: Cloth Cowl
   description: A linen hood.
   goldValue: 0
-  sprite: {fileID: 964583420314795779, guid: 8c500e45b904a74468ea62831fc2b0dc, type: 3}
-  equipmentType: 0
-  baseAttack: 0
-  minimumDamage: 0
-  maximumDamage: 0
-  delay: 0
-  blockChance: 0
-  blockAmount: 0
-  hpBonus: 5
-  mpBonus: 10
+  sprite: {fileID: -6908666714487797074, guid: 8c500e45b904a74468ea62831fc2b0dc, type: 3}
+  equipmentType: 1
+  hpBonus: 10
+  mpBonus: 20
+  attackBonus: 0
   defenseBonus: 0
-  magicBonus: 2
+  magicBonus: 1
   speedBonus: 0
   armorBonus: 0
-  resistBonus: 0
+  resistBonus: 2
   criticalIntensityBonus: 0

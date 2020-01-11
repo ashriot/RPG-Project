@@ -17,19 +17,14 @@ MonoBehaviour:
   name: Cloth Robe
   description: A basic magic-user's robe.
   goldValue: 0
-  sprite: {fileID: 3298885011294875820, guid: 8c500e45b904a74468ea62831fc2b0dc, type: 3}
+  sprite: {fileID: -7683613693342420304, guid: 8c500e45b904a74468ea62831fc2b0dc, type: 3}
   equipmentType: 0
-  baseAttack: 0
-  minimumDamage: 0
-  maximumDamage: 0
-  delay: 0
-  blockChance: 0
-  blockAmount: 0
-  hpBonus: 10
-  mpBonus: 15
+  hpBonus: 15
+  mpBonus: 20
+  attackBonus: 0
   defenseBonus: 1
-  magicBonus: 0
+  magicBonus: 1
   speedBonus: 0
   armorBonus: 0
-  resistBonus: 2
+  resistBonus: 3
   criticalIntensityBonus: 0

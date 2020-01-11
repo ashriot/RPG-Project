@@ -53,6 +53,18 @@ public class AudioManager : MonoBehaviour {
             sfxs[5].Play();
          } else if (name == "loot") {
             sfxs[6].Play();
+         } else if (name == "click") {
+            sfxs[7].Play();
+         } else if (name == "coin") {
+            sfxs[8].Play();
+         } else if (name == "gold") {
+            sfxs[9].Play();
+         } else if (name == "select_a") {
+            sfxs[10].Play();
+         } else if (name == "error") {
+            sfxs[11].Play();
+         } else if (name == "score") {
+            sfxs[12].Play();
          }
         // } else {
         //     Debug.LogError("SFX named '" + name + "' does not exist!");

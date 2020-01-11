@@ -13,14 +13,13 @@ public abstract class Unit : MonoBehaviour {
 
     public int level;
     public int xp;
-    public int skillPoints;
 
     public Resource hp;
     public Resource mp;
 
     public Stat attack, defense, magic, speed, armor, resist, critPower;
 
-    public EquipableItem body, feet, fingerL, fingerR, head;
+    public EquippableItem head, body, arms, feet, ringL, ringR;
     public Hands mainHand, offHand;
 
     public string GetLevelAndClass() {
