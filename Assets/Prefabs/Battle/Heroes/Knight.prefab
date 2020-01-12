@@ -98,23 +98,33 @@ MonoBehaviour:
   id: knight
   hp:
     current: 0
-    max: 0
+    maximum: 0
+    totalBonus: 0
   mp:
     current: 0
-    max: 0
+    maximum: 0
+    totalBonus: 0
   level: 0
   xp: 0
   attack: 0
   defense: 0
   magic: 0
   speed: 0
-  timeTillTurn: 0
+  armor: 0
+  resist: 0
+  minDamage: 0
+  maxDamage: 0
+  initiative: 0
   isPlayer: 1
   isActive: 1
   isDead: 0
-  battleActions: []
+  battleActions:
+  - Taunt
   statusEffects: []
+  mainHand: {fileID: 0}
+  offHand: {fileID: 0}
   spriteRenderer: {fileID: 3776686873378311067}
+  portraitAnimatorController: {fileID: 0}
   portrait: {fileID: 0}
   deadSprite: {fileID: 0}
   fadeSpeed: 1

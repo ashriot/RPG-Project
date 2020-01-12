@@ -22,6 +22,9 @@ public class HeroType : ScriptableObject {
     // attribute skills
     public int[] attributeSkillValues;
 
+    public string[] skills;
+    public string[] spells;
+
     public EquippableItem head, body, arms, feet, ringL, ringR;
     public Hands mainHand, offHand;
 }

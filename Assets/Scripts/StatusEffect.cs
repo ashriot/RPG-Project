@@ -1,19 +1,10 @@
 ﻿using UnityEngine;
 
-public class StatusEffect : MonoBehaviour {
+[System.Serializable, CreateAssetMenu(fileName = "StatusEffect", menuName = "Status Effect")]
+public class StatusEffect : ScriptableObject {
 
-    public string effectName;
+    public new string name;
     public string description;
     public int duration;
     public int potency;
-    
-    // Start is called before the first frame update
-    void Start() {
-        
-    }
-
-    // Update is called once per frame
-    void Update() {
-        
-    }
 }

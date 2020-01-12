@@ -1,7 +1,8 @@
 ﻿
 public abstract class Hands : EquippableItem
 {
-    public abstract int AtkOrBlkValue();
-    public abstract string GetAtkOrBlk();
-    public abstract string GetDmgOrAmt();
+    public abstract int GetAtkOrBlkValue();
+    public abstract string GetAtkOrBlkString(int bonus = 0);
+    public abstract int GetDmgOrAmtValue();
+    public abstract string GetDmgOrAmtString();
 }

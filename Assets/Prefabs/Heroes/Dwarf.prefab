@@ -124,52 +124,49 @@ MonoBehaviour:
     type: 3}
   isActive: 1
   level: 1
-  xp: 0
+  xp: 56
   hp:
-    current: 50
-    max: 50
+    current: 58
+    maximum: 55
+    totalBonus: 40
   mp:
     current: 5
-    max: 5
+    maximum: 5
+    totalBonus: 0
   attack:
-    baseValue: 10
-    totalBonus: 0
+    baseValue: 15
+    totalBonus: 3
   defense:
-    baseValue: 6
-    totalBonus: 0
+    baseValue: 7
+    totalBonus: 4
   magic:
     baseValue: 2
-    totalBonus: 0
+    totalBonus: 2
   speed:
     baseValue: 8
-    totalBonus: 0
+    totalBonus: 5
   armor:
     baseValue: 0
-    totalBonus: 0
+    totalBonus: 1
   resist:
     baseValue: 0
     totalBonus: 0
   critPower:
-    baseValue: 0
+    baseValue: 150
     totalBonus: 0
-  body: {fileID: 0}
-  feet: {fileID: 0}
-  fingerL: {fileID: 0}
-  fingerR: {fileID: 0}
-  head: {fileID: 0}
-  mainHand: {fileID: 0}
-  offHand: {fileID: 0}
+  head: {fileID: 11400000, guid: 915fa70b45f4ab443a384cd767726b0f, type: 2}
+  body: {fileID: 11400000, guid: ef3d966ca0253b549a187d01441ddd84, type: 2}
+  arms: {fileID: 11400000, guid: c3d7bf2e702dbdd47aeaee10cdb7ec67, type: 2}
+  feet: {fileID: 11400000, guid: 02fb59e7d1f1d564d93a35273947caf5, type: 2}
+  ringL: {fileID: 11400000, guid: 4f36306fe6a84ec468500dc1b6430249, type: 2}
+  ringR: {fileID: 11400000, guid: 1afd7edd7bfefb840805c7a8642ec284, type: 2}
+  mainHand: {fileID: 11400000, guid: 4f135c96ff403b74fbf3fdb0b0c18d56, type: 2}
+  offHand: {fileID: 11400000, guid: 1d03cb9e00b5d1e4b8ee360dd33ea00c, type: 2}
   constitution:
-    current: 0
-    max: 0
-  attributeSkillNames:
-  - 
-  - 
-  - 
-  - 
-  - 
-  - 
-  attributeSkillValues: 000000000000000000000000000000000000000000000000
+    current: 3
+    maximum: 3
+    totalBonus: 0
+  attributeSkillValues: 00000000010000000f000000000000000100000000000000
   sp: 0
-  totalSp: 0
-  intialValues: {fileID: 11400000, guid: 43c01146a1da5a64b9b016006f7fdfa4, type: 2}
+  totalSp: 17
+  initialValues: {fileID: 11400000, guid: 43c01146a1da5a64b9b016006f7fdfa4, type: 2}

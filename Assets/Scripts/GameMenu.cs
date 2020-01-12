@@ -26,6 +26,8 @@ public class GameMenu : MonoBehaviour {
     public GameObject[] windows;
     public Button[] menuButtons;
     public Button backButton;
+    public Button removeAll;
+    public Button autoEquip;
     public Text[] nameTexts, hpTexts, mpTexts;
     public Image[] hpSliders, mpSliders;
     public Image[] currentTurnOutlines;
@@ -222,6 +224,8 @@ public class GameMenu : MonoBehaviour {
     }
 
     public void OpenEquipment() {
+        removeAll.gameObject.SetActive(true);
+        autoEquip.gameObject.SetActive(true);
         UpdateStats();
         SetHeroEquipment();
         UpdateMiniStatPanel();
@@ -283,6 +287,8 @@ public class GameMenu : MonoBehaviour {
     }
 
     public void SetHeroEquipment() {
+        const string none = "      [None]";
+
         var hero = heroes[currentHeroId];
         equipmentWindow.head = hero.head;
         equipmentWindow.body = hero.body;
@@ -299,7 +305,7 @@ public class GameMenu : MonoBehaviour {
             equipmentWindow.headButton.text.text = equipmentWindow.head.name;
         } else {
             equipmentWindow.headButton.image.enabled = false;
-            equipmentWindow.headButton.text.text = "[None]";
+            equipmentWindow.headButton.text.text = none;
         }
         if (equipmentWindow.body != null) {
             equipmentWindow.bodyButton.image.enabled = true;
@@ -307,7 +313,7 @@ public class GameMenu : MonoBehaviour {
             equipmentWindow.bodyButton.text.text = equipmentWindow.body.name;
         } else {
             equipmentWindow.bodyButton.image.enabled = false;
-            equipmentWindow.bodyButton.text.text = "[None]";
+            equipmentWindow.bodyButton.text.text = none;
         }
         if (equipmentWindow.arms != null) {
             equipmentWindow.armsButton.image.enabled = true;
@@ -315,7 +321,7 @@ public class GameMenu : MonoBehaviour {
             equipmentWindow.armsButton.text.text = equipmentWindow.arms.name;
         } else {
             equipmentWindow.armsButton.image.enabled = false;
-            equipmentWindow.armsButton.text.text = "[None]";
+            equipmentWindow.armsButton.text.text = none;
         }
         if (equipmentWindow.feet != null) {
             equipmentWindow.feetButton.image.enabled = true;
@@ -323,7 +329,7 @@ public class GameMenu : MonoBehaviour {
             equipmentWindow.feetButton.text.text = equipmentWindow.feet.name;
         } else {
             equipmentWindow.feetButton.image.enabled = false;
-            equipmentWindow.feetButton.text.text = "[None]";
+            equipmentWindow.feetButton.text.text = none;
         }
         if (equipmentWindow.ringL != null) {
             equipmentWindow.ringLButton.image.enabled = true;
@@ -331,7 +337,7 @@ public class GameMenu : MonoBehaviour {
             equipmentWindow.ringLButton.text.text = equipmentWindow.ringL.name;
         } else {
             equipmentWindow.ringLButton.image.enabled = false;
-            equipmentWindow.ringLButton.text.text = "[None]";
+            equipmentWindow.ringLButton.text.text = none;
         }
         if (equipmentWindow.ringR != null) {
             equipmentWindow.ringRButton.image.enabled = true;
@@ -339,7 +345,7 @@ public class GameMenu : MonoBehaviour {
             equipmentWindow.ringRButton.text.text = equipmentWindow.ringR.name;
         } else {
             equipmentWindow.ringRButton.image.enabled = false;
-            equipmentWindow.ringRButton.text.text = "[None]";
+            equipmentWindow.ringRButton.text.text = none;
         }
         if (equipmentWindow.mainHand != null) {
             equipmentWindow.mainHandButton.image.enabled = true;
@@ -349,11 +355,11 @@ public class GameMenu : MonoBehaviour {
             if (equipmentWindow.offHand != null && equipmentWindow.offHand.equipmentType != EquipmentType.Shield) {
                 penalty = 6;
             }
-            equipmentWindow.mainHandAtkOrBlk.text = (hero.attack.value - penalty + equipmentWindow.mainHand.AtkOrBlkValue()) + " ATK v. DEF";
-            equipmentWindow.mainHandDmgOrAmt.text = equipmentWindow.mainHand.GetDmgOrAmt() + " Wpn. Dmg.";
-            } else {
+            equipmentWindow.mainHandAtkOrBlk.text = equipmentWindow.mainHand.GetAtkOrBlkString(hero.attack.value - penalty);
+            equipmentWindow.mainHandDmgOrAmt.text = equipmentWindow.mainHand.GetDmgOrAmtString();
+        } else {
             equipmentWindow.mainHandButton.image.enabled = false;
-            equipmentWindow.mainHandButton.text.text = "[None]";
+            equipmentWindow.mainHandButton.text.text = none;
             equipmentWindow.mainHandAtkOrBlk.text = "---";
             equipmentWindow.mainHandDmgOrAmt.text = "---";
         }
@@ -362,16 +368,17 @@ public class GameMenu : MonoBehaviour {
             equipmentWindow.offHandButton.image.sprite = equipmentWindow.offHand.sprite;
             equipmentWindow.offHandButton.text.text = equipmentWindow.offHand.name;
             if (equipmentWindow.offHand.equipmentType == EquipmentType.Shield) {
-                equipmentWindow.offHandAtkOrBlk.text = equipmentWindow.offHand.GetAtkOrBlk() + " Block Chance";
-                equipmentWindow.offHandDmgOrAmt.text = "Blocks " + equipmentWindow.offHand.GetDmgOrAmt() + " Dmg.";
+                equipmentWindow.offHandAtkOrBlk.text = equipmentWindow.offHand.GetAtkOrBlkString();
+                equipmentWindow.offHandDmgOrAmt.text = equipmentWindow.offHand.GetDmgOrAmtString();
             } else {
-                equipmentWindow.offHandAtkOrBlk.text = (hero.attack.value - 10 + equipmentWindow.offHand.AtkOrBlkValue()) + " ATK v. DEF";
-                equipmentWindow.offHandDmgOrAmt.text = equipmentWindow.offHand.GetDmgOrAmt() + " Wpn. Dmg.";
+                var penalty = 10;
+                equipmentWindow.offHandAtkOrBlk.text = equipmentWindow.offHand.GetAtkOrBlkString(hero.attack.value - penalty);
+                equipmentWindow.offHandDmgOrAmt.text = equipmentWindow.offHand.GetDmgOrAmtString();
             }
             
         } else {
             equipmentWindow.offHandButton.image.enabled = false;
-            equipmentWindow.offHandButton.text.text = "[None]";
+            equipmentWindow.offHandButton.text.text = none;
             equipmentWindow.offHandAtkOrBlk.text = "---";
             equipmentWindow.offHandDmgOrAmt.text = "---";
         }

@@ -8,15 +8,19 @@ public class Weapon : Hands {
     public int maximumDamage;
     public float delay;
 
-    public override int AtkOrBlkValue() {
+    public override int GetAtkOrBlkValue() {
         return baseAttack;
     }
 
-    public override string GetAtkOrBlk() {
-        return baseAttack.ToString();
+    public override int GetDmgOrAmtValue() {
+        return (Random.Range(minimumDamage, maximumDamage));
     }
 
-    public override string GetDmgOrAmt() {
-        return minimumDamage + "-" + maximumDamage;
+    public override string GetAtkOrBlkString(int bonus = 0) {
+        return (baseAttack + bonus) + " ATK v. DEF";
+    }
+
+    public override string GetDmgOrAmtString() {
+        return minimumDamage + "-" + maximumDamage + " Wpn. Dmg.";
     }
 }

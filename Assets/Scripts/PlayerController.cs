@@ -64,16 +64,24 @@ public class PlayerController : MonoBehaviour {
 
         if (Input.GetMouseButton(0)) {
             var tmp = FindObjectOfType<EventSystem>();
-            var tmp2 = tmp.IsPointerOverGameObject(0);
+            var tmp2 = tmp.IsPointerOverGameObject() || tmp.IsPointerOverGameObject(0);
             if (tmp2){
-                var currentGO = CurrentInput.GameObjectUnderPointer(0);
-                if (currentGO.layer == 8) { // Clickables Layer
+                var currentGO = CurrentInput.GameObjectUnderPointer();
+                var currentGOtouch = CurrentInput.GameObjectUnderPointer(0);
+                var layer = 0;
+
+                if (currentGO == null) {
+                    layer = currentGOtouch.layer;
+                } else {
+                    layer = currentGO.layer;
+                }
+                if (layer == 8) { // Clickables Layer
                     // if (noteCooldown) return;
                     // noteCooldown = true;
                     // var clickable = currentGO.GetComponent<Clickable>();
                     // StatusManager.instance.Notification(clickable.GetInfo());
                     // return;
-                } else if (currentGO.layer == 5 || currentGO.layer == 2) { // UI & Ignore Raycast Layers
+                } else if (layer == 5 || layer == 2) { // UI & Ignore Raycast Layers
                     return;
                 }
             }

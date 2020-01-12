@@ -25,7 +25,7 @@ public class DamageNumber : MonoBehaviour {
         transform.position += new Vector3(moveSpeed * Time.deltaTime * direction, moveSpeed * movementAngle * Time.deltaTime, 0f);
     }
 
-    public void SetDamage(int damageValue, bool isCrit, bool isGraze, bool isPlayer) {
+    public void SetDamage(int damageValue, bool isCrit, bool isGraze, bool isMiss, bool isPlayer) {
         if (isPlayer) {
             direction = 1;
         } else {
@@ -44,10 +44,11 @@ public class DamageNumber : MonoBehaviour {
         } else if (isGraze) {
             damageText.color = Color.gray;
             movementAngle = -.33f;
-        } else if (damageValue == 0) {
-            damageText.color = Color.red;
+        } else if (isMiss) {
+            damageText.color = Color.gray;
+            moveSpeed *= .5f;
             damageText.text = "Miss!";
-            movementAngle = -.9f;
+            movementAngle = -1f;
         }
 
         var startingOffset = isPlayer ? 30 : -30;

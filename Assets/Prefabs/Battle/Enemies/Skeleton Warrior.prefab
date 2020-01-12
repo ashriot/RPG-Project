@@ -47,26 +47,35 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   id: skeletonWarrior
   hp:
-    current: 60
-    max: 60
+    current: 0
+    maximum: 25
+    totalBonus: 0
   mp:
     current: 0
-    max: 0
+    maximum: 0
+    totalBonus: 0
   level: 0
   xp: 0
-  attack: 7
-  defense: 6
+  attack: 11
+  defense: 5
   magic: 3
-  speed: 5
-  armor: 2
+  speed: 8
+  armor: 1
   resist: 0
+  minDamage: 8
+  maxDamage: 14
   initiative: 0
   isPlayer: 0
   isActive: 1
   isDead: 0
-  battleActions:
+  isTaunting: 0
+  isHiding: 0
+  skills:
   - Attack
+  spells: []
   statusEffects: []
+  mainHand: {fileID: 0}
+  offHand: {fileID: 0}
   spriteRenderer: {fileID: 8787949426215704517}
   portraitAnimatorController: {fileID: 9100000, guid: 88643cd6fc2ac8847b61efb21da4fe12,
     type: 2}

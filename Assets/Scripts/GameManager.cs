@@ -22,40 +22,42 @@ public class GameManager : MonoBehaviour {
 
     void Start() {
         foreach(var hero in heroes) {
-            hero.hp.current = hero.intialValues.hp.current;
-            hero.hp.maximum = hero.intialValues.hp.maximum;
-            hero.hp.totalBonus = hero.intialValues.hp.totalBonus;
-            hero.mp.current = hero.intialValues.mp.current;
-            hero.mp.maximum = hero.intialValues.mp.maximum;
-            hero.mp.totalBonus = hero.intialValues.mp.totalBonus;
-            hero.constitution.current = hero.intialValues.constitution.current;
-            hero.constitution.maximum = hero.intialValues.constitution.maximum;
-            hero.xp = hero.intialValues.xp;
-            hero.sp = hero.intialValues.sp;
-            hero.totalSp = hero.intialValues.totalSp;
-            hero.attack.baseValue = hero.intialValues.attack.baseValue;
-            hero.attack.totalBonus = hero.intialValues.attack.totalBonus;
-            hero.defense.baseValue = hero.intialValues.defense.baseValue;
-            hero.defense.totalBonus = hero.intialValues.defense.totalBonus;
-            hero.magic.baseValue = hero.intialValues.magic.baseValue;
-            hero.magic.totalBonus = hero.intialValues.magic.totalBonus;
-            hero.speed.baseValue = hero.intialValues.speed.baseValue;
-            hero.speed.totalBonus = hero.intialValues.speed.totalBonus;
-            hero.armor.baseValue = hero.intialValues.armor.baseValue;
-            hero.armor.totalBonus = hero.intialValues.armor.totalBonus;
-            hero.resist.baseValue = hero.intialValues.resist.baseValue;
-            hero.resist.totalBonus = hero.intialValues.resist.totalBonus;
-            hero.critPower.baseValue = hero.intialValues.critPower.baseValue;
-            hero.critPower.totalBonus = hero.intialValues.critPower.totalBonus;
+            hero.hp.current = hero.initialValues.hp.current;
+            hero.hp.maximum = hero.initialValues.hp.maximum;
+            hero.hp.totalBonus = hero.initialValues.hp.totalBonus;
+            hero.mp.current = hero.initialValues.mp.current;
+            hero.mp.maximum = hero.initialValues.mp.maximum;
+            hero.mp.totalBonus = hero.initialValues.mp.totalBonus;
+            hero.constitution.current = hero.initialValues.constitution.current;
+            hero.constitution.maximum = hero.initialValues.constitution.maximum;
+            hero.xp = hero.initialValues.xp;
+            hero.sp = hero.initialValues.sp;
+            hero.totalSp = hero.initialValues.totalSp;
+            hero.attack.baseValue = hero.initialValues.attack.baseValue;
+            hero.attack.totalBonus = hero.initialValues.attack.totalBonus;
+            hero.defense.baseValue = hero.initialValues.defense.baseValue;
+            hero.defense.totalBonus = hero.initialValues.defense.totalBonus;
+            hero.magic.baseValue = hero.initialValues.magic.baseValue;
+            hero.magic.totalBonus = hero.initialValues.magic.totalBonus;
+            hero.speed.baseValue = hero.initialValues.speed.baseValue;
+            hero.speed.totalBonus = hero.initialValues.speed.totalBonus;
+            hero.armor.baseValue = hero.initialValues.armor.baseValue;
+            hero.armor.totalBonus = hero.initialValues.armor.totalBonus;
+            hero.resist.baseValue = hero.initialValues.resist.baseValue;
+            hero.resist.totalBonus = hero.initialValues.resist.totalBonus;
+            hero.critPower.baseValue = hero.initialValues.critPower.baseValue;
+            hero.critPower.totalBonus = hero.initialValues.critPower.totalBonus;
+            hero.skills = hero.initialValues.skills;
+            hero.spells = hero.initialValues.spells;
 
-            hero.head = hero.intialValues.head;
-            hero.body = hero.intialValues.body;
-            hero.arms = hero.intialValues.arms;
-            hero.feet = hero.intialValues.feet;
-            hero.ringL = hero.intialValues.ringL;
-            hero.ringR = hero.intialValues.ringR;
-            hero.mainHand = hero.intialValues.mainHand;
-            hero.offHand = hero.intialValues.offHand;
+            hero.head = hero.initialValues.head;
+            hero.body = hero.initialValues.body;
+            hero.arms = hero.initialValues.arms;
+            hero.feet = hero.initialValues.feet;
+            hero.ringL = hero.initialValues.ringL;
+            hero.ringR = hero.initialValues.ringR;
+            hero.mainHand = hero.initialValues.mainHand;
+            hero.offHand = hero.initialValues.offHand;
 
             // check equipment
             var hpBonus = 0;
@@ -150,6 +152,8 @@ public class GameManager : MonoBehaviour {
 
             hero.hp.totalBonus += hpBonus;
             hero.mp.totalBonus += mpBonus;
+            hero.hp.SetToMax();
+            hero.mp.SetToMax();
             hero.attack.totalBonus += attackBonus;
             hero.defense.totalBonus += defenseBonus;
             hero.magic.totalBonus += magicBonus;
@@ -157,8 +161,8 @@ public class GameManager : MonoBehaviour {
             hero.armor.totalBonus += armorBonus;
             hero.resist.totalBonus += resistBonus;
 
-            for (var i = 0; i < hero.intialValues.attributeSkillValues.Length; i++) {
-                hero.attributeSkillValues[i] = hero.intialValues.attributeSkillValues[i];
+            for (var i = 0; i < hero.initialValues.attributeSkillValues.Length; i++) {
+                hero.attributeSkillValues[i] = hero.initialValues.attributeSkillValues[i];
             }
         }
     }

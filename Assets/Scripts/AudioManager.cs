@@ -65,6 +65,16 @@ public class AudioManager : MonoBehaviour {
             sfxs[11].Play();
          } else if (name == "score") {
             sfxs[12].Play();
+         } else if (name == "impact_a") {
+            sfxs[13].Play();
+         } else if (name == "impact_b") {
+            sfxs[14].Play();
+         } else if (name == "swing") {
+            sfxs[15].Play();
+         } else if (name == "rebound") {
+            sfxs[16].Play();
+         } else if (name == "fire_c") {
+            sfxs[17].Play();
          }
         // } else {
         //     Debug.LogError("SFX named '" + name + "' does not exist!");

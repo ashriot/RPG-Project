@@ -1,5 +1,4 @@
-﻿using System.ComponentModel;
-using UnityEngine;
+﻿using UnityEngine;
 
 public abstract class Unit : MonoBehaviour {
 
@@ -10,6 +9,8 @@ public abstract class Unit : MonoBehaviour {
     public Sprite aliveSprite, deadSprite;
     public bool isActive;
     public bool isDead { get { return (hp.current == 0); } }
+    public string[] skills;
+    public string[] spells;
 
     public int level;
     public int xp;
