@@ -75,6 +75,10 @@ public class AudioManager : MonoBehaviour {
             sfxs[16].Play();
          } else if (name == "fire_c") {
             sfxs[17].Play();
+         } else if (name == "end_turn") {
+            sfxs[18].Play();
+         } else if (name == "special_a") {
+            sfxs[19].Play();
          }
         // } else {
         //     Debug.LogError("SFX named '" + name + "' does not exist!");

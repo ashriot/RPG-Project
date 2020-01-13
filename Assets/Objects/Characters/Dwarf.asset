@@ -24,28 +24,28 @@ MonoBehaviour:
   sp: 0
   totalSp: 0
   hp:
-    current: 35
-    maximum: 35
+    current: 0
+    maximum: 30
     totalBonus: 0
   mp:
     current: 0
-    maximum: 0
+    maximum: 5
     totalBonus: 0
   constitution:
     current: 3
     maximum: 3
     totalBonus: 0
   attack:
-    baseValue: 10
+    baseValue: 8
     totalBonus: 0
   defense:
-    baseValue: 6
+    baseValue: 7
     totalBonus: 0
   magic:
-    baseValue: 2
+    baseValue: 3
     totalBonus: 0
   speed:
-    baseValue: 8
+    baseValue: 5
     totalBonus: 0
   armor:
     baseValue: 0
@@ -57,6 +57,8 @@ MonoBehaviour:
     baseValue: 150
     totalBonus: 0
   attributeSkillValues: 000000000000000000000000000000000000000000000000
+  skills: []
+  spells: []
   head: {fileID: 11400000, guid: 915fa70b45f4ab443a384cd767726b0f, type: 2}
   body: {fileID: 11400000, guid: ef3d966ca0253b549a187d01441ddd84, type: 2}
   arms: {fileID: 11400000, guid: c3d7bf2e702dbdd47aeaee10cdb7ec67, type: 2}
@@ -64,4 +66,4 @@ MonoBehaviour:
   ringL: {fileID: 11400000, guid: 4f36306fe6a84ec468500dc1b6430249, type: 2}
   ringR: {fileID: 11400000, guid: 1afd7edd7bfefb840805c7a8642ec284, type: 2}
   mainHand: {fileID: 11400000, guid: 4f135c96ff403b74fbf3fdb0b0c18d56, type: 2}
-  offHand: {fileID: 11400000, guid: 4f135c96ff403b74fbf3fdb0b0c18d56, type: 2}
+  offHand: {fileID: 11400000, guid: 1d03cb9e00b5d1e4b8ee360dd33ea00c, type: 2}

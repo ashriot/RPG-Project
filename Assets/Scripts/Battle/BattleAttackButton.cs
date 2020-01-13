@@ -4,6 +4,7 @@ using UnityEngine.UI;
 public class BattleAttackButton : MonoBehaviour {
 
     public Text nameText;
+    public string description;
     public Image image;
 
     // Start is called before the first frame update
@@ -19,5 +20,10 @@ public class BattleAttackButton : MonoBehaviour {
     public void Press() {
         // BattleManager.instance.OpenTargetMenu(name);
         BattleManager.instance.HeroAction(nameText.text);
+    }
+
+    public void LongPress(){
+        Debug.Log("Long press!");
+        BattleManager.instance.DisplayTooltip(description);
     }
 }

@@ -24,11 +24,11 @@ MonoBehaviour:
   sp: 0
   totalSp: 0
   hp:
-    current: 25
-    maximum: 25
+    current: 0
+    maximum: 20
     totalBonus: 0
   mp:
-    current: 15
+    current: 0
     maximum: 15
     totalBonus: 0
   constitution:
@@ -36,16 +36,16 @@ MonoBehaviour:
     maximum: 3
     totalBonus: 0
   attack:
-    baseValue: 8
+    baseValue: 7
     totalBonus: 0
   defense:
-    baseValue: 5
+    baseValue: 4
     totalBonus: 0
   magic:
-    baseValue: 5
+    baseValue: 6
     totalBonus: 0
   speed:
-    baseValue: 7
+    baseValue: 6
     totalBonus: 0
   armor:
     baseValue: 0
@@ -57,6 +57,8 @@ MonoBehaviour:
     baseValue: 150
     totalBonus: 0
   attributeSkillValues: 000000000000000000000000000000000000000000000000
+  skills: []
+  spells: []
   head: {fileID: 11400000, guid: 647712a93ca143249a21b3d1d5895c62, type: 2}
   body: {fileID: 11400000, guid: ef3d966ca0253b549a187d01441ddd84, type: 2}
   arms: {fileID: 11400000, guid: c3d7bf2e702dbdd47aeaee10cdb7ec67, type: 2}

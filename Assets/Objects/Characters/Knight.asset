@@ -24,11 +24,11 @@ MonoBehaviour:
   sp: 0
   totalSp: 0
   hp:
-    current: 40
-    maximum: 40
+    current: 0
+    maximum: 35
     totalBonus: 0
   mp:
-    current: 10
+    current: 0
     maximum: 10
     totalBonus: 0
   constitution:
@@ -36,16 +36,16 @@ MonoBehaviour:
     maximum: 3
     totalBonus: 0
   attack:
-    baseValue: 8
+    baseValue: 6
     totalBonus: 0
   defense:
     baseValue: 7
     totalBonus: 0
   magic:
-    baseValue: 3
+    baseValue: 4
     totalBonus: 0
   speed:
-    baseValue: 5
+    baseValue: 4
     totalBonus: 4
   armor:
     baseValue: 0

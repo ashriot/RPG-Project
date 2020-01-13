@@ -29,6 +29,6 @@ MonoBehaviour:
   resistBonus: 0
   criticalIntensityBonus: 0
   baseAttack: 2
-  minimumDamage: 3
-  maximumDamage: 15
-  delay: 0.75
+  minimumDamage: 8
+  maximumDamage: 12
+  delay: 1.25

@@ -16,12 +16,12 @@ MonoBehaviour:
   sprite: {fileID: -3578585665867577350, guid: 8c500e45b904a74468ea62831fc2b0dc, type: 3}
   description: 
   actionType: 1
-  attackPower: 16
+  attackPower: 0
   minDamage: 20
   maxDamage: 30
   mpCost: 5
   isCharge: 1
-  delay: 1.25
+  delay: 1.5
   visualFx: {fileID: 2467785622394809194, guid: f326f11d5e1b60a4cbad1dec0605fed7,
     type: 3}
   statusEffects: []

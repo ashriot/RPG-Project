@@ -10,9 +10,9 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 55ab7c10ac817f74690899407ef52845, type: 3}
-  m_Name: Attack
+  m_Name: Charge
   m_EditorClassIdentifier: 
-  name: Attack
+  name: Charge
   sprite: {fileID: 0}
   description: 
   actionType: 0
@@ -21,7 +21,6 @@ MonoBehaviour:
   maxDamage: 0
   mpCost: 0
   isCharge: 0
-  delay: 0.75
-  visualFx: {fileID: 3482613456182776616, guid: bb69396eec3d170429dbc2a3956afbdd,
-    type: 3}
+  delay: 0
+  visualFx: {fileID: 0}
   statusEffects: []

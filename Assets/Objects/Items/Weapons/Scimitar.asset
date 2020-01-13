@@ -31,4 +31,4 @@ MonoBehaviour:
   baseAttack: 1
   minimumDamage: 3
   maximumDamage: 6
-  delay: 0.5
+  delay: 0.75

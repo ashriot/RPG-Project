@@ -56,18 +56,20 @@ MonoBehaviour:
     totalBonus: 0
   level: 0
   xp: 0
-  attack: 11
-  defense: 5
-  magic: 3
-  speed: 8
-  armor: 1
+  attack: 8
+  defense: 4
+  magic: 2
+  speed: 5
+  armor: 2
   resist: 0
-  minDamage: 8
-  maxDamage: 14
-  initiative: 0
+  minDamage: 9
+  maxDamage: 12
+  ticks: 0
+  delay: 1
   isPlayer: 0
   isActive: 1
   isDead: 0
+  isCharging: 0
   isTaunting: 0
   isHiding: 0
   skills:
