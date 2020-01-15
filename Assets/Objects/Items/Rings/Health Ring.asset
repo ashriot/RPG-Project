@@ -12,12 +12,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 196ae3416209e94438141c87500d0e5b, type: 3}
   m_Name: Health Ring
   m_EditorClassIdentifier: 
-  id: healthRing
+  id: ringHealthRing
   itemType: 4
   name: Health Ring
   description: A heart-shaped ring that boosts your HP.
   goldValue: 0
   sprite: {fileID: 1086285259529317080, guid: 8c500e45b904a74468ea62831fc2b0dc, type: 3}
+  quantity: 0
   equipmentType: 0
   hpBonus: 10
   mpBonus: 0

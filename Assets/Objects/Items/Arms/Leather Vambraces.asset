@@ -12,12 +12,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 196ae3416209e94438141c87500d0e5b, type: 3}
   m_Name: Leather Vambraces
   m_EditorClassIdentifier: 
-  id: leatherVambraces
+  id: armsLeatherVambraces
   itemType: 0
   name: Leather Vambraces
   description: Agile arm guards made of leather.
   goldValue: 0
   sprite: {fileID: 5091309420521078198, guid: 8c500e45b904a74468ea62831fc2b0dc, type: 3}
+  quantity: 0
   equipmentType: 2
   hpBonus: 0
   mpBonus: 0

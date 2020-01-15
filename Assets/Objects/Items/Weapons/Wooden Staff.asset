@@ -12,12 +12,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8c495ffb35114c94cab25aea9e1a9eaf, type: 3}
   m_Name: Wooden Staff
   m_EditorClassIdentifier: 
-  id: woodenStaff
+  id: weapWoodenStaff
   itemType: 5
   name: Wooden Staff
   description: A basic staff made from wood.
   goldValue: 0
   sprite: {fileID: 2425125559403032947, guid: 8c500e45b904a74468ea62831fc2b0dc, type: 3}
+  quantity: 0
   equipmentType: 5
   hpBonus: 0
   mpBonus: 15
@@ -28,7 +29,7 @@ MonoBehaviour:
   armorBonus: 0
   resistBonus: 0
   criticalIntensityBonus: 0
-  baseAttack: 1
+  baseAttack: 2
   minimumDamage: 4
   maximumDamage: 6
   delay: 1.5

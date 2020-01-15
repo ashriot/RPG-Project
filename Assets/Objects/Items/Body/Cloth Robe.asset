@@ -12,12 +12,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 196ae3416209e94438141c87500d0e5b, type: 3}
   m_Name: Cloth Robe
   m_EditorClassIdentifier: 
-  id: clothRobe
+  id: bodyClothRobe
   itemType: 1
   name: Cloth Robe
   description: A basic magic-user's robe.
   goldValue: 0
   sprite: {fileID: -7683613693342420304, guid: 8c500e45b904a74468ea62831fc2b0dc, type: 3}
+  quantity: 0
   equipmentType: 1
   hpBonus: 20
   mpBonus: 20

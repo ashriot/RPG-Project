@@ -10,6 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 6204281288088726027}
   - component: {fileID: 6204281288088726026}
+  - component: {fileID: 773095801}
   m_Layer: 0
   m_Name: InventoryManager
   m_TagString: Untagged
@@ -43,18 +44,55 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 03a99bf85e445c441b5c726658671979, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  referenceItems:
-  - {fileID: 11400000, guid: a1ef50b5b22bab248957c2c0f1fd83ee, type: 2}
-  - {fileID: 11400000, guid: ee95e8df730e34d48a6bf019f55099c6, type: 2}
+  refArms:
+  - {fileID: 11400000, guid: 50031aa6443758b49aa0215805cb10eb, type: 2}
   - {fileID: 11400000, guid: 887e64df4beeb504faf8a2d32f38d0b4, type: 2}
+  - {fileID: 11400000, guid: c3d7bf2e702dbdd47aeaee10cdb7ec67, type: 2}
+  refBody:
   - {fileID: 11400000, guid: f1c8d53becd8984459da65c1803742ea, type: 2}
   - {fileID: 11400000, guid: ef3d966ca0253b549a187d01441ddd84, type: 2}
+  - {fileID: 11400000, guid: 1ee9a7c2975e56b4bb2f0915d99bef86, type: 2}
+  refConsumables:
+  - {fileID: 11400000, guid: ee95e8df730e34d48a6bf019f55099c6, type: 2}
+  refFeet:
+  - {fileID: 11400000, guid: c85ca059dcce50c409b139ff1596ee89, type: 2}
   - {fileID: 11400000, guid: 5fae76587eb4d214a923ad0760350a53, type: 2}
+  - {fileID: 11400000, guid: 02fb59e7d1f1d564d93a35273947caf5, type: 2}
+  refHead:
   - {fileID: 11400000, guid: 647712a93ca143249a21b3d1d5895c62, type: 2}
   - {fileID: 11400000, guid: 8730d309d39a3bd4f978188ca375469c, type: 2}
+  - {fileID: 11400000, guid: 915fa70b45f4ab443a384cd767726b0f, type: 2}
+  refRings:
   - {fileID: 11400000, guid: e7f4044147f66e045b993f1e127f2e1f, type: 2}
   - {fileID: 11400000, guid: 1c4bd2414c1aaeb41990448180a2f34f, type: 2}
+  - {fileID: 11400000, guid: 4f36306fe6a84ec468500dc1b6430249, type: 2}
+  - {fileID: 11400000, guid: 1afd7edd7bfefb840805c7a8642ec284, type: 2}
+  refShields:
   - {fileID: 11400000, guid: 1d03cb9e00b5d1e4b8ee360dd33ea00c, type: 2}
+  refSpells:
+  - {fileID: 11400000, guid: 954a9e1496f138443a29542442300204, type: 2}
+  refWeapons:
+  - {fileID: 11400000, guid: 4f135c96ff403b74fbf3fdb0b0c18d56, type: 2}
+  - {fileID: 11400000, guid: 7d35252fabe69bc4487b5a7935b84585, type: 2}
   - {fileID: 11400000, guid: 538da7e1706915c42b8a32b66812466f, type: 2}
-  - {fileID: 11400000, guid: 1ee9a7c2975e56b4bb2f0915d99bef86, type: 2}
-  inventory: []
+  - {fileID: 11400000, guid: 9390d113075557b4c81c81a70974da61, type: 2}
+  inventory:
+  - {fileID: 11400000, guid: f1c8d53becd8984459da65c1803742ea, type: 2}
+--- !u!114 &773095801
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6204281288088726025}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5c2807448e42849468d89dde9ef9e90d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  referenceBattleActions:
+  - {fileID: 11400000, guid: 59055a1aa976aa44b80dbd4ed166146d, type: 2}
+  - {fileID: 11400000, guid: b41d241606927bc4e9f761f082788869, type: 2}
+  - {fileID: 11400000, guid: d05a953a7f1f95f438baa5619a4f624a, type: 2}
+  referenceStatusEffects:
+  - {fileID: 11400000, guid: fa71da18fc74b0d4f92eb15679c04ea0, type: 2}

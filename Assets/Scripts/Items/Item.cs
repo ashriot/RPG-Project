@@ -10,6 +10,7 @@ public abstract class Item : ScriptableObject {
     public string description;
     public int goldValue;
     public Sprite sprite;
+    public int quantity;
 
     public abstract void Use(int targetId);
     public abstract void Discard();

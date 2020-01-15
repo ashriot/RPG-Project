@@ -12,12 +12,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 423144db617dd744687a7dd969b18869, type: 3}
   m_Name: Iron Shield
   m_EditorClassIdentifier: 
-  id: ironShield
+  id: shldIronShield
   itemType: 5
   name: Iron Shield
   description: A durable shield made of iron.
   goldValue: 0
   sprite: {fileID: -4205743271587067428, guid: 8c500e45b904a74468ea62831fc2b0dc, type: 3}
+  quantity: 0
   equipmentType: 9
   hpBonus: 0
   mpBonus: 0

@@ -38,6 +38,9 @@ public class GameMenu : MonoBehaviour {
     public EquipmentWindow equipmentWindow;
     public string[] skillNames;
 
+    [Header("Inventory Refs")]
+    public ItemButton[] itemButtons;
+
     [Header("Data Trackers")]
     public int currentWindowId = 0;
     public int currentHeroId = 0;
@@ -118,6 +121,8 @@ public class GameMenu : MonoBehaviour {
         UpdateHeroButtons();
         if (currentWindowId == 0) { // status
             OpenStatus();
+        } else if (currentWindowId == 1) { // inventory
+            OpenInventory();
         } else if (currentWindowId == 2) { // equipment
             OpenEquipment();
         } else if (currentWindowId == 3) { // skills
@@ -224,6 +229,12 @@ public class GameMenu : MonoBehaviour {
         }
     }
 
+    public void OpenInventory() {
+        UpdateStats();
+        SetInventory();
+        UpdateMiniStatPanel();
+    }
+
     public void OpenEquipment() {
         removeAll.gameObject.SetActive(true);
         autoEquip.gameObject.SetActive(true);
@@ -285,6 +296,25 @@ public class GameMenu : MonoBehaviour {
         //     heroDisplayStatus.OffHandAtkOrBlk.text = "-";
         //     heroDisplayStatus.OffHandDmgOrAmt.text = "-";
         // }
+    }
+
+    public void SetInventory() {
+        var inventory = InventoryManager.instance.inventory;
+        for (var i = 0; i < itemButtons.Length; i++) {
+            if (i >= inventory.Count) {
+                itemButtons[i].gameObject.SetActive(false);
+            } else {
+                itemButtons[i].gameObject.SetActive(true);
+                itemButtons[i].buttonId = i;
+                itemButtons[i].nameText.text = inventory[i].name;
+                itemButtons[i].buttonImage.sprite = inventory[i].sprite;
+                if (inventory[i].itemType == ItemType.Consumable) {
+                    itemButtons[i].quantityText.text = "x" + inventory[i].quantity;
+                } else {
+                    itemButtons[i].quantityText.gameObject.SetActive(false);
+                }
+            }
+        }
     }
 
     public void SetHeroEquipment() {
@@ -473,6 +503,8 @@ public class GameMenu : MonoBehaviour {
                 if (!windows[i].activeInHierarchy) {
                     if (i == 0) { // status
                         OpenStatus();
+                    } else if (i == 1) { // inventory
+                        OpenInventory();
                     } else if (i == 2) { // equipment
                         OpenEquipment();
                     } else if (i == 3) { // skills

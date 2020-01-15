@@ -4,18 +4,9 @@ using UnityEngine.UI;
 public class ItemButton : MonoBehaviour {
 
     public Image buttonImage;
+    public Text nameText;
     public Text quantityText;
     public int buttonId;
-
-    // Start is called before the first frame update
-    void Start() {
-        
-    }
-
-    // Update is called once per frame
-    void Update() {
-        
-    }
 
     public void Press() {
         // if (GameMenu.instance.gameMenu.activeInHierarchy) {

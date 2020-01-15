@@ -427,7 +427,7 @@ public class PlayerController : MonoBehaviour {
         // }
         else if ( other.tag == "Key" ) {
             Debug.Log("Key picked up!");
-            GameMenu.instance.LootNotification("goldKey");
+            GameMenu.instance.LootNotification("othrGoldKey");
             AdjustKeys(1);
             if (AudioManager.instance != null)
                 AudioManager.instance.PlaySfx("loot");

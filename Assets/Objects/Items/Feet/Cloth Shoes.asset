@@ -12,12 +12,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 196ae3416209e94438141c87500d0e5b, type: 3}
   m_Name: Cloth Shoes
   m_EditorClassIdentifier: 
-  id: clothShoes
+  id: feetClothShoes
   itemType: 3
   name: Cloth Shoes
   description: Wizard's shoes.
   goldValue: 0
   sprite: {fileID: -7335202786924632854, guid: 8c500e45b904a74468ea62831fc2b0dc, type: 3}
+  quantity: 0
   equipmentType: 1
   hpBonus: 0
   mpBonus: 0

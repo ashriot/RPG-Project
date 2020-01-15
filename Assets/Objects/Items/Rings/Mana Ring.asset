@@ -12,12 +12,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 196ae3416209e94438141c87500d0e5b, type: 3}
   m_Name: Mana Ring
   m_EditorClassIdentifier: 
-  id: manaRing
+  id: ringManaRing
   itemType: 4
   name: Mana Ring
   description: A crystalline ring that boosts your MP.
   goldValue: 0
   sprite: {fileID: 1814850146556007829, guid: 8c500e45b904a74468ea62831fc2b0dc, type: 3}
+  quantity: 0
   equipmentType: 0
   hpBonus: 0
   mpBonus: 10

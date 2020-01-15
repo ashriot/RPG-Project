@@ -1,5 +1,4 @@
-﻿using System.Linq;
-using UnityEngine;
+﻿using UnityEngine;
 
 public class Chest : MonoBehaviour {
 
@@ -26,6 +25,7 @@ public class Chest : MonoBehaviour {
         isLooted = true;
         GetComponent<SpriteRenderer>().sprite = looted;
         GameMenu.instance.LootNotification(contents[0]);
+        InventoryManager.instance.AddItem(contents[0], 1);
         PlaySfx("loot");
     }
 

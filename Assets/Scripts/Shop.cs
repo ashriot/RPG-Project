@@ -106,7 +106,7 @@ public class Shop : MonoBehaviour {
         if (selectedItem != null) {
             if (GameManager.instance.currentGoldPieces >= selectedItem.goldValue) {
                 GameManager.instance.currentGoldPieces -= selectedItem.goldValue;
-                InventoryManager.instance.AddItem(selectedItem.id);
+                InventoryManager.instance.AddItem(selectedItem.id, 1);
             }
 
             goldText.text = GameManager.instance.currentGoldPieces.ToString("N0");
