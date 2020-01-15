@@ -17,13 +17,14 @@ public class PlayerController : MonoBehaviour {
     public bool onExit = false;
     public bool uiOpen = false;
     public bool inBattle = false;
+    public bool isTransitioning = false;
     public string areaTransitionName;
     public bool noteCooldown;
 
     private int goldKeyCount;
     private int unitsMoving = 0;
     private float moveTime = .2f;
-    private const float COOLDOWN = .2f;
+    private const float COOLDOWN = .5f;
     private Vector3 bottomLeftLimit;
     private Vector3 topRightLimit;
 
@@ -60,7 +61,7 @@ public class PlayerController : MonoBehaviour {
     }
 
     void Update() {
-        if (isMoving || onCooldown || onExit || uiOpen || inBattle) return;
+        if (isMoving || isTransitioning || onCooldown || onExit || uiOpen || inBattle ) return;
 
         if (Input.GetMouseButton(0)) {
             var tmp = FindObjectOfType<EventSystem>();
@@ -125,7 +126,7 @@ public class PlayerController : MonoBehaviour {
 
 	private void FixedUpdate () {
         //We do nothing if the player is still moving.
-        if (isMoving || onCooldown || onExit || uiOpen || inBattle ) return;
+        if (isMoving || isTransitioning || onCooldown || onExit || uiOpen || inBattle ) return;
 
         //To store move directions.
         int horizontal = 0;
@@ -149,10 +150,11 @@ public class PlayerController : MonoBehaviour {
 	}
 
     private void Move(int xDir, int yDir) {
-        // Debug.Log("(" + xDir + ", " + yDir + ")");
+        if (isMoving || onCooldown || onExit || uiOpen || inBattle ) return;
         var cd = COOLDOWN;
         Vector2 startTile = transform.position;
         Vector2 endTile = startTile + new Vector2(xDir, yDir);
+        Debug.Log(startTile + " " + endTile);
 
         bool isOnGround = GetTile(groundTilemap, startTile) != null; //If the player is on the ground
         bool hasGroundTile = GetTile(groundTilemap, endTile) != null; //If target Tile has a ground
@@ -299,7 +301,7 @@ public class PlayerController : MonoBehaviour {
             cooldown -= Time.deltaTime;
             yield return null;
         }
-
+        isTransitioning = false;
         onCooldown = false;
     }
 
@@ -387,6 +389,8 @@ public class PlayerController : MonoBehaviour {
             return false;
         } else if (coll.tag == "Key") {
             return true;
+        } else if (coll.tag == "Transition") {
+            return true;
         } else if (coll.tag == "Enemy") {
             inBattle = true;
             return false;
@@ -394,10 +398,10 @@ public class PlayerController : MonoBehaviour {
             return false;
     }
 
-    private void OnTriggerEnter2D(Collider2D coll) {
+    private void OnTriggerEnter2D(Collider2D other) {
         //Debug.Log("Something touched!");
         //If we collided with the exit, we load the next level in two seconds.
-        if ( coll.tag == "Exit") {
+        if ( other.tag == "Exit") {
             Debug.Log("Sortie touché!");
             if (AudioManager.instance != null) {
                 AudioManager.instance.PlaySfx("victory");
@@ -421,13 +425,38 @@ public class PlayerController : MonoBehaviour {
         //     StartCoroutine(passage.Teleport(this, 0.2f));
         //     //StartCoroutine(actionCooldown(0.4f));
         // }
-        else if ( coll.tag == "Key" ) {
+        else if ( other.tag == "Key" ) {
             Debug.Log("Key picked up!");
             GameMenu.instance.LootNotification("goldKey");
             AdjustKeys(1);
             if (AudioManager.instance != null)
                 AudioManager.instance.PlaySfx("loot");
-            coll.gameObject.SetActive(false);
+            other.gameObject.SetActive(false);
+        }
+        else if ( other.tag == "Transition" ) {
+            // other.gameObject.SetActive(false);
+
+            var xPos = 0f;
+            var yPos = 0f;
+            var xDir = 0;
+            var yDir = 0;
+
+            if (other.transform.position.x - transform.position.x < 0f) {
+                xPos = -25f;
+                xDir = -1;
+            } else if (other.transform.position.x - transform.position.x > 0f) {
+                xPos = 25f;
+                xDir = 1;
+            } else if (other.transform.position.y - transform.position.y < 0f) {
+                yPos = -17f;
+                yDir = -1;
+            } else {
+                yPos = 17f;
+                yDir = 1;
+            }
+
+            var endPos = CameraController.instance.transform.position + new Vector3(xPos, yPos, 0f);
+            StartCoroutine(CameraPositionLerpTo(endPos, .5f, xDir, yDir));
         }
     }
 
@@ -467,5 +496,19 @@ public class PlayerController : MonoBehaviour {
 
     public void AdjustKeys(int amount) {
         GameManager.instance.AdjustKeys(amount);
+    }
+
+    public IEnumerator CameraPositionLerpTo(Vector3 endPos, float _duration, int xDir, int yDir) {
+        isTransitioning = true;
+        float elapsedTime = 0.0f;
+        var startPos = CameraController.instance.transform.position;
+        while (elapsedTime < _duration) {
+            CameraController.instance.transform.position = Vector3.Lerp(startPos, endPos, (elapsedTime / _duration));
+            elapsedTime += Time.deltaTime;
+            yield return new WaitForEndOfFrame();
+        }
+        yield return new WaitForEndOfFrame();
+        Move(xDir, yDir);
+        StartCoroutine(ActionCooldown(COOLDOWN/2));
     }
 }

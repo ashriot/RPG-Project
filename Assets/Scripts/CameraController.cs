@@ -2,6 +2,8 @@
 using UnityEngine.Tilemaps;
 
 public class CameraController : MonoBehaviour {
+
+    public static CameraController instance;
     
     public Transform target;
 
@@ -14,6 +16,10 @@ public class CameraController : MonoBehaviour {
 
     public string musicNameToPlay;
     private bool musicStarted = false;
+
+    void Awake() {
+        instance = this;
+    }
 
     // Start is called before the first frame update
     void Start() {

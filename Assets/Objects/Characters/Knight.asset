@@ -20,7 +20,7 @@ MonoBehaviour:
   deadSprite: {fileID: 0}
   isPlayer: 1
   isActive: 1
-  xp: 100
+  xp: 106
   sp: 0
   totalSp: 0
   hp:

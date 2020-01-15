@@ -31,6 +31,7 @@ public class GameMenu : MonoBehaviour {
     public Text[] nameTexts, hpTexts, mpTexts;
     public Image[] hpSliders, mpSliders;
     public Image[] currentTurnOutlines;
+    public Image[] spIndicators;
     public HeroDisplay miniStatPanelDisplay;
     public HeroDisplay heroDisplayStatus;
     public SkillMenuDisplay skillMenu;
@@ -508,6 +509,11 @@ public class GameMenu : MonoBehaviour {
                 hpSliders[i].fillAmount = heroes[i].hp.percent;
                 mpTexts[i].text = heroes[i].mp.current.ToString();
                 mpSliders[i].fillAmount = heroes[i].mp.percent;
+                if (heroes[i].sp > 0) {
+                    spIndicators[i].gameObject.SetActive(true);
+                } else {
+                    spIndicators[i].gameObject.SetActive(false);
+                }
             } else {
                 heroStatPanels[i].SetActive(false);
             }

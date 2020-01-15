@@ -6,6 +6,7 @@ public class BattleCombatant : MonoBehaviour {
     public string id;
     public Resource hp, mp;
     public int level, xp, attack, defense, magic, speed, armor, resist, minDamage, maxDamage;
+    public int deflection;
     public int ticks;
     public float delay = 1f;
     public bool isPlayer;

@@ -26,5 +26,5 @@ MonoBehaviour:
   magicBonus: 1
   speedBonus: 0
   armorBonus: 0
-  resistBonus: 0
+  resistBonus: 2
   criticalIntensityBonus: 0

@@ -26,6 +26,8 @@ public class AudioManager : MonoBehaviour {
             PlayBgmId(1);
         } else if (name == "victory") {
             PlayBgmId(2);
+        } else if (name == "town") {
+            PlayBgmId(3);
         }
     }
 

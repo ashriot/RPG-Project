@@ -129,6 +129,7 @@ public class BattleManager : MonoBehaviour {
                         combatants[i].skills = heroes[i].skills;
                         combatants[i].spells = heroes[i].spells;
                         combatants[i].delay = 1f;
+                        combatants[i].deflection = heroes[i].armor.value * 2;
                     }
                 }
             }
@@ -146,6 +147,7 @@ public class BattleManager : MonoBehaviour {
                         enemyStatWindows[i].animator.runtimeAnimatorController = newEnemy.portraitAnimatorController;
                         enemyStatWindows[i].hpSlider.fillAmount = newEnemy.hp.percent;
                         enemyStatWindows[i].mpSlider.fillAmount = newEnemy.mp.percent;
+                        newEnemy.deflection = newEnemy.armor *2;
                         combatants.Add(newEnemy);
                     }
                 }
@@ -576,7 +578,17 @@ public class BattleManager : MonoBehaviour {
 
             db += " modified dmg " + damageToDeal + " resist: " + armorResist;
 
-            selectedTarget.hp.current -= battleAction.actionType != BattleActionType.Healing ? damageToDeal : damageToDeal * -1;
+            if (selectedTarget.deflection > 0) {
+                if (selectedTarget.deflection > damageToDeal) {
+                    selectedTarget.deflection -= damageToDeal;
+                } else {
+                    damageToDeal -= selectedTarget.deflection;
+                    selectedTarget.deflection = 0;
+                    selectedTarget.hp.current -= damageToDeal;
+                }
+            } else {
+                selectedTarget.hp.current -= battleAction.actionType != BattleActionType.Healing ? damageToDeal : damageToDeal * -1;
+            }
 
             debugString += " " + battleAction.name + " deals " + damageToDeal + " dmg to "
                 + selectedTarget.name + " [HP: " + selectedTarget.hp.current + "/" + selectedTarget.hp.max + "]" + db;

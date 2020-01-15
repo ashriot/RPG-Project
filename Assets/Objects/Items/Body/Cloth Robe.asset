@@ -19,12 +19,12 @@ MonoBehaviour:
   goldValue: 0
   sprite: {fileID: -7683613693342420304, guid: 8c500e45b904a74468ea62831fc2b0dc, type: 3}
   equipmentType: 1
-  hpBonus: 10
+  hpBonus: 20
   mpBonus: 20
   attackBonus: 0
-  defenseBonus: 1
+  defenseBonus: 3
   magicBonus: 1
   speedBonus: 0
-  armorBonus: 1
-  resistBonus: 3
+  armorBonus: 0
+  resistBonus: 5
   criticalIntensityBonus: 0

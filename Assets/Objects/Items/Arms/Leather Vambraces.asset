@@ -22,7 +22,7 @@ MonoBehaviour:
   hpBonus: 0
   mpBonus: 0
   attackBonus: 1
-  defenseBonus: 1
+  defenseBonus: 2
   magicBonus: 0
   speedBonus: 0
   armorBonus: 0
