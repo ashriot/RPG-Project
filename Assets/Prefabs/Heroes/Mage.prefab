@@ -47,6 +47,7 @@ SpriteRenderer:
   m_MotionVectors: 1
   m_LightProbeUsage: 1
   m_ReflectionProbeUsage: 1
+  m_RayTracingMode: 0
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
@@ -114,37 +115,46 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a899e1fa9d87d4446aeb2e8444feadd2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  id: mage
   name: Raistlin
   className: Mage
-  animator: {fileID: 1337129469}
+  unitAnimator: {fileID: 1337129469}
+  portraitAnimatorController: {fileID: 9100000, guid: a3596d5ccd58e2d4aab5574b1efd6395,
+    type: 2}
   aliveSprite: {fileID: -4455212021498299619, guid: 04854a5f96e25cf4fbef374e1965bd3b,
     type: 3}
   deadSprite: {fileID: 5864110769287904594, guid: 04854a5f96e25cf4fbef374e1965bd3b,
     type: 3}
   isActive: 1
-  level: 1
-  xp: 56
+  classSkillName: Sorcery
+  classSkillDescription: Sorcery\nPowerful magic skills only known to war mages.
+  skills:
+  - Meditate
+  spells:
+  - Fireball
   hp:
     current: 30
-    maximum: 30
-    totalBonus: 25
+    baseMax: 0
+    totalBonus: 15
   mp:
-    current: 40
-    maximum: 40
-    totalBonus: 75
+    current: 90
+    baseMax: 0
+    totalBonus: 60
+  constitution:
+    current: 0
+    baseMax: 3
+    totalBonus: 0
   attack:
     baseValue: 3
     totalBonus: 0
   defense:
     baseValue: 4
-    totalBonus: 1
+    totalBonus: 3
   magic:
-    baseValue: 10
-    totalBonus: 7
+    baseValue: 8
+    totalBonus: 5
   speed:
     baseValue: 6
-    totalBonus: 3
+    totalBonus: 7
   armor:
     baseValue: 0
     totalBonus: 0
@@ -162,11 +172,7 @@ MonoBehaviour:
   ringR: {fileID: 11400000, guid: 1afd7edd7bfefb840805c7a8642ec284, type: 2}
   mainHand: {fileID: 11400000, guid: 9390d113075557b4c81c81a70974da61, type: 2}
   offHand: {fileID: 0}
-  constitution:
-    current: 3
-    maximum: 3
-    totalBonus: 0
-  attributeSkillValues: 000000000000000000000000000000000000000000000000
-  sp: 17
-  totalSp: 17
-  initialValues: {fileID: 11400000, guid: e078487fc5134804abcbabb37a2f0600, type: 2}
+  attributeMasteriesValues: 
+  xp: 0
+  sp: 6
+  totalSp: 6

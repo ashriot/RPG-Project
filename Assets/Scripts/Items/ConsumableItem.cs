@@ -11,4 +11,8 @@ public class ConsumableItem : Item {
     public override void Use(int targetId) {    // or Equip
         return;
     }
+
+    public override string GetStatsString() {
+        return null;
+    }
 }

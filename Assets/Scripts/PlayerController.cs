@@ -22,7 +22,6 @@ public class PlayerController : MonoBehaviour {
     public bool noteCooldown;
 
     private int goldKeyCount;
-    private int unitsMoving = 0;
     private float moveTime = .2f;
     private const float COOLDOWN = .5f;
     private Vector3 bottomLeftLimit;
@@ -154,7 +153,7 @@ public class PlayerController : MonoBehaviour {
         var cd = COOLDOWN;
         Vector2 startTile = transform.position;
         Vector2 endTile = startTile + new Vector2(xDir, yDir);
-        Debug.Log(startTile + " " + endTile);
+        // Debug.Log(startTile + " " + endTile);
 
         bool isOnGround = GetTile(groundTilemap, startTile) != null; //If the player is on the ground
         bool hasGroundTile = GetTile(groundTilemap, endTile) != null; //If target Tile has a ground

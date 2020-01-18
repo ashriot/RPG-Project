@@ -65,6 +65,7 @@ public class BattleManager : MonoBehaviour {
     public EnemyStatWindow[] enemyStatWindows;
     public BattleAction[] battleActions;
 
+    public GameObject classSkillButton;
     public BattleTargetButton[] targetButtons;
     public BattleMagicSelect[] magicButtons;
     public ItemButton[] itemButtons;
@@ -79,6 +80,8 @@ public class BattleManager : MonoBehaviour {
     public Image[] playerImages;
     public Text[] playerNames, playerHpValues, playerMpValues;
     public Slider[] playerHpSliders, playerMpSliders;
+    public SpriteRenderer[] tpSpriteRenderers;
+    public Sprite tp1Sprite, tp2Sprite, tp3Sprite;
 
     void Awake() {
         instance = this;
@@ -108,15 +111,18 @@ public class BattleManager : MonoBehaviour {
         for (var i = 0; i < playerPositions.Length; i++) {
             if (heroes[i].isActive) {
                 for (var j = 0; j < playerPrefabs.Length; j++) {
-                    if (playerPrefabs[j].id == heroes[i].id) {
+                    if (playerPrefabs[j].id == heroes[i].name) {
                         var newPlayer = Instantiate(playerPrefabs[j], playerPositions[i].position, playerPositions[i].rotation);
                         newPlayer.transform.parent = playerPositions[i];
                         
                         combatants.Add(newPlayer);
+                        combatants[i].classSkillName = heroes[i].classSkillName;
+                        var description = heroes[i].classSkillDescription.Replace("\\n", "\n");
+                        combatants[i].classSkillDescription = description;
                         combatants[i].hp.current = heroes[i].hp.current;
-                        combatants[i].hp.maximum = heroes[i].hp.max;
+                        combatants[i].hp.baseMax = heroes[i].hp.totalMax;
                         combatants[i].mp.current = heroes[i].mp.current;
-                        combatants[i].mp.maximum = heroes[i].mp.max;
+                        combatants[i].mp.baseMax = heroes[i].mp.totalMax;
                         combatants[i].attack = heroes[i].attack.value;
                         combatants[i].defense = heroes[i].defense.value;
                         combatants[i].magic = heroes[i].magic.value;
@@ -207,9 +213,11 @@ public class BattleManager : MonoBehaviour {
                     HeroAction(combatants[currentTurnId].chargedActionName);
                 } else {
                     AudioManager.instance.PlaySfx("end_turn");
+                    classSkillButton.GetComponentInChildren<Text>().text = combatants[currentTurnId].classSkillName;
+                    classSkillButton.GetComponentInChildren<ButtonLongPress>().description = combatants[currentTurnId].classSkillDescription;
                     battleMenu.SetActive(true);
                     enemyTargetCursors[targetedEnemyId - heroPartySizeOffset].SetActive(true);
-                    GameMenu.instance.currentTurnOutlines[currentTurnId].gameObject.SetActive(true);
+                    GameMenu.instance.heroStatPanels[currentTurnId].currentTurnCursor.gameObject.SetActive(true);
                     currentTurnCursors[currentTurnId].SetActive(true);
                     
                     battleWaiting = false;
@@ -272,6 +280,7 @@ public class BattleManager : MonoBehaviour {
         //     PredictTurnOrder();
         // }
 
+        UpdateUiStats();
         CountdownTicks();
         
         if (waitingForInput) {
@@ -309,7 +318,7 @@ public class BattleManager : MonoBehaviour {
         var gameHeroes = GameManager.instance.heroes;
         foreach (var hero in heroes) {
             foreach (var gameHero in gameHeroes) {
-                if (hero.id == gameHero.id) {
+                if (hero.id == gameHero.name) {
                     gameHero.hp.current = hero.hp.current;
                     gameHero.mp.current = hero.mp.current;
                     break;
@@ -423,8 +432,8 @@ public class BattleManager : MonoBehaviour {
         foreach (var cursor in enemyStatWindows) {
             cursor.targetBox.gameObject.SetActive(false);
         }
-        foreach (var cursor in GameMenu.instance.currentTurnOutlines) {
-            cursor.gameObject.SetActive(false);
+        foreach (var hero in GameMenu.instance.heroStatPanels) {
+            hero.currentTurnCursor.gameObject.SetActive(false);
         }
     }
 
@@ -591,7 +600,7 @@ public class BattleManager : MonoBehaviour {
             }
 
             debugString += " " + battleAction.name + " deals " + damageToDeal + " dmg to "
-                + selectedTarget.name + " [HP: " + selectedTarget.hp.current + "/" + selectedTarget.hp.max + "]" + db;
+                + selectedTarget.name + " [HP: " + selectedTarget.hp.current + "/" + selectedTarget.hp.totalMax + "]" + db;
 
             Debug.Log(debugString);
             var position = Camera.main.WorldToScreenPoint(selectedTarget.transform.position + new Vector3(0f, .5f, 0f));
@@ -648,9 +657,10 @@ public class BattleManager : MonoBehaviour {
                 combatant.isCharging = true;
                 AudioManager.instance.PlaySfx("special_a");
                 combatant.chargedActionName = action.name;
+                combatant.chargedTarget = targetedEnemyId;
                 chargingCursors[currentTurnId].SetActive(true);
                 CalculateSpeedTicks(combatant, action.delay);
-                GameMenu.instance.currentTurnOutlines[currentTurnId].gameObject.SetActive(false);
+                GameMenu.instance.heroStatPanels[currentTurnId].currentTurnCursor.gameObject.SetActive(false);
                 currentTurnCursors[currentTurnId].SetActive(false);
                 yield return new WaitForSeconds(turnDelay);
                 NextTurn();
@@ -687,6 +697,11 @@ public class BattleManager : MonoBehaviour {
             combatants[currentTurnId].isTaunting = true;
             BattleActionRepo.instance.ApplyStatusEffectToSelf("Taunt", 2);
             tauntingCursors[currentTurnId].SetActive(true);
+        } else if (action.name == "Meditate") {
+            AudioManager.instance.PlaySfx("rebound");
+            Debug.Log("MP increased by" + (int)(float)combatants[currentTurnId].mp.missing * .1f);
+            combatants[currentTurnId].mp.Increase((int)((float)combatants[currentTurnId].mp.missing * .1f));
+            UpdateUiStats();
         } else if (action.name == "Fireball") {
             AudioManager.instance.PlaySfx("fire_c");
             action.attackPower = combatant.magic;
@@ -722,9 +737,25 @@ public class BattleManager : MonoBehaviour {
 
         combatant.mp.current -= action.mpCost;
 
+        // temporary
+        if (combatant.tp < 3) {
+            combatant.tp++;
+            tpSpriteRenderers[currentTurnId].gameObject.SetActive(true);
+        }
+
+        if (combatant.tp == 1) {
+            tpSpriteRenderers[currentTurnId].sprite = tp1Sprite;
+        } else if (combatant.tp == 2) {
+            tpSpriteRenderers[currentTurnId].sprite = tp2Sprite;
+        } else if (combatant.tp == 3) {
+            tpSpriteRenderers[currentTurnId].sprite = tp3Sprite;
+        } else if (combatant.tp == 0) {
+            tpSpriteRenderers[currentTurnId].gameObject.SetActive(false);
+        }
+
         yield return new WaitForSeconds(turnDelay);
         CalculateSpeedTicks(combatant, action.delay);
-        GameMenu.instance.currentTurnOutlines[currentTurnId].gameObject.SetActive(false);
+        GameMenu.instance.heroStatPanels[currentTurnId].currentTurnCursor.gameObject.SetActive(false);
         currentTurnCursors[currentTurnId].SetActive(false);
         NextTurn();
     }
@@ -919,7 +950,7 @@ public class BattleManager : MonoBehaviour {
         return null;
     }
 
-    public void DisplayTooltip(string description) {
+    public void ShowTooltip(string description) {
         actionTooltip.description.text = description;
     }
 }
@@ -964,9 +995,9 @@ public class BattleManagerEditor : Editor {
             foreach(var player in BattleManager.instance.combatants) {
                 if (player.isPlayer) {
                     player.hp.current = 999;
-                    player.hp.maximum = 999;
+                    player.hp.baseMax = 999;
                     player.mp.current = 999;
-                    player.mp.maximum = 999;
+                    player.mp.baseMax = 999;
                     player.attack = 5000;
                     player.defense = 500;
                 }

@@ -1,8 +1,8 @@
 ﻿[System.Serializable]
 public enum ItemType {
+    Consumable,
     Arms,
     Body,
-    Consumable,
     Feet,
     Finger,
     Hands,

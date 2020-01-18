@@ -5,6 +5,7 @@ public class HeroType : ScriptableObject {
     public string id;
     public new string name;
     public string className;
+    public string classSkillName;
     public Animator animator;
     public Sprite aliveSprite, deadSprite;
     public bool isPlayer;

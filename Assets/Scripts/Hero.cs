@@ -2,35 +2,31 @@
 
 public class Hero : Unit {
 
-    public Resource constitution;
+    public EquippableItem head, body, arms, feet, ringL, ringR;
+    public Hands mainHand, offHand;
 
-    // attribute skills
-    public int[] attributeSkillValues;
+    // attribute masteries
+    public int[] attributeMasteriesValues;
 
-    public int sp, totalSp;
+    public int xp, sp, totalSp;
 
-    public bool isKOed { get { return (hp.current == 0 && constitution.current > 0); } }
-    public new bool isDead { get { return (hp.current == 0 && constitution.current == 0); } }
-
-    public HeroType initialValues;
-
-    public int xpRequired() { // INT(5*(E2+1)+((POWER(E2,3)/100)))
+    public int xpRequiredForNextSkillPoint() { // INT(5*(E2+1)+((POWER(E2,3)/100)))
         var value = 5 * (totalSp + 1) + ((Mathf.Pow(totalSp, 3) / 100));
         return (int)value;
     }
 
     public void AddXp(int amount) {
         xp += amount;
-        CheckForNewSp();
+        CheckForNewSkillPoint();
     }
 
-    public void CheckForNewSp() {
-        var req = xpRequired();
+    public void CheckForNewSkillPoint() {
+        var req = xpRequiredForNextSkillPoint();
         while (xp >= req) {
             xp -= req;
             sp++;
             totalSp++;
-            req = xpRequired();
+            req = xpRequiredForNextSkillPoint();
         }
     }
 }

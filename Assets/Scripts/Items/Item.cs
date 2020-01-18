@@ -10,10 +10,11 @@ public abstract class Item : ScriptableObject {
     public string description;
     public int goldValue;
     public Sprite sprite;
-    public int quantity;
+    public int quantity = 1;
 
     public abstract void Use(int targetId);
     public abstract void Discard();
+    public abstract string GetStatsString();
         //var selectedCharacter = GameManager.instance.playerStats[id];
 
         // if (itemType == ItemType.item) {

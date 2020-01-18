@@ -7,6 +7,7 @@ public class ItemButton : MonoBehaviour {
     public Text nameText;
     public Text quantityText;
     public int buttonId;
+    public ButtonLongPress buttonLongPress;
 
     public void Press() {
         // if (GameMenu.instance.gameMenu.activeInHierarchy) {

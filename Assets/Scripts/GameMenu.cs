@@ -10,7 +10,6 @@ public class GameMenu : MonoBehaviour {
     public Canvas canvas;
     public EventNotification note;
     public GameObject statsWindow;
-    public Text tooltip;
     public Text goldKeyText;
     public Text silverKeyText;
     public Text goldText;
@@ -22,16 +21,12 @@ public class GameMenu : MonoBehaviour {
     public GameObject menuButtonsPanel;
     public GameObject mainWindowPanel;
     public Hero selectedHero;
-    public GameObject[] heroStatPanels;
     public GameObject[] windows;
     public Button[] menuButtons;
     public Button backButton;
     public Button removeAll;
     public Button autoEquip;
-    public Text[] nameTexts, hpTexts, mpTexts;
-    public Image[] hpSliders, mpSliders;
-    public Image[] currentTurnOutlines;
-    public Image[] spIndicators;
+    public StatPanelDisplay[] heroStatPanels;
     public HeroDisplay miniStatPanelDisplay;
     public HeroDisplay heroDisplayStatus;
     public SkillMenuDisplay skillMenu;
@@ -40,6 +35,12 @@ public class GameMenu : MonoBehaviour {
 
     [Header("Inventory Refs")]
     public ItemButton[] itemButtons;
+
+    [Header("Sub Menus")]
+    public GameObject tooltipPanel;
+    public Text tooltipText;
+    public GameObject inventorySubMenu;
+    public GameObject equipmentSubMenu;
 
     [Header("Data Trackers")]
     public int currentWindowId = 0;
@@ -64,6 +65,7 @@ public class GameMenu : MonoBehaviour {
         UpdateGold();
         CloseMainMenu();
         CloseAllWindows();
+        HideTooltip();
     }
 
     void Update() {
@@ -86,7 +88,7 @@ public class GameMenu : MonoBehaviour {
             if (skillMenu.attributesWindow.activeInHierarchy) {
                 AudioManager.instance.PlaySfx("click");
                 skillMenu.attributesWindow.SetActive(false);
-                backButton.gameObject.SetActive(false);
+                HideBackButton();
             }
         }
     }
@@ -110,7 +112,7 @@ public class GameMenu : MonoBehaviour {
             if (currentHeroId == heroId) return;
         }
         currentHeroId = heroId;
-        PlayOpenSound();
+        PlayClickSound();
         UpdateHeroButtons();
         if (!menuButtonsPanel.activeInHierarchy) {
             menuButtonsPanel.SetActive(true);
@@ -145,9 +147,19 @@ public class GameMenu : MonoBehaviour {
     public void ClickMenuButton(int buttonId) {
         if (currentWindowId != buttonId) {
             currentWindowId = buttonId;
-            PlayOpenSound();
+            PlayClickSound();
             OpenWindow();
         }
+    }
+
+    public void ShowTooltip(string description) {
+        Debug.Log("Tooltip: " + description);
+        tooltipPanel.SetActive(true);
+        tooltipText.text = description;
+    }
+
+    public void HideTooltip() {
+        tooltipPanel.SetActive(false);
     }
 
     public void LootNotification(string itemId) {
@@ -161,6 +173,7 @@ public class GameMenu : MonoBehaviour {
     }
 
     public void OpenMainMenu() {
+        HideTooltip();
         menuButtonsPanel.SetActive(true);
         mainMenuButtonText.text = "Close";
         mainMenuButtonImage.sprite = buttonPressedSprite;
@@ -176,8 +189,8 @@ public class GameMenu : MonoBehaviour {
         // miniStatPanelDisplay.name.text = hero.name;
         // miniStatPanelDisplay.xp.text = "XP: " + hero.xp + "/" + hero.level * 100;
         miniStatPanelDisplay.sp.text = hero.sp.ToString();
-        miniStatPanelDisplay.hp.text = hero.hp.max.ToString();
-        miniStatPanelDisplay.mp.text = hero.mp.max.ToString();
+        miniStatPanelDisplay.hp.text = hero.hp.totalMax.ToString();
+        miniStatPanelDisplay.mp.text = hero.mp.totalMax.ToString();
         miniStatPanelDisplay.attack.text = hero.attack.value.ToString();
         miniStatPanelDisplay.defense.text = hero.defense.value.ToString();
         miniStatPanelDisplay.magic.text = hero.magic.value.ToString();
@@ -229,27 +242,44 @@ public class GameMenu : MonoBehaviour {
         }
     }
 
+    public void ShowBackButton() {
+        backButton.gameObject.SetActive(true);
+    }
+
+    public void HideBackButton() {
+        backButton.gameObject.SetActive(false);
+    }
+
+    public void HideAllSubMenus() {
+        inventorySubMenu.SetActive(false);
+        equipmentSubMenu.SetActive(false);
+    }
+
     public void OpenInventory() {
+        HideAllSubMenus();
+        inventorySubMenu.SetActive(true);
         UpdateStats();
         SetInventory();
         UpdateMiniStatPanel();
     }
 
     public void OpenEquipment() {
-        removeAll.gameObject.SetActive(true);
-        autoEquip.gameObject.SetActive(true);
+        HideAllSubMenus();
+        equipmentSubMenu.SetActive(true);
         UpdateStats();
         SetHeroEquipment();
         UpdateMiniStatPanel();
     }
 
     public void OpenSkills() {
+        HideAllSubMenus();
         UpdateStats();
         SetHeroSkills();
         UpdateMiniStatPanel();
     }
 
     public void OpenStatus() {
+        HideAllSubMenus();
         UpdateStats();
         SetHeroStatus();
     }
@@ -308,6 +338,9 @@ public class GameMenu : MonoBehaviour {
                 itemButtons[i].buttonId = i;
                 itemButtons[i].nameText.text = inventory[i].name;
                 itemButtons[i].buttonImage.sprite = inventory[i].sprite;
+                itemButtons[i].buttonLongPress.description = inventory[i].name + "\n";
+                itemButtons[i].buttonLongPress.description += inventory[i].description + "\n";
+                itemButtons[i].buttonLongPress.description += inventory[i].GetStatsString();
                 if (inventory[i].itemType == ItemType.Consumable) {
                     itemButtons[i].quantityText.text = "x" + inventory[i].quantity;
                 } else {
@@ -417,17 +450,17 @@ public class GameMenu : MonoBehaviour {
 
     public void SetHeroSkills() {
         var hero = heroes[currentHeroId];
-        skillMenu.xp.text = "XP: " + hero.xp + "/" + hero.xpRequired();
+        skillMenu.xp.text = "XP: " + hero.xp + "/" + hero.xpRequiredForNextSkillPoint();
         // skillMenu.skillPoints.text = hero.sp.ToString();
         var skillLines = skillMenu.attributesWindow.GetComponent<SkillDisplay>().skillLines;
         for (var i = 0; i < skillLines.Length; i++) {
-            for (var j = 0; j < hero.attributeSkillValues.Length; j++) {
+            for (var j = 0; j < hero.attributeMasteriesValues.Length; j++) {
                 if (skillNames[j] == skillLines[i].name) {
                     // INT(0.5 * (SQRT(8 * SP + 1) - 1))
-                    var skillRk = (int)(.5f * (Mathf.Sqrt(8f * hero.attributeSkillValues[j] + 1f) - 1f));
+                    var skillRk = (int)(.5f * (Mathf.Sqrt(8f * hero.attributeMasteriesValues[j] + 1f) - 1f));
                     // Lv * (Lv +1) / 2
                     var skillThreshold = (int)(skillRk * (skillRk +1) / 2);
-                    var skillSp = hero.attributeSkillValues[j] - skillThreshold;
+                    var skillSp = hero.attributeMasteriesValues[j] - skillThreshold;
                     var width = skillRk * 6;
                     skillLines[i].skillRank.rectTransform.sizeDelta = new Vector2(width, 5f);
                     width = skillSp * 6;
@@ -445,16 +478,16 @@ public class GameMenu : MonoBehaviour {
         if (hero.sp > 0) {
             GameMenu.instance.SetHeroSkills();
 
-            for(var i = 0; i < hero.attributeSkillValues.Length; i++) {
+            for(var i = 0; i < hero.attributeMasteriesValues.Length; i++) {
                 if (skillNames[i] == skillName) {
-                    if (hero.attributeSkillValues[i] == 55) {
+                    if (hero.attributeMasteriesValues[i] == 55) {
                         AudioManager.instance.PlaySfx("error");
                         Debug.Log("Cannot invest anymore points!");
                         return;
                     }
                     hero.sp--;
-                    hero.attributeSkillValues[i]++;
-                    var skillRank = (.5f * (Mathf.Sqrt(8f * hero.attributeSkillValues[i] + 1f) - 1f));
+                    hero.attributeMasteriesValues[i]++;
+                    var skillRank = (.5f * (Mathf.Sqrt(8f * hero.attributeMasteriesValues[i] + 1f) - 1f));
                     if (skillRank % 1 == 0) {
                         AudioManager.instance.PlaySfx("score");
                         SkillIncreaseEffect(skillName, (int)skillRank);
@@ -478,7 +511,7 @@ public class GameMenu : MonoBehaviour {
             var hero = heroes[currentHeroId];
             var increase = 5 * rank;
             hero.hp.current += increase;
-            hero.hp.maximum += increase;
+            hero.hp.baseMax += increase;
         } else if (skillName == "Precision") {
             var hero = heroes[currentHeroId];
             hero.attack.baseValue++;
@@ -486,7 +519,7 @@ public class GameMenu : MonoBehaviour {
             var hero = heroes[currentHeroId];
             var increase = 5 * rank;
             hero.mp.current += increase;
-            hero.mp.maximum += increase;
+            hero.mp.baseMax += increase;
         } else if (skillName == "Toughness") {
             var hero = heroes[currentHeroId];
             hero.defense.baseValue++;
@@ -533,21 +566,22 @@ public class GameMenu : MonoBehaviour {
         heroes = GameManager.instance.heroes;
         for (var i = 0; i < heroes.Length; i++) {
             if (heroes[i].isActive) {
-                heroes[i].CheckForNewSp();
-                heroStatPanels[i].SetActive(true);
-                nameTexts[i].text = heroes[i].name;
-                hpTexts[i].text = heroes[i].hp.current.ToString();
-                mpTexts[i].text = heroes[i].mp.current.ToString();
-                hpSliders[i].fillAmount = heroes[i].hp.percent;
-                mpTexts[i].text = heroes[i].mp.current.ToString();
-                mpSliders[i].fillAmount = heroes[i].mp.percent;
+                heroes[i].CheckForNewSkillPoint();
+                heroStatPanels[i].gameObject.SetActive(true);
+                heroStatPanels[i].nameText.text = heroes[i].name;
+                heroStatPanels[i].portraitAnimator.runtimeAnimatorController = heroes[i].portraitAnimatorController;
+                heroStatPanels[i].hpText.text = heroes[i].hp.current.ToString();
+                heroStatPanels[i].mpText.text = heroes[i].mp.current.ToString();
+                heroStatPanels[i].hpSlider.fillAmount = heroes[i].hp.percent;
+                heroStatPanels[i].mpText.text = heroes[i].mp.current.ToString();
+                heroStatPanels[i].mpSlider.fillAmount = heroes[i].mp.percent;
                 if (heroes[i].sp > 0) {
-                    spIndicators[i].gameObject.SetActive(true);
+                    heroStatPanels[i].spIndicator.gameObject.SetActive(true);
                 } else {
-                    spIndicators[i].gameObject.SetActive(false);
+                    heroStatPanels[i].spIndicator.gameObject.SetActive(false);
                 }
             } else {
-                heroStatPanels[i].SetActive(false);
+                heroStatPanels[i].gameObject.SetActive(false);
             }
         }
     }
@@ -566,7 +600,7 @@ public class GameMenu : MonoBehaviour {
         for (var i = 0; i < heroStatPanels.Length; i++) {
             if (i == currentHeroId) {
                 // heroStatPanels[i].GetComponent<Image>().sprite = buttonPressedSprite;
-                currentTurnOutlines[i].gameObject.SetActive(true);
+                heroStatPanels[i].currentTurnCursor.gameObject.SetActive(true);
                 break;
             }
         }
@@ -574,8 +608,8 @@ public class GameMenu : MonoBehaviour {
 
     private void ReadyHeroButtons() {
         for (var i = 0; i < heroStatPanels.Length; i++) {
-            if (heroStatPanels[i].activeInHierarchy) {
-                currentTurnOutlines[i].gameObject.SetActive(false);
+            if (heroStatPanels[i].gameObject.activeInHierarchy) {
+                heroStatPanels[i].currentTurnCursor.gameObject.SetActive(false);
             }
         }
     }
@@ -598,7 +632,11 @@ public class GameMenu : MonoBehaviour {
     }
     
     public void PlayOpenSound() {
-        AudioManager.instance.PlaySfx("loot");
+        AudioManager.instance.PlaySfx("end_turn");
+    }
+    
+    public void PlayClickSound() {
+        AudioManager.instance.PlaySfx("click");
     }
     
     public void PlayCloseSound() {

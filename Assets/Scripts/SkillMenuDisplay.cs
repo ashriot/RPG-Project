@@ -9,7 +9,7 @@ public class SkillMenuDisplay : MonoBehaviour {
 
     public void OpenAttributesWindow() {
         GameMenu.instance.PlayOpenSound();
-        GameMenu.instance.backButton.gameObject.SetActive(true);
+        GameMenu.instance.ShowBackButton();
         attributesWindow.SetActive(true);
     }
 }

@@ -24,6 +24,6 @@ public class BattleAttackButton : MonoBehaviour {
 
     public void LongPress(){
         Debug.Log("Long press!");
-        BattleManager.instance.DisplayTooltip(description);
+        BattleManager.instance.ShowTooltip(description);
     }
 }

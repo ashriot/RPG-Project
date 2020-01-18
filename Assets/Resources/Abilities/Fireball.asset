@@ -1,0 +1,33 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 56c8e04146474914db66ccd0f940b2c8, type: 3}
+  m_Name: Fireball
+  m_EditorClassIdentifier: 
+  name: Fireball
+  description: Launches a burning sphere of doom.
+  sprite: {fileID: 0}
+  hitType: 2
+  avoidType: 2
+  mpCost: 10
+  tpCost: 0
+  potencyModifier: 1
+  minimumPotency: 20
+  maximumPotency: 30
+  usesWeapons: 0
+  chargeType: 1
+  chargeDelay: 1
+  targetType: 3
+  splashType: 0
+  splashModifier: 1
+  actions:
+  - {fileID: 0}
+  notes: 010000000400000005000000

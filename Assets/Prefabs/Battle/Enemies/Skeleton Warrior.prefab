@@ -48,11 +48,11 @@ MonoBehaviour:
   id: skeletonWarrior
   hp:
     current: 0
-    maximum: 20
+    baseMax: 10
     totalBonus: 0
   mp:
     current: 0
-    maximum: 0
+    baseMax: 0
     totalBonus: 0
   level: 0
   xp: 0
@@ -64,6 +64,7 @@ MonoBehaviour:
   resist: 0
   minDamage: 8
   maxDamage: 12
+  tp: 0
   deflection: 0
   ticks: 0
   delay: 1
@@ -72,8 +73,11 @@ MonoBehaviour:
   isDead: 0
   isCharging: 0
   chargedActionName: 
+  chargedTarget: 0
   isTaunting: 0
   isHiding: 0
+  classSkillName: 
+  classSkillDescription: 
   skills:
   - Attack
   spells: []
@@ -102,6 +106,7 @@ SpriteRenderer:
   m_MotionVectors: 1
   m_LightProbeUsage: 1
   m_ReflectionProbeUsage: 1
+  m_RayTracingMode: 0
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:

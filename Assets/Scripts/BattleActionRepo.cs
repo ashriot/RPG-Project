@@ -1,14 +1,9 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 
 public class BattleActionRepo : MonoBehaviour {
 
     public static BattleActionRepo instance;
     
-    public List<BattleAction> referenceBattleActions;
-    public List<StatusEffect> referenceStatusEffects;
-
     void Awake () {
         if (instance == null) {
             instance = this;
@@ -21,7 +16,8 @@ public class BattleActionRepo : MonoBehaviour {
     }
 
     public BattleAction GetActionByName(string name) {
-        var action = referenceBattleActions.Find(a => a.name == name);        
+        var action = Instantiate(Resources.Load<BattleAction>("Actions/" + name));
+
         if (action != null) {
             return action;
         }
@@ -31,7 +27,8 @@ public class BattleActionRepo : MonoBehaviour {
     }
 
     public StatusEffect GetStatusEffectByName(string name) {
-        var effect = referenceStatusEffects.Find(a => a.name == name);        
+        var effect = Instantiate(Resources.Load<StatusEffect>("Effects/" + name));
+     
         if (effect != null) {
             return effect;
         }

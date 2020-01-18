@@ -21,43 +21,9 @@ public class GameManager : MonoBehaviour {
     }
 
     void Start() {
-        foreach(var hero in heroes) {
-            hero.hp.current = hero.initialValues.hp.current;
-            hero.hp.maximum = hero.initialValues.hp.maximum;
-            hero.hp.totalBonus = hero.initialValues.hp.totalBonus;
-            hero.mp.current = hero.initialValues.mp.current;
-            hero.mp.maximum = hero.initialValues.mp.maximum;
-            hero.mp.totalBonus = hero.initialValues.mp.totalBonus;
-            hero.constitution.current = hero.initialValues.constitution.current;
-            hero.constitution.maximum = hero.initialValues.constitution.maximum;
-            hero.xp = hero.initialValues.xp;
-            hero.sp = hero.initialValues.sp;
-            hero.totalSp = hero.initialValues.totalSp;
-            hero.attack.baseValue = hero.initialValues.attack.baseValue;
-            hero.attack.totalBonus = hero.initialValues.attack.totalBonus;
-            hero.defense.baseValue = hero.initialValues.defense.baseValue;
-            hero.defense.totalBonus = hero.initialValues.defense.totalBonus;
-            hero.magic.baseValue = hero.initialValues.magic.baseValue;
-            hero.magic.totalBonus = hero.initialValues.magic.totalBonus;
-            hero.speed.baseValue = hero.initialValues.speed.baseValue;
-            hero.speed.totalBonus = hero.initialValues.speed.totalBonus;
-            hero.armor.baseValue = hero.initialValues.armor.baseValue;
-            hero.armor.totalBonus = hero.initialValues.armor.totalBonus;
-            hero.resist.baseValue = hero.initialValues.resist.baseValue;
-            hero.resist.totalBonus = hero.initialValues.resist.totalBonus;
-            hero.critPower.baseValue = hero.initialValues.critPower.baseValue;
-            hero.critPower.totalBonus = hero.initialValues.critPower.totalBonus;
-            hero.skills = hero.initialValues.skills;
-            hero.spells = hero.initialValues.spells;
 
-            hero.head = hero.initialValues.head;
-            hero.body = hero.initialValues.body;
-            hero.arms = hero.initialValues.arms;
-            hero.feet = hero.initialValues.feet;
-            hero.ringL = hero.initialValues.ringL;
-            hero.ringR = hero.initialValues.ringR;
-            hero.mainHand = hero.initialValues.mainHand;
-            hero.offHand = hero.initialValues.offHand;
+        for (var i = 0; i < heroes.Length; i++) {
+            heroes[i] = Instantiate(heroes[i]);
 
             // check equipment
             var hpBonus = 0;
@@ -69,101 +35,97 @@ public class GameManager : MonoBehaviour {
             var armorBonus = 0;
             var resistBonus = 0;
 
-            if (hero.head != null) {
-                hpBonus += hero.head.hpBonus;
-                mpBonus += hero.head.mpBonus;
-                attackBonus += hero.head.attackBonus;
-                defenseBonus += hero.head.defenseBonus;
-                magicBonus += hero.head.magicBonus;
-                speedBonus += hero.head.speedBonus;
-                armorBonus += hero.head.armorBonus;
-                resistBonus += hero.head.resistBonus;
+            if (heroes[i].head != null) {
+                hpBonus += heroes[i].head.hpBonus;
+                mpBonus += heroes[i].head.mpBonus;
+                attackBonus += heroes[i].head.attackBonus;
+                defenseBonus += heroes[i].head.defenseBonus;
+                magicBonus += heroes[i].head.magicBonus;
+                speedBonus += heroes[i].head.speedBonus;
+                armorBonus += heroes[i].head.armorBonus;
+                resistBonus += heroes[i].head.resistBonus;
             }
-            if (hero.body != null) {
-                hpBonus += hero.body.hpBonus;
-                mpBonus += hero.body.mpBonus;
-                attackBonus += hero.body.attackBonus;
-                defenseBonus += hero.body.defenseBonus;
-                magicBonus += hero.body.magicBonus;
-                speedBonus += hero.body.speedBonus;
-                armorBonus += hero.body.armorBonus;
-                resistBonus += hero.body.resistBonus;
+            if (heroes[i].body != null) {
+                hpBonus += heroes[i].body.hpBonus;
+                mpBonus += heroes[i].body.mpBonus;
+                attackBonus += heroes[i].body.attackBonus;
+                defenseBonus += heroes[i].body.defenseBonus;
+                magicBonus += heroes[i].body.magicBonus;
+                speedBonus += heroes[i].body.speedBonus;
+                armorBonus += heroes[i].body.armorBonus;
+                resistBonus += heroes[i].body.resistBonus;
             }
-            if (hero.arms != null) {
-                hpBonus += hero.arms.hpBonus;
-                mpBonus += hero.arms.mpBonus;
-                attackBonus += hero.arms.attackBonus;
-                defenseBonus += hero.arms.defenseBonus;
-                magicBonus += hero.arms.magicBonus;
-                speedBonus += hero.arms.speedBonus;
-                armorBonus += hero.arms.armorBonus;
-                resistBonus += hero.arms.resistBonus;
+            if (heroes[i].arms != null) {
+                hpBonus += heroes[i].arms.hpBonus;
+                mpBonus += heroes[i].arms.mpBonus;
+                attackBonus += heroes[i].arms.attackBonus;
+                defenseBonus += heroes[i].arms.defenseBonus;
+                magicBonus += heroes[i].arms.magicBonus;
+                speedBonus += heroes[i].arms.speedBonus;
+                armorBonus += heroes[i].arms.armorBonus;
+                resistBonus += heroes[i].arms.resistBonus;
             }
-            if (hero.feet != null) {
-                hpBonus += hero.feet.hpBonus;
-                mpBonus += hero.feet.mpBonus;
-                attackBonus += hero.feet.attackBonus;
-                defenseBonus += hero.feet.defenseBonus;
-                magicBonus += hero.feet.magicBonus;
-                speedBonus += hero.feet.speedBonus;
-                armorBonus += hero.feet.armorBonus;
-                resistBonus += hero.feet.resistBonus;
+            if (heroes[i].feet != null) {
+                hpBonus += heroes[i].feet.hpBonus;
+                mpBonus += heroes[i].feet.mpBonus;
+                attackBonus += heroes[i].feet.attackBonus;
+                defenseBonus += heroes[i].feet.defenseBonus;
+                magicBonus += heroes[i].feet.magicBonus;
+                speedBonus += heroes[i].feet.speedBonus;
+                armorBonus += heroes[i].feet.armorBonus;
+                resistBonus += heroes[i].feet.resistBonus;
             }
-            if (hero.ringL != null) {
-                hpBonus += hero.ringL.hpBonus;
-                mpBonus += hero.ringL.mpBonus;
-                attackBonus += hero.ringL.attackBonus;
-                defenseBonus += hero.ringL.defenseBonus;
-                magicBonus += hero.ringL.magicBonus;
-                speedBonus += hero.ringL.speedBonus;
-                armorBonus += hero.ringL.armorBonus;
-                resistBonus += hero.ringL.resistBonus;
+            if (heroes[i].ringL != null) {
+                hpBonus += heroes[i].ringL.hpBonus;
+                mpBonus += heroes[i].ringL.mpBonus;
+                attackBonus += heroes[i].ringL.attackBonus;
+                defenseBonus += heroes[i].ringL.defenseBonus;
+                magicBonus += heroes[i].ringL.magicBonus;
+                speedBonus += heroes[i].ringL.speedBonus;
+                armorBonus += heroes[i].ringL.armorBonus;
+                resistBonus += heroes[i].ringL.resistBonus;
             }
-            if (hero.ringR != null) {
-                hpBonus += hero.ringR.hpBonus;
-                mpBonus += hero.ringR.mpBonus;
-                attackBonus += hero.ringR.attackBonus;
-                defenseBonus += hero.ringR.defenseBonus;
-                magicBonus += hero.ringR.magicBonus;
-                speedBonus += hero.ringR.speedBonus;
-                armorBonus += hero.ringR.armorBonus;
-                resistBonus += hero.ringR.resistBonus;
+            if (heroes[i].ringR != null) {
+                hpBonus += heroes[i].ringR.hpBonus;
+                mpBonus += heroes[i].ringR.mpBonus;
+                attackBonus += heroes[i].ringR.attackBonus;
+                defenseBonus += heroes[i].ringR.defenseBonus;
+                magicBonus += heroes[i].ringR.magicBonus;
+                speedBonus += heroes[i].ringR.speedBonus;
+                armorBonus += heroes[i].ringR.armorBonus;
+                resistBonus += heroes[i].ringR.resistBonus;
             }
-            if (hero.mainHand != null) {
-                hpBonus += hero.mainHand.hpBonus;
-                mpBonus += hero.mainHand.mpBonus;
-                attackBonus += hero.mainHand.attackBonus;
-                defenseBonus += hero.mainHand.defenseBonus;
-                magicBonus += hero.mainHand.magicBonus;
-                speedBonus += hero.mainHand.speedBonus;
-                armorBonus += hero.mainHand.armorBonus;
-                resistBonus += hero.mainHand.resistBonus;
+            if (heroes[i].mainHand != null) {
+                hpBonus += heroes[i].mainHand.hpBonus;
+                mpBonus += heroes[i].mainHand.mpBonus;
+                attackBonus += heroes[i].mainHand.attackBonus;
+                defenseBonus += heroes[i].mainHand.defenseBonus;
+                magicBonus += heroes[i].mainHand.magicBonus;
+                speedBonus += heroes[i].mainHand.speedBonus;
+                armorBonus += heroes[i].mainHand.armorBonus;
+                resistBonus += heroes[i].mainHand.resistBonus;
             }
-            if (hero.offHand != null) {
-                hpBonus += hero.offHand.hpBonus;
-                mpBonus += hero.offHand.mpBonus;
-                attackBonus += hero.offHand.attackBonus;
-                defenseBonus += hero.offHand.defenseBonus;
-                magicBonus += hero.offHand.magicBonus;
-                speedBonus += hero.offHand.speedBonus;
-                armorBonus += hero.offHand.armorBonus;
-                resistBonus += hero.offHand.resistBonus;
+            if (heroes[i].offHand != null) {
+                hpBonus += heroes[i].offHand.hpBonus;
+                mpBonus += heroes[i].offHand.mpBonus;
+                attackBonus += heroes[i].offHand.attackBonus;
+                defenseBonus += heroes[i].offHand.defenseBonus;
+                magicBonus += heroes[i].offHand.magicBonus;
+                speedBonus += heroes[i].offHand.speedBonus;
+                armorBonus += heroes[i].offHand.armorBonus;
+                resistBonus += heroes[i].offHand.resistBonus;
             }
 
-            hero.hp.totalBonus += hpBonus;
-            hero.mp.totalBonus += mpBonus;
-            hero.hp.SetToMax();
-            hero.mp.SetToMax();
-            hero.attack.totalBonus += attackBonus;
-            hero.defense.totalBonus += defenseBonus;
-            hero.magic.totalBonus += magicBonus;
-            hero.speed.totalBonus += speedBonus;
-            hero.armor.totalBonus += armorBonus;
-            hero.resist.totalBonus += resistBonus;
-
-            for (var i = 0; i < hero.initialValues.attributeSkillValues.Length; i++) {
-                hero.attributeSkillValues[i] = hero.initialValues.attributeSkillValues[i];
-            }
+            heroes[i].hp.totalBonus += hpBonus;
+            heroes[i].mp.totalBonus += mpBonus;
+            heroes[i].hp.SetToMax();
+            heroes[i].mp.SetToMax();
+            heroes[i].attack.totalBonus += attackBonus;
+            heroes[i].defense.totalBonus += defenseBonus;
+            heroes[i].magic.totalBonus += magicBonus;
+            heroes[i].speed.totalBonus += speedBonus;
+            heroes[i].armor.totalBonus += armorBonus;
+            heroes[i].resist.totalBonus += resistBonus;
         }
     }
 
@@ -207,12 +169,11 @@ public class GameManager : MonoBehaviour {
         for (var i = 0; i < heroes.Length; i++) {
             PlayerPrefs.SetInt("Player_" + heroes[i].name + "_Active", heroes[i].gameObject.activeInHierarchy ? 1 : 0);
 
-            PlayerPrefs.SetInt("Player_" + heroes[i].name + "_Level", heroes[i].level);
             PlayerPrefs.SetInt("Player_" + heroes[i].name + "_CurrentXp", heroes[i].xp);
             PlayerPrefs.SetInt("Player_" + heroes[i].name + "_CurrentHp", heroes[i].hp.current);
-            PlayerPrefs.SetInt("Player_" + heroes[i].name + "_maximumHp", heroes[i].hp.maximum);
+            PlayerPrefs.SetInt("Player_" + heroes[i].name + "_maximumHp", heroes[i].hp.baseMax);
             PlayerPrefs.SetInt("Player_" + heroes[i].name + "_CurrentMp", heroes[i].mp.current);
-            PlayerPrefs.SetInt("Player_" + heroes[i].name + "_maximumMp", heroes[i].mp.maximum);
+            PlayerPrefs.SetInt("Player_" + heroes[i].name + "_maximumMp", heroes[i].mp.baseMax);
             PlayerPrefs.SetInt("Player_" + heroes[i].name + "_BaseAttack", heroes[i].attack.baseValue);
             PlayerPrefs.SetInt("Player_" + heroes[i].name + "_BaseDefense", heroes[i].defense.baseValue);
             PlayerPrefs.SetInt("Player_" + heroes[i].name + "_BaseMagic", heroes[i].magic.baseValue);
@@ -241,12 +202,11 @@ public class GameManager : MonoBehaviour {
                 heroes[i].gameObject.SetActive(false);
             }
 
-            heroes[i].level = PlayerPrefs.GetInt("Player_" + heroes[i].name + "_Level");
             heroes[i].xp = PlayerPrefs.GetInt("Player_" + heroes[i].name + "_CurrentXp");
             heroes[i].hp.current = PlayerPrefs.GetInt("Player_" + heroes[i].name + "_CurrentHp");
-            heroes[i].hp.maximum = PlayerPrefs.GetInt("Player_" + heroes[i].name + "_maximumHp");
+            heroes[i].hp.baseMax = PlayerPrefs.GetInt("Player_" + heroes[i].name + "_maximumHp");
             heroes[i].mp.current = PlayerPrefs.GetInt("Player_" + heroes[i].name + "_CurrentMp");
-            heroes[i].mp.maximum = PlayerPrefs.GetInt("Player_" + heroes[i].name + "_maximumMp");
+            heroes[i].mp.baseMax = PlayerPrefs.GetInt("Player_" + heroes[i].name + "_maximumMp");
             heroes[i].attack.baseValue = PlayerPrefs.GetInt("Player_" + heroes[i].name + "_BaseAttack");
             heroes[i].defense.baseValue = PlayerPrefs.GetInt("Player_" + heroes[i].name + "_BaseDefense");
             heroes[i].magic.baseValue = PlayerPrefs.GetInt("Player_" + heroes[i].name + "_BaseMagic");

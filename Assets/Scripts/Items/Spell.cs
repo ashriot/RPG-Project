@@ -14,4 +14,8 @@ public class Spell : Item {
     public override void Discard() {
         
     }
+
+    public override string GetStatsString() {
+        return "Deals " + minimumDamage + "-" + maximumDamage + " MAG DMG\n" + (delay*100) + "% Delay";
+    }
 }

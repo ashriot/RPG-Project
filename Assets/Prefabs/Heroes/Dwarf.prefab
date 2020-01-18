@@ -47,6 +47,7 @@ SpriteRenderer:
   m_MotionVectors: 1
   m_LightProbeUsage: 1
   m_ReflectionProbeUsage: 1
+  m_RayTracingMode: 0
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
@@ -117,37 +118,41 @@ MonoBehaviour:
   id: dwarf
   name: Flint
   className: Dwarf
-  animator: {fileID: 2945478755862410872}
+  unitAnimator: {fileID: 2945478755862410872}
+  portraitAnimatorController: {fileID: 9100000, guid: b8aed53e8a93b5e4e81b61d965a4fe90,
+    type: 2}
   aliveSprite: {fileID: -3154873122853401360, guid: 04854a5f96e25cf4fbef374e1965bd3b,
     type: 3}
   deadSprite: {fileID: 1083927990338066198, guid: 04854a5f96e25cf4fbef374e1965bd3b,
     type: 3}
   isActive: 1
+  skills: []
+  spells: []
   level: 1
-  xp: 56
+  xp: 0
   hp:
-    current: 58
-    maximum: 55
-    totalBonus: 40
+    current: 0
+    maximum: 30
+    totalBonus: 0
   mp:
-    current: 5
+    current: 0
     maximum: 5
     totalBonus: 0
   attack:
-    baseValue: 15
-    totalBonus: 3
+    baseValue: 8
+    totalBonus: 0
   defense:
     baseValue: 7
-    totalBonus: 4
+    totalBonus: 0
   magic:
-    baseValue: 2
-    totalBonus: 2
+    baseValue: 3
+    totalBonus: 0
   speed:
-    baseValue: 8
-    totalBonus: 5
+    baseValue: 5
+    totalBonus: 0
   armor:
     baseValue: 0
-    totalBonus: 1
+    totalBonus: 0
   resist:
     baseValue: 0
     totalBonus: 0
@@ -166,7 +171,10 @@ MonoBehaviour:
     current: 3
     maximum: 3
     totalBonus: 0
-  attributeSkillValues: 00000000010000000f000000000000000100000000000000
+  attributeSkillValues: 000000000000000000000000000000000000000000000000
   sp: 0
-  totalSp: 17
+  totalSp: 0
+  classSkillName: Berserking
+  classSkillDescription: Berserking.\nDwarven berserking is a lost art of war only
+    known by a select few.
   initialValues: {fileID: 11400000, guid: 43c01146a1da5a64b9b016006f7fdfa4, type: 2}

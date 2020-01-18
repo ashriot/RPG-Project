@@ -1,31 +1,30 @@
-﻿using UnityEngine;
+﻿using System.Collections.Generic;
+using UnityEngine;
 
 public abstract class Unit : MonoBehaviour {
 
-    public string id;
     public new string name;
     public string className;
-    public Animator animator;
-    public Sprite aliveSprite, deadSprite;
+    public Animator unitAnimator;
+    public RuntimeAnimatorController portraitAnimatorController;
+    public Sprite portrait, aliveSprite, deadSprite;
+
     public bool isActive;
-    public bool isDead { get { return (hp.current == 0); } }
+    public bool isKOed { get { return (hp.current == 0 && constitution.current > 0); } }
+    public bool isDead { get { return (hp.current == 0 && constitution.current == 0); } }
+    
+    public string classSkillName;
+    public string classSkillDescription;
     public string[] skills;
     public string[] spells;
 
-    public int level;
-    public int xp;
-
     public Resource hp;
     public Resource mp;
+    public Resource constitution;
 
     public Stat attack, defense, magic, speed, armor, resist, critPower;
-
-    public EquippableItem head, body, arms, feet, ringL, ringR;
-    public Hands mainHand, offHand;
-
-    public string GetLevelAndClass() {
-        return "Lv." + level + " " + className;
-    }
+    
+    public List<StatusEffect> statusEffects = new List<StatusEffect>();
 
     // Skills
 }

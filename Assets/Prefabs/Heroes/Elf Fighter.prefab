@@ -47,6 +47,7 @@ SpriteRenderer:
   m_MotionVectors: 1
   m_LightProbeUsage: 1
   m_ReflectionProbeUsage: 1
+  m_RayTracingMode: 0
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
@@ -117,45 +118,49 @@ MonoBehaviour:
   id: elfFighter
   name: Drizz't
   className: Elf Fighter
-  animator: {fileID: 7383352328448479878}
+  unitAnimator: {fileID: 7383352328448479878}
+  portraitAnimatorController: {fileID: 9100000, guid: f11933a4923ff2c4da4a7d0cffc0c41c,
+    type: 2}
   aliveSprite: {fileID: 8944779272692540031, guid: 04854a5f96e25cf4fbef374e1965bd3b,
     type: 3}
   deadSprite: {fileID: 4750745865729764837, guid: 04854a5f96e25cf4fbef374e1965bd3b,
     type: 3}
   isActive: 1
+  skills: []
+  spells: []
   level: 1
-  xp: 56
+  xp: 0
   hp:
-    current: 35
-    maximum: 35
-    totalBonus: 30
+    current: 0
+    maximum: 20
+    totalBonus: 0
   mp:
-    current: 25
-    maximum: 25
-    totalBonus: 55
+    current: 0
+    maximum: 15
+    totalBonus: 0
   attack:
-    baseValue: 8
-    totalBonus: 1
-  defense:
-    baseValue: 5
-    totalBonus: 2
-  magic:
-    baseValue: 5
-    totalBonus: 4
-  speed:
     baseValue: 7
-    totalBonus: 7
+    totalBonus: 0
+  defense:
+    baseValue: 4
+    totalBonus: 0
+  magic:
+    baseValue: 6
+    totalBonus: 0
+  speed:
+    baseValue: 6
+    totalBonus: 0
   armor:
     baseValue: 0
     totalBonus: 0
   resist:
     baseValue: 0
-    totalBonus: 5
+    totalBonus: 0
   critPower:
     baseValue: 150
     totalBonus: 0
   head: {fileID: 11400000, guid: 647712a93ca143249a21b3d1d5895c62, type: 2}
-  body: {fileID: 11400000, guid: f1c8d53becd8984459da65c1803742ea, type: 2}
+  body: {fileID: 11400000, guid: ef3d966ca0253b549a187d01441ddd84, type: 2}
   arms: {fileID: 11400000, guid: c3d7bf2e702dbdd47aeaee10cdb7ec67, type: 2}
   feet: {fileID: 11400000, guid: 02fb59e7d1f1d564d93a35273947caf5, type: 2}
   ringL: {fileID: 11400000, guid: 1afd7edd7bfefb840805c7a8642ec284, type: 2}
@@ -167,6 +172,9 @@ MonoBehaviour:
     maximum: 3
     totalBonus: 0
   attributeSkillValues: 000000000000000000000000000000000000000000000000
-  sp: 17
-  totalSp: 17
-  initialValues: {fileID: 11400000, guid: 16daf9702dd6f664692e3889b5fa0057, type: 2}
+  sp: 0
+  totalSp: 0
+  classSkillName: Blade Dancing
+  classSkillDescription: Blade Dancing\nAn ancient elven fighting style both deadly
+    and beautiful to watch.
+  initialValues: {fileID: 0}

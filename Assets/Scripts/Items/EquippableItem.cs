@@ -39,4 +39,35 @@ public class EquippableItem : Item {
                 break;
         }
     }
+
+    public override string GetStatsString() {
+        var result = string.Empty;
+
+        if (hpBonus > 0) {
+            result += "\nHP+" + hpBonus;
+        }
+        if (mpBonus > 0) {
+            result += "\nMP+" + mpBonus;
+        }
+        if (attackBonus > 0) {
+            result += "\nATK+" + attackBonus;
+        }
+        if (defenseBonus > 0) {
+            result += "\nDEF+" + defenseBonus;
+        }
+        if (magicBonus > 0) {
+            result += "\nMAG+" + magicBonus;
+        }
+        if (speedBonus > 0) {
+            result += "\nSPD+" + speedBonus;
+        }
+        if (armorBonus > 0) {
+            result += "\nARM+" + armorBonus;
+        }
+        if (resistBonus > 0) {
+            result += "\nRES+" + resistBonus;
+        }
+
+        return result;
+    }
 }

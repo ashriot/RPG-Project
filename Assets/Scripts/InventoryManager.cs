@@ -1,20 +1,11 @@
-﻿using System.Collections.Generic;
+﻿using System.Linq;
+using System.Collections.Generic;
 using UnityEngine;
 
 public class InventoryManager : MonoBehaviour {
 
     public static InventoryManager instance;
     
-    public List<Item> refArms;
-    public List<Item> refBody;
-    public List<Item> refConsumables;
-    public List<Item> refFeet;
-    public List<Item> refHead;
-    public List<Item> refRings;
-    public List<Item> refShields;
-    public List<Item> refSpells;
-    public List<Item> refWeapons;
-    public List<Item> refOthers;
     public List<Item> inventory;
 
     void Awake () {
@@ -29,9 +20,18 @@ public class InventoryManager : MonoBehaviour {
     }
 
     public void AddItem(string id, int qty) {
-        var item = FindItemReference(id);
+        var item = Instantiate(FindItemReference(id));
         for (var i = 0; i < qty; i++) {
-            inventory.Add(item);
+            if (item.itemType == ItemType.Consumable) {
+                var prevItem = FetchItemFromInventory(id);
+                if (prevItem != null) {
+                    prevItem.quantity++;
+                } else {
+                    inventory.Add(item);
+                }
+            } else {
+                inventory.Add(item);
+            }
         }
     }
 
@@ -44,54 +44,22 @@ public class InventoryManager : MonoBehaviour {
         var item = inventory.Find(i => i.id == id);
 
         if (item == null){
-            Debug.LogError("Item '" + id + "' does not exist!");
+            Debug.Log("Item '" + id + "' is not in inventory!");
             return null;
         }
 
         return item;
     }
 
-    public Item FindItemReference(string id) {
-        var prefix = id.Substring(0, 4);
-        
-        Item item;
+    public void SortInventory() {
+        inventory.OrderByDescending(i => (int)(i.itemType))
+            .ToList();
+    }
 
-        switch (prefix) {
-            case "arms":
-                item = refArms.Find(i => i.id == id);
-                break;
-            case "body":
-                item = refBody.Find(i => i.id == id);
-                break;
-            case "cons":
-                item = refConsumables.Find(i => i.id == id);
-                break;
-            case "feet":
-                item = refFeet.Find(i => i.id == id);
-                break;
-            case "head":
-                item = refHead.Find(i => i.id == id);
-                break;
-            case "ring":
-                item = refRings.Find(i => i.id == id);
-                break;
-            case "shld":
-                item = refShields.Find(i => i.id == id);
-                break;
-            case "spel":
-                item = refSpells.Find(i => i.id == id);
-                break;
-            case "weap":
-                item = refWeapons.Find(i => i.id == id);
-                break;
-            case "othr":
-                item = refOthers.Find(i => i.id == id);
-                break;
-            default:
-                item = null;
-                break;
-        }
-        
+    public Item FindItemReference(string id) {
+        var folder = id.Substring(0, 4);
+        var itemName = id.Substring(4, id.Length-4);
+        var item = Instantiate(Resources.Load<Item>("Items/" + folder + "/" + itemName));
 
         if (item == null){
             Debug.LogError("Item '" + id + "' does not exist!");

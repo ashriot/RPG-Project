@@ -76,6 +76,7 @@ MonoBehaviour:
   - {fileID: 11400000, guid: 7d35252fabe69bc4487b5a7935b84585, type: 2}
   - {fileID: 11400000, guid: 538da7e1706915c42b8a32b66812466f, type: 2}
   - {fileID: 11400000, guid: 9390d113075557b4c81c81a70974da61, type: 2}
+  refOthers: []
   inventory:
   - {fileID: 11400000, guid: f1c8d53becd8984459da65c1803742ea, type: 2}
 --- !u!114 &773095801
@@ -94,5 +95,6 @@ MonoBehaviour:
   - {fileID: 11400000, guid: 59055a1aa976aa44b80dbd4ed166146d, type: 2}
   - {fileID: 11400000, guid: b41d241606927bc4e9f761f082788869, type: 2}
   - {fileID: 11400000, guid: d05a953a7f1f95f438baa5619a4f624a, type: 2}
+  - {fileID: 11400000, guid: d564f11d92c1653469c390ce1225a2cf, type: 2}
   referenceStatusEffects:
   - {fileID: 11400000, guid: fa71da18fc74b0d4f92eb15679c04ea0, type: 2}

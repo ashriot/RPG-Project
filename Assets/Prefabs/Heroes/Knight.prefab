@@ -47,6 +47,7 @@ SpriteRenderer:
   m_MotionVectors: 1
   m_LightProbeUsage: 1
   m_ReflectionProbeUsage: 1
+  m_RayTracingMode: 0
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
@@ -117,37 +118,42 @@ MonoBehaviour:
   id: knight
   name: Sturm
   className: Knight
-  animator: {fileID: 8296436625748676018}
+  unitAnimator: {fileID: 8296436625748676018}
+  portraitAnimatorController: {fileID: 9100000, guid: fd187a5c76b2a204693bf11e7b80b91f,
+    type: 2}
   aliveSprite: {fileID: 2833635029592336169, guid: 04854a5f96e25cf4fbef374e1965bd3b,
     type: 3}
   deadSprite: {fileID: -1826126182828285318, guid: 04854a5f96e25cf4fbef374e1965bd3b,
     type: 3}
   isActive: 1
+  skills:
+  - Taunt
+  spells: []
   level: 1
-  xp: 56
+  xp: 0
   hp:
-    current: 55
-    maximum: 55
-    totalBonus: 90
+    current: 95
+    maximum: 35
+    totalBonus: 60
   mp:
-    current: 15
-    maximum: 15
+    current: 10
+    maximum: 10
     totalBonus: 0
   attack:
-    baseValue: 8
-    totalBonus: 2
+    baseValue: 6
+    totalBonus: 1
   defense:
     baseValue: 7
-    totalBonus: 9
+    totalBonus: 6
   magic:
-    baseValue: 3
+    baseValue: 4
     totalBonus: 0
   speed:
-    baseValue: 5
-    totalBonus: 2
+    baseValue: 4
+    totalBonus: 6
   armor:
     baseValue: 0
-    totalBonus: 11
+    totalBonus: 6
   resist:
     baseValue: 0
     totalBonus: 0
@@ -167,6 +173,9 @@ MonoBehaviour:
     maximum: 3
     totalBonus: 0
   attributeSkillValues: 000000000000000000000000000000000000000000000000
-  sp: 17
-  totalSp: 17
-  initialValues: {fileID: 11400000, guid: 03c6b93b49ca0ef4d9f858d6066078c5, type: 2}
+  sp: 6
+  totalSp: 6
+  classSkillName: Chivalry
+  classSkillDescription: Chivalry\nBattle tactics designed to both encourage and
+    command allies.
+  initialValues: {fileID: 0}
