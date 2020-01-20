@@ -20,7 +20,7 @@ MonoBehaviour:
   sprite: {fileID: -8951020669439005780, guid: 8c500e45b904a74468ea62831fc2b0dc, type: 3}
   quantity: 1
   equipmentType: 2
-  hpBonus: 25
+  hpBonus: 8
   mpBonus: 0
   attackBonus: 0
   defenseBonus: 5

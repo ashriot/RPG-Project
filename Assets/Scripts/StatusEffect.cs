@@ -8,3 +8,13 @@ public class StatusEffect : ScriptableObject {
     public int duration;
     public int potency;
 }
+
+public enum StatusEffectTriggers {
+    Instant,
+    BeginningOfTurn,
+    EndOfTurn,
+    ReceivingMeleeAttack,
+    ReceivingMissileAttack,
+    ReceivingMagicAttack,
+    AllyAttack
+}

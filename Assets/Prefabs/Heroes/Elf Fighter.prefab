@@ -121,44 +121,55 @@ MonoBehaviour:
   unitAnimator: {fileID: 7383352328448479878}
   portraitAnimatorController: {fileID: 9100000, guid: f11933a4923ff2c4da4a7d0cffc0c41c,
     type: 2}
+  portrait: {fileID: 0}
   aliveSprite: {fileID: 8944779272692540031, guid: 04854a5f96e25cf4fbef374e1965bd3b,
     type: 3}
   deadSprite: {fileID: 4750745865729764837, guid: 04854a5f96e25cf4fbef374e1965bd3b,
     type: 3}
   isActive: 1
+  classSkillName: Blade Dancing
+  classSkillDescription: Blade Dancing\nAn ancient elven fighting style both deadly
+    and beautiful to watch.
   skills: []
   spells: []
-  level: 1
-  xp: 0
   hp:
     current: 0
-    maximum: 20
-    totalBonus: 0
+    baseMax: 30
+    bonus: 0
   mp:
     current: 0
-    maximum: 15
-    totalBonus: 0
+    baseMax: 20
+    bonus: 0
+  constitution:
+    current: 3
+    baseMax: 0
+    bonus: 0
+  deflect: 0
+  barrier: 0
   attack:
     baseValue: 7
-    totalBonus: 0
+    bonus: 0
   defense:
     baseValue: 4
-    totalBonus: 0
+    bonus: 0
   magic:
     baseValue: 6
-    totalBonus: 0
+    bonus: 0
   speed:
     baseValue: 6
-    totalBonus: 0
+    bonus: 0
   armor:
     baseValue: 0
-    totalBonus: 0
+    bonus: 0
   resist:
     baseValue: 0
-    totalBonus: 0
+    bonus: 0
   critPower:
     baseValue: 150
-    totalBonus: 0
+    bonus: 0
+  statusEffects: []
+  tpChanceBase: 0.5
+  tpChance: 0
   head: {fileID: 11400000, guid: 647712a93ca143249a21b3d1d5895c62, type: 2}
   body: {fileID: 11400000, guid: ef3d966ca0253b549a187d01441ddd84, type: 2}
   arms: {fileID: 11400000, guid: c3d7bf2e702dbdd47aeaee10cdb7ec67, type: 2}
@@ -167,14 +178,7 @@ MonoBehaviour:
   ringR: {fileID: 11400000, guid: 1c4bd2414c1aaeb41990448180a2f34f, type: 2}
   mainHand: {fileID: 11400000, guid: 7d35252fabe69bc4487b5a7935b84585, type: 2}
   offHand: {fileID: 11400000, guid: 7d35252fabe69bc4487b5a7935b84585, type: 2}
-  constitution:
-    current: 3
-    maximum: 3
-    totalBonus: 0
-  attributeSkillValues: 000000000000000000000000000000000000000000000000
+  attributeMasteriesValues: 000000000000000000000000000000000000000000000000
+  xp: 0
   sp: 0
   totalSp: 0
-  classSkillName: Blade Dancing
-  classSkillDescription: Blade Dancing\nAn ancient elven fighting style both deadly
-    and beautiful to watch.
-  initialValues: {fileID: 0}

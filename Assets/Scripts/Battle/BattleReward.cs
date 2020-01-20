@@ -9,17 +9,24 @@ public class BattleReward : MonoBehaviour {
 
     public Text[] xpTexts;
     public int[] xpRewards;
+    public Color originalColor;
 
     public bool markQuestComplete;
     public string questNameToComplete;
+
+    private Vector3 originalPos;
 
     void Awake() {
         instance = this;
     }
 
     public void OpenWindow(int xpEarned) {
-        PlayerController.instance.inBattle = false;
+        originalPos = transform.position;
+        foreach(var text in xpTexts) {
+            text.color = originalColor;
+        }
 
+        Debug.Log("Start REWARDS");
         for (var i = 0; i < xpRewards.Length; i++) {
             xpRewards[i] = xpEarned;
         }
@@ -34,6 +41,7 @@ public class BattleReward : MonoBehaviour {
             }
         }
 
+        PlayerController.instance.inBattle = false;
         GameManager.instance.battleActive = false;
         StartCoroutine(CloseWindow(2f));
     
@@ -43,7 +51,8 @@ public class BattleReward : MonoBehaviour {
     }
 
     public IEnumerator CloseWindow(float _duration) {
-        StartCoroutine(SlideIntoPosition());
+        GameMenu.instance.UpdateStats();
+        StartCoroutine(MoveTowards(transform, transform.localPosition + new Vector3(55f, 0f, 0f), .25f));
 
         float elapsedTime = 0.0f;
         while (elapsedTime < _duration) {
@@ -51,35 +60,32 @@ public class BattleReward : MonoBehaviour {
             yield return new WaitForEndOfFrame();
         }
 
-        Debug.Log("Fade out!");
 
-        StartCoroutine(FadeOut(2f));
+        StartCoroutine(FadeOut(1.5f));
     }
 
-    public IEnumerator SlideIntoPosition() {
-        var moveTime = .0005f;
-        var endPos = transform.position + new Vector3(366f, 0f, 0f);
-        float sqrRemainingDistance = (transform.position - endPos).sqrMagnitude;
-        float inverseMoveTime = 1 / moveTime;
-        
-        while (sqrRemainingDistance > float.Epsilon) {
-            Vector3 newPosition = Vector3.MoveTowards(transform.position, endPos, inverseMoveTime * Time.deltaTime);
-            transform.position = newPosition;
-            sqrRemainingDistance = (transform.position - endPos).sqrMagnitude;
-
+    IEnumerator MoveTowards(Transform objectToMove, Vector3 toPosition, float duration) {
+        float counter = 0;
+        while (counter < duration) {
+            counter += Time.deltaTime;
+            Vector3 currentPos = objectToMove.localPosition;
+            float time = Vector3.Distance(currentPos, toPosition) / (duration - counter) * Time.deltaTime;
+            objectToMove.localPosition = Vector3.MoveTowards(currentPos, toPosition, time);
             yield return null;
         }
-    }
+}
 
     public IEnumerator FadeOut(float _duration) {
+        Debug.Log(gameObject.transform.localPosition);
         float elapsedTime = 0.0f;
         while (elapsedTime < _duration) {
             foreach(var text in xpTexts) {
-            text.color = Color.Lerp(text.color, Color.clear, (elapsedTime / _duration));
-            elapsedTime += Time.deltaTime;
-            yield return new WaitForEndOfFrame();
+                text.color = Color.Lerp(text.color, Color.clear, (elapsedTime / _duration));
+                elapsedTime += Time.deltaTime;
+                yield return new WaitForEndOfFrame();
             }
         }
+        transform.position = originalPos;
     }
 }
 

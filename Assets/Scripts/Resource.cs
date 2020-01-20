@@ -5,23 +5,23 @@ public class Resource {
     
     public int current;
     public int baseMax;
-    public int totalBonus;
+    public int bonus;
 
-    public int totalMax { get => baseMax + totalBonus; }
-    public int missing { get => totalMax - current; }
+    public int maximum { get => baseMax + bonus; }
+    public int missing { get => maximum - current; }
 
-    public string display { get => current + "/" + totalMax; }
-    public float percent { get => totalMax == 0 ? 1 : (float)current / totalMax; }
+    public string display { get => current + "/" + maximum; }
+    public float percent { get => maximum == 0 ? 1 : (float)current / maximum; }
 
     public void Increase(int amount) {
-        current = Mathf.Clamp(current + amount, 0, totalMax);
+        current = Mathf.Clamp(current + amount, 0, maximum);
     }
 
     public void Decerease(int amount) {
-        current = Mathf.Clamp(current - amount, 0, totalMax);
+        current = Mathf.Clamp(current - amount, 0, maximum);
     }
 
     public void SetToMax() {
-        current = totalMax;
+        current = maximum;
     }
 }

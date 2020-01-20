@@ -189,8 +189,8 @@ public class GameMenu : MonoBehaviour {
         // miniStatPanelDisplay.name.text = hero.name;
         // miniStatPanelDisplay.xp.text = "XP: " + hero.xp + "/" + hero.level * 100;
         miniStatPanelDisplay.sp.text = hero.sp.ToString();
-        miniStatPanelDisplay.hp.text = hero.hp.totalMax.ToString();
-        miniStatPanelDisplay.mp.text = hero.mp.totalMax.ToString();
+        miniStatPanelDisplay.hp.text = hero.hp.maximum.ToString();
+        miniStatPanelDisplay.mp.text = hero.mp.maximum.ToString();
         miniStatPanelDisplay.attack.text = hero.attack.value.ToString();
         miniStatPanelDisplay.defense.text = hero.defense.value.ToString();
         miniStatPanelDisplay.magic.text = hero.magic.value.ToString();
@@ -200,42 +200,42 @@ public class GameMenu : MonoBehaviour {
 
         var green = new Color(.3843f, .7019f, .3294f, 1f);
         var white = new Color(1f, .9450f, .9137f, 1f);
-        if (hero.hp.totalBonus > 0) {
+        if (hero.hp.bonus > 0) {
             miniStatPanelDisplay.hp.color = green;
         } else {
             miniStatPanelDisplay.hp.color = white;
         }
-        if (hero.mp.totalBonus > 0) {
+        if (hero.mp.bonus > 0) {
             miniStatPanelDisplay.mp.color = green;
         } else {
             miniStatPanelDisplay.mp.color = white;
         }
-        if (hero.attack.totalBonus > 0) {
+        if (hero.attack.bonus > 0) {
             miniStatPanelDisplay.attack.color = green;
         } else {
             miniStatPanelDisplay.attack.color = white;
         }
-        if (hero.defense.totalBonus > 0) {
+        if (hero.defense.bonus > 0) {
             miniStatPanelDisplay.defense.color = green;
         } else {
             miniStatPanelDisplay.defense.color = white;
         }
-        if (hero.magic.totalBonus > 0) {
+        if (hero.magic.bonus > 0) {
             miniStatPanelDisplay.magic.color = green;
         } else {
             miniStatPanelDisplay.magic.color = white;
         }
-        if (hero.speed.totalBonus > 0) {
+        if (hero.speed.bonus > 0) {
             miniStatPanelDisplay.speed.color = green;
         } else {
             miniStatPanelDisplay.speed.color = white;
         }
-        if (hero.armor.totalBonus > 0) {
+        if (hero.armor.bonus > 0) {
             miniStatPanelDisplay.armor.color = green;
         } else {
             miniStatPanelDisplay.armor.color = white;
         }
-        if (hero.resist.totalBonus > 0) {
+        if (hero.resist.bonus > 0) {
             miniStatPanelDisplay.resist.color = green;
         } else {
             miniStatPanelDisplay.resist.color = white;
@@ -497,6 +497,8 @@ public class GameMenu : MonoBehaviour {
                     break;
                 }
             }
+        } else {
+            AudioManager.instance.PlaySfx("error");
         }
         UpdateMiniStatPanel();
         UpdateStats();
@@ -579,6 +581,11 @@ public class GameMenu : MonoBehaviour {
                     heroStatPanels[i].spIndicator.gameObject.SetActive(true);
                 } else {
                     heroStatPanels[i].spIndicator.gameObject.SetActive(false);
+                }
+                if (GameManager.instance.battleActive) {
+                    heroStatPanels[i].deflectSlider.fillAmount = (float)heroes[i].deflect / heroes[i].hp.maximum;
+                } else {
+                    heroStatPanels[i].deflectSlider.fillAmount = 0;
                 }
             } else {
                 heroStatPanels[i].gameObject.SetActive(false);

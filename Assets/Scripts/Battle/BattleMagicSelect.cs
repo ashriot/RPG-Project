@@ -21,7 +21,7 @@ public class BattleMagicSelect : MonoBehaviour {
     }
 
     public void Press() {
-        var currentTurn = BattleManager.instance.combatants[BattleManager.instance.currentTurnId];
+        var currentTurn = BattleManager.instance.combatants[BattleManager.instance.combatantId];
 
         if (currentTurn.mp.current < mpCost) {
             Debug.Log(currentTurn.name + " doesn't have enough MP. (Cost: " + mpCost + ")");

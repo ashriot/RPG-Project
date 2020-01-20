@@ -5,25 +5,28 @@ public class BattleCombatant : MonoBehaviour {
 
     public string id;
     public Resource hp, mp;
+    public int deflect;
+    public int barrier;
     public int level, xp, attack, defense, magic, speed, armor, resist, minDamage, maxDamage, tp;
-    public int deflection;
+    public float tpChanceBase;
+    public float tpChance;
     public int ticks;
     public float delay = 1f;
     public bool isPlayer;
     public bool isActive;
-    public bool isDead;
+    public bool isDead { get { return hp.current <= 0; } }
     public bool isCharging;
     public string chargedActionName;
     public int chargedTarget;
     public bool isTaunting = false;
     public bool isHiding = false;
     public string classSkillName, classSkillDescription;
-    public string[] skills;
+    public string[] abilities;
     public string[] spells;
     public List<StatusEffect> statusEffects;
     public Hands mainHand, offHand;
 
-    public bool dualWielding {
+    public bool isDualWielding {
         get {
             if (mainHand != null && offHand != null && offHand.equipmentType == EquipmentType.LightWeapon) {
                 return true;

@@ -116,16 +116,16 @@ public class GameManager : MonoBehaviour {
                 resistBonus += heroes[i].offHand.resistBonus;
             }
 
-            heroes[i].hp.totalBonus += hpBonus;
-            heroes[i].mp.totalBonus += mpBonus;
+            heroes[i].hp.bonus += hpBonus;
+            heroes[i].mp.bonus += mpBonus;
             heroes[i].hp.SetToMax();
             heroes[i].mp.SetToMax();
-            heroes[i].attack.totalBonus += attackBonus;
-            heroes[i].defense.totalBonus += defenseBonus;
-            heroes[i].magic.totalBonus += magicBonus;
-            heroes[i].speed.totalBonus += speedBonus;
-            heroes[i].armor.totalBonus += armorBonus;
-            heroes[i].resist.totalBonus += resistBonus;
+            heroes[i].attack.bonus += attackBonus;
+            heroes[i].defense.bonus += defenseBonus;
+            heroes[i].magic.bonus += magicBonus;
+            heroes[i].speed.bonus += speedBonus;
+            heroes[i].armor.bonus += armorBonus;
+            heroes[i].resist.bonus += resistBonus;
         }
     }
 

@@ -115,11 +115,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a899e1fa9d87d4446aeb2e8444feadd2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  id: mage
   name: Raistlin
   className: Mage
   unitAnimator: {fileID: 1337129469}
   portraitAnimatorController: {fileID: 9100000, guid: a3596d5ccd58e2d4aab5574b1efd6395,
     type: 2}
+  portrait: {fileID: 0}
   aliveSprite: {fileID: -4455212021498299619, guid: 04854a5f96e25cf4fbef374e1965bd3b,
     type: 3}
   deadSprite: {fileID: 5864110769287904594, guid: 04854a5f96e25cf4fbef374e1965bd3b,
@@ -132,38 +134,43 @@ MonoBehaviour:
   spells:
   - Fireball
   hp:
-    current: 30
-    baseMax: 0
-    totalBonus: 15
+    current: 0
+    baseMax: 20
+    bonus: 0
   mp:
-    current: 90
-    baseMax: 0
-    totalBonus: 60
+    current: 0
+    baseMax: 30
+    bonus: 0
   constitution:
     current: 0
     baseMax: 3
-    totalBonus: 0
+    bonus: 0
+  deflect: 0
+  barrier: 0
   attack:
     baseValue: 3
-    totalBonus: 0
+    bonus: 0
   defense:
     baseValue: 4
-    totalBonus: 3
+    bonus: 0
   magic:
     baseValue: 8
-    totalBonus: 5
+    bonus: 0
   speed:
     baseValue: 6
-    totalBonus: 7
+    bonus: 0
   armor:
     baseValue: 0
-    totalBonus: 0
+    bonus: 0
   resist:
     baseValue: 0
-    totalBonus: 6
+    bonus: 0
   critPower:
     baseValue: 150
-    totalBonus: 0
+    bonus: 0
+  statusEffects: []
+  tpChanceBase: 0.1
+  tpChance: 0
   head: {fileID: 11400000, guid: 647712a93ca143249a21b3d1d5895c62, type: 2}
   body: {fileID: 11400000, guid: f1c8d53becd8984459da65c1803742ea, type: 2}
   arms: {fileID: 11400000, guid: 50031aa6443758b49aa0215805cb10eb, type: 2}
@@ -172,7 +179,7 @@ MonoBehaviour:
   ringR: {fileID: 11400000, guid: 1afd7edd7bfefb840805c7a8642ec284, type: 2}
   mainHand: {fileID: 11400000, guid: 9390d113075557b4c81c81a70974da61, type: 2}
   offHand: {fileID: 0}
-  attributeMasteriesValues: 
+  attributeMasteriesValues: 000000000000000000000000000000000000000000000000
   xp: 0
-  sp: 6
-  totalSp: 6
+  sp: 0
+  totalSp: 0

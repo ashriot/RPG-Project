@@ -30,6 +30,10 @@ MonoBehaviour:
   resistBonus: 0
   criticalIntensityBonus: 0
   baseAttack: 2
-  minimumDamage: 4
+  minimumDamage: 3
   maximumDamage: 6
   delay: 1.5
+  hitType: 4
+  avoidType: 5
+  weaponTechniqueName: 
+  weaponTechniqueRank: 0

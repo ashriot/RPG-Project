@@ -40,8 +40,11 @@ public class BattleManager : MonoBehaviour {
     [Header("Battle Flow Data")]
     // public List<int> turnOrder = new List<int>();
     public List<int> potentialTurnOrder = new List<int>();
-    public int currentTurnId;
-    public int targetedEnemyId;
+    public int combatantId;
+    public int targetId;
+    public BattleCombatant combatant;
+    public BattleCombatant target;
+    public BattleCombatant enemyTarget;
     public bool battleWaiting;
     public bool waitingForInput;
     public float turnDelay = .1f;
@@ -63,7 +66,7 @@ public class BattleManager : MonoBehaviour {
     public BattleCombatant[] playerPrefabs;
     public BattleCombatant[] enemyPrefabs;
     public EnemyStatWindow[] enemyStatWindows;
-    public BattleAction[] battleActions;
+    public Ability[] battleActions;
 
     public GameObject classSkillButton;
     public BattleTargetButton[] targetButtons;
@@ -94,6 +97,7 @@ public class BattleManager : MonoBehaviour {
     public void BattleStart(string[] enemyIds, bool unableToFlee) {
         if (battleActive) return;
 
+        xpEarned = 0;
         cannotFlee = unableToFlee;
         battleActive = true;
         GameManager.instance.battleActive = true;
@@ -103,15 +107,18 @@ public class BattleManager : MonoBehaviour {
         battleScene.SetActive(true);
         enemyWindows.SetActive(true);
         canvas.gameObject.SetActive(true);
-        // battleMenu.SetActive(true);
         actionTooltip.gameObject.SetActive(true);
 
         var heroes = GameManager.instance.heroes.Where(h => h.isActive).ToArray();
+        PlayerController.instance.GetComponent<SpriteRenderer>().enabled = false;
+        foreach(var member in PlayerController.instance.partyMembers) {
+            member.GetComponent<SpriteRenderer>().enabled = false;
+        }
 
         for (var i = 0; i < playerPositions.Length; i++) {
             if (heroes[i].isActive) {
                 for (var j = 0; j < playerPrefabs.Length; j++) {
-                    if (playerPrefabs[j].id == heroes[i].name) {
+                    if (playerPrefabs[j].id == heroes[i].id) {
                         var newPlayer = Instantiate(playerPrefabs[j], playerPositions[i].position, playerPositions[i].rotation);
                         newPlayer.transform.parent = playerPositions[i];
                         
@@ -120,9 +127,9 @@ public class BattleManager : MonoBehaviour {
                         var description = heroes[i].classSkillDescription.Replace("\\n", "\n");
                         combatants[i].classSkillDescription = description;
                         combatants[i].hp.current = heroes[i].hp.current;
-                        combatants[i].hp.baseMax = heroes[i].hp.totalMax;
+                        combatants[i].hp.baseMax = heroes[i].hp.maximum;
                         combatants[i].mp.current = heroes[i].mp.current;
-                        combatants[i].mp.baseMax = heroes[i].mp.totalMax;
+                        combatants[i].mp.baseMax = heroes[i].mp.maximum;
                         combatants[i].attack = heroes[i].attack.value;
                         combatants[i].defense = heroes[i].defense.value;
                         combatants[i].magic = heroes[i].magic.value;
@@ -132,10 +139,11 @@ public class BattleManager : MonoBehaviour {
                         combatants[i].deadSprite = heroes[i].deadSprite;
                         combatants[i].mainHand = heroes[i].mainHand;
                         combatants[i].offHand = heroes[i].offHand;
-                        combatants[i].skills = heroes[i].skills;
+                        combatants[i].abilities = heroes[i].skills;
                         combatants[i].spells = heroes[i].spells;
+                        combatants[i].tpChanceBase = heroes[i].tpChanceBase;
                         combatants[i].delay = 1f;
-                        combatants[i].deflection = heroes[i].armor.value * 2;
+                        combatants[i].deflect = heroes[i].armor.value * 2;
                     }
                 }
             }
@@ -143,32 +151,44 @@ public class BattleManager : MonoBehaviour {
 
         for (var i = 0; i < enemyIds.Length; i++) {
             if (enemyIds[i] != string.Empty) {
-                for (var j = 0; j < enemyPrefabs.Length; j++) {
-                    if (enemyPrefabs[j].id == enemyIds[i]) {
-                        var newEnemy = Instantiate(enemyPrefabs[j], enemyPositions[i].position, enemyPositions[i].rotation);
-                        newEnemy.hp.SetToMax();
-                        newEnemy.transform.parent = enemyPositions[i];
-                        enemyStatWindows[i].gameObject.SetActive(true);
-                        enemyStatWindows[i].portrait.sprite = newEnemy.portrait;
-                        enemyStatWindows[i].animator.runtimeAnimatorController = newEnemy.portraitAnimatorController;
-                        enemyStatWindows[i].hpSlider.fillAmount = newEnemy.hp.percent;
-                        enemyStatWindows[i].mpSlider.fillAmount = newEnemy.mp.percent;
-                        newEnemy.deflection = newEnemy.armor *2;
-                        combatants.Add(newEnemy);
-                    }
-                }
+                var enemyPrefab = GetEnemyPrefabById(enemyIds[i]);
+                var newEnemy = Instantiate(enemyPrefab, enemyPositions[i].position, enemyPositions[i].rotation);
+                newEnemy.hp.SetToMax();
+                newEnemy.deflect = newEnemy.armor *2;
+                newEnemy.transform.parent = enemyPositions[i];
+                enemyStatWindows[i].gameObject.SetActive(true);
+                enemyStatWindows[i].portrait.sprite = newEnemy.portrait;
+                enemyStatWindows[i].animator.runtimeAnimatorController = newEnemy.portraitAnimatorController;
+                enemyStatWindows[i].hpSlider.fillAmount = newEnemy.hp.percent;
+                enemyStatWindows[i].tempHpSlider.fillAmount = (float)newEnemy.deflect / newEnemy.hp.maximum;
+                enemyStatWindows[i].mpSlider.fillAmount = newEnemy.mp.percent;
+                combatants.Add(newEnemy);
+                Debug.Log(xpEarned);
+                xpEarned += newEnemy.xp;
             }
         }
         heroPartySizeOffset = combatants.Where(c => c.isPlayer).Count();
         OpenTargetMenu();
         SetInitialTicks();
         battleWaiting = true;
+        UpdateUiStats();
         CountdownTicks();
     }
 
+    private BattleCombatant GetEnemyPrefabById(string enemyId) {
+        var enemy = Instantiate(Resources.Load<BattleCombatant>("Enemies/" + enemyId));
+
+        if (enemy != null) {
+            return enemy;
+        }
+
+        Debug.LogError("Couldn't find enemy '" + enemyId +"'!");
+        return null;
+    }
+
     private void SetInitialTicks() {
-        foreach (var combatant in combatants) {
-            CalculateSpeedTicks(combatant, 1f);
+        foreach (var c in combatants) {
+            CalculateSpeedTicks(c, 1f);
         }
     }
 
@@ -177,18 +197,13 @@ public class BattleManager : MonoBehaviour {
 
         // currentTurnId = turnOrder[0];
         // potentialTurnOrder.RemoveAt(0);
-
-        var enemies = combatants.Where(c => !c.isPlayer);
-        if (enemies.All(e => e.isDead)) {
-            Debug.Log("YOU WIN");
-            ClearAllCursors();
-            StartCoroutine(EndBattleCoroutine());
-        }
         
         if (!waitingForInput) {
             // status effects
+            combatant = combatants[combatantId];
+            target = combatants[targetId];
             List<int> effectsToRemove = new List<int>();
-            var statusEffects = combatants[currentTurnId].statusEffects;
+            var statusEffects = combatant.statusEffects;
             for(var i = 0; i < statusEffects.Count; i++) {
                 statusEffects[i].duration--;
                 if (statusEffects[i].duration == 0) {
@@ -198,33 +213,35 @@ public class BattleManager : MonoBehaviour {
             if (effectsToRemove.Any()) {
                 foreach (var i in effectsToRemove) {
                     if (statusEffects[i].name == "Taunt") {
-                        combatants[currentTurnId].isTaunting = false;
-                        tauntingCursors[currentTurnId].SetActive(false);
+                        combatant.isTaunting = false;
+                        tauntingCursors[combatantId].SetActive(false);
                     }
                     statusEffects.RemoveAt(i);
                 }
             }
 
-            if (combatants[currentTurnId].isPlayer) {
+            if (combatant.isPlayer) {
                 // PLAYER TURN
                 if (combatants.All(x => x.isDead && !x.isPlayer)) return;
 
-                if (combatants[currentTurnId].isCharging) {
-                    HeroAction(combatants[currentTurnId].chargedActionName);
+                if (combatant.isCharging) {
+                    enemyTargetCursors[targetId - heroPartySizeOffset].SetActive(false);
+                    enemyTargetCursors[combatant.chargedTarget - heroPartySizeOffset].SetActive(true);
+                    HeroAction(combatant.chargedActionName);
                 } else {
                     AudioManager.instance.PlaySfx("end_turn");
-                    classSkillButton.GetComponentInChildren<Text>().text = combatants[currentTurnId].classSkillName;
-                    classSkillButton.GetComponentInChildren<ButtonLongPress>().description = combatants[currentTurnId].classSkillDescription;
+                    classSkillButton.GetComponentInChildren<Text>().text = combatant.classSkillName;
+                    classSkillButton.GetComponentInChildren<ButtonLongPress>().description = combatant.classSkillDescription;
                     battleMenu.SetActive(true);
-                    enemyTargetCursors[targetedEnemyId - heroPartySizeOffset].SetActive(true);
-                    GameMenu.instance.heroStatPanels[currentTurnId].currentTurnCursor.gameObject.SetActive(true);
-                    currentTurnCursors[currentTurnId].SetActive(true);
-                    
-                    battleWaiting = false;
-                    waitingForInput = true;
+                    enemyTargetCursors[targetId - heroPartySizeOffset].SetActive(true);
+                    GameMenu.instance.heroStatPanels[combatantId].currentTurnCursor.gameObject.SetActive(true);
+                    currentTurnCursors[combatantId].SetActive(true);
                 }
-            } else { // enemy turn
-                enemyTargetCursors[targetedEnemyId - heroPartySizeOffset].SetActive(false);
+                battleWaiting = false;
+                waitingForInput = true;
+            } else {
+                // ENEMY TURN
+                enemyTargetCursors[targetId - heroPartySizeOffset].SetActive(false);
                 battleMenu.SetActive(false);
                 // enemy should attack
                 StartCoroutine(EnemyMoveCoroutine());
@@ -266,7 +283,7 @@ public class BattleManager : MonoBehaviour {
         while(true) {
             for (var i = 0; i < combatants.Count; i++) {
                 if (!combatants[i].isDead && combatants[i].ticks == 0) {
-                    currentTurnId = i;
+                    combatantId = i;
                     return;
                 } else {
                     combatants[i].ticks--;
@@ -276,6 +293,7 @@ public class BattleManager : MonoBehaviour {
     }
 
     public void NextTurn() {
+        CheckForBattleEnd();
         // while (turnOrder.Count < 10) {
         //     PredictTurnOrder();
         // }
@@ -290,7 +308,11 @@ public class BattleManager : MonoBehaviour {
         battleWaiting = true;
         
         // update enemy target
-        if (combatants[targetedEnemyId].isDead) {
+        CheckIfEnemyTargetIsDead();
+    }
+
+    private void CheckIfEnemyTargetIsDead() {
+        if (target.isDead) {
             var id = -1;
             for (var i = 0; i < combatants.Count; i++) {
                 if (!combatants[i].isPlayer && !combatants[i].isDead) {
@@ -304,44 +326,33 @@ public class BattleManager : MonoBehaviour {
                 SetTargetedEnemyId(id);
             }
         }
-        UpdateBattle();
     }
 
-    public void UpdateBattle() {
-
+    private void UpdateEnemyStatWindows() {
         for (var i = 0; i < enemyStatWindows.Length; i++) {
             if (enemyStatWindows[i].gameObject.activeInHierarchy) {
-                enemyStatWindows[i].hpSlider.GetComponentInChildren<Image>().fillAmount = combatants[i+4].hp.percent;
+                enemyStatWindows[i].hpSlider.fillAmount = combatants[i+4].hp.percent;
+                enemyStatWindows[i].tempHpSlider.fillAmount = (float)combatants[i+4].deflect / combatants[i+4].hp.maximum;
             }
         }
-        var heroes = combatants.Where(c => c.isPlayer).ToList();
-        var gameHeroes = GameManager.instance.heroes;
-        foreach (var hero in heroes) {
-            foreach (var gameHero in gameHeroes) {
-                if (hero.id == gameHero.name) {
-                    gameHero.hp.current = hero.hp.current;
-                    gameHero.mp.current = hero.mp.current;
-                    break;
-                }
-            }
-        }
+    }
+
+    public void CheckForBattleEnd() {
+        UpdateUiStats();
+        UpdateEnemyStatWindows();
 
         bool allEnemiesDead = true;
         bool allPlayersDead = true;
 
         for (var i = 0; i < combatants.Count; i++) {
-            if (combatants[i].hp.current < 0) {
-                combatants[i].hp.current = 0;
-            }
-
-            if (combatants[i].hp.current == 0 && !combatants[i].isDead) {
-                combatants[i].isDead = true; 
-                // AudioManager.instance.PlaySfx("test");
+            if (combatants[i].isDead) {
                 if (combatants[i].isPlayer) {
                     combatants[i].spriteRenderer.sprite = combatants[i].deadSprite;
                 } else {
-                    combatants[i].EnemyFade();
-                    enemyStatWindows[i - heroPartySizeOffset].gameObject.SetActive(false);
+                    if (enemyStatWindows[i - heroPartySizeOffset].gameObject.activeInHierarchy) {
+                        combatants[i].EnemyFade();
+                        enemyStatWindows[i - heroPartySizeOffset].gameObject.SetActive(false);
+                    }
                 }
             } else if (combatants[i].isPlayer) {
                 allPlayersDead = false;
@@ -367,8 +378,13 @@ public class BattleManager : MonoBehaviour {
         }
     }
 
+    public void ClickAttackButton() {
+        PlayClickSound();
+        HeroAction("Attack");
+    }
+
     public void ClickSkillButton() {
-        var actionNames = combatants[currentTurnId].skills;
+        var actionNames = combatant.abilities;
         if (actionNames.Length == 0) {
             AudioManager.instance.PlaySfx("error");
             Debug.Log("No known skills!");
@@ -378,10 +394,10 @@ public class BattleManager : MonoBehaviour {
         }
 
         skillsMenu.SetActive(true);
-        var actions = new List<BattleAction>();
+        var actions = new List<Ability>();
 
         foreach(var n in actionNames) {
-            actions.Add(BattleActionRepo.instance.GetActionByName(n));
+            actions.Add(BattleActionRepo.instance.GetAbilityByName(n));
         }
 
         for(var i = 0; i < menuButtons.Length; i++) {
@@ -397,7 +413,7 @@ public class BattleManager : MonoBehaviour {
     }
 
     public void ClickSpellsButton() {
-        var actionNames = combatants[currentTurnId].spells;
+        var actionNames = combatant.spells;
         if (actionNames.Length == 0) {
             AudioManager.instance.PlaySfx("error");
             Debug.Log("No known spells!");
@@ -407,10 +423,10 @@ public class BattleManager : MonoBehaviour {
         }
 
         skillsMenu.SetActive(true);
-        var actions = new List<BattleAction>();
+        var actions = new List<Ability>();
 
         foreach(var n in actionNames) {
-            actions.Add(BattleActionRepo.instance.GetActionByName(n));
+            actions.Add(BattleActionRepo.instance.GetAbilityByName(n));
         }
 
         for(var i = 0; i < menuButtons.Length; i++) {
@@ -426,6 +442,7 @@ public class BattleManager : MonoBehaviour {
     }
 
     private void ClearAllCursors() {
+        Debug.Log("clearing cursors");
         foreach (var cursor in enemyTargetCursors) {
             cursor.SetActive(false);
         }
@@ -440,23 +457,25 @@ public class BattleManager : MonoBehaviour {
     public IEnumerator<WaitForSeconds> EnemyMoveCoroutine() {
         battleWaiting = false;
         yield return new WaitForSeconds(turnDelay);
-        var currentUnit = combatants[currentTurnId];
-        var selectedActionId = Random.Range(0, currentUnit.skills.Length);
-        var action = BattleActionRepo.instance.GetActionByName(currentUnit.skills[selectedActionId]);
-        EnemyDeclareAttack(action);
+        var currentUnit = combatant;
+        var selectedAbilityId = Random.Range(0, currentUnit.abilities.Length);
+        var ability = BattleActionRepo.instance.GetAbilityByName(currentUnit.abilities[selectedAbilityId]);
+        EnemyDeclareAttack(ability);
         yield return new WaitForSeconds(turnDelay*1.25f);
-        EnemyAttack(action);
-        yield return new WaitForSeconds(turnDelay/4);
+        foreach(var action in ability.actions) {
+            EnemyAttack(action);
+            yield return new WaitForSeconds(turnDelay/4);
+        }
         NextTurn();
     }
 
-    public void EnemyDeclareAttack(BattleAction action) {
-        var position = Camera.main.WorldToScreenPoint(combatants[currentTurnId].transform.position + new Vector3(0,.8f, 0f));
-        Instantiate(battleActionDisplay, position, combatants[currentTurnId].transform.rotation, canvas.transform).SetText(action.name);
+    public void EnemyDeclareAttack(Ability ability) {
+        var position = Camera.main.WorldToScreenPoint(combatant.transform.position + new Vector3(0,.8f, 0f));
+        Instantiate(battleActionDisplay, position, combatant.transform.rotation, canvas.transform).SetText(ability.name);
     }
 
-    public void EnemyAttack(BattleAction action) {
-        List<int> players = new List<int>();
+    public void EnemyAttack(AbilityAction action) {
+        List<BattleCombatant> playerCombatants = new List<BattleCombatant>();
 
         var someoneIsTaunting = combatants.Any(c => c.isPlayer && !c.isDead && c.isTaunting);
 
@@ -467,24 +486,21 @@ public class BattleManager : MonoBehaviour {
                         continue;
                     }
                 }
-                players.Add(i);
+                playerCombatants.Add(combatants[i]);
             }
         }
 
-        var selectedTargetId = players[Random.Range(0, players.Count)];
-        var currentTurn = combatants[currentTurnId];
-        var selectedTarget = combatants[selectedTargetId];
+        enemyTarget = playerCombatants[Random.Range(0, playerCombatants.Count)];
 
-        action.attackPower = currentTurn.attack;
-        action.minDamage = currentTurn.minDamage;
-        action.maxDamage = currentTurn.maxDamage;
+        // action.attackPower = currentTurn.attack;
+        // action.minDamage = currentTurn.minDamage;
+        // action.maxDamage = currentTurn.maxDamage;
 
-        StartCoroutine(FlashSprite(currentTurn.spriteRenderer, Color.clear));
-        Instantiate(action.visualFx, selectedTarget.transform.position, selectedTarget.transform.rotation);
-        DealDamage(selectedTargetId, action, false);
-        StartCoroutine(FlashSprite(selectedTarget.spriteRenderer, Color.red));
-        CalculateSpeedTicks(currentTurn, 1f);
-        UpdateBattle();
+        StartCoroutine(FlashSprite(combatant.spriteRenderer, Color.clear));
+        Instantiate(action.visualFx, enemyTarget.transform.position, enemyTarget.transform.rotation);
+        DealDamage(action, false);
+        StartCoroutine(FlashSprite(enemyTarget.spriteRenderer, Color.red));
+        CalculateSpeedTicks(combatant, 1f);
     }
 
     public IEnumerator<WaitForSeconds> FlashSprite(SpriteRenderer spriteRenderer, Color color) {
@@ -519,47 +535,89 @@ public class BattleManager : MonoBehaviour {
     //     }
     // }
 
-    public void DealDamage(int selectedTargetId, BattleAction battleAction, bool isPlayer) {
-        var currentTurn = combatants[currentTurnId];
-        var selectedTarget = combatants[selectedTargetId];
-        var attackPower = battleAction.attackPower;
-        var defensePower = 0;
+    public void DealDamage(AbilityAction action, bool isPlayer) {
+        var localTarget = isPlayer ? target : enemyTarget;
+
+        var hitPower = 0;
+        var avoidPower = 0;
         var armorResist = 0;
         var numberOfAttacks = 1;
         var damageToDeal = 0;
         var isCrit = false;
         var isGraze = false;
         var isMiss = false;
+        
+        switch (action.hitType) {
+            case StatTypes.Attack:
+                hitPower = combatant.attack;
+                break;
+            case StatTypes.Defense:
+                hitPower = combatant.defense;
+                break;
+            case StatTypes.Magic:
+                hitPower = combatant.magic;
+                break;
+            case StatTypes.Speed:
+                hitPower = combatant.speed;
+                break;
+            default:
+                Debug.LogError("Missing Attack StatType!");
+                break;
+        };
+        switch (action.avoidType) {
+            case StatTypes.Attack:
+                avoidPower = localTarget.attack;
+                armorResist = 0;
+                break;
+            case StatTypes.Defense:
+                avoidPower = localTarget.defense;
+                armorResist = localTarget.armor;
+                break;
+            case StatTypes.Magic:
+                avoidPower = localTarget.magic;
+                armorResist = localTarget.resist;
+                break;
+            case StatTypes.Speed:
+                avoidPower = localTarget.speed;
+                armorResist = 0;
+                break;
+            default:
+                Debug.LogError("Missing Defense StatType!");
+                break;
+        };
+
+        switch (action.damageType) {
+            case DamageTypes.Physical:
+                armorResist = localTarget.armor;
+                break;
+            case DamageTypes.Magical:
+                armorResist = localTarget.resist;
+                break;
+            case DamageTypes.True:
+                armorResist = 0;
+                break;
+            default:
+                Debug.LogError("Missing damage type!");
+                break;
+        }
 
         for (var i = 0; i < numberOfAttacks; i++) {
-            switch (battleAction.actionType) {
-                case BattleActionType.Physical:
-                    defensePower = selectedTarget.defense;
-                    armorResist = selectedTarget.armor;
-                break;
-
-                case BattleActionType.Magical:
-                    defensePower = selectedTarget.magic;
-                    armorResist = selectedTarget.resist;
-                break;
-                
-                case BattleActionType.Healing:
-                    defensePower = 1;
-                break;
-
-                default:
-                Debug.LogError("Reached an invalid Battle Action Type.");
-                break;
+            if (action.isWeaponAttack) {
+                var weapon = combatant.mainHand as Weapon;
+                action.minimumPotency = weapon.minimumDamage;
+                action.maximumPotency = weapon.maximumDamage;
+                hitPower += combatant.mainHand.attackBonus - (combatant.isDualWielding ? 6 : 0);
             }
-            damageToDeal = Random.Range(battleAction.minDamage, battleAction.maxDamage);
+
+            damageToDeal = Random.Range(action.minimumPotency, action.maximumPotency);
 
             var db = " base dmg " + damageToDeal;
 
-            damageToDeal = Mathf.Clamp(damageToDeal - armorResist, 0, damageToDeal - armorResist);
             var attackRoll = Random.Range(1, 20);
-            var hit = attackRoll + attackPower - defensePower;
 
-            var debugString = currentTurn.name + " rolls " + attackRoll + " + " + attackPower + " - " + defensePower + " = " + hit;
+            var hit = attackRoll + hitPower - avoidPower;
+
+            var debugString = combatant.name + " rolls " + attackRoll + " + " + hitPower + " - " + avoidPower + " = " + hit;
 
             if (hit < 4) { // miss
                 damageToDeal = 0;
@@ -571,7 +629,7 @@ public class BattleManager : MonoBehaviour {
                 debugString += " Graze!";
                 isGraze = true;
                 AudioManager.instance.PlaySfx("swing");
-            } else if (hit < 22) { // hit
+            } else if (hit < 20) { // hit
                 damageToDeal *= 1;
                 debugString += " Hit!";
                 AudioManager.instance.PlaySfx("impact_a");
@@ -583,61 +641,67 @@ public class BattleManager : MonoBehaviour {
                 AudioManager.instance.PlaySfx("impact_b");
             }
 
-            Mathf.Clamp(damageToDeal, damageToDeal - armorResist, 0);
+            damageToDeal = Mathf.Clamp(damageToDeal - armorResist, 0, damageToDeal - armorResist);
 
             db += " modified dmg " + damageToDeal + " resist: " + armorResist;
 
-            if (selectedTarget.deflection > 0) {
-                if (selectedTarget.deflection > damageToDeal) {
-                    selectedTarget.deflection -= damageToDeal;
-                } else {
-                    damageToDeal -= selectedTarget.deflection;
-                    selectedTarget.deflection = 0;
-                    selectedTarget.hp.current -= damageToDeal;
-                }
-            } else {
-                selectedTarget.hp.current -= battleAction.actionType != BattleActionType.Healing ? damageToDeal : damageToDeal * -1;
-            }
-
-            debugString += " " + battleAction.name + " deals " + damageToDeal + " dmg to "
-                + selectedTarget.name + " [HP: " + selectedTarget.hp.current + "/" + selectedTarget.hp.totalMax + "]" + db;
+            debugString += " deals " + damageToDeal + " dmg to "
+                + localTarget.name + " [HP: " + localTarget.hp.current + "/" + localTarget.hp.maximum + "]" + db;
 
             Debug.Log(debugString);
-            var position = Camera.main.WorldToScreenPoint(selectedTarget.transform.position + new Vector3(0f, .5f, 0f));
-            Instantiate(damageNumber, position, selectedTarget.transform.rotation, canvas.transform)
+            var position = Camera.main.WorldToScreenPoint(localTarget.transform.position + new Vector3(0f, .5f, 0f));
+            Instantiate(damageNumber, position, localTarget.transform.rotation, canvas.transform)
                 .SetDamage(damageToDeal, isCrit, isGraze, isMiss, isPlayer);
+
+            if (localTarget.deflect > 0) {
+                if (localTarget.deflect > damageToDeal) {
+                    localTarget.deflect -= damageToDeal;
+                } else {
+                    damageToDeal -= localTarget.deflect;
+                    localTarget.deflect = 0;
+                    localTarget.hp.Decerease(damageToDeal);
+                }
+            } else {
+                localTarget.hp.Decerease(damageToDeal);
+            }
+            UpdateEnemyStatWindows();
+            UpdateUiStats();
         }
-        UpdateBattle();
-        UpdateUiStats();
     }
 
     public void UpdateUiStats() {
+        for(var i = 0; i < combatants.Count; i++) {
+            foreach(var se in combatants[i].statusEffects) {
+                if (se.name == "Taunt") {
+                    combatants[i].isTaunting = true;
+                    tauntingCursors[i].SetActive(true);
+                }
+            }
+        }
+
+        var heroes = combatants.Where(c => c.isPlayer).ToList();
+        var gameHeroes = GameManager.instance.heroes;
+        foreach (var hero in heroes) {
+            foreach (var gameHero in gameHeroes) {
+                if (hero.id == gameHero.id) {
+                    gameHero.deflect = hero.deflect;
+                    gameHero.hp.current = hero.hp.current;
+                    gameHero.mp.current = hero.mp.current;
+                    break;
+                }
+            }
+        }
         GameMenu.instance.UpdateStats();
     }
 
     public void HeroAction(string actionName) {
-        var combatant = combatants[currentTurnId];
-        var repoAction = BattleActionRepo.instance.GetActionByName(actionName);
-        var action = ScriptableObject.CreateInstance<BattleAction>();
+        var abilityRef = BattleActionRepo.instance.GetAbilityByName(actionName);
+        var ability = Instantiate(abilityRef);
 
-        action.name = repoAction.name;
-        action.actionType = repoAction.actionType;
-        action.attackPower = repoAction.attackPower;
-        action.delay = repoAction.delay;
-        action.description = repoAction.description;
-        action.isCharge = repoAction.isCharge;
-        action.maxDamage = repoAction.maxDamage;
-        action.minDamage = repoAction.minDamage;
-        action.mpCost = repoAction.mpCost;
-        action.sprite = repoAction.sprite;
-        action.statusEffects = repoAction.statusEffects;
-        action.visualFx = repoAction.visualFx;
-        
         if (combatant.isCharging) {
-            battleMenu.SetActive(false);
-            action.delay = 0;
+            ability.delay = 0;
         } else {
-            if (combatant.mp.current < action.mpCost) {
+            if (combatant.mp.current < ability.mpCost) {
                 AudioManager.instance.PlaySfx("error");
                 Debug.Log("Not enough MP!");
                 return;
@@ -647,116 +711,138 @@ public class BattleManager : MonoBehaviour {
         skillsMenu.SetActive(false);
         Debug.Log("Action used: " + actionName);
 
-        StartCoroutine(HeroActionCoroutine(action));
+        StartCoroutine(HeroActionCoroutine(ability));
     }
     
-    public IEnumerator<WaitForSeconds> HeroActionCoroutine(BattleAction action) {
-        var combatant = combatants[currentTurnId];
-        if (action.isCharge) {
+    public IEnumerator<WaitForSeconds> HeroActionCoroutine(Ability ability) {
+        if (ability.chargeType == ChargeTypes.Charge) {
             if (!combatant.isCharging) {
                 combatant.isCharging = true;
                 AudioManager.instance.PlaySfx("special_a");
-                combatant.chargedActionName = action.name;
-                combatant.chargedTarget = targetedEnemyId;
-                chargingCursors[currentTurnId].SetActive(true);
-                CalculateSpeedTicks(combatant, action.delay);
-                GameMenu.instance.heroStatPanels[currentTurnId].currentTurnCursor.gameObject.SetActive(false);
-                currentTurnCursors[currentTurnId].SetActive(false);
+                combatant.chargedActionName = ability.name;
+                combatant.chargedTarget = targetId;
+                chargingCursors[combatantId].SetActive(true);
+                CalculateSpeedTicks(combatant, ability.delay);
+                GameMenu.instance.heroStatPanels[combatantId].currentTurnCursor.gameObject.SetActive(false);
+                currentTurnCursors[combatantId].SetActive(false);
                 yield return new WaitForSeconds(turnDelay);
                 NextTurn();
                 yield break;
             } else {
-                combatant.isCharging = false;
-                chargingCursors[currentTurnId].SetActive(false);
-                var position = Camera.main.WorldToScreenPoint(combatants[currentTurnId].transform.position + new Vector3(0,.8f, 0f));
-                Instantiate(battleActionDisplay, position, combatants[currentTurnId].transform.rotation, canvas.transform).SetText(action.name);
+                targetId = combatant.chargedTarget;
+                target = combatants[targetId];
+                CheckIfEnemyTargetIsDead();
+                chargingCursors[combatantId].SetActive(false);
+                var position = Camera.main.WorldToScreenPoint(combatant.transform.position + new Vector3(0,.8f, 0f));
+                Instantiate(battleActionDisplay, position, combatant.transform.rotation, canvas.transform).SetText(ability.name);
                 yield return new WaitForSeconds(turnDelay * 2);
             }
         }
+        
+        combatant.mp.current -= ability.mpCost;
+        UpdateUiStats();
+
         var hits = 1;
-        var selectedTarget = combatants[targetedEnemyId];
-        actionTooltip.description.text = string.Empty;
 
         // animation
         StartCoroutine(FlashSprite(combatant.spriteRenderer, Color.black));
 
-        var mainHand = combatant.mainHand as Weapon;
-        var offHand = ScriptableObject.CreateInstance<Weapon>();
-
-        if (combatant.dualWielding) {
-            offHand = combatant.offHand as Weapon;
-        }
-
-        if (action.visualFx != null) {
-            Instantiate(action.visualFx, selectedTarget.transform.position, selectedTarget.transform.rotation);
-        }
-
-        
-        if (action.name == "Taunt") {
-            AudioManager.instance.PlaySfx("rebound");
-            combatants[currentTurnId].isTaunting = true;
-            BattleActionRepo.instance.ApplyStatusEffectToSelf("Taunt", 2);
-            tauntingCursors[currentTurnId].SetActive(true);
-        } else if (action.name == "Meditate") {
-            AudioManager.instance.PlaySfx("rebound");
-            Debug.Log("MP increased by" + (int)(float)combatants[currentTurnId].mp.missing * .1f);
-            combatants[currentTurnId].mp.Increase((int)((float)combatants[currentTurnId].mp.missing * .1f));
-            UpdateUiStats();
-        } else if (action.name == "Fireball") {
-            AudioManager.instance.PlaySfx("fire_c");
-            action.attackPower = combatant.magic;
-            DealDamage(targetedEnemyId, action, true);
-
-        } else if (action.name == "Attack") {
-            action.attackPower = combatant.attack + mainHand.attackBonus - (combatant.dualWielding ? 6 : 0);
-            action.minDamage = mainHand.minimumDamage;
-            action.maxDamage = mainHand.maximumDamage;
-            action.delay = mainHand.delay;
-
-            // mainhand attack
-            for (var i = 0; i < hits; i++) {
-                DealDamage(targetedEnemyId, action, true);
+        // loop through actions
+        foreach(var action in ability.actions) {
+            if (action.visualFx != null) {
+                Instantiate(action.visualFx, target.transform.position, target.transform.rotation);
             }
 
-            if (combatant.dualWielding) {
-                yield return new WaitForSeconds(turnDelay);
+            if (action.isWeaponAttack) {
+                var mainHand = combatant.mainHand as Weapon;
+                var offHand = ScriptableObject.CreateInstance<Weapon>();
 
-                action = ScriptableObject.CreateInstance<BattleAction>();
-                action.name = "Attack";
-                action.actionType = BattleActionType.Physical;
-                action.attackPower = combatant.attack + offHand.attackBonus - (combatant.dualWielding ? 10 : 0);
-                action.minDamage = offHand.minimumDamage;
-                action.maxDamage = offHand.maximumDamage;
-                action.delay = (mainHand.delay + offHand.delay) / 2f;
-
+                if (combatant.isDualWielding) {
+                    offHand = combatant.offHand as Weapon;
+                }
+                // Main Hand
+                action.hitType = mainHand.hitType;
+                action.avoidType = mainHand.avoidType;
+                action.hitModifier = combatant.isDualWielding ? mainHand.baseAttack - 6 : mainHand.baseAttack;
+                action.minimumPotency = mainHand.minimumDamage;
+                action.maximumPotency = mainHand.maximumDamage;
                 for (var i = 0; i < hits; i++) {
-                    DealDamage(targetedEnemyId, action, true);
+                    DealDamage(action, true);
+                }
+
+                if (combatant.isDualWielding) {
+                    yield return new WaitForSeconds(turnDelay);
+                    ability.delay = (mainHand.delay + offHand.delay) / 2;
+
+                    action.hitType = offHand.hitType;
+                    action.avoidType = offHand.avoidType;
+                    action.hitModifier = combatant.isDualWielding ? offHand.baseAttack - 10 : offHand.baseAttack;
+                    action.minimumPotency = offHand.minimumDamage;
+                    action.maximumPotency = offHand.maximumDamage;
+                    for (var i = 0; i < hits; i++) {
+                        DealDamage(action, true);
+                    }
+
+                } else {    // Main Hand Only
+                    ability.delay = mainHand.delay;
+                }
+            }
+
+            foreach(var se in action.statusEffects) {
+                if (action.targetType == TargetTypes.Self) {
+                    combatant.statusEffects.Add(se);
+                } else {
+                    target.statusEffects.Add(se);
+                }
+            }
+
+            if (action.isEffectOnly) {
+                if (action.hitType == StatTypes.Mp) {
+                    Debug.Log("MP increased by " + (int)((float)combatant.mp.missing * action.potencyModifier));
+                    combatant.mp.Increase((int)((float)combatant.mp.missing * action.potencyModifier));
+                }
+            } else {
+                if (!action.isWeaponAttack) {
+                    DealDamage(action, true);
                 }
             }
         }
 
-        combatant.mp.current -= action.mpCost;
-
         // temporary
         if (combatant.tp < 3) {
-            combatant.tp++;
-            tpSpriteRenderers[currentTurnId].gameObject.SetActive(true);
+            if(combatant.tpChance < combatant.tpChanceBase) {
+                combatant.tpChance = combatant.tpChanceBase;
+            }
+            var roll = Random.Range(0f, 1f);
+            Debug.Log("TP Chance: " + combatant.tpChance * 100 + "% Roll: " + roll*100);
+            if(roll < combatant.tpChance) {
+                combatant.tpChance = combatant.tpChanceBase;
+                combatant.tp++;
+                tpSpriteRenderers[combatantId].gameObject.SetActive(true);
+            } else {
+                combatant.tpChance = Mathf.Clamp(combatant.tpChance + .15f, 0f, 1f);
+            }
         }
 
         if (combatant.tp == 1) {
-            tpSpriteRenderers[currentTurnId].sprite = tp1Sprite;
+            tpSpriteRenderers[combatantId].sprite = tp1Sprite;
         } else if (combatant.tp == 2) {
-            tpSpriteRenderers[currentTurnId].sprite = tp2Sprite;
+            tpSpriteRenderers[combatantId].sprite = tp2Sprite;
         } else if (combatant.tp == 3) {
-            tpSpriteRenderers[currentTurnId].sprite = tp3Sprite;
+            tpSpriteRenderers[combatantId].sprite = tp3Sprite;
         } else if (combatant.tp == 0) {
-            tpSpriteRenderers[currentTurnId].gameObject.SetActive(false);
+            tpSpriteRenderers[combatantId].gameObject.SetActive(false);
         }
 
         yield return new WaitForSeconds(turnDelay);
-        CalculateSpeedTicks(combatant, action.delay);
-        GameMenu.instance.heroStatPanels[currentTurnId].currentTurnCursor.gameObject.SetActive(false);
-        currentTurnCursors[currentTurnId].SetActive(false);
+        CalculateSpeedTicks(combatant, ability.delay);
+        GameMenu.instance.heroStatPanels[combatantId].currentTurnCursor.gameObject.SetActive(false);
+        currentTurnCursors[combatantId].SetActive(false);
+
+        if (combatant.isCharging) {
+            combatant.isCharging = false;
+            enemyTargetCursors[combatant.chargedTarget - heroPartySizeOffset].SetActive(false);
+        }
         NextTurn();
     }
 
@@ -769,16 +855,17 @@ public class BattleManager : MonoBehaviour {
     public void SetTargetedEnemyId(int id) {
         if (combatants[id].isDead) return;
 
-        enemyTargetCursors[targetedEnemyId - heroPartySizeOffset].SetActive(false);
-        enemyStatWindows[targetedEnemyId - heroPartySizeOffset].targetBox.gameObject.SetActive(false);
+        enemyTargetCursors[targetId - heroPartySizeOffset].SetActive(false);
+        enemyStatWindows[targetId - heroPartySizeOffset].targetBox.gameObject.SetActive(false);
         enemyTargetCursors[id - heroPartySizeOffset].SetActive(true);
         enemyStatWindows[id - heroPartySizeOffset].targetBox.gameObject.SetActive(true);
-        targetedEnemyId = id;
+        targetId = id;
+        target = combatants[targetId];
     }
 
     public void ClearEnemyTarget() {
-        enemyTargetCursors[targetedEnemyId - heroPartySizeOffset].SetActive(false);
-        enemyStatWindows[targetedEnemyId - heroPartySizeOffset].targetBox.gameObject.SetActive(false);
+        enemyTargetCursors[targetId - heroPartySizeOffset].SetActive(false);
+        enemyStatWindows[targetId - heroPartySizeOffset].targetBox.gameObject.SetActive(false);
     }
 
     public void PlayClickSound() {
@@ -813,7 +900,7 @@ public class BattleManager : MonoBehaviour {
                 enemyStatWindows[i].gameObject.SetActive(false);
             }
         }
-        targetedEnemyId = 4;
+        targetId = 4;
         SetTargetedEnemyId(4);
     }
 
@@ -824,7 +911,7 @@ public class BattleManager : MonoBehaviour {
         // magicMenu.SetActive(true);
         battleMenuDisabled.SetActive(true);
 
-        var magicNames = combatants[currentTurnId].skills;
+        var magicNames = combatant.abilities;
 
         for (var i = 0; i < magicButtons.Length; i++) {
             if (i >= magicNames.Length) {
@@ -881,23 +968,39 @@ public class BattleManager : MonoBehaviour {
     }
     
     public IEnumerator<WaitForSeconds> EndBattleCoroutine() {
-        battleActive = false;
+        GameMenu.instance.heroStatPanels[combatantId].currentTurnCursor.gameObject.SetActive(false);
+        currentTurnCursors[combatantId].SetActive(false);battleActive = false;
+        ClearAllCursors();
+        ClearEnemyTarget();
+        enemyWindows.SetActive(false);
         battleMenu.SetActive(false);
         AudioManager.instance.PlayBgm("victory");
 
-        yield return new WaitForSeconds(1.5f);
+        yield return new WaitForSeconds(1.25f);
 
-        UIFade.instance.FadeToBlack();
+        UIFade.instance.FadeOut();
+
+        yield return new WaitForSeconds(.5f);
+
+        UIFade.instance.Collapse();
+        battleScene.SetActive(false);
         canvas.gameObject.SetActive(false);
 
-        yield return new WaitForSeconds(1.5f);
+        PlayerController.instance.GetComponent<SpriteRenderer>().enabled = true;
+        foreach(var member in PlayerController.instance.partyMembers) {
+            member.GetComponent<SpriteRenderer>().enabled = true;
+        }
+
+        yield return new WaitForSeconds(1.25f);
 
         for (var i = 0; i < combatants.Count; i++) {
             if (combatants[i].isPlayer) {
                 for (var j = 0; j < GameManager.instance.heroes.Length; j++) {
-                    if (combatants[i].name == GameManager.instance.heroes[j].name) {
+                    if (combatants[i].id == GameManager.instance.heroes[j].id) {
                         GameManager.instance.heroes[j].hp.current = combatants[i].hp.current;
                         GameManager.instance.heroes[j].mp.current = combatants[i].mp.current;
+                        GameManager.instance.heroes[j].deflect = 0;
+                        GameManager.instance.heroes[j].barrier = 0;
                         break;
                     }
                 }
@@ -906,11 +1009,10 @@ public class BattleManager : MonoBehaviour {
             Destroy(combatants[i].gameObject);
         }
 
-        UIFade.instance.FadeFromBlack();
-        battleScene.SetActive(false);
-        enemyWindows.SetActive(false);
+        
         combatants.Clear();
-        currentTurnId = 0;
+        combatantId = 0;
+        
         if (fleeing) {
             fleeing = false;
             GameManager.instance.battleActive = false;
@@ -922,11 +1024,15 @@ public class BattleManager : MonoBehaviour {
     }
 
     public IEnumerator<WaitForSeconds> GameOverCoroutine() {
+        GameMenu.instance.heroStatPanels[combatantId].currentTurnCursor.gameObject.SetActive(false);
+        currentTurnCursors[combatantId].SetActive(false);battleActive = false;
+        ClearAllCursors();
+        ClearEnemyTarget();
         battleNotification.text.text = "Game Over!";
         battleNotification.Activate();
         battleActive = false;
         yield return new WaitForSeconds(2f);
-        UIFade.instance.FadeToBlack();
+        UIFade.instance.Expand();
         yield return new WaitForSeconds(.5f);
         battleScene.SetActive(false);
         enemyWindows.SetActive(false);
@@ -940,7 +1046,7 @@ public class BattleManager : MonoBehaviour {
         battleMenuDisabled.SetActive(false);
     }
 
-    public BattleAction GetBattleAction (string name) {
+    public Ability GetBattleAction (string name) {
         for (var i = 0; i < battleActions.Length; i++) {
             if (battleActions[i].name == name) {
                 return battleActions[i];
@@ -1002,7 +1108,7 @@ public class BattleManagerEditor : Editor {
                     player.defense = 500;
                 }
             }
-            manager.UpdateBattle();
+            manager.CheckForBattleEnd();
         }
         if (GUILayout.Button("Next turn.")) {
             manager.NextTurn();

@@ -21,7 +21,7 @@ MonoBehaviour:
   quantity: 1
   equipmentType: 1
   hpBonus: 0
-  mpBonus: 0
+  mpBonus: 4
   attackBonus: 0
   defenseBonus: 0
   magicBonus: 1

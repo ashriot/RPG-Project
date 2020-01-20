@@ -3,6 +3,7 @@ using UnityEngine;
 
 public abstract class Unit : MonoBehaviour {
 
+    public string id;
     public new string name;
     public string className;
     public Animator unitAnimator;
@@ -21,6 +22,7 @@ public abstract class Unit : MonoBehaviour {
     public Resource hp;
     public Resource mp;
     public Resource constitution;
+    public int deflect, barrier;
 
     public Stat attack, defense, magic, speed, armor, resist, critPower;
     

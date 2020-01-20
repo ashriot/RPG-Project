@@ -13,14 +13,26 @@ MonoBehaviour:
   m_Name: Meditate
   m_EditorClassIdentifier: 
   name: Meditate
+  description: Meditate\nThe user regains MP equal to 20% of their missing MP.
   sprite: {fileID: -6908666714487797074, guid: 8c500e45b904a74468ea62831fc2b0dc, type: 3}
-  description: Meditate\nThe user regains MP equal to 10% of their missing MP.
-  actionType: 0
-  attackPower: 0
-  minDamage: 0
-  maxDamage: 0
   mpCost: 0
-  isCharge: 1
-  delay: 1.25
-  visualFx: {fileID: 0}
-  statusEffects: []
+  tpCost: 0
+  chargeType: 1
+  delay: 0.75
+  actions:
+  - hitType: 1
+    avoidType: 1
+    hitModifier: 0
+    avoidModifier: 0
+    potencyModifier: 0.2
+    minimumPotency: 0
+    maximumPotency: 0
+    isWeaponAttack: 0
+    isEffectOnly: 1
+    targetType: 0
+    splashType: 0
+    splashModifier: 0
+    visualFx: {fileID: 5687904313256788930, guid: 7e7a887159a664146bddf764beff94f4,
+      type: 3}
+    statusEffects: []
+  notes: 

@@ -1,4 +1,5 @@
 ﻿using System.Collections;
+using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.Tilemaps;
@@ -8,7 +9,8 @@ public class PlayerController : MonoBehaviour {
     public static PlayerController instance;
 
     public Animator animator;
-    public GameObject[] partyMembers;
+    public List<GameObject> partyMembers;
+    public Vector2[] endTiles;
     public EventNotification note;
     public Tilemap groundTilemap;
     public Tilemap obstaclesTilemap;
@@ -23,7 +25,7 @@ public class PlayerController : MonoBehaviour {
 
     private int goldKeyCount;
     private float moveTime = .2f;
-    private const float COOLDOWN = .5f;
+    private const float COOLDOWN = .3f;
     private Vector3 bottomLeftLimit;
     private Vector3 topRightLimit;
 
@@ -53,6 +55,17 @@ public class PlayerController : MonoBehaviour {
 
     void Start() {
         goldKeyCount = GameManager.instance.currentGoldKeys;
+
+        for(var i = 0; i < GameManager.instance.heroes.Length; i++) {
+            var hero = GameManager.instance.heroes[i];
+            if (i == 0) { // party leader
+                hero.GetComponent<SpriteRenderer>().enabled = false;
+                continue;
+            }
+            partyMembers.Add(hero.gameObject);
+            hero.gameObject.transform.position = this.gameObject.transform.position;
+        }
+
         foreach(var member in partyMembers) {
             member.GetComponent<SpriteRenderer>().sortingLayerName = "Player";
         }
@@ -148,9 +161,8 @@ public class PlayerController : MonoBehaviour {
         }
 	}
 
-    private void Move(int xDir, int yDir) {
+    private void Move(int xDir, int yDir, float cooldown = COOLDOWN) {
         if (isMoving || onCooldown || onExit || uiOpen || inBattle ) return;
-        var cd = COOLDOWN;
         Vector2 startTile = transform.position;
         Vector2 endTile = startTile + new Vector2(xDir, yDir);
         // Debug.Log(startTile + " " + endTile);
@@ -163,33 +175,39 @@ public class PlayerController : MonoBehaviour {
         if (isOnGround) {
             //If the front tile is a walkable ground tile, the player moves here.
             if (hasGroundTile && !hasObstacleTile) {
-                if ( CollisionCheck(endTile) ){
-                    cd /= 2;
+                if (CollisionCheck(endTile)){
+                    cooldown *= .66f;
                     PlayGrassSound();
+
+                    endTiles[0] = startTile;
+                    for (var i = 1; i < partyMembers.Count; i++) {
+                        endTiles[i] = (partyMembers[i-1].transform.position);
+                    }
+
+                    isMoving = true;
                     StartCoroutine(SmoothMovement(this.gameObject, endTile));
     
-                    endTile = startTile;
-                    var prevStartTile = new Vector3();
-                    for (var i = 0; i < partyMembers.Length; i++) {
-                        prevStartTile = new Vector3(partyMembers[i].transform.position.x, partyMembers[i].transform.position.y, 0f);
-                        StartCoroutine(SmoothMovement(partyMembers[i], endTile));
-                        endTile = prevStartTile;
+                    // endTile = startTile;
+                    // var prevStartTile = new Vector3();
+                    for (var i = 0; i < partyMembers.Count; i++) {
+                        // prevStartTile = new Vector3(partyMembers[i].transform.position.x, partyMembers[i].transform.position.y, 0f);
+                        StartCoroutine(SmoothMovement(partyMembers[i], endTiles[i]));
+                        // endTile = prevStartTile;
                     }
                 }
-                else
+                else {
                     StartCoroutine(BlockedMovement(endTile));
+                }
+            } else {
+                if (!isMoving) {
+                    StartCoroutine(BlockedMovement(endTile));
+                }
             }
         }
-
-        if (!isMoving) {
-            StartCoroutine(BlockedMovement(endTile));
-        }
-        // StartCoroutine(ActionCooldown(cd));
+        StartCoroutine(ActionCooldown(cooldown));
     }
 
     private IEnumerator SmoothMovement(GameObject unit, Vector3 endTile) {
-        isMoving = true;
-        
         var horizontal = Mathf.RoundToInt(endTile.x - unit.transform.position.x);
         var vertical = Mathf.RoundToInt(endTile.y - unit.transform.position.y);
 
@@ -220,7 +238,7 @@ public class PlayerController : MonoBehaviour {
 
         end = transform.position + ((end - transform.position) / 5);
         float sqrRemainingDistance = (transform.position - end).sqrMagnitude;
-        float inverseMoveTime = (1 / (moveTime * 3) );
+        float inverseMoveTime = (1 / (moveTime * 3f) );
 
         while (sqrRemainingDistance > float.Epsilon) {
             Vector3 newPosition = Vector3.MoveTowards(transform.position, end, inverseMoveTime * Time.deltaTime);
@@ -300,7 +318,6 @@ public class PlayerController : MonoBehaviour {
             cooldown -= Time.deltaTime;
             yield return null;
         }
-        isTransitioning = false;
         onCooldown = false;
     }
 
@@ -409,21 +426,6 @@ public class PlayerController : MonoBehaviour {
             //Invoke("NextLevel", 1f);
             //enabled = false;
         }
-        // else if ( coll.tag == "Wood")
-        // {
-        //     //Debug.Log("You picked up wood ! You have " + woodCount + "piece of woods.");
-        //     coll.gameObject.SetActive(false);
-
-        //     if (AudioManager.instance != null)
-        //         AudioManager.instance.Find("woodpickup").source.Play();
-        // }
-        // else if ( coll.tag == "Passage" )
-        // {
-        //     //Debug.Log("Teleport!");
-        //     //StartCoroutine(Teleport(passage, 0.2f));
-        //     StartCoroutine(passage.Teleport(this, 0.2f));
-        //     //StartCoroutine(actionCooldown(0.4f));
-        // }
         else if ( other.tag == "Key" ) {
             Debug.Log("Key picked up!");
             GameMenu.instance.LootNotification("othrGoldKey");
@@ -507,7 +509,7 @@ public class PlayerController : MonoBehaviour {
             yield return new WaitForEndOfFrame();
         }
         yield return new WaitForEndOfFrame();
-        Move(xDir, yDir);
-        StartCoroutine(ActionCooldown(COOLDOWN/2));
+        Move(xDir, yDir, .35f);
+        isTransitioning = false;
     }
 }

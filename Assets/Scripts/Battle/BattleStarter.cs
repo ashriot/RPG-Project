@@ -65,17 +65,16 @@ public class BattleStarter : MonoBehaviour {
         yield return new WaitForSeconds(.5f);
         UIFade.instance.FlashScreen(2);
         yield return new WaitForSeconds(.25f);
-        UIFade.instance.FadeToBlack();
+        UIFade.instance.Expand();
 
         var selectedBattleId = Random.Range(0, potentialBattles.Length);
 
         BattleManager.instance.itemsReceived = potentialBattles[selectedBattleId].itemRewards;
-        BattleManager.instance.xpEarned = potentialBattles[selectedBattleId].xpReward;
 
         yield return new WaitForSeconds(.5f);
 
         BattleManager.instance.BattleStart(potentialBattles[selectedBattleId].enemies, cannotFlee);
-        UIFade.instance.FadeFromBlack();
+        UIFade.instance.FadeIn();
 
         if (deactivateAfterBattle) {
             gameObject.SetActive(false);

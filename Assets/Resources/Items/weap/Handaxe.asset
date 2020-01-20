@@ -33,3 +33,7 @@ MonoBehaviour:
   minimumDamage: 8
   maximumDamage: 12
   delay: 1.25
+  hitType: 4
+  avoidType: 5
+  weaponTechniqueName: 
+  weaponTechniqueRank: 0

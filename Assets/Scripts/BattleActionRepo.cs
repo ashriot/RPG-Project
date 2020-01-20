@@ -15,14 +15,26 @@ public class BattleActionRepo : MonoBehaviour {
         DontDestroyOnLoad(gameObject);
     }
 
-    public BattleAction GetActionByName(string name) {
-        var action = Instantiate(Resources.Load<BattleAction>("Actions/" + name));
+    public Ability GetAbilityByName(string name) {
+        var action = Instantiate(Resources.Load<Ability>("Abilities/" + name));
 
         if (action != null) {
             return action;
         }
 
         Debug.LogError("Couldn't find battle action '" + name +"'!");
+        return null;
+    }
+
+    public StatusEffect CreateStatusEffectWithDuration(string name, int duration) {
+        var effect = Instantiate(Resources.Load<StatusEffect>("Effects/" + name));
+     
+        if (effect != null) {
+            effect.duration = duration;
+            return effect;
+        }
+
+        Debug.LogError("Couldn't find status effect '" + name +"'!");
         return null;
     }
 
@@ -38,7 +50,7 @@ public class BattleActionRepo : MonoBehaviour {
     }
 
     public void ApplyStatusEffectToSelf(string name, int duration) {
-        var currentTurnId = BattleManager.instance.currentTurnId;
+        var currentTurnId = BattleManager.instance.combatantId;
         var statusEffect = GetStatusEffectByName(name);
         statusEffect.duration = duration;
         BattleManager.instance.combatants[currentTurnId].statusEffects.Add(statusEffect);

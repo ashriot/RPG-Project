@@ -6,6 +6,7 @@ public class EnemyStatWindow : MonoBehaviour {
     public Image portrait;
     public Animator animator;
     public Image hpSlider;
+    public Image tempHpSlider;
     public Image mpSlider;
     public Image targetBox;
     public int targetId;

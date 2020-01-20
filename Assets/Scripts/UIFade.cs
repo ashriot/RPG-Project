@@ -12,8 +12,10 @@ public class UIFade : MonoBehaviour {
     
     private bool flashing;
     private int flashTimes;
-    private bool shouldFadeToBlack;
-    private bool shouldFadeFromBlack;
+    private bool shouldExpand;
+    private bool shouldFadeIn;
+    private bool shouldFadeOut;
+    private bool shouldCollapse;
 
     // Start is called before the first frame update
     void Start() {
@@ -24,22 +26,43 @@ public class UIFade : MonoBehaviour {
 
     // Update is called once per frame
     void Update() {
-        if (shouldFadeToBlack) {
+        if (shouldExpand) {
             var yScale = Mathf.MoveTowards(fadeScreen.rectTransform.localScale.y, 1f, fadeSpeed * Time.deltaTime);
 
             fadeScreen.rectTransform.localScale = new Vector3(1f, yScale, 1f);
 
             if (fadeScreen.rectTransform.localScale.y == 1f) {
-                shouldFadeToBlack = false;
+                shouldExpand = false;
             }
         }
 
-        if (shouldFadeFromBlack) {
+        if (shouldFadeIn) {
             fadeScreen.color = new Color(fadeScreen.color.r, fadeScreen.color.g, fadeScreen.color.b,
                 Mathf.MoveTowards(fadeScreen.color.a, 0f, fadeSpeed * Time.deltaTime));
             
-            if (fadeScreen.color.a == 0) {
-                shouldFadeFromBlack = false;
+            if (fadeScreen.color.a == 0f) {
+                shouldFadeIn = false;
+                fadeScreen.gameObject.SetActive(false);
+                fullScreen.gameObject.SetActive(false);
+            }
+        }
+
+        if (shouldFadeOut) {
+            fadeScreen.color = new Color(fadeScreen.color.r, fadeScreen.color.g, fadeScreen.color.b,
+                Mathf.MoveTowards(fadeScreen.color.a, 1f, fadeSpeed * Time.deltaTime));
+            
+            if (fadeScreen.color.a == 1f) {
+                shouldFadeOut = false;
+            }
+        }
+
+        if (shouldCollapse) {
+            var yScale = Mathf.MoveTowards(fadeScreen.rectTransform.localScale.y, 0f, fadeSpeed * Time.deltaTime);
+
+            fadeScreen.rectTransform.localScale = new Vector3(1f, yScale, 1f);
+
+            if (fadeScreen.rectTransform.localScale.y == 0f) {
+                shouldCollapse = false;
                 fadeScreen.gameObject.SetActive(false);
                 fullScreen.gameObject.SetActive(false);
             }
@@ -73,15 +96,27 @@ public class UIFade : MonoBehaviour {
         fullScreen.FlashWhite(times, .5f);
     }
 
-    public void FadeToBlack() {
+    public void Expand() {
         fadeScreen.gameObject.SetActive(true);
         fadeScreen.rectTransform.localScale = new Vector3(1f, 0f, 1f);
-        shouldFadeToBlack = true;
-        shouldFadeFromBlack = false;
+        shouldExpand = true;
+        shouldFadeIn = false;
     }
 
-    public void FadeFromBlack() {
-        shouldFadeToBlack = false;
-        shouldFadeFromBlack = true;
+    public void FadeIn() {
+        shouldExpand = false;
+        shouldFadeIn = true;
+    }
+
+    public void FadeOut() {
+        fadeScreen.gameObject.SetActive(true);
+        fadeScreen.color = Color.clear;
+        fadeScreen.rectTransform.localScale = new Vector3(1f, 1f, 1f);
+        shouldFadeOut = true;
+    }
+
+    public void Collapse() {
+        fadeScreen.gameObject.SetActive(true);
+        shouldCollapse = true;
     }
 }

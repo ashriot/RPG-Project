@@ -4,21 +4,21 @@
 public class Stat {
     
     public int baseValue;
-    public int totalBonus;
-    public int value { get => baseValue + totalBonus; }
+    public int bonus;
+    public int value { get => baseValue + bonus; }
 
     public void IncreaseBaseValue(int amount) {
         baseValue += amount;
     }
 
     public void IncreaseBonus(int amount) {
-        totalBonus += amount;
+        bonus += amount;
     }
 
     public void DecreaseBonus(int amount) {
-        totalBonus -= amount;
+        bonus -= amount;
 
-        if (totalBonus < 0) {
+        if (bonus < 0) {
             Debug.LogError("Bonus went negative!");
         }
     }

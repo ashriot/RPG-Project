@@ -290,7 +290,6 @@ GameObject:
   - component: {fileID: 3482397129116855465}
   - component: {fileID: 8163021016736879952}
   - component: {fileID: 6050508463971367767}
-  - component: {fileID: 3160966542816504876}
   - component: {fileID: 2843240769602836108}
   m_Layer: 5
   m_Name: Attack
@@ -356,21 +355,6 @@ MonoBehaviour:
   m_FillOrigin: 0
   m_UseSpriteMesh: 0
   m_PixelsPerUnitMultiplier: 1
---- !u!114 &3160966542816504876
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 449809264851331308}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 0e29aa0c11df0574b9e890ad598ab1ff, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  nameText: {fileID: 1329338981482689610}
-  description: 
-  image: {fileID: 1646210928658985702}
 --- !u!114 &2843240769602836108
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -386,8 +370,8 @@ MonoBehaviour:
   onClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 3160966542816504876}
-        m_MethodName: Press
+      - m_Target: {fileID: 7518430370341941196}
+        m_MethodName: ClickAttackButton
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -7777,14 +7761,17 @@ MonoBehaviour:
   - {fileID: 2715583478003315345}
   - {fileID: 5921544672709627006}
   potentialTurnOrder: 
-  currentTurnId: 0
-  targetedEnemyId: 0
+  combatantId: 0
+  targetId: 0
+  combatant: {fileID: 0}
+  target: {fileID: 0}
+  enemyTarget: {fileID: 0}
   battleWaiting: 0
   waitingForInput: 0
   turnDelay: 0.35
   chanceToFlee: 0.35
   cannotFlee: 0
-  xpEarned: 5000
+  xpEarned: 0
   itemsReceived:
   - Wooden Sword
   - Iron Armor
@@ -9186,11 +9173,6 @@ PrefabInstance:
       propertyPath: m_Name
       value: Enemy Stat Panel 1
       objectReference: {fileID: 0}
-    - target: {fileID: 8270997996493166516, guid: 395145930efb69c4ebf1c6e52f3b7659,
-        type: 3}
-      propertyPath: m_IsActive
-      value: 0
-      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 395145930efb69c4ebf1c6e52f3b7659, type: 3}
 --- !u!114 &6482855377238550896 stripped
@@ -9465,19 +9447,8 @@ PrefabInstance:
       propertyPath: m_Name
       value: Enemy Stat Panel 2
       objectReference: {fileID: 0}
-    - target: {fileID: 8270997996493166516, guid: 395145930efb69c4ebf1c6e52f3b7659,
-        type: 3}
-      propertyPath: m_IsActive
-      value: 0
-      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 395145930efb69c4ebf1c6e52f3b7659, type: 3}
---- !u!224 &4424510237700072205 stripped
-RectTransform:
-  m_CorrespondingSourceObject: {fileID: 4187761913305881369, guid: 395145930efb69c4ebf1c6e52f3b7659,
-    type: 3}
-  m_PrefabInstance: {fileID: 539006832550672404}
-  m_PrefabAsset: {fileID: 0}
 --- !u!114 &6508591783432498166 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 6713114860797154274, guid: 395145930efb69c4ebf1c6e52f3b7659,
@@ -9490,6 +9461,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 231af3333cf7c574782e33010ee7b6bc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!224 &4424510237700072205 stripped
+RectTransform:
+  m_CorrespondingSourceObject: {fileID: 4187761913305881369, guid: 395145930efb69c4ebf1c6e52f3b7659,
+    type: 3}
+  m_PrefabInstance: {fileID: 539006832550672404}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &1910990852688623787
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -9606,11 +9583,6 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: Spell Button (9)
-      objectReference: {fileID: 0}
-    - target: {fileID: 5107119825795941013, guid: d611bf8fb323d6d44bbff40093728d54,
-        type: 3}
-      propertyPath: m_IsActive
-      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: d611bf8fb323d6d44bbff40093728d54, type: 3}
@@ -9737,13 +9709,14 @@ PrefabInstance:
       propertyPath: m_Name
       value: Enemy Stat Panel 4
       objectReference: {fileID: 0}
-    - target: {fileID: 8270997996493166516, guid: 395145930efb69c4ebf1c6e52f3b7659,
-        type: 3}
-      propertyPath: m_IsActive
-      value: 0
-      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 395145930efb69c4ebf1c6e52f3b7659, type: 3}
+--- !u!224 &2424177207986142887 stripped
+RectTransform:
+  m_CorrespondingSourceObject: {fileID: 4187761913305881369, guid: 395145930efb69c4ebf1c6e52f3b7659,
+    type: 3}
+  m_PrefabInstance: {fileID: 1997772040565515710}
+  m_PrefabAsset: {fileID: 0}
 --- !u!114 &5084640343319164508 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 6713114860797154274, guid: 395145930efb69c4ebf1c6e52f3b7659,
@@ -9756,12 +9729,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 231af3333cf7c574782e33010ee7b6bc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
---- !u!224 &2424177207986142887 stripped
-RectTransform:
-  m_CorrespondingSourceObject: {fileID: 4187761913305881369, guid: 395145930efb69c4ebf1c6e52f3b7659,
-    type: 3}
-  m_PrefabInstance: {fileID: 1997772040565515710}
-  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &2090538665633808485
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -9878,11 +9845,6 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: Enemy Stat Panel 6
-      objectReference: {fileID: 0}
-    - target: {fileID: 8270997996493166516, guid: 395145930efb69c4ebf1c6e52f3b7659,
-        type: 3}
-      propertyPath: m_IsActive
-      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 395145930efb69c4ebf1c6e52f3b7659, type: 3}
@@ -10020,11 +9982,6 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: Spell Button
-      objectReference: {fileID: 0}
-    - target: {fileID: 5107119825795941013, guid: d611bf8fb323d6d44bbff40093728d54,
-        type: 3}
-      propertyPath: m_IsActive
-      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: d611bf8fb323d6d44bbff40093728d54, type: 3}
@@ -10425,11 +10382,6 @@ PrefabInstance:
       propertyPath: m_Name
       value: Spell Button (5)
       objectReference: {fileID: 0}
-    - target: {fileID: 5107119825795941013, guid: d611bf8fb323d6d44bbff40093728d54,
-        type: 3}
-      propertyPath: m_IsActive
-      value: 1
-      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: d611bf8fb323d6d44bbff40093728d54, type: 3}
 --- !u!224 &8754935824323928359 stripped
@@ -10692,11 +10644,6 @@ PrefabInstance:
       propertyPath: m_Name
       value: Enemy Stat Panel 3
       objectReference: {fileID: 0}
-    - target: {fileID: 8270997996493166516, guid: 395145930efb69c4ebf1c6e52f3b7659,
-        type: 3}
-      propertyPath: m_IsActive
-      value: 0
-      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 395145930efb69c4ebf1c6e52f3b7659, type: 3}
 --- !u!114 &1159708516822071622 stripped
@@ -10834,11 +10781,6 @@ PrefabInstance:
       propertyPath: m_Name
       value: Spell Button (1)
       objectReference: {fileID: 0}
-    - target: {fileID: 5107119825795941013, guid: d611bf8fb323d6d44bbff40093728d54,
-        type: 3}
-      propertyPath: m_IsActive
-      value: 1
-      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: d611bf8fb323d6d44bbff40093728d54, type: 3}
 --- !u!224 &723456645044853750 stripped
@@ -10964,11 +10906,6 @@ PrefabInstance:
       propertyPath: m_Name
       value: Spell Button (4)
       objectReference: {fileID: 0}
-    - target: {fileID: 5107119825795941013, guid: d611bf8fb323d6d44bbff40093728d54,
-        type: 3}
-      propertyPath: m_IsActive
-      value: 1
-      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: d611bf8fb323d6d44bbff40093728d54, type: 3}
 --- !u!224 &844394323156605390 stripped
@@ -11093,11 +11030,6 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: Enemy Stat Panel 5
-      objectReference: {fileID: 0}
-    - target: {fileID: 8270997996493166516, guid: 395145930efb69c4ebf1c6e52f3b7659,
-        type: 3}
-      propertyPath: m_IsActive
-      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 395145930efb69c4ebf1c6e52f3b7659, type: 3}
@@ -11647,11 +11579,6 @@ PrefabInstance:
       propertyPath: m_Name
       value: Enemy Stat Panel 7
       objectReference: {fileID: 0}
-    - target: {fileID: 8270997996493166516, guid: 395145930efb69c4ebf1c6e52f3b7659,
-        type: 3}
-      propertyPath: m_IsActive
-      value: 0
-      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 395145930efb69c4ebf1c6e52f3b7659, type: 3}
 --- !u!224 &7168095750381830623 stripped
@@ -11926,11 +11853,6 @@ PrefabInstance:
       propertyPath: m_Name
       value: Skill Button
       objectReference: {fileID: 0}
-    - target: {fileID: 5107119825795941013, guid: d611bf8fb323d6d44bbff40093728d54,
-        type: 3}
-      propertyPath: m_IsActive
-      value: 1
-      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: d611bf8fb323d6d44bbff40093728d54, type: 3}
 --- !u!224 &2259865283725588094 stripped
@@ -12068,11 +11990,6 @@ PrefabInstance:
       propertyPath: m_Name
       value: Spell Button (8)
       objectReference: {fileID: 0}
-    - target: {fileID: 5107119825795941013, guid: d611bf8fb323d6d44bbff40093728d54,
-        type: 3}
-      propertyPath: m_IsActive
-      value: 1
-      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: d611bf8fb323d6d44bbff40093728d54, type: 3}
 --- !u!224 &2007280220997627349 stripped
@@ -12197,11 +12114,6 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: Spell Button (7)
-      objectReference: {fileID: 0}
-    - target: {fileID: 5107119825795941013, guid: d611bf8fb323d6d44bbff40093728d54,
-        type: 3}
-      propertyPath: m_IsActive
-      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: d611bf8fb323d6d44bbff40093728d54, type: 3}
@@ -12328,11 +12240,6 @@ PrefabInstance:
       propertyPath: m_Name
       value: Spell Button (6)
       objectReference: {fileID: 0}
-    - target: {fileID: 5107119825795941013, guid: d611bf8fb323d6d44bbff40093728d54,
-        type: 3}
-      propertyPath: m_IsActive
-      value: 1
-      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: d611bf8fb323d6d44bbff40093728d54, type: 3}
 --- !u!224 &2714275842481532024 stripped
@@ -12458,11 +12365,6 @@ PrefabInstance:
       propertyPath: m_Name
       value: Spell Button (3)
       objectReference: {fileID: 0}
-    - target: {fileID: 5107119825795941013, guid: d611bf8fb323d6d44bbff40093728d54,
-        type: 3}
-      propertyPath: m_IsActive
-      value: 1
-      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: d611bf8fb323d6d44bbff40093728d54, type: 3}
 --- !u!224 &3034915136987544716 stripped
@@ -12587,11 +12489,6 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: Spell Button (2)
-      objectReference: {fileID: 0}
-    - target: {fileID: 5107119825795941013, guid: d611bf8fb323d6d44bbff40093728d54,
-        type: 3}
-      propertyPath: m_IsActive
-      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: d611bf8fb323d6d44bbff40093728d54, type: 3}

@@ -20,12 +20,12 @@ MonoBehaviour:
   sprite: {fileID: -8164989167165242966, guid: 8c500e45b904a74468ea62831fc2b0dc, type: 3}
   quantity: 1
   equipmentType: 3
-  hpBonus: 5
+  hpBonus: 4
   mpBonus: 0
   attackBonus: 0
   defenseBonus: 1
   magicBonus: 0
   speedBonus: 0
-  armorBonus: 1
+  armorBonus: 0
   resistBonus: 0
   criticalIntensityBonus: 0

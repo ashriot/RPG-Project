@@ -9,11 +9,11 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 8787949426215704519}
-  - component: {fileID: 8787949426215704516}
   - component: {fileID: 8787949426215704517}
+  - component: {fileID: 8787949426215704516}
   - component: {fileID: 9017432730243066158}
   m_Layer: 0
-  m_Name: Skeleton Warrior
+  m_Name: skeletonWarrior
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -33,65 +33,6 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &8787949426215704516
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8787949426215704514}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 1a608e7024d6d2a45ad1815a6a08d3c0, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  id: skeletonWarrior
-  hp:
-    current: 0
-    baseMax: 10
-    totalBonus: 0
-  mp:
-    current: 0
-    baseMax: 0
-    totalBonus: 0
-  level: 0
-  xp: 0
-  attack: 9
-  defense: 5
-  magic: 2
-  speed: 5
-  armor: 3
-  resist: 0
-  minDamage: 8
-  maxDamage: 12
-  tp: 0
-  deflection: 0
-  ticks: 0
-  delay: 1
-  isPlayer: 0
-  isActive: 1
-  isDead: 0
-  isCharging: 0
-  chargedActionName: 
-  chargedTarget: 0
-  isTaunting: 0
-  isHiding: 0
-  classSkillName: 
-  classSkillDescription: 
-  skills:
-  - Attack
-  spells: []
-  statusEffects: []
-  mainHand: {fileID: 0}
-  offHand: {fileID: 0}
-  spriteRenderer: {fileID: 8787949426215704517}
-  portraitAnimatorController: {fileID: 9100000, guid: 88643cd6fc2ac8847b61efb21da4fe12,
-    type: 2}
-  portrait: {fileID: 2159116858117616238, guid: 96bde4b4bb84ff54bb970194b4f379a1,
-    type: 3}
-  deadSprite: {fileID: 9177001904570590583, guid: 04854a5f96e25cf4fbef374e1965bd3b,
-    type: 3}
-  fadeSpeed: 1
 --- !u!212 &8787949426215704517
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -142,6 +83,67 @@ SpriteRenderer:
   m_WasSpriteAssigned: 0
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
+--- !u!114 &8787949426215704516
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8787949426215704514}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1a608e7024d6d2a45ad1815a6a08d3c0, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  id: skeletonWarrior
+  hp:
+    current: 0
+    baseMax: 20
+    bonus: 0
+  mp:
+    current: 0
+    baseMax: 0
+    bonus: 0
+  deflect: 0
+  barrier: 0
+  level: 0
+  xp: 10
+  attack: 11
+  defense: 5
+  magic: 2
+  speed: 5
+  armor: 3
+  resist: 0
+  minDamage: 8
+  maxDamage: 12
+  tp: 0
+  tpChanceBase: 0
+  tpChance: 0
+  ticks: 0
+  delay: 1
+  isPlayer: 0
+  isActive: 1
+  isCharging: 0
+  chargedActionName: 
+  chargedTarget: 0
+  isTaunting: 0
+  isHiding: 0
+  classSkillName: 
+  classSkillDescription: 
+  abilities:
+  - Attack
+  spells: []
+  statusEffects: []
+  mainHand: {fileID: 11400000, guid: 538da7e1706915c42b8a32b66812466f, type: 2}
+  offHand: {fileID: 0}
+  spriteRenderer: {fileID: 8787949426215704517}
+  portraitAnimatorController: {fileID: 9100000, guid: 88643cd6fc2ac8847b61efb21da4fe12,
+    type: 2}
+  portrait: {fileID: 2159116858117616238, guid: 96bde4b4bb84ff54bb970194b4f379a1,
+    type: 3}
+  deadSprite: {fileID: 9177001904570590583, guid: 04854a5f96e25cf4fbef374e1965bd3b,
+    type: 3}
+  fadeSpeed: 1
 --- !u!95 &9017432730243066158
 Animator:
   serializedVersion: 3

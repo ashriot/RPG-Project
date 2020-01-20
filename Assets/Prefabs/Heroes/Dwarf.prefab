@@ -121,44 +121,55 @@ MonoBehaviour:
   unitAnimator: {fileID: 2945478755862410872}
   portraitAnimatorController: {fileID: 9100000, guid: b8aed53e8a93b5e4e81b61d965a4fe90,
     type: 2}
+  portrait: {fileID: 0}
   aliveSprite: {fileID: -3154873122853401360, guid: 04854a5f96e25cf4fbef374e1965bd3b,
     type: 3}
   deadSprite: {fileID: 1083927990338066198, guid: 04854a5f96e25cf4fbef374e1965bd3b,
     type: 3}
   isActive: 1
+  classSkillName: Berserking
+  classSkillDescription: Berserking.\nDwarven berserking is a lost art of war only
+    known by a select few.
   skills: []
   spells: []
-  level: 1
-  xp: 0
   hp:
     current: 0
-    maximum: 30
-    totalBonus: 0
+    baseMax: 40
+    bonus: 0
   mp:
     current: 0
-    maximum: 5
-    totalBonus: 0
+    baseMax: 5
+    bonus: 0
+  constitution:
+    current: 3
+    baseMax: 0
+    bonus: 0
+  deflect: 0
+  barrier: 0
   attack:
     baseValue: 8
-    totalBonus: 0
+    bonus: 0
   defense:
     baseValue: 7
-    totalBonus: 0
+    bonus: 0
   magic:
     baseValue: 3
-    totalBonus: 0
+    bonus: 0
   speed:
     baseValue: 5
-    totalBonus: 0
+    bonus: 0
   armor:
     baseValue: 0
-    totalBonus: 0
+    bonus: 0
   resist:
     baseValue: 0
-    totalBonus: 0
+    bonus: 0
   critPower:
     baseValue: 150
-    totalBonus: 0
+    bonus: 0
+  statusEffects: []
+  tpChanceBase: 0.5
+  tpChance: 0
   head: {fileID: 11400000, guid: 915fa70b45f4ab443a384cd767726b0f, type: 2}
   body: {fileID: 11400000, guid: ef3d966ca0253b549a187d01441ddd84, type: 2}
   arms: {fileID: 11400000, guid: c3d7bf2e702dbdd47aeaee10cdb7ec67, type: 2}
@@ -166,15 +177,8 @@ MonoBehaviour:
   ringL: {fileID: 11400000, guid: 4f36306fe6a84ec468500dc1b6430249, type: 2}
   ringR: {fileID: 11400000, guid: 1afd7edd7bfefb840805c7a8642ec284, type: 2}
   mainHand: {fileID: 11400000, guid: 4f135c96ff403b74fbf3fdb0b0c18d56, type: 2}
-  offHand: {fileID: 11400000, guid: 1d03cb9e00b5d1e4b8ee360dd33ea00c, type: 2}
-  constitution:
-    current: 3
-    maximum: 3
-    totalBonus: 0
-  attributeSkillValues: 000000000000000000000000000000000000000000000000
+  offHand: {fileID: 0}
+  attributeMasteriesValues: 000000000000000000000000000000000000000000000000
+  xp: 0
   sp: 0
   totalSp: 0
-  classSkillName: Berserking
-  classSkillDescription: Berserking.\nDwarven berserking is a lost art of war only
-    known by a select few.
-  initialValues: {fileID: 11400000, guid: 43c01146a1da5a64b9b016006f7fdfa4, type: 2}

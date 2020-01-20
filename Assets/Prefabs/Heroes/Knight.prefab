@@ -121,45 +121,56 @@ MonoBehaviour:
   unitAnimator: {fileID: 8296436625748676018}
   portraitAnimatorController: {fileID: 9100000, guid: fd187a5c76b2a204693bf11e7b80b91f,
     type: 2}
+  portrait: {fileID: 0}
   aliveSprite: {fileID: 2833635029592336169, guid: 04854a5f96e25cf4fbef374e1965bd3b,
     type: 3}
   deadSprite: {fileID: -1826126182828285318, guid: 04854a5f96e25cf4fbef374e1965bd3b,
     type: 3}
   isActive: 1
+  classSkillName: Chivalry
+  classSkillDescription: Chivalry\nBattle tactics designed to both encourage and
+    command allies.
   skills:
   - Taunt
   spells: []
-  level: 1
-  xp: 0
   hp:
-    current: 95
-    maximum: 35
-    totalBonus: 60
+    current: 0
+    baseMax: 45
+    bonus: 0
   mp:
-    current: 10
-    maximum: 10
-    totalBonus: 0
+    current: 0
+    baseMax: 10
+    bonus: 0
+  constitution:
+    current: 3
+    baseMax: 0
+    bonus: 0
+  deflect: 0
+  barrier: 0
   attack:
     baseValue: 6
-    totalBonus: 1
+    bonus: 0
   defense:
     baseValue: 7
-    totalBonus: 6
+    bonus: 0
   magic:
     baseValue: 4
-    totalBonus: 0
+    bonus: 0
   speed:
     baseValue: 4
-    totalBonus: 6
+    bonus: 0
   armor:
     baseValue: 0
-    totalBonus: 6
+    bonus: 0
   resist:
     baseValue: 0
-    totalBonus: 0
+    bonus: 0
   critPower:
     baseValue: 150
-    totalBonus: 0
+    bonus: 0
+  statusEffects: []
+  tpChanceBase: 0.25
+  tpChance: 0
   head: {fileID: 11400000, guid: 8730d309d39a3bd4f978188ca375469c, type: 2}
   body: {fileID: 11400000, guid: 1ee9a7c2975e56b4bb2f0915d99bef86, type: 2}
   arms: {fileID: 11400000, guid: 887e64df4beeb504faf8a2d32f38d0b4, type: 2}
@@ -167,15 +178,8 @@ MonoBehaviour:
   ringL: {fileID: 11400000, guid: e7f4044147f66e045b993f1e127f2e1f, type: 2}
   ringR: {fileID: 11400000, guid: 4f36306fe6a84ec468500dc1b6430249, type: 2}
   mainHand: {fileID: 11400000, guid: 538da7e1706915c42b8a32b66812466f, type: 2}
-  offHand: {fileID: 11400000, guid: 1d03cb9e00b5d1e4b8ee360dd33ea00c, type: 2}
-  constitution:
-    current: 3
-    maximum: 3
-    totalBonus: 0
-  attributeSkillValues: 000000000000000000000000000000000000000000000000
-  sp: 6
-  totalSp: 6
-  classSkillName: Chivalry
-  classSkillDescription: Chivalry\nBattle tactics designed to both encourage and
-    command allies.
-  initialValues: {fileID: 0}
+  offHand: {fileID: 0}
+  attributeMasteriesValues: 000000000000000000000000000000000000000000000000
+  xp: 100
+  sp: 0
+  totalSp: 0

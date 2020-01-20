@@ -2,7 +2,7 @@
 using UnityEngine.UI;
 
 public class StatPanelDisplay : MonoBehaviour {
-    public Text nameText, hpText, mpText, deflectionText;
-    public Image hpSlider, mpSlider, currentTurnCursor, spIndicator, deflectionImage;
+    public Text nameText, hpText, mpText;
+    public Image hpSlider, deflectSlider, barrierSlider, mpSlider, currentTurnCursor, spIndicator;
     public Animator portraitAnimator;
 }

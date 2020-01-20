@@ -2,6 +2,9 @@
 
 public class Hero : Unit {
 
+    public float tpChanceBase;
+    public float tpChance;
+    
     public EquippableItem head, body, arms, feet, ringL, ringR;
     public Hands mainHand, offHand;
 
