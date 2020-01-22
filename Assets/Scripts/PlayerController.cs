@@ -391,9 +391,13 @@ public class PlayerController : MonoBehaviour {
             // if (!chest.isUnlocked) {
             //     chest.Unlock();
             if (!chest.isOpened) {
-                if (chest.isLocked && goldKeyCount > 0) {
-                    AdjustKeys(-1);
-                    chest.Unlock();
+                if (chest.isLocked) {
+                    if (GameManager.instance.currentGoldKeys > 0) {
+                        AdjustKeys(-1);
+                        chest.Unlock();
+                    } else {
+                        GameMenu.instance.Notification("You need a key.");
+                    }
                 } else if (!chest.isLocked) {
                     chest.Open();
                 }

@@ -31,7 +31,7 @@ MonoBehaviour:
   criticalIntensityBonus: 0
   baseAttack: 5
   minimumDamage: 5
-  maximumDamage: 9
+  maximumDamage: 10
   delay: 0.75
   hitType: 4
   avoidType: 5

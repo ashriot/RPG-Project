@@ -10,14 +10,15 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 55ab7c10ac817f74690899407ef52845, type: 3}
-  m_Name: Attack
+  m_Name: Lead the Charge
   m_EditorClassIdentifier: 
   abilityType: 0
-  name: Attack
-  description: 
+  name: Lead the Charge
+  description: Lead the Charge\nLead the party in a coordinated attack, causing one
+    ally per TP spent to attack the target.
   sprite: {fileID: 0}
   mpCost: 0
-  tpCost: 0
+  tpCost: 4
   chargeType: 2
   delay: 1
   actions:
@@ -37,4 +38,22 @@ MonoBehaviour:
     abilityFx: {fileID: 3482613456182776616, guid: bb69396eec3d170429dbc2a3956afbdd,
       type: 3}
     statusEffects: []
+  - hitType: 4
+    avoidType: 5
+    damageType: 0
+    hitModifier: 0
+    avoidModifier: 0
+    potencyModifier: 0
+    minimumPotency: 0
+    maximumPotency: 0
+    isWeaponAttack: 0
+    isEffectOnly: 1
+    targetType: 1
+    splashType: 0
+    splashModifier: 0
+    abilityFx: {fileID: 0}
+    statusEffects:
+    - baseStatusEffect: {fileID: 11400000, guid: ab8a48748c622f6489278d589b2aa06e,
+        type: 2}
+      stacks: 0
   notes: 

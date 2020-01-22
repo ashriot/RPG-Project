@@ -15,7 +15,7 @@ public class AbilityAction {
     public TargetTypes targetType;
     public SplashTypes splashType;
     public float splashModifier = 1f;
-    public AttackEffect visualFx;
+    public AbilityFx abilityFx;
     public List<StatusEffect> statusEffects = new List<StatusEffect>();
 
     public void Execute() {

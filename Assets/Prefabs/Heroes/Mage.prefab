@@ -130,6 +130,7 @@ MonoBehaviour:
   classSkillName: Sorcery
   classSkillDescription: Sorcery\nPowerful magic skills only known to war mages.
   skills:
+  - Burning Armor
   - Meditate
   spells:
   - Fireball
@@ -179,7 +180,10 @@ MonoBehaviour:
   ringR: {fileID: 11400000, guid: 1afd7edd7bfefb840805c7a8642ec284, type: 2}
   mainHand: {fileID: 11400000, guid: 9390d113075557b4c81c81a70974da61, type: 2}
   offHand: {fileID: 0}
-  attributeMasteriesValues: 000000000000000000000000000000000000000000000000
+  attributeSkillValues: 000000000000000000000000000000000000000000000000
+  combatSkillValues: 
+  magicSkillValues: 
+  fieldSkillValues: 
   xp: 0
   sp: 0
   totalSp: 0

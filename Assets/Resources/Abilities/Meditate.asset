@@ -12,6 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 55ab7c10ac817f74690899407ef52845, type: 3}
   m_Name: Meditate
   m_EditorClassIdentifier: 
+  abilityType: 7
   name: Meditate
   description: Meditate\nThe user regains MP equal to 20% of their missing MP.
   sprite: {fileID: -6908666714487797074, guid: 8c500e45b904a74468ea62831fc2b0dc, type: 3}
@@ -22,6 +23,7 @@ MonoBehaviour:
   actions:
   - hitType: 1
     avoidType: 1
+    damageType: 0
     hitModifier: 0
     avoidModifier: 0
     potencyModifier: 0.2
@@ -32,7 +34,7 @@ MonoBehaviour:
     targetType: 0
     splashType: 0
     splashModifier: 0
-    visualFx: {fileID: 5687904313256788930, guid: 7e7a887159a664146bddf764beff94f4,
+    abilityFx: {fileID: 5687904313256788930, guid: 7e7a887159a664146bddf764beff94f4,
       type: 3}
     statusEffects: []
   notes: 

@@ -16,8 +16,8 @@ public class BattleCombatant : MonoBehaviour {
     public bool isActive;
     public bool isDead { get { return hp.current <= 0; } }
     public bool isCharging;
-    public string chargedActionName;
-    public int chargedTarget;
+    public string chargedAbilityName;
+    public int targetId;
     public bool isTaunting = false;
     public bool isHiding = false;
     public string classSkillName, classSkillDescription;

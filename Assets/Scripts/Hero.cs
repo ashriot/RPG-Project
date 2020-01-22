@@ -9,7 +9,10 @@ public class Hero : Unit {
     public Hands mainHand, offHand;
 
     // attribute masteries
-    public int[] attributeMasteriesValues;
+    public int[] attributeSkillValues;
+    public int[] combatSkillValues;
+    public int[] magicSkillValues;
+    public int[] fieldSkillValues;
 
     public int xp, sp, totalSp;
 

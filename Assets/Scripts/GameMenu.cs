@@ -15,9 +15,11 @@ public class GameMenu : MonoBehaviour {
     public Text goldText;
     public string mainMenuSceneName;
     public Image mainMenuButtonImage;
+    public Image mainMenuButtonIcon;
     public Text mainMenuButtonText;
     public Sprite buttonPressedSprite;
     public Sprite buttonReadySprite;
+    public Sprite[] suits;
     public GameObject menuButtonsPanel;
     public GameObject mainWindowPanel;
     public Hero selectedHero;
@@ -47,7 +49,6 @@ public class GameMenu : MonoBehaviour {
     public int currentHeroId = 0;
 
     public Hero[] heroes;
-
 
     void Awake () {
         if (instance == null) {
@@ -133,7 +134,13 @@ public class GameMenu : MonoBehaviour {
     }
 
     public void ClickMainMenuButton() {
-        if (!menuButtonsPanel.activeInHierarchy) {
+        if (GameManager.instance.battleActive) {
+            if (BattleManager.instance.subMenu != null) {
+                PlayClickSound();
+                BattleManager.instance.SetMenuButtonToFlee();
+            }
+            return;
+        } else if (!menuButtonsPanel.activeInHierarchy) {
             PlayOpenSound();
             UpdateHeroButtons();
             OpenMainMenu();
@@ -454,13 +461,13 @@ public class GameMenu : MonoBehaviour {
         // skillMenu.skillPoints.text = hero.sp.ToString();
         var skillLines = skillMenu.attributesWindow.GetComponent<SkillDisplay>().skillLines;
         for (var i = 0; i < skillLines.Length; i++) {
-            for (var j = 0; j < hero.attributeMasteriesValues.Length; j++) {
+            for (var j = 0; j < hero.attributeSkillValues.Length; j++) {
                 if (skillNames[j] == skillLines[i].name) {
                     // INT(0.5 * (SQRT(8 * SP + 1) - 1))
-                    var skillRk = (int)(.5f * (Mathf.Sqrt(8f * hero.attributeMasteriesValues[j] + 1f) - 1f));
+                    var skillRk = (int)(.5f * (Mathf.Sqrt(8f * hero.attributeSkillValues[j] + 1f) - 1f));
                     // Lv * (Lv +1) / 2
                     var skillThreshold = (int)(skillRk * (skillRk +1) / 2);
-                    var skillSp = hero.attributeMasteriesValues[j] - skillThreshold;
+                    var skillSp = hero.attributeSkillValues[j] - skillThreshold;
                     var width = skillRk * 6;
                     skillLines[i].skillRank.rectTransform.sizeDelta = new Vector2(width, 5f);
                     width = skillSp * 6;
@@ -478,16 +485,16 @@ public class GameMenu : MonoBehaviour {
         if (hero.sp > 0) {
             GameMenu.instance.SetHeroSkills();
 
-            for(var i = 0; i < hero.attributeMasteriesValues.Length; i++) {
+            for(var i = 0; i < hero.attributeSkillValues.Length; i++) {
                 if (skillNames[i] == skillName) {
-                    if (hero.attributeMasteriesValues[i] == 55) {
+                    if (hero.attributeSkillValues[i] == 55) {
                         AudioManager.instance.PlaySfx("error");
                         Debug.Log("Cannot invest anymore points!");
                         return;
                     }
                     hero.sp--;
-                    hero.attributeMasteriesValues[i]++;
-                    var skillRank = (.5f * (Mathf.Sqrt(8f * hero.attributeMasteriesValues[i] + 1f) - 1f));
+                    hero.attributeSkillValues[i]++;
+                    var skillRank = (.5f * (Mathf.Sqrt(8f * hero.attributeSkillValues[i] + 1f) - 1f));
                     if (skillRank % 1 == 0) {
                         AudioManager.instance.PlaySfx("score");
                         SkillIncreaseEffect(skillName, (int)skillRank);
@@ -577,14 +584,18 @@ public class GameMenu : MonoBehaviour {
                 heroStatPanels[i].hpSlider.fillAmount = heroes[i].hp.percent;
                 heroStatPanels[i].mpText.text = heroes[i].mp.current.ToString();
                 heroStatPanels[i].mpSlider.fillAmount = heroes[i].mp.percent;
+
                 if (heroes[i].sp > 0) {
                     heroStatPanels[i].spIndicator.gameObject.SetActive(true);
                 } else {
                     heroStatPanels[i].spIndicator.gameObject.SetActive(false);
                 }
                 if (GameManager.instance.battleActive) {
+                    heroStatPanels[i].targetIndicator.gameObject.SetActive(true);
+                    heroStatPanels[i].targetIndicator.sprite = suits[i];
                     heroStatPanels[i].deflectSlider.fillAmount = (float)heroes[i].deflect / heroes[i].hp.maximum;
                 } else {
+                    heroStatPanels[i].targetIndicator.gameObject.SetActive(false);
                     heroStatPanels[i].deflectSlider.fillAmount = 0;
                 }
             } else {

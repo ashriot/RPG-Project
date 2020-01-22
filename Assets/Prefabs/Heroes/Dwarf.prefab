@@ -127,9 +127,9 @@ MonoBehaviour:
   deadSprite: {fileID: 1083927990338066198, guid: 04854a5f96e25cf4fbef374e1965bd3b,
     type: 3}
   isActive: 1
-  classSkillName: Berserking
-  classSkillDescription: Berserking.\nDwarven berserking is a lost art of war only
-    known by a select few.
+  classSkillName: Phalanx
+  classSkillDescription: Phalanx\nA powerful, dwarven fighting technique that specializes
+    in using shields offensively.
   skills: []
   spells: []
   hp:
@@ -178,7 +178,10 @@ MonoBehaviour:
   ringR: {fileID: 11400000, guid: 1afd7edd7bfefb840805c7a8642ec284, type: 2}
   mainHand: {fileID: 11400000, guid: 4f135c96ff403b74fbf3fdb0b0c18d56, type: 2}
   offHand: {fileID: 0}
-  attributeMasteriesValues: 000000000000000000000000000000000000000000000000
+  attributeSkillValues: 000000000000000000000000000000000000000000000000
+  combatSkillValues: 
+  magicSkillValues: 
+  fieldSkillValues: 
   xp: 0
   sp: 0
   totalSp: 0

@@ -10,31 +10,35 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 55ab7c10ac817f74690899407ef52845, type: 3}
-  m_Name: Fireball
+  m_Name: Burning Armor
   m_EditorClassIdentifier: 
-  abilityType: 4
-  name: Fireball
-  description: 
-  sprite: {fileID: -3578585665867577350, guid: 8c500e45b904a74468ea62831fc2b0dc, type: 3}
-  mpCost: 10
+  abilityType: 6
+  name: Burning Armor
+  description: Burning Armor\nThe mage is protected by a shield of fire, increasing
+    his Armor and potentially burning attackers.
+  sprite: {fileID: 2534157650512097630, guid: 8c500e45b904a74468ea62831fc2b0dc, type: 3}
+  mpCost: 0
   tpCost: 0
-  chargeType: 1
-  delay: 1.25
+  chargeType: 2
+  delay: 1
   actions:
   - hitType: 6
-    avoidType: 6
+    avoidType: 8
     damageType: 1
     hitModifier: 0
     avoidModifier: 0
-    potencyModifier: 1
-    minimumPotency: 20
-    maximumPotency: 30
+    potencyModifier: 0.5
+    minimumPotency: 0
+    maximumPotency: 0
     isWeaponAttack: 0
-    isEffectOnly: 0
-    targetType: 3
+    isEffectOnly: 1
+    targetType: 0
     splashType: 0
     splashModifier: 0
     abilityFx: {fileID: 2467785622394809194, guid: f326f11d5e1b60a4cbad1dec0605fed7,
       type: 3}
-    statusEffects: []
+    statusEffects:
+    - baseStatusEffect: {fileID: 11400000, guid: a757d136306d69c4db07fae563e8b90a,
+        type: 2}
+      stacks: 2
   notes: 

@@ -178,7 +178,10 @@ MonoBehaviour:
   ringR: {fileID: 11400000, guid: 1c4bd2414c1aaeb41990448180a2f34f, type: 2}
   mainHand: {fileID: 11400000, guid: 7d35252fabe69bc4487b5a7935b84585, type: 2}
   offHand: {fileID: 11400000, guid: 7d35252fabe69bc4487b5a7935b84585, type: 2}
-  attributeMasteriesValues: 000000000000000000000000000000000000000000000000
+  attributeSkillValues: 000000000000000000000000000000000000000000000000
+  combatSkillValues: 
+  magicSkillValues: 
+  fieldSkillValues: 
   xp: 0
   sp: 0
   totalSp: 0

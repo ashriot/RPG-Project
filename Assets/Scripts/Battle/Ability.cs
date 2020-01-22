@@ -3,6 +3,7 @@ using UnityEngine;
 
 [System.Serializable, CreateAssetMenu(fileName = "Ability", menuName = "Ability")]
 public class Ability : ScriptableObject {
+    public AbilityTypes abilityType;
     public new string name;
     public string description;
     public Sprite sprite;
@@ -12,6 +13,18 @@ public class Ability : ScriptableObject {
     public float delay = 1f;
     public List<AbilityAction> actions = new List<AbilityAction>();
     public List<Notes> notes = new List<Notes>();
+}
+
+public enum AbilityTypes {
+    Melee,
+    Ranged,
+    AoE,
+    SingleMagic,
+    ProjectileMagic,
+    Debuff,
+    Buff,
+    Heal,
+    Count
 }
 
 public enum StatTypes {  // the source stat for determining accuracy

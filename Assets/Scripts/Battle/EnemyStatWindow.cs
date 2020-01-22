@@ -8,11 +8,14 @@ public class EnemyStatWindow : MonoBehaviour {
     public Image hpSlider;
     public Image tempHpSlider;
     public Image mpSlider;
-    public Image targetBox;
+    public Image targetCursor;
+    public Image enemyIcon;
+    public Image actionIcon;
+    public Image targetIcon;
     public int targetId;
 
     public void Press() {
-        GetComponent<EnemyStatWindow>().targetBox.gameObject.SetActive(true);
+        GetComponent<EnemyStatWindow>().targetCursor.gameObject.SetActive(true);
         // BattleManager.instance.PlayerAttack(actionName);
         BattleManager.instance.SetTargetedEnemyId(targetId);
     }

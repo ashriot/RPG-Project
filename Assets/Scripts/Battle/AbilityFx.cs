@@ -1,6 +1,6 @@
 ﻿using UnityEngine;
 
-public class AttackEffect : MonoBehaviour {
+public class AbilityFx : MonoBehaviour {
 
     public float effectDuration;
     public int sfxId;

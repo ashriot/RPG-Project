@@ -17,7 +17,7 @@ public class BattleTargetButton : MonoBehaviour {
     }
 
     public void Press() {
-        GetComponent<EnemyStatWindow>().targetBox.gameObject.SetActive(true);
+        GetComponent<EnemyStatWindow>().targetCursor.gameObject.SetActive(true);
         // BattleManager.instance.PlayerAttack(actionName);
         BattleManager.instance.SetTargetedEnemyId(targetId);
     }

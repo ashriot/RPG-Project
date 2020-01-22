@@ -10,9 +10,10 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 55ab7c10ac817f74690899407ef52845, type: 3}
-  m_Name: Taunt
+  m_Name: Warhorn
   m_EditorClassIdentifier: 
-  name: Taunt
+  abilityType: 6
+  name: Warhorn
   description: 
   sprite: {fileID: -4025681734518897009, guid: 8c500e45b904a74468ea62831fc2b0dc, type: 3}
   mpCost: 0
@@ -22,6 +23,7 @@ MonoBehaviour:
   actions:
   - hitType: 0
     avoidType: 0
+    damageType: 0
     hitModifier: 0
     avoidModifier: 0
     potencyModifier: 0
@@ -34,5 +36,7 @@ MonoBehaviour:
     splashModifier: 0
     visualFx: {fileID: 0}
     statusEffects:
-    - {fileID: 11400000, guid: fa71da18fc74b0d4f92eb15679c04ea0, type: 2}
+    - baseStatusEffect: {fileID: 11400000, guid: 9a268594f5aa1214f9613be954ca07bc,
+        type: 2}
+      stacks: 1
   notes: 

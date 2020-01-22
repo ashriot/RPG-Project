@@ -26,33 +26,44 @@ public class BattleActionRepo : MonoBehaviour {
         return null;
     }
 
-    public StatusEffect CreateStatusEffectWithDuration(string name, int duration) {
-        var effect = Instantiate(Resources.Load<StatusEffect>("Effects/" + name));
-     
-        if (effect != null) {
-            effect.duration = duration;
-            return effect;
+    public AbilityTypes GetAbilityTypeByName(string name) {
+        var action = Resources.Load<Ability>("Abilities/" + name);
+
+        if (action != null) {
+            return action.abilityType;
         }
 
-        Debug.LogError("Couldn't find status effect '" + name +"'!");
-        return null;
+        Debug.LogError("Couldn't find battle action '" + name +"'!");
+        return AbilityTypes.Count;
     }
 
-    public StatusEffect GetStatusEffectByName(string name) {
-        var effect = Instantiate(Resources.Load<StatusEffect>("Effects/" + name));
+    // public StatusEffect CreateStatusEffectWithDuration(string name, int duration) {
+    //     var effect = Instantiate(Resources.Load<StatusEffect>("Effects/" + name));
      
-        if (effect != null) {
-            return effect;
-        }
+    //     if (effect != null) {
+    //         effect.duration = duration;
+    //         return effect;
+    //     }
 
-        Debug.LogError("Couldn't find status effect '" + name +"'!");
-        return null;
-    }
+    //     Debug.LogError("Couldn't find status effect '" + name +"'!");
+    //     return null;
+    // }
 
-    public void ApplyStatusEffectToSelf(string name, int duration) {
-        var currentTurnId = BattleManager.instance.combatantId;
-        var statusEffect = GetStatusEffectByName(name);
-        statusEffect.duration = duration;
-        BattleManager.instance.combatants[currentTurnId].statusEffects.Add(statusEffect);
-    }
+    // public StatusEffect GetStatusEffectByName(string name) {
+    //     var effect = Instantiate(Resources.Load<StatusEffect>("Effects/" + name));
+     
+    //     if (effect != null) {
+    //         return effect;
+    //     }
+
+    //     Debug.LogError("Couldn't find status effect '" + name +"'!");
+    //     return null;
+    // }
+
+    // public void ApplyStatusEffectToSelf(string name, int duration) {
+    //     var currentTurnId = BattleManager.instance.combatantId;
+    //     var statusEffect = GetStatusEffectByName(name);
+    //     statusEffect.duration = duration;
+    //     BattleManager.instance.combatants[currentTurnId].statusEffects.Add(statusEffect);
+    // }
 }

@@ -5,4 +5,6 @@ public class ButtonWithImage : MonoBehaviour {
 
     public Image image;
     public Text text;
+
+    public ButtonLongPress buttonLongPress;
 }

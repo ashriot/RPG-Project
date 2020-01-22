@@ -10,9 +10,10 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 9398440df1425b34f9da67b01b4b292b, type: 3}
-  m_Name: Taunt
+  m_Name: Burning Armor
   m_EditorClassIdentifier: 
-  name: Taunt
-  description: Forces all targets to attack you.
-  duration: 0
+  name: Burning Armor
+  expiry: 0
+  description: Armor is temporarily increased; attackers have a chance to be Burned.
   potency: 0
+  statModified: 8

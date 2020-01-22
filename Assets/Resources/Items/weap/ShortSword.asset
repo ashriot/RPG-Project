@@ -29,9 +29,9 @@ MonoBehaviour:
   armorBonus: 0
   resistBonus: 0
   criticalIntensityBonus: 0
-  baseAttack: 3
-  minimumDamage: 6
-  maximumDamage: 8
+  baseAttack: 5
+  minimumDamage: 8
+  maximumDamage: 12
   delay: 1
   hitType: 4
   avoidType: 5
