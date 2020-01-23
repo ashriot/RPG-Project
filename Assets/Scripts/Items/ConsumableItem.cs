@@ -5,7 +5,7 @@ public class ConsumableItem : Item {
 
     public int potency;
     public override void Discard() {
-        InventoryManager.instance.RemoveItem(id);
+        InventoryManager.instance.RemoveItemById(id);
     }
 
     public override void Use(int targetId) {    // or Equip

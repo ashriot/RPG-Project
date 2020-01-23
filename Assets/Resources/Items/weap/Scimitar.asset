@@ -20,18 +20,10 @@ MonoBehaviour:
   sprite: {fileID: 2425125559403032947, guid: 8c500e45b904a74468ea62831fc2b0dc, type: 3}
   quantity: 1
   equipmentType: 4
-  hpBonus: 0
-  mpBonus: 0
-  attackBonus: 0
-  defenseBonus: 0
-  magicBonus: 0
-  speedBonus: 1
-  armorBonus: 0
-  resistBonus: 0
-  criticalIntensityBonus: 0
-  baseAttack: 5
-  minimumDamage: 5
-  maximumDamage: 10
+  statBonuses: 0000000000000000000000000000000000000000010000000000000000000000
+  baseAttack: 4
+  minimumDamage: 6
+  maximumDamage: 9
   delay: 0.75
   hitType: 4
   avoidType: 5

@@ -43,7 +43,7 @@ public class EventNotification : MonoBehaviour {
     }
 
     public void GenerateLootNote(string itemId) {
-        var item = InventoryManager.instance.FindItemReference(itemId);
+        var item = InventoryManager.instance.GetItemReference(itemId);
 
         image.sprite = item.sprite;
         notificationText.text = item.name;

@@ -26,29 +26,30 @@ public class Shield : Hands {
         var result = string.Empty;
 
         result += (blockChance*100) + "% chance to block " + blockAmount + " DMG";
-        if (hpBonus > 0) {
-            result += "\nHP+" + hpBonus;
+
+        if (statBonuses[(int)Stats.Hp] > 0) {
+            result += "\nHP+" + statBonuses[(int)Stats.Hp];
         }
-        if (mpBonus > 0) {
-            result += "\nMP+" + mpBonus;
+        if (statBonuses[(int)Stats.Mp] > 0) {
+            result += "\nMP+" + statBonuses[(int)Stats.Mp];
         }
-        if (attackBonus > 0) {
-            result += "\nATK+" + attackBonus;
+        if (statBonuses[(int)Stats.Attack] > 0) {
+            result += "\nATK+" + statBonuses[(int)Stats.Attack];
         }
-        if (defenseBonus > 0) {
-            result += "\nDEF+" + defenseBonus;
+        if (statBonuses[(int)Stats.Defense] > 0) {
+            result += "\nDEF+" + statBonuses[(int)Stats.Defense];
         }
-        if (magicBonus > 0) {
-            result += "\nMAG+" + magicBonus;
+        if (statBonuses[(int)Stats.Magic] > 0) {
+            result += "\nMAG+" + statBonuses[(int)Stats.Magic];
         }
-        if (speedBonus > 0) {
-            result += "\nSPD+" + speedBonus;
+        if (statBonuses[(int)Stats.Speed] > 0) {
+            result += "\nSPD+" + statBonuses[(int)Stats.Speed];
         }
-        if (armorBonus > 0) {
-            result += "\nARM+" + armorBonus;
+        if (statBonuses[(int)Stats.Armor] > 0) {
+            result += "\nARM+" + statBonuses[(int)Stats.Armor];
         }
-        if (resistBonus > 0) {
-            result += "\nRES+" + resistBonus;
+        if (statBonuses[(int)Stats.Resist] > 0) {
+            result += "\nRES+" + statBonuses[(int)Stats.Resist];
         }
 
         return result;

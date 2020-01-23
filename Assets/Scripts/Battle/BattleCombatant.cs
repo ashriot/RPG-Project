@@ -28,7 +28,7 @@ public class BattleCombatant : MonoBehaviour {
 
     public bool isDualWielding {
         get {
-            if (mainHand != null && offHand != null && offHand.equipmentType == EquipmentType.LightWeapon) {
+            if (mainHand != null && offHand != null && offHand.equipmentType == EquipmentTypes.LightWeapon) {
                 return true;
             }
             else {

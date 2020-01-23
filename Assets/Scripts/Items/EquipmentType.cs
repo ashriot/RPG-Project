@@ -1,5 +1,5 @@
 ﻿[System.Serializable]
-public enum EquipmentType {
+public enum EquipmentTypes {
     Accessory,
     ClothArmor,
     LightArmor,

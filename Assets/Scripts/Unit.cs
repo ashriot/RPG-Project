@@ -25,6 +25,7 @@ public abstract class Unit : MonoBehaviour {
     public int deflect, barrier;
 
     public Stat attack, defense, magic, speed, armor, resist, critPower;
+    public int[] statBonuses = new int[(int)Stats.Count];
     
     public List<StatusEffect> statusEffects = new List<StatusEffect>();
 

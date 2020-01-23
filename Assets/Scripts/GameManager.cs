@@ -21,111 +21,15 @@ public class GameManager : MonoBehaviour {
     }
 
     void Start() {
+        for (var h = 0; h < heroes.Length; h++) {
+            heroes[h] = Instantiate(heroes[h]);
+        }
 
-        for (var i = 0; i < heroes.Length; i++) {
-            heroes[i] = Instantiate(heroes[i]);
-
-            // check equipment
-            var hpBonus = 0;
-            var mpBonus = 0;
-            var attackBonus = 0;
-            var defenseBonus = 0;
-            var magicBonus = 0;
-            var speedBonus = 0;
-            var armorBonus = 0;
-            var resistBonus = 0;
-
-            if (heroes[i].head != null) {
-                hpBonus += heroes[i].head.hpBonus;
-                mpBonus += heroes[i].head.mpBonus;
-                attackBonus += heroes[i].head.attackBonus;
-                defenseBonus += heroes[i].head.defenseBonus;
-                magicBonus += heroes[i].head.magicBonus;
-                speedBonus += heroes[i].head.speedBonus;
-                armorBonus += heroes[i].head.armorBonus;
-                resistBonus += heroes[i].head.resistBonus;
-            }
-            if (heroes[i].body != null) {
-                hpBonus += heroes[i].body.hpBonus;
-                mpBonus += heroes[i].body.mpBonus;
-                attackBonus += heroes[i].body.attackBonus;
-                defenseBonus += heroes[i].body.defenseBonus;
-                magicBonus += heroes[i].body.magicBonus;
-                speedBonus += heroes[i].body.speedBonus;
-                armorBonus += heroes[i].body.armorBonus;
-                resistBonus += heroes[i].body.resistBonus;
-            }
-            if (heroes[i].arms != null) {
-                hpBonus += heroes[i].arms.hpBonus;
-                mpBonus += heroes[i].arms.mpBonus;
-                attackBonus += heroes[i].arms.attackBonus;
-                defenseBonus += heroes[i].arms.defenseBonus;
-                magicBonus += heroes[i].arms.magicBonus;
-                speedBonus += heroes[i].arms.speedBonus;
-                armorBonus += heroes[i].arms.armorBonus;
-                resistBonus += heroes[i].arms.resistBonus;
-            }
-            if (heroes[i].feet != null) {
-                hpBonus += heroes[i].feet.hpBonus;
-                mpBonus += heroes[i].feet.mpBonus;
-                attackBonus += heroes[i].feet.attackBonus;
-                defenseBonus += heroes[i].feet.defenseBonus;
-                magicBonus += heroes[i].feet.magicBonus;
-                speedBonus += heroes[i].feet.speedBonus;
-                armorBonus += heroes[i].feet.armorBonus;
-                resistBonus += heroes[i].feet.resistBonus;
-            }
-            if (heroes[i].ringL != null) {
-                hpBonus += heroes[i].ringL.hpBonus;
-                mpBonus += heroes[i].ringL.mpBonus;
-                attackBonus += heroes[i].ringL.attackBonus;
-                defenseBonus += heroes[i].ringL.defenseBonus;
-                magicBonus += heroes[i].ringL.magicBonus;
-                speedBonus += heroes[i].ringL.speedBonus;
-                armorBonus += heroes[i].ringL.armorBonus;
-                resistBonus += heroes[i].ringL.resistBonus;
-            }
-            if (heroes[i].ringR != null) {
-                hpBonus += heroes[i].ringR.hpBonus;
-                mpBonus += heroes[i].ringR.mpBonus;
-                attackBonus += heroes[i].ringR.attackBonus;
-                defenseBonus += heroes[i].ringR.defenseBonus;
-                magicBonus += heroes[i].ringR.magicBonus;
-                speedBonus += heroes[i].ringR.speedBonus;
-                armorBonus += heroes[i].ringR.armorBonus;
-                resistBonus += heroes[i].ringR.resistBonus;
-            }
-            if (heroes[i].mainHand != null) {
-                hpBonus += heroes[i].mainHand.hpBonus;
-                mpBonus += heroes[i].mainHand.mpBonus;
-                attackBonus += heroes[i].mainHand.attackBonus;
-                defenseBonus += heroes[i].mainHand.defenseBonus;
-                magicBonus += heroes[i].mainHand.magicBonus;
-                speedBonus += heroes[i].mainHand.speedBonus;
-                armorBonus += heroes[i].mainHand.armorBonus;
-                resistBonus += heroes[i].mainHand.resistBonus;
-            }
-            if (heroes[i].offHand != null) {
-                hpBonus += heroes[i].offHand.hpBonus;
-                mpBonus += heroes[i].offHand.mpBonus;
-                attackBonus += heroes[i].offHand.attackBonus;
-                defenseBonus += heroes[i].offHand.defenseBonus;
-                magicBonus += heroes[i].offHand.magicBonus;
-                speedBonus += heroes[i].offHand.speedBonus;
-                armorBonus += heroes[i].offHand.armorBonus;
-                resistBonus += heroes[i].offHand.resistBonus;
-            }
-
-            heroes[i].hp.bonus += hpBonus;
-            heroes[i].mp.bonus += mpBonus;
-            heroes[i].hp.SetToMax();
-            heroes[i].mp.SetToMax();
-            heroes[i].attack.bonus += attackBonus;
-            heroes[i].defense.bonus += defenseBonus;
-            heroes[i].magic.bonus += magicBonus;
-            heroes[i].speed.bonus += speedBonus;
-            heroes[i].armor.bonus += armorBonus;
-            heroes[i].resist.bonus += resistBonus;
+        UpdateHeroesEquipmentBonuses();
+        
+        for (var h = 0; h < heroes.Length; h++) {
+            heroes[h].hp.SetToMax();
+            heroes[h].mp.SetToMax();
         }
     }
 
@@ -157,6 +61,87 @@ public class GameManager : MonoBehaviour {
     //     Debug.LogError("'" + itemName + "' does not exist!");
     //     return null;
     // }
+
+    public void UpdateHeroesEquipmentBonuses(int? heroId = null, EquipmentSlots? slot = null) {
+        if (heroId != null) {
+            var id = (int)heroId;
+            UpdateHeroEquipmentBonus(id, slot);
+            heroes[id].hp.bonus = heroes[id].statBonuses[(int)Stats.Hp];
+            heroes[id].hp.Increase(heroes[id].hp.bonus);
+            heroes[id].mp.bonus = heroes[id].statBonuses[(int)Stats.Mp];
+            heroes[id].mp.Increase(heroes[id].mp.bonus);
+            heroes[id].attack.bonus = heroes[id].statBonuses[(int)Stats.Attack];
+            heroes[id].defense.bonus = heroes[id].statBonuses[(int)Stats.Defense];
+            heroes[id].magic.bonus = heroes[id].statBonuses[(int)Stats.Magic];
+            heroes[id].speed.bonus = heroes[id].statBonuses[(int)Stats.Speed];
+            heroes[id].armor.bonus = heroes[id].statBonuses[(int)Stats.Armor];
+            heroes[id].resist.bonus = heroes[id].statBonuses[(int)Stats.Resist];
+        } else {
+            for (var h = 0; h < heroes.Length; h++) {
+                for (var i = 0; i < (int)Stats.Count; i++) {
+                    for (var j = 0; j < 6; j++) {
+                        if (heroes[h].bodyEquipment[j] != null) {
+                            heroes[h].statBonuses[i] += heroes[h].bodyEquipment[j].statBonuses[i];
+                        }
+                    }
+                    for (var j = 0; j < 2; j++) {
+                        if (heroes[h].handEquipment[j] != null) {
+                            heroes[h].statBonuses[i] += heroes[h].handEquipment[j].statBonuses[i];
+                        }
+                    }
+                }
+                heroes[h].hp.bonus = heroes[h].statBonuses[(int)Stats.Hp];
+                heroes[h].hp.Increase(heroes[h].hp.bonus);
+                heroes[h].mp.bonus = heroes[h].statBonuses[(int)Stats.Mp];
+                heroes[h].mp.Increase(heroes[h].mp.bonus);
+                heroes[h].attack.bonus = heroes[h].statBonuses[(int)Stats.Attack];
+                heroes[h].defense.bonus = heroes[h].statBonuses[(int)Stats.Defense];
+                heroes[h].magic.bonus = heroes[h].statBonuses[(int)Stats.Magic];
+                heroes[h].speed.bonus = heroes[h].statBonuses[(int)Stats.Speed];
+                heroes[h].armor.bonus = heroes[h].statBonuses[(int)Stats.Armor];
+                heroes[h].resist.bonus = heroes[h].statBonuses[(int)Stats.Resist];
+            }
+        }
+    }
+
+    public void RemoveEquipmentBonus(int heroId, EquipmentSlots slot) {
+        var slotId = (int)slot;
+        for (var i = 0; i < (int)Stats.Count; i++) {
+                if (heroes[heroId].bodyEquipment[slotId] != null) {
+                    if (slotId < 6) {
+                        heroes[heroId].statBonuses[i] -= heroes[heroId].bodyEquipment[slotId].statBonuses[i];
+                    } else { // hands
+                        heroes[heroId].statBonuses[i] -= heroes[heroId].handEquipment[slotId].statBonuses[i];
+                }
+            }
+        }
+    }
+
+    private void UpdateHeroEquipmentBonus(int heroId, EquipmentSlots? slot) {
+        if (slot != null) {
+            UpdateHeroSlotBonus(heroId, (EquipmentSlots)slot);
+        }
+        else {
+            for (var i = 0; i < (int)EquipmentSlots.Count; i++) {
+                UpdateHeroSlotBonus(heroId, (EquipmentSlots)i);
+            }
+        }
+    }
+
+    private void UpdateHeroSlotBonus(int heroId, EquipmentSlots slot) {
+        var slotId = (int)slot;
+        for (var i = 0; i < (int)Stats.Count; i++) {
+            if (slotId < 6) {
+                if (heroes[heroId].bodyEquipment[slotId] != null) {
+                    heroes[heroId].statBonuses[i] += heroes[heroId].bodyEquipment[slotId].statBonuses[i];
+                }
+            } else { // hands
+                if (heroes[heroId].handEquipment[slotId-6] != null) {
+                    heroes[heroId].statBonuses[i] += heroes[heroId].handEquipment[slotId-6].statBonuses[i];
+                }
+            }
+        }
+    }
 
     public void SaveData() {
         // player location data

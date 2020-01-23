@@ -57,7 +57,7 @@ public class Shop : MonoBehaviour {
 
             if (itemsForSale[i] != string.Empty) {
                 buyItemButtons[i].buttonImage.gameObject.SetActive(true);
-                buyItemButtons[i].buttonImage.sprite = InventoryManager.instance.FindItemReference(itemsForSale[i]).sprite;
+                buyItemButtons[i].buttonImage.sprite = InventoryManager.instance.GetItemReference(itemsForSale[i]).sprite;
                 buyItemButtons[i].quantityText.text = string.Empty;
             } else {
                 buyItemButtons[i].buttonImage.gameObject.SetActive(false);
@@ -80,7 +80,7 @@ public class Shop : MonoBehaviour {
 
             if (InventoryManager.instance.inventory[i].id != "") {
                 sellItemButtons[i].buttonImage.gameObject.SetActive(true);
-                sellItemButtons[i].buttonImage.sprite = InventoryManager.instance.FindItemReference(InventoryManager.instance.inventory[i].id).sprite;
+                sellItemButtons[i].buttonImage.sprite = InventoryManager.instance.GetItemReference(InventoryManager.instance.inventory[i].id).sprite;
             } else {
                 sellItemButtons[i].buttonImage.gameObject.SetActive(false);
                 sellItemButtons[i].quantityText.text = string.Empty;
@@ -116,7 +116,7 @@ public class Shop : MonoBehaviour {
     public void SellItem() {
         if (selectedItem != null) {
             GameManager.instance.currentGoldPieces += Mathf.FloorToInt(selectedItem.goldValue * .5f);
-            InventoryManager.instance.RemoveItem(selectedItem.name);
+            InventoryManager.instance.RemoveItemById(selectedItem.name);
             goldText.text = GameManager.instance.currentGoldPieces.ToString("N0");
             ShowSellItems();
         }

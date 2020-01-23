@@ -5,8 +5,10 @@ public class Hero : Unit {
     public float tpChanceBase;
     public float tpChance;
     
-    public EquippableItem head, body, arms, feet, ringL, ringR;
-    public Hands mainHand, offHand;
+	[LabeledArray(new string[] {"Head", "Body", "Arms", "Feet", "Ring L", "Ring R"})]
+    public EquippableItem[] bodyEquipment = new EquippableItem[6];
+	[LabeledArray(new string[] {"Main Hand", "Off-hand"})]
+    public Hands[] handEquipment = new Hands[2];
 
     // attribute masteries
     public int[] attributeSkillValues;
@@ -34,5 +36,15 @@ public class Hero : Unit {
             totalSp++;
             req = xpRequiredForNextSkillPoint();
         }
+    }
+
+    public EquippableItem GetBodyEquipment(EquipmentSlots slot) {
+        var slotId = (int)slot;
+        return bodyEquipment[slotId];
+    }
+    
+    public EquippableItem GetHandEquipment(EquipmentSlots slot) {
+        var slotId = (int)slot - 6;
+        return bodyEquipment[slotId];
     }
 }

@@ -1,5 +1,5 @@
 ﻿[System.Serializable]
-public enum ItemType {
+public enum ItemTypes {
     Consumable,
     Arms,
     Body,

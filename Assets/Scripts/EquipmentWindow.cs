@@ -2,14 +2,14 @@
 using UnityEngine.UI;
 
 public class EquipmentWindow : MonoBehaviour {
-    public ButtonWithImage headButton;
-    public ButtonWithImage bodyButton;
-    public ButtonWithImage armsButton;
-    public ButtonWithImage feetButton;
-    public ButtonWithImage ringLButton;
-    public ButtonWithImage ringRButton;
-    public ButtonWithImage mainHandButton;
-    public ButtonWithImage offHandButton;
+    public EquipmentButton headButton;
+    public EquipmentButton bodyButton;
+    public EquipmentButton armsButton;
+    public EquipmentButton feetButton;
+    public EquipmentButton ringLButton;
+    public EquipmentButton ringRButton;
+    public EquipmentButton mainHandButton;
+    public EquipmentButton offHandButton;
     public EquippableItem head;
     public EquippableItem body;
     public EquippableItem arms;
@@ -18,6 +18,10 @@ public class EquipmentWindow : MonoBehaviour {
     public EquippableItem ringR;
     public Hands mainHand;
     public Hands offHand;
+
+    public EquipmentButton[] buttons;
+    public EquippableItem[] equipment;
+    public Hands[] hands;
 
     public Text mainHandAtkOrBlk;
     public Text mainHandDmgOrAmt;

@@ -5,7 +5,7 @@ public abstract class Item : ScriptableObject {
     
     [Header("Basic Details")]
     public string id;
-    public ItemType itemType;
+    public ItemTypes itemType;
     public new string name;
     public string description;
     public int goldValue;

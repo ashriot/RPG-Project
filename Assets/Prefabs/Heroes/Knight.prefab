@@ -178,7 +178,7 @@ MonoBehaviour:
   ringL: {fileID: 11400000, guid: e7f4044147f66e045b993f1e127f2e1f, type: 2}
   ringR: {fileID: 11400000, guid: 4f36306fe6a84ec468500dc1b6430249, type: 2}
   mainHand: {fileID: 11400000, guid: 538da7e1706915c42b8a32b66812466f, type: 2}
-  offHand: {fileID: 0}
+  offHand: {fileID: 11400000, guid: a2bd5575302112d428664921cffe28b3, type: 2}
   attributeSkillValues: 000000000000000000000000000000000000000000000000
   combatSkillValues: 
   magicSkillValues: 

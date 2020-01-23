@@ -20,9 +20,9 @@ public class InventoryManager : MonoBehaviour {
     }
 
     public void AddItem(string id, int qty) {
-        var item = Instantiate(FindItemReference(id));
+        var item = Instantiate(GetItemReference(id));
         for (var i = 0; i < qty; i++) {
-            if (item.itemType == ItemType.Consumable) {
+            if (item.itemType == ItemTypes.Consumable) {
                 var prevItem = FetchItemFromInventory(id);
                 if (prevItem != null) {
                     prevItem.quantity++;
@@ -35,7 +35,7 @@ public class InventoryManager : MonoBehaviour {
         }
     }
 
-    public void RemoveItem(string id) {
+    public void RemoveItemById(string id) {
         var item = FetchItemFromInventory(id);
         inventory.Remove(item);
     }
@@ -56,7 +56,7 @@ public class InventoryManager : MonoBehaviour {
             .ToList();
     }
 
-    public Item FindItemReference(string id) {
+    public Item GetItemReference(string id) {
         var folder = id.Substring(0, 4);
         var itemName = id.Substring(4, id.Length-4);
         var item = Instantiate(Resources.Load<Item>("Items/" + folder + "/" + itemName));

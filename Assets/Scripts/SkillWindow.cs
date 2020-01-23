@@ -1,7 +1,7 @@
 ﻿using UnityEngine;
 using UnityEngine.UI;
 
-public class SkillMenuDisplay : MonoBehaviour {
+public class SkillWindow : MonoBehaviour {
     public new Text name;
     public Text skillPoints, xp;
 
@@ -9,7 +9,7 @@ public class SkillMenuDisplay : MonoBehaviour {
 
     public void OpenAttributesWindow() {
         GameMenu.instance.PlayOpenSound();
-        GameMenu.instance.ShowBackButton();
+        GameMenu.instance.ShowBackButton(attributesWindow);
         attributesWindow.SetActive(true);
     }
 }

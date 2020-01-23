@@ -3,69 +3,45 @@
 [System.Serializable, CreateAssetMenu(fileName = "Equipment", menuName = "Equipment")]
 public class EquippableItem : Item {
 
-    public EquipmentType equipmentType;
-    public int hpBonus;
-    public int mpBonus;
-    public int attackBonus;
-    public int defenseBonus;
-    public int magicBonus;
-    public int speedBonus;
-    public int armorBonus;
-    public int resistBonus;
-    public int criticalIntensityBonus;
+    public EquipmentTypes equipmentType;
+	
+	[LabeledArray(typeof(Stats))]
+    public int[] statBonuses = new int[(int)Stats.Count];
 
     public override void Discard() {
-        InventoryManager.instance.RemoveItem(id);
+        InventoryManager.instance.RemoveItemById(id);
     }
 
     public override void Use(int targetId) {    // or Equip
-        switch (itemType) {
-            case ItemType.Arms:
-                break;
-            case ItemType.Body:
-                break;
-            case ItemType.Feet:
-                break;
-            case ItemType.Finger:
-                break;
-            case ItemType.Hands:
-                break;
-            case ItemType.Head:
-                break;
-            case ItemType.Quest:
-                break;
-            default:
-                Debug.LogError("Item type '" + itemType + "' does not exist!");
-                break;
-        }
+        //
     }
 
     public override string GetStatsString() {
         var result = string.Empty;
 
-        if (hpBonus > 0) {
-            result += "\nHP+" + hpBonus;
+        if (statBonuses[(int)Stats.Hp] > 0) {
+            result += "\nHP+" + statBonuses[(int)Stats.Hp];
         }
-        if (mpBonus > 0) {
-            result += "\nMP+" + mpBonus;
+        if (statBonuses[(int)Stats.Mp] > 0) {
+            result += "\nMP+" + statBonuses[(int)Stats.Mp];
         }
-        if (attackBonus > 0) {
-            result += "\nATK+" + attackBonus;
+        if (statBonuses[(int)Stats.Attack] > 0) {
+            result += "\nATK+" + statBonuses[(int)Stats.Attack];
         }
-        if (defenseBonus > 0) {
-            result += "\nDEF+" + defenseBonus;
+        if (statBonuses[(int)Stats.Defense] > 0) {
+            result += "\nDEF+" + statBonuses[(int)Stats.Defense];
         }
-        if (magicBonus > 0) {
-            result += "\nMAG+" + magicBonus;
+        if (statBonuses[(int)Stats.Magic] > 0) {
+            result += "\nMAG+" + statBonuses[(int)Stats.Magic];
         }
-        if (speedBonus > 0) {
-            result += "\nSPD+" + speedBonus;
+        if (statBonuses[(int)Stats.Speed] > 0) {
+            result += "\nSPD+" + statBonuses[(int)Stats.Speed];
         }
-        if (armorBonus > 0) {
-            result += "\nARM+" + armorBonus;
+        if (statBonuses[(int)Stats.Armor] > 0) {
+            result += "\nARM+" + statBonuses[(int)Stats.Armor];
         }
-        if (resistBonus > 0) {
-            result += "\nRES+" + resistBonus;
+        if (statBonuses[(int)Stats.Resist] > 0) {
+            result += "\nRES+" + statBonuses[(int)Stats.Resist];
         }
 
         return result;

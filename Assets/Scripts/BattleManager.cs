@@ -30,7 +30,7 @@ public class BattleManager : MonoBehaviour {
     public string gameOverScene;
     public BattleAttackButton[] menuButtons;
 
-    public GameObject subMenu;
+    public GameObject openWindow;
     public Sprite fleeSprite;
     public Sprite backSprite;
     public Sprite menuSprite;
@@ -145,8 +145,8 @@ public class BattleManager : MonoBehaviour {
                         combatants[i].armor = heroes[i].armor.value;
                         combatants[i].resist = heroes[i].resist.value;
                         combatants[i].deadSprite = heroes[i].deadSprite;
-                        combatants[i].mainHand = heroes[i].mainHand;
-                        combatants[i].offHand = heroes[i].offHand;
+                        combatants[i].mainHand = heroes[i].handEquipment[0];
+                        combatants[i].offHand = heroes[i].handEquipment[1];
                         combatants[i].abilities = heroes[i].skills;
                         combatants[i].spells = heroes[i].spells;
                         combatants[i].tpChanceBase = heroes[i].tpChanceBase;
@@ -395,22 +395,22 @@ public class BattleManager : MonoBehaviour {
     }
 
     private void SetMenuButtonToBack(GameObject window) {
-        subMenu = window;
+        openWindow = window;
         GameMenu.instance.mainMenuButtonIcon.sprite = backSprite;
         GameMenu.instance.mainMenuButtonText.text = "<Back";
     }
 
     public void SetMenuButtonToFlee() {
-        if (subMenu != null) {
-            subMenu.SetActive(false);
-            subMenu = null;
+        if (openWindow != null) {
+            openWindow.SetActive(false);
+            openWindow = null;
         }
         GameMenu.instance.mainMenuButtonIcon.sprite = fleeSprite;
         GameMenu.instance.mainMenuButtonText.text = "Flee";
     }
 
     private void ResetMainMenuButton() {
-        subMenu = null;
+        openWindow = null;
         GameMenu.instance.mainMenuButtonIcon.sprite = menuSprite;
         GameMenu.instance.mainMenuButtonText.text = "Menu";
     }
@@ -671,7 +671,7 @@ public class BattleManager : MonoBehaviour {
                 var weapon = combatant.mainHand as Weapon;
                 action.minimumPotency = weapon.minimumDamage;
                 action.maximumPotency = weapon.maximumDamage;
-                hitPower += combatant.mainHand.attackBonus - (combatant.isDualWielding ? 6 : 0);
+                // hitPower += combatant.mainHand.statBonuses[(int)Stats.Attack] - (combatant.isDualWielding ? 6 : 0);
             }
 
             damageToDeal = Random.Range(action.minimumPotency, action.maximumPotency);
@@ -780,7 +780,7 @@ public class BattleManager : MonoBehaviour {
     }
     
     public IEnumerator<WaitForSeconds> HeroActionCoroutine(Ability ability) {
-        if (subMenu != null) {
+        if (openWindow != null) {
             SetMenuButtonToFlee();
         }
         if (ability.chargeType == ChargeTypes.Charge) {

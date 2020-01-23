@@ -1,4 +1,6 @@
-﻿using UnityEngine;
+﻿using System.Collections.Generic;
+using System.Linq;
+using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.SceneManagement;
 
@@ -9,7 +11,6 @@ public class GameMenu : MonoBehaviour {
     [Header("Object References")]
     public Canvas canvas;
     public EventNotification note;
-    public GameObject statsWindow;
     public Text goldKeyText;
     public Text silverKeyText;
     public Text goldText;
@@ -31,17 +32,27 @@ public class GameMenu : MonoBehaviour {
     public StatPanelDisplay[] heroStatPanels;
     public HeroDisplay miniStatPanelDisplay;
     public HeroDisplay heroDisplayStatus;
-    public SkillMenuDisplay skillMenu;
+    public GameObject statsWindow;
+    public SkillWindow skillWindow;
+    public GameObject inventoryWindow;
     public EquipmentWindow equipmentWindow;
     public string[] skillNames;
 
     [Header("Inventory Refs")]
     public ItemButton[] itemButtons;
+    public Item clickedItem;
+    public EquippableItem clickedEquipment;
+    public Image selectedItemCursor;
+    public Color red;
+    public Color green;
+    public Color white;
+    public Color gold;
 
     [Header("Sub Menus")]
     public GameObject tooltipPanel;
     public Text tooltipText;
     public GameObject inventorySubMenu;
+    public ItemSubMenu itemSubMenu;
     public GameObject equipmentSubMenu;
 
     [Header("Data Trackers")]
@@ -49,6 +60,9 @@ public class GameMenu : MonoBehaviour {
     public int currentHeroId = 0;
 
     public Hero[] heroes;
+
+    private GameObject subWindow;
+    private GameObject subMenu;
 
     void Awake () {
         if (instance == null) {
@@ -85,13 +99,8 @@ public class GameMenu : MonoBehaviour {
     }
 
     public void Back() {
-        if (skillMenu.gameObject.activeInHierarchy) {
-            if (skillMenu.attributesWindow.activeInHierarchy) {
-                AudioManager.instance.PlaySfx("click");
-                skillMenu.attributesWindow.SetActive(false);
-                HideBackButton();
-            }
-        }
+        ClearPreviews();
+        HideBackButton();
     }
 
     public void CloseMainMenu() {
@@ -135,7 +144,7 @@ public class GameMenu : MonoBehaviour {
 
     public void ClickMainMenuButton() {
         if (GameManager.instance.battleActive) {
-            if (BattleManager.instance.subMenu != null) {
+            if (BattleManager.instance.openWindow != null) {
                 PlayClickSound();
                 BattleManager.instance.SetMenuButtonToFlee();
             }
@@ -152,6 +161,9 @@ public class GameMenu : MonoBehaviour {
     }
 
     public void ClickMenuButton(int buttonId) {
+        HideAllSubMenus();
+        HideSelectedItemCursor();
+        ClearPreviews();
         if (currentWindowId != buttonId) {
             currentWindowId = buttonId;
             PlayClickSound();
@@ -197,84 +209,106 @@ public class GameMenu : MonoBehaviour {
         // miniStatPanelDisplay.xp.text = "XP: " + hero.xp + "/" + hero.level * 100;
         miniStatPanelDisplay.sp.text = hero.sp.ToString();
         miniStatPanelDisplay.hp.text = hero.hp.maximum.ToString();
+        miniStatPanelDisplay.hp.GetComponentInParent<ButtonLongPress>().description = "Hit Points [HP]\nOnce a unit reaches 0 HP, they fall unconscious and lose 1 CON.\nBase: " + hero.hp.baseMax.ToString() + "\nBonus: " + hero.hp.bonus.ToString();
         miniStatPanelDisplay.mp.text = hero.mp.maximum.ToString();
+        miniStatPanelDisplay.mp.GetComponentInParent<ButtonLongPress>().description = "Magic Points [MP]\nUsed to cast spells and use magical abilities.\nBase: " + hero.mp.baseMax + "\nBonus: " + hero.mp.bonus;
         miniStatPanelDisplay.attack.text = hero.attack.value.ToString();
+        miniStatPanelDisplay.attack.GetComponentInParent<ButtonLongPress>().description = "Attack [ATK]\nCompared to enemy Defense to determine weapon accuracy.\nBase: " + hero.attack.baseValue + "\nBonus: " + hero.attack.bonus;
         miniStatPanelDisplay.defense.text = hero.defense.value.ToString();
+        miniStatPanelDisplay.defense.GetComponentInParent<ButtonLongPress>().description = "Defense [DEF]\nReduces enemy's Attack to reduce their weapon accuracy.\nBase: " + hero.defense.baseValue + "\nBonus: " + hero.defense.bonus;
         miniStatPanelDisplay.magic.text = hero.magic.value.ToString();
+        miniStatPanelDisplay.magic.GetComponentInParent<ButtonLongPress>().description = "Magic [MAG]\nCompared to enemy's Magic to determine magic accuracy.0\nBase: " + hero.magic.baseValue + "\nBonus: " + hero.magic.bonus;
         miniStatPanelDisplay.speed.text = hero.speed.value.ToString();
+        miniStatPanelDisplay.speed.GetComponentInParent<ButtonLongPress>().description = "Speed [SPD]\nDetermines how quickly a unit receives their turns.\nBase: " + hero.speed.baseValue + "\nBonus: " + hero.speed.bonus;
         miniStatPanelDisplay.armor.text = hero.armor.value.ToString();
+        miniStatPanelDisplay.armor.GetComponentInParent<ButtonLongPress>().description = "Armor [ARM]\nReduces incoming physical damage.\nBase: " + hero.armor.baseValue + "\nBonus: " + hero.armor.bonus;
         miniStatPanelDisplay.resist.text = hero.resist.value.ToString();
+        miniStatPanelDisplay.resist.GetComponentInParent<ButtonLongPress>().description = "Resist [RES]\nReduces incoming magical damage.\nBase: " + hero.resist.baseValue + "\nBonus: " + hero.resist.bonus;
 
-        var green = new Color(.3843f, .7019f, .3294f, 1f);
-        var white = new Color(1f, .9450f, .9137f, 1f);
         if (hero.hp.bonus > 0) {
-            miniStatPanelDisplay.hp.color = green;
+            miniStatPanelDisplay.hp.color = gold;
         } else {
             miniStatPanelDisplay.hp.color = white;
         }
         if (hero.mp.bonus > 0) {
-            miniStatPanelDisplay.mp.color = green;
+            miniStatPanelDisplay.mp.color = gold;
         } else {
             miniStatPanelDisplay.mp.color = white;
         }
         if (hero.attack.bonus > 0) {
-            miniStatPanelDisplay.attack.color = green;
+            miniStatPanelDisplay.attack.color = gold;
         } else {
             miniStatPanelDisplay.attack.color = white;
         }
         if (hero.defense.bonus > 0) {
-            miniStatPanelDisplay.defense.color = green;
+            miniStatPanelDisplay.defense.color = gold;
         } else {
             miniStatPanelDisplay.defense.color = white;
         }
         if (hero.magic.bonus > 0) {
-            miniStatPanelDisplay.magic.color = green;
+            miniStatPanelDisplay.magic.color = gold;
         } else {
             miniStatPanelDisplay.magic.color = white;
         }
         if (hero.speed.bonus > 0) {
-            miniStatPanelDisplay.speed.color = green;
+            miniStatPanelDisplay.speed.color = gold;
         } else {
             miniStatPanelDisplay.speed.color = white;
         }
         if (hero.armor.bonus > 0) {
-            miniStatPanelDisplay.armor.color = green;
+            miniStatPanelDisplay.armor.color = gold;
         } else {
             miniStatPanelDisplay.armor.color = white;
         }
         if (hero.resist.bonus > 0) {
-            miniStatPanelDisplay.resist.color = green;
+            miniStatPanelDisplay.resist.color = gold;
         } else {
             miniStatPanelDisplay.resist.color = white;
         }
     }
 
-    public void ShowBackButton() {
+    public void ShowBackButton(GameObject window) {
+        subWindow = window;
+        subWindow.SetActive(true);
         backButton.gameObject.SetActive(true);
     }
 
     public void HideBackButton() {
+        if (subWindow != null) {
+            subWindow.SetActive(false);
+            subWindow = null;
+        }
         backButton.gameObject.SetActive(false);
     }
 
     public void HideAllSubMenus() {
         inventorySubMenu.SetActive(false);
+        itemSubMenu.gameObject.SetActive(false);
         equipmentSubMenu.SetActive(false);
     }
 
-    public void OpenInventory() {
-        HideAllSubMenus();
-        inventorySubMenu.SetActive(true);
+    private void HideSelectedItemCursor() {
+        selectedItemCursor.gameObject.SetActive(false);
+    }
+
+    public void OpenInventory(EquipmentButton button = null) {
+        clickedEquipment = null;
+        HideSelectedItemCursor();
+        if (button == null) {
+            HideAllSubMenus();
+            inventorySubMenu.SetActive(true);
+        }
         UpdateStats();
-        SetInventory();
+        SetInventory(button);
         UpdateMiniStatPanel();
     }
 
     public void OpenEquipment() {
+        clickedEquipment = null;
         HideAllSubMenus();
         equipmentSubMenu.SetActive(true);
         UpdateStats();
-        SetHeroEquipment();
+        SetEquipment();
         UpdateMiniStatPanel();
     }
 
@@ -335,20 +369,120 @@ public class GameMenu : MonoBehaviour {
         // }
     }
 
-    public void SetInventory() {
+    private void ClearPreviews() {
+        foreach(var preview in miniStatPanelDisplay.statPreviews) {
+            preview.gameObject.SetActive(false);
+        }
+    }
+
+    public void ClickItem(ItemButton button) {
+        selectedItemCursor.gameObject.SetActive(true);
+        selectedItemCursor.transform.position = button.transform.position;
+        AudioManager.instance.PlaySfx("click");
+        HideAllSubMenus();
+        clickedItem = button.item;
+        if (clickedItem.GetType() == typeof(EquippableItem)
+            || clickedItem.GetType() == typeof(Weapon)
+            || clickedItem.GetType() == typeof(Shield)) {
+            itemSubMenu.UseText.text = "Equip";
+        } else {
+            itemSubMenu.UseText.text = "Use";
+        }
+        itemSubMenu.gameObject.SetActive(true);
+        Debug.Log("Item clicked: " + button.item.name);
+        if (clickedItem.GetType() == typeof(EquippableItem) // comparing equipment
+            || clickedItem.GetType() == typeof(Weapon)
+            || clickedItem.GetType() == typeof(Shield)) {
+            ClearPreviews();
+            var itemPreview = clickedItem as EquippableItem;
+            var comparisonItem = clickedEquipment;
+            var secondaryComparison = ScriptableObject.CreateInstance<EquippableItem>();
+            if (comparisonItem == null) {
+                if (clickedItem.GetType() == typeof(EquippableItem))
+                if (clickedItem.itemType == ItemTypes.Arms) {
+                    comparisonItem = heroes[currentHeroId].GetBodyEquipment(EquipmentSlots.Arms);
+                    itemSubMenu.slot = EquipmentSlots.Arms;
+                }
+                if (clickedItem.itemType == ItemTypes.Body) {
+                    comparisonItem = heroes[currentHeroId].GetBodyEquipment(EquipmentSlots.Body);
+                    itemSubMenu.slot = EquipmentSlots.Body;
+                }
+                if (clickedItem.itemType == ItemTypes.Feet) {
+                    comparisonItem = heroes[currentHeroId].GetBodyEquipment(EquipmentSlots.Feet);
+                    itemSubMenu.slot = EquipmentSlots.Feet;
+                }
+                if (clickedItem.itemType == ItemTypes.Head) {
+                    comparisonItem = heroes[currentHeroId].GetBodyEquipment(EquipmentSlots.Head);
+                    itemSubMenu.slot = EquipmentSlots.Head;
+                }
+                if (clickedItem.itemType == ItemTypes.Finger) {
+                    comparisonItem = heroes[currentHeroId].GetBodyEquipment(EquipmentSlots.RingL);
+                    secondaryComparison = heroes[currentHeroId].GetBodyEquipment(EquipmentSlots.RingR);
+                }
+            }
+            var currentItem = comparisonItem == null ? ScriptableObject.CreateInstance<EquippableItem>() : comparisonItem;
+            var delta = 0;
+            var delta2 = 0;
+            for (var i = 0; i < (int)Stats.Count; i++) {
+                delta = itemPreview.statBonuses[i] - currentItem.statBonuses[i];
+                if (secondaryComparison.id != null) {
+                    delta2 = itemPreview.statBonuses[i] - secondaryComparison.statBonuses[i];
+                }
+                if (delta != 0) {
+                    miniStatPanelDisplay.statPreviews[i].gameObject.SetActive(true);
+                    miniStatPanelDisplay.statPreviews[i].color = delta > 0 ? green : red;
+                    miniStatPanelDisplay.statPreviews[i].text = delta > 0 ? "+" + delta : delta.ToString();
+                }
+                if (delta2 != 0) {
+                    if (miniStatPanelDisplay.statPreviews[i].gameObject.activeInHierarchy) {
+                        miniStatPanelDisplay.statPreviews[i].color = delta > 0 ? green : red;
+                        miniStatPanelDisplay.statPreviews[i].text += "/" + (delta2 > 0 ? "+" + delta2 : delta2.ToString());
+                    } else {
+                        miniStatPanelDisplay.statPreviews[i].gameObject.SetActive(true);
+                        miniStatPanelDisplay.statPreviews[i].color = delta2 > 0 ? green : red;
+                        miniStatPanelDisplay.statPreviews[i].text = "-/" + (delta2 > 0 ? "+" + delta2 : delta2.ToString());
+                    }
+                } else if (secondaryComparison.id != null) {
+                    miniStatPanelDisplay.statPreviews[i].text += "/-";
+                }
+            }
+        }
+    }
+
+    public void SetInventory(EquipmentButton button = null) {
         var inventory = InventoryManager.instance.inventory;
+        if (button != null) {
+            var item = button.equippedItem;
+            var handFilter = new List<EquipmentTypes>();
+            if (button.slot == EquipmentSlots.MainHand) {
+                handFilter.Add(EquipmentTypes.HeavyWeapon);
+                handFilter.Add(EquipmentTypes.LightWeapon);
+                handFilter.Add(EquipmentTypes.MagicWeapon);
+            } else if (button.slot == EquipmentSlots.OffHand) {
+                handFilter.Add(EquipmentTypes.LightWeapon);
+                handFilter.Add(EquipmentTypes.Shield);
+            }
+            ShowBackButton(inventoryWindow);
+            inventory = inventory.Where(i => i.itemType == button.itemType).ToList();
+            if (handFilter.Count > 0) {
+                var equipment = inventory.Cast<Hands>();
+                inventory = equipment.Where(e => handFilter.Contains(e.equipmentType)).Cast<Item>().ToList();
+            }
+        }
+
         for (var i = 0; i < itemButtons.Length; i++) {
             if (i >= inventory.Count) {
                 itemButtons[i].gameObject.SetActive(false);
             } else {
                 itemButtons[i].gameObject.SetActive(true);
                 itemButtons[i].buttonId = i;
+                itemButtons[i].item = inventory[i];
                 itemButtons[i].nameText.text = inventory[i].name;
                 itemButtons[i].buttonImage.sprite = inventory[i].sprite;
                 itemButtons[i].buttonLongPress.description = inventory[i].name + "\n";
                 itemButtons[i].buttonLongPress.description += inventory[i].description + "\n";
                 itemButtons[i].buttonLongPress.description += inventory[i].GetStatsString();
-                if (inventory[i].itemType == ItemType.Consumable) {
+                if (inventory[i].itemType == ItemTypes.Consumable) {
                     itemButtons[i].quantityText.text = "x" + inventory[i].quantity;
                 } else {
                     itemButtons[i].quantityText.gameObject.SetActive(false);
@@ -357,73 +491,53 @@ public class GameMenu : MonoBehaviour {
         }
     }
 
-    public void SetHeroEquipment() {
+    public void SetEquipment() {
         const string none = "      [None]";
 
         var hero = heroes[currentHeroId];
-        equipmentWindow.head = hero.head;
-        equipmentWindow.body = hero.body;
-        equipmentWindow.arms = hero.arms;
-        equipmentWindow.feet = hero.feet;
-        equipmentWindow.ringL = hero.ringL;
-        equipmentWindow.ringR = hero.ringR;
-        equipmentWindow.mainHand = hero.mainHand;
-        equipmentWindow.offHand = hero.offHand;
+        equipmentWindow.head = hero.bodyEquipment[(int)EquipmentSlots.Head];
+        equipmentWindow.body = hero.bodyEquipment[(int)EquipmentSlots.Body];
+        equipmentWindow.arms = hero.bodyEquipment[(int)EquipmentSlots.Arms];
+        equipmentWindow.feet = hero.bodyEquipment[(int)EquipmentSlots.Feet];
+        equipmentWindow.ringL = hero.bodyEquipment[(int)EquipmentSlots.RingL];
+        equipmentWindow.ringR = hero.bodyEquipment[(int)EquipmentSlots.RingR];
+        equipmentWindow.mainHand = hero.handEquipment[0];
+        equipmentWindow.offHand = hero.handEquipment[1];
 
-        if (equipmentWindow.head != null) {
-            equipmentWindow.headButton.image.enabled = true;
-            equipmentWindow.headButton.image.sprite = equipmentWindow.head.sprite;
-            equipmentWindow.headButton.text.text = equipmentWindow.head.name;
-        } else {
-            equipmentWindow.headButton.image.enabled = false;
-            equipmentWindow.headButton.text.text = none;
+        equipmentWindow.equipment = new EquippableItem[] {
+            equipmentWindow.head,
+            equipmentWindow.body,
+            equipmentWindow.arms,
+            equipmentWindow.feet,
+            equipmentWindow.ringL,
+            equipmentWindow.ringR,
+            equipmentWindow.mainHand,
+            equipmentWindow.offHand
+        };
+
+        for (var i = 0; i < equipmentWindow.equipment.Length; i++) {
+            if (equipmentWindow.equipment[i] != null) {
+                equipmentWindow.buttons[i].image.enabled = true;
+                equipmentWindow.buttons[i].image.sprite = equipmentWindow.equipment[i].sprite;
+                equipmentWindow.buttons[i].id = equipmentWindow.equipment[i].id;
+                equipmentWindow.buttons[i].text.text = equipmentWindow.equipment[i].name;
+                equipmentWindow.buttons[i].buttonLongPress.description = equipmentWindow.equipment[i].name + "\n";
+                equipmentWindow.buttons[i].buttonLongPress.description += equipmentWindow.equipment[i].description + "\n";
+                equipmentWindow.buttons[i].buttonLongPress.description += equipmentWindow.equipment[i].GetStatsString();
+                equipmentWindow.buttons[i].equippedItem = equipmentWindow.equipment[i];
+            } else {
+                equipmentWindow.buttons[i].image.enabled = false;
+                equipmentWindow.buttons[i].text.text = none;
+                equipmentWindow.buttons[i].buttonLongPress.description = string.Empty;
+            }
         }
-        if (equipmentWindow.body != null) {
-            equipmentWindow.bodyButton.image.enabled = true;
-            equipmentWindow.bodyButton.image.sprite = equipmentWindow.body.sprite;
-            equipmentWindow.bodyButton.text.text = equipmentWindow.body.name;
-        } else {
-            equipmentWindow.bodyButton.image.enabled = false;
-            equipmentWindow.bodyButton.text.text = none;
-        }
-        if (equipmentWindow.arms != null) {
-            equipmentWindow.armsButton.image.enabled = true;
-            equipmentWindow.armsButton.image.sprite = equipmentWindow.arms.sprite;
-            equipmentWindow.armsButton.text.text = equipmentWindow.arms.name;
-        } else {
-            equipmentWindow.armsButton.image.enabled = false;
-            equipmentWindow.armsButton.text.text = none;
-        }
-        if (equipmentWindow.feet != null) {
-            equipmentWindow.feetButton.image.enabled = true;
-            equipmentWindow.feetButton.image.sprite = equipmentWindow.feet.sprite;
-            equipmentWindow.feetButton.text.text = equipmentWindow.feet.name;
-        } else {
-            equipmentWindow.feetButton.image.enabled = false;
-            equipmentWindow.feetButton.text.text = none;
-        }
-        if (equipmentWindow.ringL != null) {
-            equipmentWindow.ringLButton.image.enabled = true;
-            equipmentWindow.ringLButton.image.sprite = equipmentWindow.ringL.sprite;
-            equipmentWindow.ringLButton.text.text = equipmentWindow.ringL.name;
-        } else {
-            equipmentWindow.ringLButton.image.enabled = false;
-            equipmentWindow.ringLButton.text.text = none;
-        }
-        if (equipmentWindow.ringR != null) {
-            equipmentWindow.ringRButton.image.enabled = true;
-            equipmentWindow.ringRButton.image.sprite = equipmentWindow.ringR.sprite;
-            equipmentWindow.ringRButton.text.text = equipmentWindow.ringR.name;
-        } else {
-            equipmentWindow.ringRButton.image.enabled = false;
-            equipmentWindow.ringRButton.text.text = none;
-        }
+
         if (equipmentWindow.mainHand != null) {
             equipmentWindow.mainHandButton.image.enabled = true;
             equipmentWindow.mainHandButton.image.sprite = equipmentWindow.mainHand.sprite;
             equipmentWindow.mainHandButton.text.text = equipmentWindow.mainHand.name;
             var penalty = 0;
-            if (equipmentWindow.offHand != null && equipmentWindow.offHand.equipmentType != EquipmentType.Shield) {
+            if (equipmentWindow.offHand != null && equipmentWindow.offHand.equipmentType != EquipmentTypes.Shield) {
                 penalty = 6;
             }
             equipmentWindow.mainHandAtkOrBlk.text = equipmentWindow.mainHand.GetAtkOrBlkString(hero.attack.value - penalty);
@@ -438,7 +552,7 @@ public class GameMenu : MonoBehaviour {
             equipmentWindow.offHandButton.image.enabled = true;
             equipmentWindow.offHandButton.image.sprite = equipmentWindow.offHand.sprite;
             equipmentWindow.offHandButton.text.text = equipmentWindow.offHand.name;
-            if (equipmentWindow.offHand.equipmentType == EquipmentType.Shield) {
+            if (equipmentWindow.offHand.equipmentType == EquipmentTypes.Shield) {
                 equipmentWindow.offHandAtkOrBlk.text = equipmentWindow.offHand.GetAtkOrBlkString();
                 equipmentWindow.offHandDmgOrAmt.text = equipmentWindow.offHand.GetDmgOrAmtString();
             } else {
@@ -455,11 +569,19 @@ public class GameMenu : MonoBehaviour {
         }
     }
 
+    public void ClickEquipment(EquipmentButton button) {
+        clickedEquipment = button.equippedItem;
+        Debug.Log("Item ID: " + button.id);
+
+        windows[1].SetActive(true);
+        OpenInventory(button);
+    }
+
     public void SetHeroSkills() {
         var hero = heroes[currentHeroId];
-        skillMenu.xp.text = "XP: " + hero.xp + "/" + hero.xpRequiredForNextSkillPoint();
+        skillWindow.xp.text = "XP: " + hero.xp + "/" + hero.xpRequiredForNextSkillPoint();
         // skillMenu.skillPoints.text = hero.sp.ToString();
-        var skillLines = skillMenu.attributesWindow.GetComponent<SkillDisplay>().skillLines;
+        var skillLines = skillWindow.attributesWindow.GetComponent<SkillDisplay>().skillLines;
         for (var i = 0; i < skillLines.Length; i++) {
             for (var j = 0; j < hero.attributeSkillValues.Length; j++) {
                 if (skillNames[j] == skillLines[i].name) {
