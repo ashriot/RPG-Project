@@ -169,17 +169,20 @@ MonoBehaviour:
   critPower:
     baseValue: 150
     bonus: 0
+  statBonuses: 0000000000000000000000000000000000000000000000000000000000000000
   statusEffects: []
   tpChanceBase: 0.1
   tpChance: 0
-  head: {fileID: 11400000, guid: 647712a93ca143249a21b3d1d5895c62, type: 2}
-  body: {fileID: 11400000, guid: f1c8d53becd8984459da65c1803742ea, type: 2}
-  arms: {fileID: 11400000, guid: 50031aa6443758b49aa0215805cb10eb, type: 2}
-  feet: {fileID: 11400000, guid: c85ca059dcce50c409b139ff1596ee89, type: 2}
-  ringL: {fileID: 11400000, guid: 1c4bd2414c1aaeb41990448180a2f34f, type: 2}
-  ringR: {fileID: 11400000, guid: 1afd7edd7bfefb840805c7a8642ec284, type: 2}
-  mainHand: {fileID: 11400000, guid: 9390d113075557b4c81c81a70974da61, type: 2}
-  offHand: {fileID: 0}
+  bodyEquipment:
+  - {fileID: 11400000, guid: 647712a93ca143249a21b3d1d5895c62, type: 2}
+  - {fileID: 11400000, guid: f1c8d53becd8984459da65c1803742ea, type: 2}
+  - {fileID: 11400000, guid: 50031aa6443758b49aa0215805cb10eb, type: 2}
+  - {fileID: 11400000, guid: c85ca059dcce50c409b139ff1596ee89, type: 2}
+  - {fileID: 11400000, guid: 1afd7edd7bfefb840805c7a8642ec284, type: 2}
+  - {fileID: 11400000, guid: 1c4bd2414c1aaeb41990448180a2f34f, type: 2}
+  handEquipment:
+  - {fileID: 11400000, guid: 9390d113075557b4c81c81a70974da61, type: 2}
+  - {fileID: 0}
   attributeSkillValues: 000000000000000000000000000000000000000000000000
   combatSkillValues: 
   magicSkillValues: 

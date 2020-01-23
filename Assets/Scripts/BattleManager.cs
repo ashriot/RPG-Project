@@ -161,7 +161,7 @@ public class BattleManager : MonoBehaviour {
             if (enemyIds[i] != string.Empty) {
                 var enemyPrefab = GetEnemyPrefabById(enemyIds[i]);
                 var newEnemy = Instantiate(enemyPrefab, enemyPositions[i].position, enemyPositions[i].rotation);
-                enemyStatWindows[i].enemyIcon.sprite = enemyIcons[i - partySizeOffset];
+                enemyStatWindows[i].enemyIcon.sprite = enemyIcons[i];
                 SetEnemyTargetAndAction(newEnemy, enemyStatWindows[i].actionIcon, enemyStatWindows[i].targetIcon);
                 newEnemy.hp.SetToMax();
                 newEnemy.deflect = newEnemy.armor *2;
@@ -186,7 +186,7 @@ public class BattleManager : MonoBehaviour {
     }
 
     private BattleCombatant GetEnemyPrefabById(string enemyId) {
-        var enemy = Instantiate(Resources.Load<BattleCombatant>("Enemies/" + enemyId));
+        var enemy = Resources.Load<BattleCombatant>("Enemies/" + enemyId);
 
         if (enemy != null) {
             return enemy;
@@ -675,7 +675,6 @@ public class BattleManager : MonoBehaviour {
             }
 
             damageToDeal = Random.Range(action.minimumPotency, action.maximumPotency);
-
             var db = " base dmg " + damageToDeal;
 
             var attackRoll = Random.Range(1, 20);

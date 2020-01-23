@@ -98,7 +98,7 @@ MonoBehaviour:
   id: skeletonWarrior
   hp:
     current: 0
-    baseMax: 20
+    baseMax: 25
     bonus: 0
   mp:
     current: 0
@@ -108,14 +108,14 @@ MonoBehaviour:
   barrier: 0
   level: 0
   xp: 10
-  attack: 11
-  defense: 5
+  attack: 3
+  defense: 7
   magic: 2
   speed: 5
-  armor: 3
+  armor: 2
   resist: 0
-  minDamage: 8
-  maxDamage: 12
+  minDamage: 4
+  maxDamage: 7
   tp: 0
   tpChanceBase: 0
   tpChance: 0
@@ -124,8 +124,8 @@ MonoBehaviour:
   isPlayer: 0
   isActive: 1
   isCharging: 0
-  chargedActionName: 
-  chargedTarget: 0
+  chargedAbilityName: 
+  targetId: 0
   isTaunting: 0
   isHiding: 0
   classSkillName: 
