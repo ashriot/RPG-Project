@@ -1491,7 +1491,6 @@ MonoBehaviour:
   quantityText: {fileID: 1928406641229590597}
   buttonId: 0
   item: {fileID: 0}
-  slot: 0
   buttonLongPress: {fileID: 5237263887557208849}
 --- !u!114 &5237263887557208849
 MonoBehaviour:
@@ -1955,7 +1954,6 @@ MonoBehaviour:
   quantityText: {fileID: 1713695684017884133}
   buttonId: 0
   item: {fileID: 0}
-  slot: 0
   buttonLongPress: {fileID: 3952923083045618154}
 --- !u!114 &3952923083045618154
 MonoBehaviour:
@@ -2233,7 +2231,6 @@ MonoBehaviour:
   quantityText: {fileID: 5647044498141371233}
   buttonId: 0
   item: {fileID: 0}
-  slot: 0
   buttonLongPress: {fileID: 1441170031120407443}
 --- !u!114 &1441170031120407443
 MonoBehaviour:
@@ -3674,7 +3671,6 @@ MonoBehaviour:
   quantityText: {fileID: 2413013865199525876}
   buttonId: 0
   item: {fileID: 0}
-  slot: 0
   buttonLongPress: {fileID: 1180074582105348147}
 --- !u!114 &1180074582105348147
 MonoBehaviour:
@@ -5125,7 +5121,6 @@ MonoBehaviour:
   quantityText: {fileID: 6998566395139869776}
   buttonId: 0
   item: {fileID: 0}
-  slot: 0
   buttonLongPress: {fileID: 6621382980626138668}
 --- !u!114 &6621382980626138668
 MonoBehaviour:
@@ -5488,7 +5483,6 @@ MonoBehaviour:
   quantityText: {fileID: 8411286739165949968}
   buttonId: 0
   item: {fileID: 0}
-  slot: 0
   buttonLongPress: {fileID: 8229190569474045936}
 --- !u!114 &8229190569474045936
 MonoBehaviour:
@@ -5689,7 +5683,6 @@ MonoBehaviour:
   quantityText: {fileID: 4072931613139929666}
   buttonId: 0
   item: {fileID: 0}
-  slot: 0
   buttonLongPress: {fileID: 4303257981716611850}
 --- !u!114 &4303257981716611850
 MonoBehaviour:
@@ -7813,7 +7806,6 @@ MonoBehaviour:
   quantityText: {fileID: 2151384442803756191}
   buttonId: 0
   item: {fileID: 0}
-  slot: 0
   buttonLongPress: {fileID: 1281885531575424602}
 --- !u!114 &1281885531575424602
 MonoBehaviour:
@@ -10244,7 +10236,6 @@ MonoBehaviour:
   quantityText: {fileID: 8798211788644757741}
   buttonId: 0
   item: {fileID: 0}
-  slot: 0
   buttonLongPress: {fileID: 3301333060680910694}
 --- !u!114 &3301333060680910694
 MonoBehaviour:
@@ -11444,7 +11435,6 @@ MonoBehaviour:
   quantityText: {fileID: 4761984408001071518}
   buttonId: 0
   item: {fileID: 0}
-  slot: 0
   buttonLongPress: {fileID: 6655155761410753912}
 --- !u!114 &6655155761410753912
 MonoBehaviour:
@@ -12513,7 +12503,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: Left Ring
+  m_Text: Right Ring
 --- !u!1 &4663515164009626905
 GameObject:
   m_ObjectHideFlags: 0
@@ -12609,7 +12599,6 @@ MonoBehaviour:
   quantityText: {fileID: 6182872038110990598}
   buttonId: 0
   item: {fileID: 0}
-  slot: 0
   buttonLongPress: {fileID: 7162139979022361978}
 --- !u!114 &7162139979022361978
 MonoBehaviour:
@@ -12909,7 +12898,6 @@ MonoBehaviour:
   quantityText: {fileID: 3529685187206447010}
   buttonId: 0
   item: {fileID: 0}
-  slot: 0
   buttonLongPress: {fileID: 5208070661198348781}
 --- !u!114 &5208070661198348781
 MonoBehaviour:
@@ -16413,7 +16401,6 @@ MonoBehaviour:
   quantityText: {fileID: 4878227664507653178}
   buttonId: 0
   item: {fileID: 0}
-  slot: 0
   buttonLongPress: {fileID: 5413992420798861667}
 --- !u!114 &5413992420798861667
 MonoBehaviour:
@@ -17316,7 +17303,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: Right Ring
+  m_Text: Left Ring
 --- !u!1 &6644671434548030018
 GameObject:
   m_ObjectHideFlags: 0
@@ -20627,7 +20614,6 @@ MonoBehaviour:
   quantityText: {fileID: 664367665485777777}
   buttonId: 0
   item: {fileID: 0}
-  slot: 0
   buttonLongPress: {fileID: 6930507579111003506}
 --- !u!114 &6930507579111003506
 MonoBehaviour:
@@ -24315,7 +24301,6 @@ MonoBehaviour:
   quantityText: {fileID: 681626913777774330}
   buttonId: 0
   item: {fileID: 0}
-  slot: 0
   buttonLongPress: {fileID: 8185712942157392907}
 --- !u!114 &8185712942157392907
 MonoBehaviour:

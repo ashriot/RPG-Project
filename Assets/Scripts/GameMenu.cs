@@ -99,6 +99,7 @@ public class GameMenu : MonoBehaviour {
     }
 
     public void Back() {
+        PlayClickSound();
         ClearPreviews();
         HideBackButton();
     }
@@ -376,6 +377,7 @@ public class GameMenu : MonoBehaviour {
     }
 
     public void ClickItem(ItemButton button) {
+        var fromEquipmentScreen = backButton.gameObject.activeInHierarchy;
         selectedItemCursor.gameObject.SetActive(true);
         selectedItemCursor.transform.position = button.transform.position;
         AudioManager.instance.PlaySfx("click");
@@ -396,37 +398,42 @@ public class GameMenu : MonoBehaviour {
             ClearPreviews();
             var itemPreview = clickedItem as EquippableItem;
             var comparisonItem = clickedEquipment;
-            var secondaryComparison = ScriptableObject.CreateInstance<EquippableItem>();
+            EquippableItem secondaryComparison = null;
+            var comparingRings = false;
             if (comparisonItem == null) {
                 if (clickedItem.GetType() == typeof(EquippableItem))
                 if (clickedItem.itemType == ItemTypes.Arms) {
                     comparisonItem = heroes[currentHeroId].GetBodyEquipment(EquipmentSlots.Arms);
-                    itemSubMenu.slot = EquipmentSlots.Arms;
+                    if (!fromEquipmentScreen) { itemSubMenu.slot = EquipmentSlots.Arms; }
                 }
                 if (clickedItem.itemType == ItemTypes.Body) {
                     comparisonItem = heroes[currentHeroId].GetBodyEquipment(EquipmentSlots.Body);
-                    itemSubMenu.slot = EquipmentSlots.Body;
+                    if (!fromEquipmentScreen) { itemSubMenu.slot = EquipmentSlots.Body; }
                 }
                 if (clickedItem.itemType == ItemTypes.Feet) {
                     comparisonItem = heroes[currentHeroId].GetBodyEquipment(EquipmentSlots.Feet);
-                    itemSubMenu.slot = EquipmentSlots.Feet;
+                    if (!fromEquipmentScreen) { itemSubMenu.slot = EquipmentSlots.Feet; }
                 }
                 if (clickedItem.itemType == ItemTypes.Head) {
                     comparisonItem = heroes[currentHeroId].GetBodyEquipment(EquipmentSlots.Head);
-                    itemSubMenu.slot = EquipmentSlots.Head;
+                    if (!fromEquipmentScreen) { itemSubMenu.slot = EquipmentSlots.Head; }
                 }
                 if (clickedItem.itemType == ItemTypes.Finger) {
+                    comparingRings = true;
                     comparisonItem = heroes[currentHeroId].GetBodyEquipment(EquipmentSlots.RingL);
                     secondaryComparison = heroes[currentHeroId].GetBodyEquipment(EquipmentSlots.RingR);
+                    if (!fromEquipmentScreen) { itemSubMenu.slot = EquipmentSlots.RingL; }
                 }
             }
-            var currentItem = comparisonItem == null ? ScriptableObject.CreateInstance<EquippableItem>() : comparisonItem;
+            EquippableItem currentItem = comparisonItem == null ? null : comparisonItem;
             var delta = 0;
             var delta2 = 0;
             for (var i = 0; i < (int)Stats.Count; i++) {
-                delta = itemPreview.statBonuses[i] - currentItem.statBonuses[i];
-                if (secondaryComparison.id != null) {
-                    delta2 = itemPreview.statBonuses[i] - secondaryComparison.statBonuses[i];
+                delta = itemPreview.statBonuses[i];
+                delta -= currentItem?.statBonuses[i] ?? 0;
+                if (comparingRings) {
+                    delta2 = itemPreview.statBonuses[i];
+                    delta2 -= secondaryComparison?.statBonuses[i] ?? 0;
                 }
                 if (delta != 0) {
                     miniStatPanelDisplay.statPreviews[i].gameObject.SetActive(true);
@@ -442,7 +449,7 @@ public class GameMenu : MonoBehaviour {
                         miniStatPanelDisplay.statPreviews[i].color = delta2 > 0 ? green : red;
                         miniStatPanelDisplay.statPreviews[i].text = "-/" + (delta2 > 0 ? "+" + delta2 : delta2.ToString());
                     }
-                } else if (secondaryComparison.id != null) {
+                } else if (comparingRings) {
                     miniStatPanelDisplay.statPreviews[i].text += "/-";
                 }
             }
@@ -542,11 +549,6 @@ public class GameMenu : MonoBehaviour {
             }
             equipmentWindow.mainHandAtkOrBlk.text = equipmentWindow.mainHand.GetAtkOrBlkString(hero.attack.value - penalty);
             equipmentWindow.mainHandDmgOrAmt.text = equipmentWindow.mainHand.GetDmgOrAmtString();
-        } else {
-            equipmentWindow.mainHandButton.image.enabled = false;
-            equipmentWindow.mainHandButton.text.text = none;
-            equipmentWindow.mainHandAtkOrBlk.text = "---";
-            equipmentWindow.mainHandDmgOrAmt.text = "---";
         }
         if (equipmentWindow.offHand != null) {
             equipmentWindow.offHandButton.image.enabled = true;
@@ -570,6 +572,8 @@ public class GameMenu : MonoBehaviour {
     }
 
     public void ClickEquipment(EquipmentButton button) {
+        PlayClickSound();
+        itemSubMenu.slot = button.slot;
         clickedEquipment = button.equippedItem;
         Debug.Log("Item ID: " + button.id);
 

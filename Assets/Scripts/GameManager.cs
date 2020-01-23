@@ -1,5 +1,4 @@
-﻿using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 using UnityEngine.SceneManagement;
 
 public class GameManager : MonoBehaviour {
@@ -23,6 +22,9 @@ public class GameManager : MonoBehaviour {
     void Start() {
         for (var h = 0; h < heroes.Length; h++) {
             heroes[h] = Instantiate(heroes[h]);
+            if (heroes[h].handEquipment[0] == null) {
+                heroes[h].handEquipment[0] = InventoryManager.instance.GetItemReference("weapUnarmed") as Weapon;
+            }
         }
 
         UpdateHeroesEquipmentBonuses();
@@ -33,7 +35,6 @@ public class GameManager : MonoBehaviour {
         }
     }
 
-    // Update is called once per frame
     void Update() {
         if (menuButtonsOpen || dialogActive || fadingBetweenAreas || shopActive || battleActive) {
             // PlayerController.instance.canMove = false;
@@ -49,18 +50,6 @@ public class GameManager : MonoBehaviour {
             LoadData();
         }
     }
-
-    // public Item GetItemDetails(string itemName) {
-    //     for (var i = 0; i < referenceItems.Length; i++) {
-    //         if (referenceItems[i].name.ToLower() == itemName.ToLower()) {
-    //             return referenceItems[i];
-    //         }
-    //     }
-
-    //     // item could not be found
-    //     Debug.LogError("'" + itemName + "' does not exist!");
-    //     return null;
-    // }
 
     public void UpdateHeroesEquipmentBonuses(int? heroId = null, EquipmentSlots? slot = null) {
         if (heroId != null) {
