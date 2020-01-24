@@ -461,7 +461,7 @@ public class PlayerController : MonoBehaviour {
             }
 
             var endPos = CameraController.instance.transform.position + new Vector3(xPos, yPos, 0f);
-            StartCoroutine(CameraPositionLerpTo(endPos, .5f, xDir, yDir));
+            StartCoroutine(CameraPositionLerpTo(endPos, 0.5f, xDir, yDir));
         }
     }
 
@@ -507,10 +507,10 @@ public class PlayerController : MonoBehaviour {
         isTransitioning = true;
         float elapsedTime = 0.0f;
         var startPos = CameraController.instance.transform.position;
-        while (elapsedTime < _duration) {
+        while (CameraController.instance.transform.position != endPos) {
             CameraController.instance.transform.position = Vector3.Lerp(startPos, endPos, (elapsedTime / _duration));
             elapsedTime += Time.deltaTime;
-            yield return new WaitForEndOfFrame();
+            yield return null;
         }
         yield return new WaitForEndOfFrame();
         Move(xDir, yDir, .35f);

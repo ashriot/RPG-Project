@@ -22,7 +22,7 @@ public class BattleManager : MonoBehaviour {
     public GameObject spellsMenu;
     public GameObject characterSelectMenu;
     public BattleTooltip actionTooltip;
-    public BattleNotification actionNote;
+    public EventNotification note;
     public Text menuPlayerName;
     public BattleNotification battleNotification;
     public GameObject battleMenuDisabled;
@@ -147,7 +147,8 @@ public class BattleManager : MonoBehaviour {
                         combatants[i].deadSprite = heroes[i].deadSprite;
                         combatants[i].mainHand = heroes[i].handEquipment[0];
                         combatants[i].offHand = heroes[i].handEquipment[1];
-                        combatants[i].abilities = heroes[i].skills;
+                        combatants[i].weaponActions = heroes[i].weaponActions;
+                        combatants[i].classActions = heroes[i].classActions;
                         combatants[i].spells = heroes[i].spells;
                         combatants[i].tpChanceBase = heroes[i].tpChanceBase;
                         combatants[i].delay = 1f;
@@ -415,11 +416,47 @@ public class BattleManager : MonoBehaviour {
         GameMenu.instance.mainMenuButtonText.text = "Menu";
     }
 
-    public void ClickSkillButton() {
-        var actionNames = combatant.abilities;
+    public void ClickWeaponButton() {
+        var actionNames = combatant.weaponActions;
         if (actionNames.Length == 0) {
             AudioManager.instance.PlaySfx("error");
-            Debug.Log("No known skills!");
+            Notification("No known weapon actions!");
+            Debug.Log("No known weapon actions!");
+            return;
+        }
+        else {
+            PlayClickSound();
+        }
+
+        skillsMenu.SetActive(true);
+
+        SetMenuButtonToBack(skillsMenu);
+        var actions = new List<Ability>();
+
+        foreach (var n in actionNames) {
+            actions.Add(BattleActionRepo.instance.GetAbilityByName(n));
+        }
+
+        for (var i = 0; i < menuButtons.Length; i++) {
+            if (i < actions.Count) {
+                menuButtons[i].gameObject.SetActive(true);
+                menuButtons[i].nameText.text = actions[i].name;
+                menuButtons[i].image.sprite = actions[i].sprite;
+                menuButtons[i].GetComponent<ButtonLongPress>().description = actions[i].description;
+            }
+            else {
+                menuButtons[i].gameObject.SetActive(false);
+                continue;
+            }
+        }
+    }
+
+    public void ClickSkillButton() {
+        var actionNames = combatant.classActions;
+        if (actionNames.Length == 0) {
+            AudioManager.instance.PlaySfx("error");
+            Notification("No known class actions!");
+            Debug.Log("No known class actions!");
             return;
         } else {
             PlayClickSound();
@@ -451,6 +488,7 @@ public class BattleManager : MonoBehaviour {
         var actionNames = combatant.spells;
         if (actionNames.Length == 0) {
             AudioManager.instance.PlaySfx("error");
+            Notification("No known spells!");
             Debug.Log("No known spells!");
             return;
         } else {
@@ -492,8 +530,8 @@ public class BattleManager : MonoBehaviour {
     }
 
     private void SetEnemyTargetAndAction(BattleCombatant enemy, Image actionIcon, Image targetIcon) {
-        var selectedAbilityId = Random.Range(0, enemy.abilities.Length);
-        enemy.chargedAbilityName = enemy.abilities[selectedAbilityId];
+        var selectedAbilityId = Random.Range(0, enemy.classActions.Length);
+        enemy.chargedAbilityName = enemy.classActions[selectedAbilityId];
         var selectedAbilityType = BattleActionRepo.instance.GetAbilityTypeByName(enemy.chargedAbilityName);
         actionIcon.sprite = actionIcons[(int)selectedAbilityType];
 
@@ -716,18 +754,29 @@ public class BattleManager : MonoBehaviour {
             var position = Camera.main.WorldToScreenPoint(localTarget.transform.position + new Vector3(0f, .5f, 0f));
             Instantiate(damageNumber, position, localTarget.transform.rotation, canvas.transform)
                 .SetDamage(damageToDeal, isCrit, isGraze, isMiss, isPlayer);
-
-            if (localTarget.deflect > 0) {
+            
+            if (localTarget.barrier > 0 && action.damageType != DamageTypes.True) {
+                if (localTarget.barrier > damageToDeal) {
+                    localTarget.barrier -= damageToDeal;
+                }
+                else {
+                    damageToDeal -= localTarget.barrier;
+                    localTarget.barrier = 0;
+                    Debug.Log(localTarget.barrier + " should be zero.");
+                }
+            }
+            if (localTarget.deflect > 0 && action.damageType == DamageTypes.Physical) {
                 if (localTarget.deflect > damageToDeal) {
                     localTarget.deflect -= damageToDeal;
                 } else {
                     damageToDeal -= localTarget.deflect;
                     localTarget.deflect = 0;
-                    localTarget.hp.Decerease(damageToDeal);
                 }
-            } else {
+            }
+            if (damageToDeal > 0) {
                 localTarget.hp.Decerease(damageToDeal);
             }
+
             UpdateEnemyStatWindows();
             UpdateUiStats();
         }
@@ -749,6 +798,7 @@ public class BattleManager : MonoBehaviour {
             foreach (var gameHero in gameHeroes) {
                 if (hero.id == gameHero.id) {
                     gameHero.deflect = hero.deflect;
+                    gameHero.barrier = hero.barrier;
                     gameHero.hp.current = hero.hp.current;
                     gameHero.mp.current = hero.mp.current;
                     break;
@@ -767,7 +817,13 @@ public class BattleManager : MonoBehaviour {
         } else {
             if (combatant.mp.current < ability.mpCost) {
                 AudioManager.instance.PlaySfx("error");
+                Notification("Not Enough MP!");
                 Debug.Log("Not enough MP!");
+                return;
+            } else if (combatant.tp < 1 && ability.tpCost > 0) {
+                AudioManager.instance.PlaySfx("error");
+                Notification("Not Enough TP!");
+                Debug.Log("Not enough TP!");
                 return;
             }
         }
@@ -809,6 +865,12 @@ public class BattleManager : MonoBehaviour {
         UpdateUiStats();
 
         var hits = 1;
+        if (ability.name == "Endless Strikes") {
+            hits = 1 + Mathf.Clamp(combatant.tp, 0, 3);
+            combatant.tp = 0;
+            tpSpriteRenderers[combatantId].gameObject.SetActive(false);
+        }
+
 
         // animation
         StartCoroutine(FlashSprite(combatant.spriteRenderer, Color.black));
@@ -820,37 +882,38 @@ public class BattleManager : MonoBehaviour {
             }
 
             if (action.isWeaponAttack) {
-                var mainHand = combatant.mainHand as Weapon;
-                var offHand = ScriptableObject.CreateInstance<Weapon>();
-
-                if (combatant.isDualWielding) {
-                    offHand = combatant.offHand as Weapon;
-                }
-                // Main Hand
-                action.hitType = mainHand.hitType;
-                action.avoidType = mainHand.avoidType;
-                action.hitModifier = combatant.isDualWielding ? mainHand.baseAttack - 6 : mainHand.baseAttack;
-                action.minimumPotency = mainHand.minimumDamage;
-                action.maximumPotency = mainHand.maximumDamage;
                 for (var i = 0; i < hits; i++) {
-                    DealDamage(action, true);
-                }
+                    var mainHand = combatant.mainHand as Weapon;
+                    var offHand = ScriptableObject.CreateInstance<Weapon>();
 
-                if (combatant.isDualWielding) {
-                    yield return new WaitForSeconds(turnDelay);
-                    ability.delay = (mainHand.delay + offHand.delay) / 2;
-
-                    action.hitType = offHand.hitType;
-                    action.avoidType = offHand.avoidType;
-                    action.hitModifier = combatant.isDualWielding ? offHand.baseAttack - 10 : offHand.baseAttack;
-                    action.minimumPotency = offHand.minimumDamage;
-                    action.maximumPotency = offHand.maximumDamage;
-                    for (var i = 0; i < hits; i++) {
-                        DealDamage(action, true);
+                    if (combatant.isDualWielding) {
+                        offHand = combatant.offHand as Weapon;
                     }
+                    // Main Hand
+                    action.hitType = mainHand.hitType;
+                    action.avoidType = mainHand.avoidType;
+                    action.hitModifier = combatant.isDualWielding ? mainHand.baseAttack - 6 : mainHand.baseAttack;
+                    action.minimumPotency = mainHand.minimumDamage;
+                    action.maximumPotency = mainHand.maximumDamage;
+                    DealDamage(action, true);
 
-                } else {    // Main Hand Only
-                    ability.delay = mainHand.delay;
+                    if (combatant.isDualWielding) {
+                        yield return new WaitForSeconds(turnDelay);
+                        ability.delay = (mainHand.delay + offHand.delay) / 2;
+
+                        action.hitType = offHand.hitType;
+                        action.avoidType = offHand.avoidType;
+                        action.hitModifier = combatant.isDualWielding ? offHand.baseAttack - 10 : offHand.baseAttack;
+                        action.minimumPotency = offHand.minimumDamage;
+                        action.maximumPotency = offHand.maximumDamage;
+                        DealDamage(action, true);
+
+                    } else {    // Main Hand Only
+                        ability.delay = mainHand.delay;
+                    }
+                    if (i < hits) {
+                        yield return new WaitForSeconds(turnDelay);
+                    }
                 }
             }
 
@@ -874,6 +937,16 @@ public class BattleManager : MonoBehaviour {
                     combatant.armor += (int)value;
                     Debug.Log("Armor increased by " + (int)value);
                 }
+                // Gain Barrier
+                if (action.avoidType == StatTypes.Barrier) {
+                    var value = 0f;
+                    if (action.hitType == StatTypes.Magic) {
+                        value = combatant.magic;
+                    }
+                    value *= action.potencyModifier;
+                    if (combatant.barrier < value) { combatant.barrier = (int)value; }
+                    Debug.Log("Barrer set to " + (int)value);
+                }
             } else {
                 if (!action.isWeaponAttack) {
                     DealDamage(action, true);
@@ -883,18 +956,20 @@ public class BattleManager : MonoBehaviour {
 
         // temporary
         if (combatant.tp < 3) {
-            if(combatant.tpChance < combatant.tpChanceBase) {
-                combatant.tpChance = combatant.tpChanceBase;
-            }
-            var roll = Random.Range(0f, 1f);
-            Debug.Log("TP Chance: " + combatant.tpChance * 100 + "% Roll: " + roll*100);
-            if(roll < combatant.tpChance) {
-                combatant.tpChance = combatant.tpChanceBase;
-                combatant.tp++;
-                tpSpriteRenderers[combatantId].gameObject.SetActive(true);
-            } else {
-                combatant.tpChance = Mathf.Clamp(combatant.tpChance + .15f, 0f, 1f);
-            }
+            combatant.tp++;
+            tpSpriteRenderers[combatantId].gameObject.SetActive(true);
+            // if(combatant.tpChance < combatant.tpChanceBase) {
+            //     combatant.tpChance = combatant.tpChanceBase;
+            // }
+            // var roll = Random.Range(0f, 1f);
+            // Debug.Log("TP Chance: " + combatant.tpChance * 100 + "% Roll: " + roll*100);
+            // if(roll < combatant.tpChance) {
+            //     combatant.tpChance = combatant.tpChanceBase;
+            //     combatant.tp++;
+            //     tpSpriteRenderers[combatantId].gameObject.SetActive(true);
+            // } else {
+            //     combatant.tpChance = Mathf.Clamp(combatant.tpChance + .15f, 0f, 1f);
+            // }
         }
 
         if (combatant.tp == 1) {
@@ -985,7 +1060,7 @@ public class BattleManager : MonoBehaviour {
         // magicMenu.SetActive(true);
         battleMenuDisabled.SetActive(true);
 
-        var magicNames = combatant.abilities;
+        var magicNames = combatant.classActions;
 
         for (var i = 0; i < magicButtons.Length; i++) {
             if (i >= magicNames.Length) {
@@ -1044,6 +1119,9 @@ public class BattleManager : MonoBehaviour {
     public IEnumerator<WaitForSeconds> EndBattleCoroutine() {
         GameMenu.instance.heroStatPanels[combatantId].currentTurnCursor.gameObject.SetActive(false);
         currentTurnCursors[combatantId].SetActive(false);battleActive = false;
+        for (var i = 0; i < partySizeOffset; i++) {
+            tpSpriteRenderers[i].gameObject.SetActive(false);
+        }
         ClearAllCursors();
         ClearEnemyTarget();
         enemyWindows.SetActive(false);
@@ -1083,7 +1161,6 @@ public class BattleManager : MonoBehaviour {
             Destroy(combatants[i].gameObject);
         }
 
-        
         combatants.Clear();
         combatantId = 0;
         
@@ -1133,60 +1210,64 @@ public class BattleManager : MonoBehaviour {
     public void ShowTooltip(string description) {
         actionTooltip.description.text = description;
     }
-}
 
-[CustomEditor(typeof(BattleManager))]
-public class BattleManagerEditor : Editor {
-    public override void OnInspectorGUI(){
-        DrawDefaultInspector();
-        BattleManager manager = (BattleManager)target;
-
-        if(GUILayout.Button("Start a Battle against 1")) {
-            manager.BattleStart(new string[] { "Eyeball" }, false);
-        }
-        if(GUILayout.Button("Start a Battle against 2")) {
-            manager.BattleStart(new string[] { "Eyeball", "Spider" }, false);
-        }
-        if(GUILayout.Button("Start a Battle against 3")) {
-            manager.BattleStart(new string[] { "Eyeball", "Spider", "Skeleton" }, false);
-        }
-        if(GUILayout.Button("Start a Battle against 6")) {
-            manager.BattleStart(new string[] { "Eyeball", "Spider", "Skeleton", "Eyeball", "Eyeball", "Spider" }, false);
-        }
-        if(GUILayout.Button("Set all players' HP to 1")) {
-            foreach(var player in GameManager.instance.heroes) {
-                player.hp.current = 1;
-            }
-            foreach(var player in BattleManager.instance.combatants) {
-                if (player.isPlayer) {
-                    player.hp.current = 1;
-                }
-            }
-        }
-        if(GUILayout.Button("God Mode!!")) {
-            foreach(var player in GameManager.instance.heroes) {
-                // player.hp.current = 999;
-                // player.hp.max = 999;
-                // player.mp.current = 999;
-                // player.mp.max = 999;
-                // player.attack = 5000;
-                // player.defense = 500;
-            }
-            foreach(var player in BattleManager.instance.combatants) {
-                if (player.isPlayer) {
-                    player.hp.current = 999;
-                    player.hp.baseMax = 999;
-                    player.mp.current = 999;
-                    player.mp.baseMax = 999;
-                    player.attack = 5000;
-                    player.defense = 500;
-                }
-            }
-            manager.CheckForBattleEnd();
-        }
-        if (GUILayout.Button("Next turn.")) {
-            manager.NextTurn();
-        }
+    private void Notification(string message) {
+        var position = new Vector3(1200f, 1000f, 0f);
+        Instantiate(note, position, transform.rotation, canvas.transform).GenerateNote(message);
     }
 }
 
+// [CustomEditor(typeof(BattleManager))]
+// public class BattleManagerEditor : Editor {
+//     public override void OnInspectorGUI(){
+//         DrawDefaultInspector();
+//         BattleManager manager = (BattleManager)target;
+
+//         if(GUILayout.Button("Start a Battle against 1")) {
+//             manager.BattleStart(new string[] { "Eyeball" }, false);
+//         }
+//         if(GUILayout.Button("Start a Battle against 2")) {
+//             manager.BattleStart(new string[] { "Eyeball", "Spider" }, false);
+//         }
+//         if(GUILayout.Button("Start a Battle against 3")) {
+//             manager.BattleStart(new string[] { "Eyeball", "Spider", "Skeleton" }, false);
+//         }
+//         if(GUILayout.Button("Start a Battle against 6")) {
+//             manager.BattleStart(new string[] { "Eyeball", "Spider", "Skeleton", "Eyeball", "Eyeball", "Spider" }, false);
+//         }
+//         if(GUILayout.Button("Set all players' HP to 1")) {
+//             foreach(var player in GameManager.instance.heroes) {
+//                 player.hp.current = 1;
+//             }
+//             foreach(var player in BattleManager.instance.combatants) {
+//                 if (player.isPlayer) {
+//                     player.hp.current = 1;
+//                 }
+//             }
+//         }
+//         if(GUILayout.Button("God Mode!!")) {
+//             foreach(var player in GameManager.instance.heroes) {
+//                 // player.hp.current = 999;
+//                 // player.hp.max = 999;
+//                 // player.mp.current = 999;
+//                 // player.mp.max = 999;
+//                 // player.attack = 5000;
+//                 // player.defense = 500;
+//             }
+//             foreach(var player in BattleManager.instance.combatants) {
+//                 if (player.isPlayer) {
+//                     player.hp.current = 999;
+//                     player.hp.baseMax = 999;
+//                     player.mp.current = 999;
+//                     player.mp.baseMax = 999;
+//                     player.attack = 5000;
+//                     player.defense = 500;
+//                 }
+//             }
+//             manager.CheckForBattleEnd();
+//         }
+//         if (GUILayout.Button("Next turn.")) {
+//             manager.NextTurn();
+//         }
+//     }
+// }

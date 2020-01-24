@@ -129,9 +129,10 @@ MonoBehaviour:
   isActive: 1
   classSkillName: Sorcery
   classSkillDescription: Sorcery\nPowerful magic skills only known to war mages.
-  skills:
-  - Burning Armor
+  weaponActions: []
+  classActions:
   - Meditate
+  - Burning Armor
   spells:
   - Fireball
   - Scorch

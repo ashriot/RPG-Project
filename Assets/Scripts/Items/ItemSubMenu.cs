@@ -4,6 +4,7 @@ using UnityEngine.UI;
 public class ItemSubMenu : MonoBehaviour {
     public Text UseText;
     public EquipmentSlots slot;
+    public bool fromEquipScreen;
 
     public bool waitingToConfirmDrop;
 
@@ -33,9 +34,11 @@ public class ItemSubMenu : MonoBehaviour {
                 GameManager.instance.heroes[GameMenu.instance.currentHeroId].handEquipment[(int)slot-6] = newEquipment as Hands;
             }
             GameManager.instance.UpdateHeroesEquipmentBonuses(GameMenu.instance.currentHeroId, slot);
-            GameMenu.instance.Back(2);
+            GameMenu.instance.Back((fromEquipScreen ? 2 : 1));
             GameMenu.instance.SetEquipment();
         }
+        fromEquipScreen = false;
+        GameMenu.instance.SetInventory();
     }
 
     public void ClickRemove() {
@@ -68,7 +71,9 @@ public class ItemSubMenu : MonoBehaviour {
             if (GameManager.instance.heroes[GameMenu.instance.currentHeroId].handEquipment[(int)slot - 6] != null) {
                 oldEquipmentId = GameManager.instance.heroes[GameMenu.instance.currentHeroId].handEquipment[(int)slot - 6].id;
                 GameManager.instance.RemoveEquipmentBonus(GameMenu.instance.currentHeroId, slot);
-                InventoryManager.instance.AddItemById(oldEquipmentId, 1);
+                if (oldEquipmentId != "weapUnarmed") {
+                    InventoryManager.instance.AddItemById(oldEquipmentId, 1);
+                }
             }
         }
     }

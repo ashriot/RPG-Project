@@ -14,8 +14,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   abilityType: 6
   name: Burning Armor
-  description: Burning Armor\nThe mage is protected by a shield of fire, increasing
-    his Armor and potentially burning attackers.
+  description: Burning Armor\nPassively increases the mage's Defense. Activate to
+    grant Barrier.
   sprite: {fileID: 2534157650512097630, guid: 8c500e45b904a74468ea62831fc2b0dc, type: 3}
   mpCost: 0
   tpCost: 0
@@ -23,7 +23,7 @@ MonoBehaviour:
   delay: 1
   actions:
   - hitType: 6
-    avoidType: 8
+    avoidType: 12
     damageType: 1
     hitModifier: 0
     avoidModifier: 0

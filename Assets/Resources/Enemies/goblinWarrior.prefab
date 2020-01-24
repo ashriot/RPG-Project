@@ -98,7 +98,7 @@ MonoBehaviour:
   id: goblinWarrior
   hp:
     current: 0
-    baseMax: 12
+    baseMax: 22
     bonus: 0
   mp:
     current: 0
@@ -109,7 +109,7 @@ MonoBehaviour:
   level: 0
   xp: 10
   attack: 6
-  defense: 5
+  defense: 4
   magic: 2
   speed: 8
   armor: 0
@@ -130,7 +130,8 @@ MonoBehaviour:
   isHiding: 0
   classSkillName: 
   classSkillDescription: 
-  abilities:
+  weaponActions: []
+  classActions:
   - Attack
   spells: []
   statusEffects: []

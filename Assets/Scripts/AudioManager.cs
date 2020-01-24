@@ -8,15 +8,15 @@ public class AudioManager : MonoBehaviour {
 
     public static AudioManager instance;
 
-    // Start is called before the first frame update
-    void Start() {
-        instance = this;
+    void Awake() {
+        if (instance == null) {
+            instance = this;
+        }
+        else {
+            Destroy(gameObject);
+            return;
+        }
         DontDestroyOnLoad(gameObject);
-    }
-
-    // Update is called once per frame
-    void Update() {
-        
     }
 
     public void PlayBgm(string name) {
@@ -28,6 +28,8 @@ public class AudioManager : MonoBehaviour {
             PlayBgmId(2);
         } else if (name == "town") {
             PlayBgmId(3);
+        } else if (name == "epilogue") {
+            PlayBgmId(4);
         }
     }
 
@@ -35,7 +37,6 @@ public class AudioManager : MonoBehaviour {
         if (!bgms[id].isPlaying) {
             StopMusic();
             if (id < bgms.Length) {
-                bgms[id].volume = 0.15f;
                 bgms[id].Play();
             } else {
                 Debug.LogError("BGM id '" + id + "' does not exist!");

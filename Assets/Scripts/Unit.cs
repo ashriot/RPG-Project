@@ -16,7 +16,8 @@ public abstract class Unit : MonoBehaviour {
     
     public string classSkillName;
     public string classSkillDescription;
-    public string[] skills;
+    public string[] weaponActions;
+    public string[] classActions;
     public string[] spells;
 
     public Resource hp;

@@ -1,0 +1,41 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 55ab7c10ac817f74690899407ef52845, type: 3}
+  m_Name: Endless Strikes
+  m_EditorClassIdentifier: 
+  abilityType: 0
+  name: Endless Strikes
+  description: Endless Strikes\n1-3 TP\nMake an attack plus an additional attack
+    per TP spent, up to 3.
+  sprite: {fileID: 2425125559403032947, guid: 8c500e45b904a74468ea62831fc2b0dc, type: 3}
+  mpCost: 0
+  tpCost: 4
+  chargeType: 2
+  delay: 1.5
+  actions:
+  - hitType: 0
+    avoidType: 0
+    damageType: 0
+    hitModifier: 0
+    avoidModifier: 0
+    potencyModifier: 1
+    minimumPotency: 0
+    maximumPotency: 0
+    isWeaponAttack: 1
+    isEffectOnly: 0
+    targetType: 3
+    splashType: 0
+    splashModifier: 0
+    abilityFx: {fileID: 3482613456182776616, guid: bb69396eec3d170429dbc2a3956afbdd,
+      type: 3}
+    statusEffects: []
+  notes: 

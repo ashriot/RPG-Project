@@ -16,4 +16,4 @@ MonoBehaviour:
   expiry: 0
   description: Armor is temporarily increased; attackers have a chance to be Burned.
   potency: 0
-  statModified: 8
+  statModified: 12

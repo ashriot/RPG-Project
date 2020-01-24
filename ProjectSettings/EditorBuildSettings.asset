@@ -11,22 +11,28 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/MainMenu.unity
     guid: 6403747061765a64d8b1d7e946d0d9ec
-  - enabled: 1
+  - enabled: 0
     path: Assets/Scenes/LoadingScene.unity
     guid: 45dd44a14492093418d1688ebd429731
-  - enabled: 1
+  - enabled: 0
     path: Assets/Scenes/Countryside.unity
     guid: 24faabdd533cf2b40ad355d6373bbc00
-  - enabled: 1
+  - enabled: 0
     path: Assets/Scenes/Town.unity
     guid: b9da7d460caa4c94e970b503bffed0e1
-  - enabled: 1
+  - enabled: 0
     path: Assets/Scenes/Shop.unity
     guid: c69dbb23b6119454fa9beedec39ad435
-  - enabled: 1
+  - enabled: 0
     path: Assets/Scenes/GameOver.unity
     guid: 338242332bae6b54fa07f2177149703a
-  - enabled: 1
+  - enabled: 0
     path: Assets/Scenes/Cave.unity
     guid: 027dd60c674ef2245af7a82ec327ea43
+  - enabled: 1
+    path: Assets/Scenes/PixelTest.unity
+    guid: 59e4e3db225784f4fa6f6a55ad48b183
+  - enabled: 0
+    path: Assets/Scenes/Start Screen.unity
+    guid: c72a190176411d84d8e7239092f01bcf
   m_configObjects: {}

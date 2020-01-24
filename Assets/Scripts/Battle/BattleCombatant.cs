@@ -21,7 +21,8 @@ public class BattleCombatant : MonoBehaviour {
     public bool isTaunting = false;
     public bool isHiding = false;
     public string classSkillName, classSkillDescription;
-    public string[] abilities;
+    public string[] weaponActions;
+    public string[] classActions;
     public string[] spells;
     public List<StatusEffect> statusEffects;
     public Hands mainHand, offHand;

@@ -9,6 +9,7 @@ public class GameMenu : MonoBehaviour {
     public static GameMenu instance;
 
     [Header("Object References")]
+    public List<BattleStarter> enemies;
     public Canvas canvas;
     public EventNotification note;
     public Text goldKeyText;
@@ -55,9 +56,13 @@ public class GameMenu : MonoBehaviour {
     public GameObject inventorySubMenu;
     public ItemSubMenu itemSubMenu;
     public GameObject equipmentSubMenu;
+    public GameObject subMenuCursor;
+
+    [Header("Sub Windows")]
+    public GameObject attributesWindow;
 
     [Header("Data Trackers")]
-    public int currentWindowId = 0;
+    public int currentWindowId = 1;
     public int currentHeroId = 0;
 
     public Hero[] heroes;
@@ -86,8 +91,13 @@ public class GameMenu : MonoBehaviour {
     }
 
     void Update() {
-        if (Input.GetKeyDown(KeyCode.R)) {
+        if (Input.GetKeyDown(KeyCode.H)) {
             RestoreAllHpMp();
+        }
+        if (Input.GetKeyDown(KeyCode.M)) {
+            foreach(var enemy in enemies) {
+                enemy.gameObject.SetActive(true);
+            }
         }
     }
 
@@ -97,7 +107,9 @@ public class GameMenu : MonoBehaviour {
             hero.mp.SetToMax();
         }
         UpdateStats();
-        UpdateMiniStatPanel();
+        if (menuButtonsPanel.activeInHierarchy) {
+            UpdateMiniStatPanel();
+        }
     }
 
     public void Back(int times = 1) {
@@ -167,8 +179,11 @@ public class GameMenu : MonoBehaviour {
     }
 
     public void ClickMenuButton(int buttonId) {
+        clickedEquipment = null;
+        clickedItem = null;
         HideSelectedItemCursor();
         ClearPreviews();
+        HideSubMenus();
         if (currentWindowId != buttonId) {
             currentWindowId = buttonId;
             PlayClickSound();
@@ -213,8 +228,9 @@ public class GameMenu : MonoBehaviour {
         // miniStatPanelDisplay.name.text = hero.name;
         // miniStatPanelDisplay.xp.text = "XP: " + hero.xp + "/" + hero.level * 100;
         miniStatPanelDisplay.sp.text = hero.sp.ToString();
+        miniStatPanelDisplay.sp.GetComponentInParent<ButtonLongPress>().description = "Skill Points [SP]\nUse these to improve your skills.\nXP: " + hero.xp + "/" + hero.xpRequiredForNextSkillPoint();
         miniStatPanelDisplay.hp.text = hero.hp.maximum.ToString();
-        miniStatPanelDisplay.hp.GetComponentInParent<ButtonLongPress>().description = "Hit Points [HP]\nOnce a unit reaches 0 HP, they fall unconscious and lose 1 CON.\nBase: " + hero.hp.baseMax.ToString() + "\nBonus: " + hero.hp.bonus.ToString();
+        miniStatPanelDisplay.hp.GetComponentInParent<ButtonLongPress>().description = "Hit Points [HP]\nOnce a unit reaches 0 HP, they fall unconscious and lose 1 CON.\nBase: " + hero.hp.baseMax + "\nBonus: " + hero.hp.bonus;
         miniStatPanelDisplay.mp.text = hero.mp.maximum.ToString();
         miniStatPanelDisplay.mp.GetComponentInParent<ButtonLongPress>().description = "Magic Points [MP]\nUsed to cast spells and use magical abilities.\nBase: " + hero.mp.baseMax + "\nBonus: " + hero.mp.bonus;
         miniStatPanelDisplay.attack.text = hero.attack.value.ToString();
@@ -300,7 +316,24 @@ public class GameMenu : MonoBehaviour {
         }
     }
 
+    public void HideSubMenus() {
+        HideSelectedItemCursor();
+        backButton.gameObject.SetActive(false);
+        while (subWindows.Count > 0) {
+            var subWindow = subWindows.Pop();
+            subWindow.SetActive(false);
+        }
+        while (subMenus.Count > 0) {
+            var subMenu = subMenus.Pop();
+            subMenu.SetActive(false);
+        }
+    }
+
     public void ShowSubMenu(GameObject subMenu) {
+        if (subMenu.name == "InventorySubMenu") {
+            subMenuCursor.SetActive(true);
+            subMenuCursor.transform.localPosition = new Vector3(0f, -2f, 0f);
+        }
         subMenu.SetActive(true);
         if (subMenus.Count > 0) {
             subMenus.Peek().SetActive(false);
@@ -338,6 +371,7 @@ public class GameMenu : MonoBehaviour {
     }
 
     public void OpenSkills() {
+        attributesWindow.SetActive(false);
         UpdateStats();
         SetHeroSkills();
         UpdateMiniStatPanel();
@@ -346,6 +380,12 @@ public class GameMenu : MonoBehaviour {
     public void OpenStatus() {
         UpdateStats();
         SetHeroStatus();
+    }
+
+
+    public void OpenAttributesWindow() {
+        PlayOpenSound();
+        ShowSubWindow(attributesWindow);
     }
 
     public void QuitGame() {
@@ -609,6 +649,7 @@ public class GameMenu : MonoBehaviour {
     public void ClickEquipment(EquipmentButton button) {
         PlayClickSound();
         itemSubMenu.slot = button.slot;
+        itemSubMenu.fromEquipScreen = true;
         clickedEquipment = button.equippedItem;
         Debug.Log("Item ID: " + button.id);
 
@@ -679,7 +720,7 @@ public class GameMenu : MonoBehaviour {
             hero.speed.baseValue++;
         } else if (skillName == "Endurance") {
             var hero = heroes[currentHeroId];
-            var increase = 5 * rank;
+            var increase = 4 * rank;
             hero.hp.current += increase;
             hero.hp.baseMax += increase;
         } else if (skillName == "Precision") {
@@ -687,7 +728,7 @@ public class GameMenu : MonoBehaviour {
             hero.attack.baseValue++;
         } else if (skillName == "Spirit") {
             var hero = heroes[currentHeroId];
-            var increase = 5 * rank;
+            var increase = 4 * rank;
             hero.mp.current += increase;
             hero.mp.baseMax += increase;
         } else if (skillName == "Toughness") {
@@ -754,10 +795,12 @@ public class GameMenu : MonoBehaviour {
                 if (GameManager.instance.battleActive) {
                     heroStatPanels[i].targetIndicator.gameObject.SetActive(true);
                     heroStatPanels[i].targetIndicator.sprite = suits[i];
-                    heroStatPanels[i].deflectSlider.fillAmount = (float)heroes[i].deflect / heroes[i].hp.maximum;
+                    heroStatPanels[i].deflectSlider.fillAmount = Mathf.Clamp((float)heroes[i].deflect / heroes[i].hp.maximum, 0f, 1f);
+                    heroStatPanels[i].barrierSlider.fillAmount = Mathf.Clamp((float)heroes[i].barrier / heroes[i].hp.maximum, 0f, 1f);
                 } else {
                     heroStatPanels[i].targetIndicator.gameObject.SetActive(false);
                     heroStatPanels[i].deflectSlider.fillAmount = 0;
+                    heroStatPanels[i].barrierSlider.fillAmount = 0;
                 }
             } else {
                 heroStatPanels[i].gameObject.SetActive(false);

@@ -15,13 +15,24 @@ public class BattleReward : MonoBehaviour {
     public string questNameToComplete;
 
     private Vector3 originalPos;
+    private bool moving;
 
     void Awake() {
         instance = this;
+        originalPos = transform.position;
+    }
+
+    void Update() {
+        if(Input.GetKeyDown(KeyCode.R)) {
+            OpenWindow(100);
+        }
     }
 
     public void OpenWindow(int xpEarned) {
-        originalPos = transform.position;
+        if (moving) {
+            return;
+        }
+        moving = true;
         foreach(var text in xpTexts) {
             text.color = originalColor;
         }
@@ -43,40 +54,34 @@ public class BattleReward : MonoBehaviour {
 
         PlayerController.instance.inBattle = false;
         GameManager.instance.battleActive = false;
-        StartCoroutine(CloseWindow(2f));
-    
+
+        GameMenu.instance.UpdateStats();
+        StartCoroutine(CloseWindow(.5f));
+
         if (markQuestComplete) {
             QuestManager.instance.MarkQuestComplete(questNameToComplete);
         }
     }
 
-    public IEnumerator CloseWindow(float _duration) {
-        GameMenu.instance.UpdateStats();
-        StartCoroutine(MoveTowards(transform, transform.localPosition + new Vector3(55f, 0f, 0f), .25f));
-
-        float elapsedTime = 0.0f;
-        while (elapsedTime < _duration) {
-            elapsedTime += Time.deltaTime;
-            yield return new WaitForEndOfFrame();
-        }
-
-
-        StartCoroutine(FadeOut(1.5f));
-    }
-
-    IEnumerator MoveTowards(Transform objectToMove, Vector3 toPosition, float duration) {
+    public IEnumerator CloseWindow(float duration) {
+        var endPos = transform.localPosition + new Vector3(55f, 0f, 0f);
         float counter = 0;
         while (counter < duration) {
             counter += Time.deltaTime;
-            Vector3 currentPos = objectToMove.localPosition;
-            float time = Vector3.Distance(currentPos, toPosition) / (duration - counter) * Time.deltaTime;
-            objectToMove.localPosition = Vector3.MoveTowards(currentPos, toPosition, time);
-            yield return null;
+            Vector3 currentPos = transform.localPosition;
+            float time = Vector3.Distance(currentPos, endPos) / (duration - counter) * Time.deltaTime;
+            transform.localPosition = Vector3.MoveTowards(currentPos, endPos, time);
+            yield return new WaitForEndOfFrame();
         }
-}
+        StartCoroutine(FadeOut(2f));
+    }
 
     public IEnumerator FadeOut(float _duration) {
-        Debug.Log(gameObject.transform.localPosition);
+        var waitTime = _duration/2;
+        while (waitTime > 0) {
+            waitTime -= Time.deltaTime;
+            yield return new WaitForEndOfFrame();
+        }
         float elapsedTime = 0.0f;
         while (elapsedTime < _duration) {
             foreach(var text in xpTexts) {
@@ -86,6 +91,7 @@ public class BattleReward : MonoBehaviour {
             }
         }
         transform.position = originalPos;
+        moving = false;
     }
 }
 

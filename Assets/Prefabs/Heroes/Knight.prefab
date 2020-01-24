@@ -130,7 +130,8 @@ MonoBehaviour:
   classSkillName: Chivalry
   classSkillDescription: Chivalry\nBattle tactics designed to both encourage and
     command allies.
-  skills:
+  weaponActions: []
+  classActions:
   - Warhorn
   spells: []
   hp:

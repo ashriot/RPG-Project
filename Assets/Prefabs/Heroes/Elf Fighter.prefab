@@ -130,7 +130,9 @@ MonoBehaviour:
   classSkillName: Blade Dancing
   classSkillDescription: Blade Dancing\nAn ancient elven fighting style both deadly
     and beautiful to watch.
-  skills: []
+  weaponActions: []
+  classActions:
+  - Endless Strikes
   spells: []
   hp:
     current: 0

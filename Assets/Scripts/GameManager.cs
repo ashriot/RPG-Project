@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using System.Linq;
+using UnityEngine;
 using UnityEngine.SceneManagement;
 
 public class GameManager : MonoBehaviour {
@@ -35,6 +36,12 @@ public class GameManager : MonoBehaviour {
         for (var h = 0; h < heroes.Length; h++) {
             heroes[h].hp.SetToMax();
             heroes[h].mp.SetToMax();
+            // passives
+            if (heroes[h].classActions.Contains("Burning Armor")) {
+                var bonus = (int)((float)heroes[h].magic.value * .3f);
+                heroes[h].defense.IncreaseBonus(bonus);
+                Debug.Log("Burning Armor bonus: " + bonus);
+            }
         }
     }
 
