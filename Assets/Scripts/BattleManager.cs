@@ -471,6 +471,7 @@ public class BattleManager : MonoBehaviour {
                 menuButtons[i].gameObject.SetActive(true);
                 menuButtons[i].nameText.text = actions[i].name;
                 menuButtons[i].image.sprite = actions[i].sprite;
+                menuButtons[i].description = actions[i].description;
             } else {
                 menuButtons[i].gameObject.SetActive(false);
                 continue;
@@ -479,7 +480,6 @@ public class BattleManager : MonoBehaviour {
     }
 
     private void ClearAllCursors() {
-        Debug.Log("clearing cursors");
         foreach (var cursor in enemyTargetCursors) {
             cursor.SetActive(false);
         }
@@ -773,7 +773,6 @@ public class BattleManager : MonoBehaviour {
         }
         battleMenu.SetActive(false);
         skillsMenu.SetActive(false);
-        Debug.Log("Action used: " + actionName);
 
         StartCoroutine(HeroActionCoroutine(ability));
     }

@@ -19,7 +19,7 @@ public class InventoryManager : MonoBehaviour {
         DontDestroyOnLoad(gameObject);
     }
 
-    public void AddItem(string id, int qty) {
+    public void AddItemById(string id, int qty) {
         var item = Instantiate(GetItemReference(id));
         for (var i = 0; i < qty; i++) {
             if (item.itemType == ItemTypes.Consumable) {
@@ -37,7 +37,9 @@ public class InventoryManager : MonoBehaviour {
 
     public void RemoveItemById(string id) {
         var item = FetchItemFromInventory(id);
-        inventory.Remove(item);
+        // inventory.Remove(item);
+        var index = inventory.IndexOf(item);
+        inventory.RemoveAt(index);
     }
 
     public Item FetchItemFromInventory(string id) {
@@ -59,7 +61,7 @@ public class InventoryManager : MonoBehaviour {
     public Item GetItemReference(string id) {
         var folder = id.Substring(0, 4);
         var itemName = id.Substring(4, id.Length-4);
-        var item = Instantiate(Resources.Load<Item>("Items/" + folder + "/" + itemName));
+        var item = (Resources.Load<Item>("Items/" + folder + "/" + itemName));
 
         if (item == null){
             Debug.LogError("Item '" + id + "' does not exist!");

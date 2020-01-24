@@ -20,6 +20,9 @@ public class GameManager : MonoBehaviour {
     }
 
     void Start() {
+        // InventoryManager.instance.AddItemById("bodyLinenShirt", 4);
+        // InventoryManager.instance.AddItemById("weapRustyDagger", 4);
+        // InventoryManager.instance.AddItemById("feetWornBoots", 4);
         for (var h = 0; h < heroes.Length; h++) {
             heroes[h] = Instantiate(heroes[h]);
             if (heroes[h].handEquipment[0] == null) {
@@ -54,19 +57,12 @@ public class GameManager : MonoBehaviour {
     public void UpdateHeroesEquipmentBonuses(int? heroId = null, EquipmentSlots? slot = null) {
         if (heroId != null) {
             var id = (int)heroId;
+            heroes[id].statBonuses = new int[(int)Stats.Count];
             UpdateHeroEquipmentBonus(id, slot);
-            heroes[id].hp.bonus = heroes[id].statBonuses[(int)Stats.Hp];
-            heroes[id].hp.Increase(heroes[id].hp.bonus);
-            heroes[id].mp.bonus = heroes[id].statBonuses[(int)Stats.Mp];
-            heroes[id].mp.Increase(heroes[id].mp.bonus);
-            heroes[id].attack.bonus = heroes[id].statBonuses[(int)Stats.Attack];
-            heroes[id].defense.bonus = heroes[id].statBonuses[(int)Stats.Defense];
-            heroes[id].magic.bonus = heroes[id].statBonuses[(int)Stats.Magic];
-            heroes[id].speed.bonus = heroes[id].statBonuses[(int)Stats.Speed];
-            heroes[id].armor.bonus = heroes[id].statBonuses[(int)Stats.Armor];
-            heroes[id].resist.bonus = heroes[id].statBonuses[(int)Stats.Resist];
+            UpdateHeroStatBonuses(heroes[id]);
         } else {
             for (var h = 0; h < heroes.Length; h++) {
+                heroes[h].statBonuses = new int[(int)Stats.Count];
                 for (var i = 0; i < (int)Stats.Count; i++) {
                     for (var j = 0; j < 6; j++) {
                         if (heroes[h].bodyEquipment[j] != null) {
@@ -79,31 +75,37 @@ public class GameManager : MonoBehaviour {
                         }
                     }
                 }
-                heroes[h].hp.bonus = heroes[h].statBonuses[(int)Stats.Hp];
-                heroes[h].hp.Increase(heroes[h].hp.bonus);
-                heroes[h].mp.bonus = heroes[h].statBonuses[(int)Stats.Mp];
-                heroes[h].mp.Increase(heroes[h].mp.bonus);
-                heroes[h].attack.bonus = heroes[h].statBonuses[(int)Stats.Attack];
-                heroes[h].defense.bonus = heroes[h].statBonuses[(int)Stats.Defense];
-                heroes[h].magic.bonus = heroes[h].statBonuses[(int)Stats.Magic];
-                heroes[h].speed.bonus = heroes[h].statBonuses[(int)Stats.Speed];
-                heroes[h].armor.bonus = heroes[h].statBonuses[(int)Stats.Armor];
-                heroes[h].resist.bonus = heroes[h].statBonuses[(int)Stats.Resist];
+                UpdateHeroStatBonuses(heroes[h]);
             }
         }
     }
 
     public void RemoveEquipmentBonus(int heroId, EquipmentSlots slot) {
         var slotId = (int)slot;
+        heroes[heroId].statBonuses = new int[(int)Stats.Count];
         for (var i = 0; i < (int)Stats.Count; i++) {
+            if (slotId < 6) {
                 if (heroes[heroId].bodyEquipment[slotId] != null) {
-                    if (slotId < 6) {
-                        heroes[heroId].statBonuses[i] -= heroes[heroId].bodyEquipment[slotId].statBonuses[i];
-                    } else { // hands
-                        heroes[heroId].statBonuses[i] -= heroes[heroId].handEquipment[slotId].statBonuses[i];
-                }
+                    heroes[heroId].statBonuses[i] -= heroes[heroId].bodyEquipment[slotId].statBonuses[i];
+                } 
+            } else { // hands
+                heroes[heroId].statBonuses[i] -= heroes[heroId].handEquipment[slotId - 6].statBonuses[i];
             }
         }
+        UpdateHeroStatBonuses(heroes[heroId]);
+    }
+
+    private void UpdateHeroStatBonuses(Hero hero) {
+        hero.hp.bonus += hero.statBonuses[(int)Stats.Hp];
+        hero.hp.Increase(hero.hp.bonus);
+        hero.mp.bonus += hero.statBonuses[(int)Stats.Mp];
+        hero.mp.Increase(hero.mp.bonus);
+        hero.attack.bonus += hero.statBonuses[(int)Stats.Attack];
+        hero.defense.bonus += hero.statBonuses[(int)Stats.Defense];
+        hero.magic.bonus += hero.statBonuses[(int)Stats.Magic];
+        hero.speed.bonus += hero.statBonuses[(int)Stats.Speed];
+        hero.armor.bonus += hero.statBonuses[(int)Stats.Armor];
+        hero.resist.bonus += hero.statBonuses[(int)Stats.Resist];
     }
 
     private void UpdateHeroEquipmentBonus(int heroId, EquipmentSlots? slot) {

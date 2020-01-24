@@ -1,0 +1,23 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 196ae3416209e94438141c87500d0e5b, type: 3}
+  m_Name: LinenShirt
+  m_EditorClassIdentifier: 
+  id: bodyLinenShirt
+  itemType: 2
+  name: Linen Shirt
+  description: A simple, cloth shirt.
+  goldValue: 0
+  sprite: {fileID: -7683613693342420304, guid: 8c500e45b904a74468ea62831fc2b0dc, type: 3}
+  quantity: 1
+  equipmentType: 1
+  statBonuses: 0800000000000000000000000200000000000000000000000000000000000000

@@ -98,7 +98,7 @@ MonoBehaviour:
   id: skeletonWarrior
   hp:
     current: 0
-    baseMax: 25
+    baseMax: 15
     bonus: 0
   mp:
     current: 0
@@ -109,7 +109,7 @@ MonoBehaviour:
   level: 0
   xp: 10
   attack: 3
-  defense: 7
+  defense: 4
   magic: 2
   speed: 5
   armor: 2
@@ -134,7 +134,7 @@ MonoBehaviour:
   - Attack
   spells: []
   statusEffects: []
-  mainHand: {fileID: 11400000, guid: 538da7e1706915c42b8a32b66812466f, type: 2}
+  mainHand: {fileID: 11400000, guid: 98bd7c77f0a6f30469f088a358f5ff7e, type: 2}
   offHand: {fileID: 0}
   spriteRenderer: {fileID: 8787949426215704517}
   portraitAnimatorController: {fileID: 9100000, guid: 88643cd6fc2ac8847b61efb21da4fe12,

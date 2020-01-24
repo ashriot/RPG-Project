@@ -42,6 +42,7 @@ public class GameMenu : MonoBehaviour {
     public ItemButton[] itemButtons;
     public Item clickedItem;
     public EquippableItem clickedEquipment;
+    public ItemButton removeItem;
     public Image selectedItemCursor;
     public Color red;
     public Color green;
@@ -61,8 +62,8 @@ public class GameMenu : MonoBehaviour {
 
     public Hero[] heroes;
 
-    private GameObject subWindow;
-    private GameObject subMenu;
+    private Stack<GameObject> subWindows = new Stack<GameObject>();
+    private Stack<GameObject> subMenus = new Stack<GameObject>();
 
     void Awake () {
         if (instance == null) {
@@ -81,6 +82,7 @@ public class GameMenu : MonoBehaviour {
         CloseMainMenu();
         CloseAllWindows();
         HideTooltip();
+        removeItem.gameObject.SetActive(false);
     }
 
     void Update() {
@@ -98,10 +100,13 @@ public class GameMenu : MonoBehaviour {
         UpdateMiniStatPanel();
     }
 
-    public void Back() {
+    public void Back(int times = 1) {
+        HideSelectedItemCursor();
         PlayClickSound();
         ClearPreviews();
-        HideBackButton();
+        for(var i = 0; i < times; i++) {
+            HideBackButton();
+        }
     }
 
     public void CloseMainMenu() {
@@ -162,7 +167,6 @@ public class GameMenu : MonoBehaviour {
     }
 
     public void ClickMenuButton(int buttonId) {
-        HideAllSubMenus();
         HideSelectedItemCursor();
         ClearPreviews();
         if (currentWindowId != buttonId) {
@@ -268,24 +272,50 @@ public class GameMenu : MonoBehaviour {
         }
     }
 
-    public void ShowBackButton(GameObject window) {
-        subWindow = window;
-        subWindow.SetActive(true);
+    public void ShowBackButton() {
         backButton.gameObject.SetActive(true);
     }
 
     public void HideBackButton() {
-        if (subWindow != null) {
-            subWindow.SetActive(false);
-            subWindow = null;
+        if (subWindows.Count > 0) {
+            if (!itemSubMenu.gameObject.activeInHierarchy) {
+                var subWindow = subWindows.Pop();
+                subWindow.SetActive(false);
+                if (subWindows.Count > 0) {
+                    subWindows.Peek().SetActive(true);
+                }
+            }
         }
-        backButton.gameObject.SetActive(false);
+        if (subWindows.Count == 0) {
+            backButton.gameObject.SetActive(false);
+        }
+        if (subMenus.Count > 0)
+        {
+            var subMenu = subMenus.Pop();
+            subMenu.SetActive(false);
+            if (subMenus.Count > 0)
+            {
+                subMenus.Peek().SetActive(true);
+            }
+        }
     }
 
-    public void HideAllSubMenus() {
-        inventorySubMenu.SetActive(false);
-        itemSubMenu.gameObject.SetActive(false);
-        equipmentSubMenu.SetActive(false);
+    public void ShowSubMenu(GameObject subMenu) {
+        subMenu.SetActive(true);
+        if (subMenus.Count > 0) {
+            subMenus.Peek().SetActive(false);
+        }
+        subMenus.Push(subMenu);
+    }
+
+    public void ShowSubWindow(GameObject subWindow) {
+        ShowBackButton();
+        subWindow.SetActive(true);
+        if (subWindows.Count > 0)
+        {
+            subWindows.Peek().SetActive(false);
+        }
+        subWindows.Push(subWindow);
     }
 
     private void HideSelectedItemCursor() {
@@ -295,10 +325,7 @@ public class GameMenu : MonoBehaviour {
     public void OpenInventory(EquipmentButton button = null) {
         clickedEquipment = null;
         HideSelectedItemCursor();
-        if (button == null) {
-            HideAllSubMenus();
-            inventorySubMenu.SetActive(true);
-        }
+        ShowSubMenu(inventorySubMenu);
         UpdateStats();
         SetInventory(button);
         UpdateMiniStatPanel();
@@ -306,22 +333,17 @@ public class GameMenu : MonoBehaviour {
 
     public void OpenEquipment() {
         clickedEquipment = null;
-        HideAllSubMenus();
-        equipmentSubMenu.SetActive(true);
-        UpdateStats();
+        ShowSubMenu(equipmentSubMenu);
         SetEquipment();
-        UpdateMiniStatPanel();
     }
 
     public void OpenSkills() {
-        HideAllSubMenus();
         UpdateStats();
         SetHeroSkills();
         UpdateMiniStatPanel();
     }
 
     public void OpenStatus() {
-        HideAllSubMenus();
         UpdateStats();
         SetHeroStatus();
     }
@@ -381,7 +403,6 @@ public class GameMenu : MonoBehaviour {
         selectedItemCursor.gameObject.SetActive(true);
         selectedItemCursor.transform.position = button.transform.position;
         AudioManager.instance.PlaySfx("click");
-        HideAllSubMenus();
         clickedItem = button.item;
         if (clickedItem.GetType() == typeof(EquippableItem)
             || clickedItem.GetType() == typeof(Weapon)
@@ -390,7 +411,9 @@ public class GameMenu : MonoBehaviour {
         } else {
             itemSubMenu.UseText.text = "Use";
         }
-        itemSubMenu.gameObject.SetActive(true);
+        if (!itemSubMenu.gameObject.activeInHierarchy) {
+            ShowSubMenu(itemSubMenu.gameObject);
+        }
         Debug.Log("Item clicked: " + button.item.name);
         if (clickedItem.GetType() == typeof(EquippableItem) // comparing equipment
             || clickedItem.GetType() == typeof(Weapon)
@@ -469,12 +492,18 @@ public class GameMenu : MonoBehaviour {
                 handFilter.Add(EquipmentTypes.LightWeapon);
                 handFilter.Add(EquipmentTypes.Shield);
             }
-            ShowBackButton(inventoryWindow);
             inventory = inventory.Where(i => i.itemType == button.itemType).ToList();
             if (handFilter.Count > 0) {
                 var equipment = inventory.Cast<Hands>();
                 inventory = equipment.Where(e => handFilter.Contains(e.equipmentType)).Cast<Item>().ToList();
             }
+            if (button.equippedItem != null && button.equippedItem.name != "Unarmed") {
+                removeItem.gameObject.SetActive(true);
+            } else {
+                removeItem.gameObject.SetActive(false);
+            }
+        } else {
+            removeItem.gameObject.SetActive(false);
         }
 
         for (var i = 0; i < itemButtons.Length; i++) {
@@ -533,8 +562,10 @@ public class GameMenu : MonoBehaviour {
                 equipmentWindow.buttons[i].buttonLongPress.description += equipmentWindow.equipment[i].GetStatsString();
                 equipmentWindow.buttons[i].equippedItem = equipmentWindow.equipment[i];
             } else {
+                equipmentWindow.buttons[i].id = string.Empty;
                 equipmentWindow.buttons[i].image.enabled = false;
                 equipmentWindow.buttons[i].text.text = none;
+                equipmentWindow.buttons[i].equippedItem = null;
                 equipmentWindow.buttons[i].buttonLongPress.description = string.Empty;
             }
         }
@@ -564,11 +595,15 @@ public class GameMenu : MonoBehaviour {
             }
             
         } else {
+            equipmentWindow.offHandButton.id = string.Empty;
             equipmentWindow.offHandButton.image.enabled = false;
             equipmentWindow.offHandButton.text.text = none;
+            equipmentWindow.offHandButton.equippedItem = null;
             equipmentWindow.offHandAtkOrBlk.text = "---";
             equipmentWindow.offHandDmgOrAmt.text = "---";
         }
+        UpdateStats();
+        UpdateMiniStatPanel();
     }
 
     public void ClickEquipment(EquipmentButton button) {
@@ -577,7 +612,7 @@ public class GameMenu : MonoBehaviour {
         clickedEquipment = button.equippedItem;
         Debug.Log("Item ID: " + button.id);
 
-        windows[1].SetActive(true);
+        ShowSubWindow(windows[1]);
         OpenInventory(button);
     }
 

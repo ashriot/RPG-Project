@@ -134,6 +134,7 @@ MonoBehaviour:
   - Meditate
   spells:
   - Fireball
+  - Scorch
   hp:
     current: 0
     baseMax: 20
@@ -171,17 +172,17 @@ MonoBehaviour:
     bonus: 0
   statBonuses: 0000000000000000000000000000000000000000000000000000000000000000
   statusEffects: []
-  tpChanceBase: 0.1
+  tpChanceBase: 0.5
   tpChance: 0
   bodyEquipment:
-  - {fileID: 11400000, guid: 647712a93ca143249a21b3d1d5895c62, type: 2}
-  - {fileID: 11400000, guid: f1c8d53becd8984459da65c1803742ea, type: 2}
-  - {fileID: 11400000, guid: 50031aa6443758b49aa0215805cb10eb, type: 2}
-  - {fileID: 11400000, guid: c85ca059dcce50c409b139ff1596ee89, type: 2}
-  - {fileID: 11400000, guid: 1afd7edd7bfefb840805c7a8642ec284, type: 2}
-  - {fileID: 11400000, guid: 1c4bd2414c1aaeb41990448180a2f34f, type: 2}
+  - {fileID: 0}
+  - {fileID: 11400000, guid: 27b143e1dad53394fbcc962b10dc07cb, type: 2}
+  - {fileID: 0}
+  - {fileID: 11400000, guid: 260e209c32488cf4f808955465afb2f0, type: 2}
+  - {fileID: 0}
+  - {fileID: 0}
   handEquipment:
-  - {fileID: 11400000, guid: 9390d113075557b4c81c81a70974da61, type: 2}
+  - {fileID: 11400000, guid: 1f0b8659d3ded4e4f8c4853d982f2ef0, type: 2}
   - {fileID: 0}
   attributeSkillValues: 000000000000000000000000000000000000000000000000
   combatSkillValues: 

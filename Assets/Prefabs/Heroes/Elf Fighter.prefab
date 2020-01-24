@@ -172,15 +172,15 @@ MonoBehaviour:
   tpChanceBase: 0.5
   tpChance: 0
   bodyEquipment:
-  - {fileID: 11400000, guid: 647712a93ca143249a21b3d1d5895c62, type: 2}
-  - {fileID: 11400000, guid: ef3d966ca0253b549a187d01441ddd84, type: 2}
-  - {fileID: 11400000, guid: 50031aa6443758b49aa0215805cb10eb, type: 2}
-  - {fileID: 11400000, guid: 02fb59e7d1f1d564d93a35273947caf5, type: 2}
-  - {fileID: 11400000, guid: 1afd7edd7bfefb840805c7a8642ec284, type: 2}
-  - {fileID: 11400000, guid: 4f36306fe6a84ec468500dc1b6430249, type: 2}
+  - {fileID: 0}
+  - {fileID: 11400000, guid: 27b143e1dad53394fbcc962b10dc07cb, type: 2}
+  - {fileID: 0}
+  - {fileID: 11400000, guid: 260e209c32488cf4f808955465afb2f0, type: 2}
+  - {fileID: 0}
+  - {fileID: 0}
   handEquipment:
-  - {fileID: 11400000, guid: 7d35252fabe69bc4487b5a7935b84585, type: 2}
-  - {fileID: 11400000, guid: 7d35252fabe69bc4487b5a7935b84585, type: 2}
+  - {fileID: 11400000, guid: 98bd7c77f0a6f30469f088a358f5ff7e, type: 2}
+  - {fileID: 11400000, guid: 98bd7c77f0a6f30469f088a358f5ff7e, type: 2}
   attributeSkillValues: 000000000000000000000000000000000000000000000000
   combatSkillValues: 
   magicSkillValues: 

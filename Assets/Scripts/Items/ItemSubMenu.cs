@@ -13,14 +13,13 @@ public class ItemSubMenu : MonoBehaviour {
             || GameMenu.instance.clickedItem.GetType() == typeof(Shield)) {
             AudioManager.instance.PlaySfx("click");
 
+            UnequipItem();
+            GameManager.instance.UpdateHeroesEquipmentBonuses(GameMenu.instance.currentHeroId, slot);
             InventoryManager.instance.RemoveItemById(GameMenu.instance.clickedItem.id);
             var newEquipment = GameMenu.instance.clickedItem as EquippableItem;
-            var oldEquipment = ScriptableObject.CreateInstance<EquippableItem>();
             if ((int)slot < 6) {
                 if (GameManager.instance.heroes[GameMenu.instance.currentHeroId].bodyEquipment[(int)slot] != null) {
-                    oldEquipment = GameManager.instance.heroes[GameMenu.instance.currentHeroId].bodyEquipment[(int)slot];
                     GameManager.instance.RemoveEquipmentBonus(GameMenu.instance.currentHeroId, slot);
-                    InventoryManager.instance.AddItem(oldEquipment.id, 1);
                 }
                 GameManager.instance.heroes[GameMenu.instance.currentHeroId].bodyEquipment[(int)slot] = newEquipment;
             } else {
@@ -30,15 +29,47 @@ public class ItemSubMenu : MonoBehaviour {
                     newEquipment = newEquipment as Shield;
                 }
                 if (GameManager.instance.heroes[GameMenu.instance.currentHeroId].handEquipment[(int)slot-6] != null) {
-                    oldEquipment = GameManager.instance.heroes[GameMenu.instance.currentHeroId].handEquipment[(int)slot-6];
-                    InventoryManager.instance.AddItem(oldEquipment.id, 1);
                 }
                 GameManager.instance.heroes[GameMenu.instance.currentHeroId].handEquipment[(int)slot-6] = newEquipment as Hands;
             }
-            
             GameManager.instance.UpdateHeroesEquipmentBonuses(GameMenu.instance.currentHeroId, slot);
-            GameMenu.instance.Back();
-            GameMenu.instance.OpenEquipment();
+            GameMenu.instance.Back(2);
+            GameMenu.instance.SetEquipment();
+        }
+    }
+
+    public void ClickRemove() {
+        AudioManager.instance.PlaySfx("click");
+        UnequipItem();
+        if ((int)slot < 6) {
+            GameManager.instance.heroes[GameMenu.instance.currentHeroId].bodyEquipment[(int)slot] = null;
+        } else {
+            if (slot == EquipmentSlots.MainHand) {
+                GameManager.instance.heroes[GameMenu.instance.currentHeroId].handEquipment[0] = InventoryManager.instance.GetItemReference("weapUnarmed") as Weapon;
+            } else {
+                GameManager.instance.heroes[GameMenu.instance.currentHeroId].handEquipment[(int)slot - 6] = null;
+            }
+        }
+        GameManager.instance.UpdateHeroesEquipmentBonuses(GameMenu.instance.currentHeroId, slot);
+        GameMenu.instance.Back();
+        GameMenu.instance.SetEquipment();
+    }
+
+    private void UnequipItem() {
+        var oldEquipmentId = string.Empty;
+        if ((int)slot < 6) {
+            if (GameManager.instance.heroes[GameMenu.instance.currentHeroId].bodyEquipment[(int)slot] != null) {
+                oldEquipmentId = GameManager.instance.heroes[GameMenu.instance.currentHeroId].bodyEquipment[(int)slot].id;
+                GameManager.instance.RemoveEquipmentBonus(GameMenu.instance.currentHeroId, slot);
+                InventoryManager.instance.AddItemById(oldEquipmentId, 1);
+            }
+        }
+        else {
+            if (GameManager.instance.heroes[GameMenu.instance.currentHeroId].handEquipment[(int)slot - 6] != null) {
+                oldEquipmentId = GameManager.instance.heroes[GameMenu.instance.currentHeroId].handEquipment[(int)slot - 6].id;
+                GameManager.instance.RemoveEquipmentBonus(GameMenu.instance.currentHeroId, slot);
+                InventoryManager.instance.AddItemById(oldEquipmentId, 1);
+            }
         }
     }
 }

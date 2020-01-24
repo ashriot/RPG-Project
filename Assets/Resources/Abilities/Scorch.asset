@@ -10,16 +10,17 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 55ab7c10ac817f74690899407ef52845, type: 3}
-  m_Name: Fireball
+  m_Name: Scorch
   m_EditorClassIdentifier: 
-  abilityType: 4
-  name: Fireball
-  description: 
+  abilityType: 3
+  name: Scorch
+  description: With a snap of your fingers, an enemy is sorched, taking magic damage
+    and becoming burned.
   sprite: {fileID: -3578585665867577350, guid: 8c500e45b904a74468ea62831fc2b0dc, type: 3}
-  mpCost: 6
+  mpCost: 4
   tpCost: 0
-  chargeType: 1
-  delay: 1.25
+  chargeType: 2
+  delay: 1
   actions:
   - hitType: 6
     avoidType: 6
@@ -27,14 +28,17 @@ MonoBehaviour:
     hitModifier: 0
     avoidModifier: 0
     potencyModifier: 1
-    minimumPotency: 20
-    maximumPotency: 30
+    minimumPotency: 12
+    maximumPotency: 16
     isWeaponAttack: 0
     isEffectOnly: 0
-    targetType: 3
-    splashType: 3
-    splashModifier: 0.5
+    targetType: 0
+    splashType: 0
+    splashModifier: 0
     abilityFx: {fileID: 2467785622394809194, guid: f326f11d5e1b60a4cbad1dec0605fed7,
       type: 3}
-    statusEffects: []
+    statusEffects:
+    - baseStatusEffect: {fileID: 11400000, guid: fe81e7659927c264aa4a8458e1f36cfd,
+        type: 2}
+      stacks: 1
   notes: 
