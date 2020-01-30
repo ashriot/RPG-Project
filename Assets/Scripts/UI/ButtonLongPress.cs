@@ -1,21 +1,32 @@
 ﻿using UnityEngine;
 using UnityEngine.Events;
 using UnityEngine.EventSystems;
+using UnityEngine.UI;
  
-public class ButtonLongPress : MonoBehaviour, IPointerDownHandler, IPointerUpHandler, IPointerExitHandler {
-    [SerializeField, Tooltip("How long must pointer be down on this object to trigger a long press")]
-    public UnityEvent onClick = new UnityEvent();
-    
-    public string description;
+public class ButtonLongPress : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler, IPointerDownHandler, IPointerUpHandler {
 
-    // public UnityEvent onLongPress = new UnityEvent();
-    // public UnityEvent onRelease = new UnityEvent();
+    public UnityEvent onClick = new UnityEvent();
+    public string description;
+    
+    public Sprite idleSprite;
+    public Sprite hoverSprite;
+    
  
+    public Image backgroundImage;
     private float holdTime = .33f;
     private float timePressStarted;
     private bool isHeld = false;
     private bool longPressTriggered = false;
  
+    private void Awake() {
+        backgroundImage = GetComponent<Image>();
+
+    }
+
+    private void OnEnable() {
+        if (idleSprite != null) { backgroundImage.sprite = idleSprite; }
+    }
+
     private void Update() {
         if (isHeld && !longPressTriggered) {
             if (Time.time - timePressStarted > holdTime) {
@@ -40,20 +51,33 @@ public class ButtonLongPress : MonoBehaviour, IPointerDownHandler, IPointerUpHan
         }
     }
  
- 
     public void OnPointerExit(PointerEventData eventData) {
+        if (idleSprite != null) { backgroundImage.sprite = idleSprite; }
         isHeld = false;
     }
  
     private void OnLongPress() {
         isHeld = true;
         description = description.Replace("\\n", "\n");
-        GameMenu.instance.ShowTooltip(description);
-
+        if (GameMenu.instance != null) {
+            GameMenu.instance.ShowTooltip(description);
+        } else {
+            PartyCreation.instance.ShowTooltip(description);
+        }
     }
 
     private void OnRelease() {
+        if (idleSprite != null) { backgroundImage.sprite = idleSprite; }
         isHeld = false;
-        GameMenu.instance.HideTooltip();
+        if (GameMenu.instance != null) {
+            GameMenu.instance.HideTooltip();
+        } else {
+            PartyCreation.instance.HideTooltip();
+        }
+    }
+
+    public void OnPointerEnter(PointerEventData eventData) {
+        if (hoverSprite != null) {
+            backgroundImage.sprite = hoverSprite; }
     }
 }

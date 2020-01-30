@@ -5,8 +5,9 @@ public abstract class Unit : MonoBehaviour {
 
     public string id;
     public new string name;
-    public string className;
+    public string className, classDescription;
     public Animator unitAnimator;
+    public RuntimeAnimatorController unitAnimatorController;
     public RuntimeAnimatorController portraitAnimatorController;
     public Sprite portrait, aliveSprite, deadSprite;
 
@@ -14,8 +15,7 @@ public abstract class Unit : MonoBehaviour {
     public bool isKOed { get { return (hp.current == 0 && constitution.current > 0); } }
     public bool isDead { get { return (hp.current == 0 && constitution.current == 0); } }
     
-    public string classSkillName;
-    public string classSkillDescription;
+    public string classSkillName, classSkillDescription;
     public string[] weaponActions;
     public string[] classActions;
     public string[] spells;

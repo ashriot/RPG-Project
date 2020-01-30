@@ -23,7 +23,9 @@ public class CameraController : MonoBehaviour {
 
     // Start is called before the first frame update
     void Start() {
-        target = FindObjectOfType<PlayerController>().transform;
+        var playerController = FindObjectOfType<PlayerController>();
+        if (playerController == null) { return; }
+        target = playerController.transform;
 
         halfHeight = Camera.main.orthographicSize;
         halfWidth = halfHeight * Camera.main.aspect;
@@ -31,7 +33,7 @@ public class CameraController : MonoBehaviour {
         bottomLeftLimit = tilemap.localBounds.min + new Vector3(halfWidth, halfHeight, 0f);
         topRightLimit = tilemap.localBounds.max + new Vector3(-halfWidth, -halfHeight, 0f);
 
-        FindObjectOfType<PlayerController>().SetBounds(tilemap.localBounds.min, tilemap.localBounds.max);
+        playerController.SetBounds(tilemap.localBounds.min, tilemap.localBounds.max);
     }
 
     // LateUpdate is called once per frame after Update

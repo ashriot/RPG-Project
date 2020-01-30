@@ -1,0 +1,997 @@
+fileFormatVersion: 2
+guid: 27b634c5d66858346b0e7958382f742e
+TextureImporter:
+  internalIDToNameTable:
+  - first:
+      213: 4269802091179652355
+    second: wee_portraits_2_0
+  - first:
+      213: 4539334809960394481
+    second: wee_portraits_2_1
+  - first:
+      213: 5989091478344799063
+    second: wee_portraits_2_2
+  - first:
+      213: -8957494910619546650
+    second: wee_portraits_2_3
+  - first:
+      213: 5682015350457440591
+    second: wee_portraits_2_4
+  - first:
+      213: -1862436834737639084
+    second: wee_portraits_2_5
+  - first:
+      213: -2887505366769847027
+    second: wee_portraits_2_6
+  - first:
+      213: 59123504597836740
+    second: wee_portraits_2_7
+  - first:
+      213: -487542877435753703
+    second: wee_portraits_2_8
+  - first:
+      213: 3195659739383953233
+    second: wee_portraits_2_9
+  - first:
+      213: 1974603461131795260
+    second: wee_portraits_2_10
+  - first:
+      213: -4565401639700005697
+    second: wee_portraits_2_11
+  - first:
+      213: -6145824296751979024
+    second: wee_portraits_2_12
+  - first:
+      213: 8084288270076515181
+    second: wee_portraits_2_13
+  - first:
+      213: -7863064548571958610
+    second: wee_portraits_2_14
+  - first:
+      213: 4871808244828293630
+    second: wee_portraits_2_15
+  - first:
+      213: -2073138290606711627
+    second: wee_portraits_2_16
+  - first:
+      213: 2545405793911089679
+    second: wee_portraits_2_17
+  - first:
+      213: 946266200358182146
+    second: wee_portraits_2_18
+  - first:
+      213: -2267993907194224819
+    second: wee_portraits_2_19
+  - first:
+      213: -9176370204529231799
+    second: wee_portraits_2_20
+  - first:
+      213: 8668446639505036043
+    second: wee_portraits_2_21
+  - first:
+      213: 5775341240800696115
+    second: wee_portraits_2_22
+  - first:
+      213: 7112698915797728260
+    second: wee_portraits_2_23
+  - first:
+      213: 6278256550329841787
+    second: wee_portraits_2_24
+  - first:
+      213: -7760881988550147553
+    second: wee_portraits_2_25
+  - first:
+      213: 2044112713096398110
+    second: wee_portraits_2_26
+  - first:
+      213: -4380746163998283803
+    second: wee_portraits_2_27
+  - first:
+      213: -6237297074260043815
+    second: wee_portraits_2_28
+  - first:
+      213: -3428265244043886286
+    second: wee_portraits_2_29
+  - first:
+      213: 1179519466920356442
+    second: wee_portraits_2_30
+  - first:
+      213: 4721170969382140939
+    second: wee_portraits_2_31
+  - first:
+      213: -4844543124177008611
+    second: wee_portraits_2_32
+  - first:
+      213: -62439284367231323
+    second: wee_portraits_2_33
+  - first:
+      213: -3907068762819494510
+    second: wee_portraits_2_34
+  - first:
+      213: -3842805616569725354
+    second: wee_portraits_2_0
+  - first:
+      213: -5559978332070979738
+    second: wee_portraits_2_1
+  - first:
+      213: 5846283799116128831
+    second: wee_portraits_2_2
+  - first:
+      213: -3233752392141685164
+    second: wee_portraits_2_3
+  - first:
+      213: 5023476830117962015
+    second: wee_portraits_2_4
+  - first:
+      213: 7129909256556955463
+    second: wee_portraits_2_5
+  - first:
+      213: -2115687488725847206
+    second: wee_portraits_2_6
+  - first:
+      213: -1039367551900316674
+    second: wee_portraits_2_7
+  - first:
+      213: -955546988309473279
+    second: wee_portraits_2_8
+  - first:
+      213: 9201991975227824111
+    second: wee_portraits_2_9
+  - first:
+      213: -7851584889004010426
+    second: wee_portraits_2_10
+  - first:
+      213: 7323052820052812337
+    second: wee_portraits_2_11
+  - first:
+      213: 7355996683662476068
+    second: wee_portraits_2_12
+  - first:
+      213: 5870772999767292453
+    second: wee_portraits_2_13
+  - first:
+      213: -6530808389969313176
+    second: wee_portraits_2_14
+  - first:
+      213: 762241076395571256
+    second: wee_portraits_2_15
+  - first:
+      213: 5993498395952103032
+    second: wee_portraits_2_16
+  - first:
+      213: 6022895617904679903
+    second: wee_portraits_2_17
+  - first:
+      213: -8343785125935935009
+    second: wee_portraits_2_18
+  - first:
+      213: -3335048338814138037
+    second: wee_portraits_2_19
+  - first:
+      213: -4693349202197206475
+    second: wee_portraits_2_20
+  - first:
+      213: -3923710040593520118
+    second: wee_portraits_2_21
+  - first:
+      213: 3563080550334304504
+    second: wee_portraits_2_22
+  - first:
+      213: -606688308005136801
+    second: wee_portraits_2_23
+  - first:
+      213: 1207106444975976485
+    second: wee_portraits_2_24
+  - first:
+      213: -7338373792646265012
+    second: wee_portraits_2_25
+  - first:
+      213: -3782848729653917757
+    second: wee_portraits_2_26
+  - first:
+      213: -5109963250419544999
+    second: wee_portraits_2_27
+  - first:
+      213: -4421470277134747325
+    second: wee_portraits_2_28
+  - first:
+      213: -6720410885045163726
+    second: wee_portraits_2_29
+  - first:
+      213: 9103135586747331210
+    second: wee_portraits_2_30
+  externalObjects: {}
+  serializedVersion: 10
+  mipmaps:
+    mipMapMode: 0
+    enableMipMap: 0
+    sRGBTexture: 1
+    linearTexture: 0
+    fadeOut: 0
+    borderMipMap: 0
+    mipMapsPreserveCoverage: 0
+    alphaTestReferenceValue: 0.5
+    mipMapFadeDistanceStart: 1
+    mipMapFadeDistanceEnd: 3
+  bumpmap:
+    convertToNormalMap: 0
+    externalNormalMap: 0
+    heightScale: 0.25
+    normalMapFilter: 0
+  isReadable: 0
+  streamingMipmaps: 0
+  streamingMipmapsPriority: 0
+  grayScaleToAlpha: 0
+  generateCubemap: 6
+  cubemapConvolution: 0
+  seamlessCubemap: 0
+  textureFormat: 1
+  maxTextureSize: 2048
+  textureSettings:
+    serializedVersion: 2
+    filterMode: 0
+    aniso: -1
+    mipBias: -100
+    wrapU: 1
+    wrapV: 1
+    wrapW: 1
+  nPOTScale: 0
+  lightmap: 0
+  compressionQuality: 50
+  spriteMode: 2
+  spriteExtrude: 1
+  spriteMeshType: 1
+  alignment: 0
+  spritePivot: {x: 0.5, y: 0.5}
+  spritePixelsToUnits: 10
+  spriteBorder: {x: 0, y: 0, z: 0, w: 0}
+  spriteGenerateFallbackPhysicsShape: 1
+  alphaUsage: 1
+  alphaIsTransparency: 1
+  spriteTessellationDetail: -1
+  textureType: 8
+  textureShape: 1
+  singleChannelComponent: 0
+  maxTextureSizeSet: 0
+  compressionQualitySet: 0
+  textureFormatSet: 0
+  platformSettings:
+  - serializedVersion: 3
+    buildTarget: DefaultTexturePlatform
+    maxTextureSize: 128
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 0
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 3
+    buildTarget: Standalone
+    maxTextureSize: 128
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 0
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 3
+    buildTarget: iPhone
+    maxTextureSize: 128
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 0
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 3
+    buildTarget: Android
+    maxTextureSize: 128
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 0
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  spriteSheet:
+    serializedVersion: 2
+    sprites:
+    - serializedVersion: 2
+      name: wee_portraits_2_0
+      rect:
+        serializedVersion: 2
+        x: 2
+        y: 102
+        width: 16
+        height: 16
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 65e4c7bd6ac9baac0800000000000000
+      internalID: -3842805616569725354
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: wee_portraits_2_1
+      rect:
+        serializedVersion: 2
+        x: 22
+        y: 102
+        width: 16
+        height: 16
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 6675a0e3a2df6d2b0800000000000000
+      internalID: -5559978332070979738
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: wee_portraits_2_2
+      rect:
+        serializedVersion: 2
+        x: 42
+        y: 102
+        width: 16
+        height: 16
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: f32207ee32c222150800000000000000
+      internalID: 5846283799116128831
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: wee_portraits_2_3
+      rect:
+        serializedVersion: 2
+        x: 62
+        y: 102
+        width: 16
+        height: 16
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 45e33de15576f13d0800000000000000
+      internalID: -3233752392141685164
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: wee_portraits_2_4
+      rect:
+        serializedVersion: 2
+        x: 82
+        y: 102
+        width: 16
+        height: 16
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: f11269cbf89f6b540800000000000000
+      internalID: 5023476830117962015
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: wee_portraits_2_5
+      rect:
+        serializedVersion: 2
+        x: 102
+        y: 102
+        width: 16
+        height: 16
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 747c8d561b682f260800000000000000
+      internalID: 7129909256556955463
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: wee_portraits_2_6
+      rect:
+        serializedVersion: 2
+        x: 2
+        y: 82
+        width: 16
+        height: 16
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: a53f1ca307193a2e0800000000000000
+      internalID: -2115687488725847206
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: wee_portraits_2_7
+      rect:
+        serializedVersion: 2
+        x: 22
+        y: 82
+        width: 16
+        height: 16
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: efb0ae5e7bc6391f0800000000000000
+      internalID: -1039367551900316674
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: wee_portraits_2_8
+      rect:
+        serializedVersion: 2
+        x: 42
+        y: 82
+        width: 16
+        height: 16
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 1089e9ba3173db2f0800000000000000
+      internalID: -955546988309473279
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: wee_portraits_2_9
+      rect:
+        serializedVersion: 2
+        x: 62
+        y: 82
+        width: 16
+        height: 16
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: fe7137d72fa04bf70800000000000000
+      internalID: 9201991975227824111
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: wee_portraits_2_10
+      rect:
+        serializedVersion: 2
+        x: 82
+        y: 82
+        width: 16
+        height: 16
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 64457179421990390800000000000000
+      internalID: -7851584889004010426
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: wee_portraits_2_11
+      rect:
+        serializedVersion: 2
+        x: 102
+        y: 82
+        width: 16
+        height: 16
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 132abaa9db5b0a560800000000000000
+      internalID: 7323052820052812337
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: wee_portraits_2_12
+      rect:
+        serializedVersion: 2
+        x: 2
+        y: 62
+        width: 16
+        height: 16
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 42347a29200c51660800000000000000
+      internalID: 7355996683662476068
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: wee_portraits_2_13
+      rect:
+        serializedVersion: 2
+        x: 22
+        y: 62
+        width: 16
+        height: 16
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 52a751840fc297150800000000000000
+      internalID: 5870772999767292453
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: wee_portraits_2_14
+      rect:
+        serializedVersion: 2
+        x: 42
+        y: 62
+        width: 16
+        height: 16
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 8620dbbfe58ed55a0800000000000000
+      internalID: -6530808389969313176
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: wee_portraits_2_15
+      rect:
+        serializedVersion: 2
+        x: 62
+        y: 62
+        width: 16
+        height: 16
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 838f4cf6836049a00800000000000000
+      internalID: 762241076395571256
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: wee_portraits_2_16
+      rect:
+        serializedVersion: 2
+        x: 82
+        y: 62
+        width: 16
+        height: 16
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 87e3994490f2d2350800000000000000
+      internalID: 5993498395952103032
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: wee_portraits_2_17
+      rect:
+        serializedVersion: 2
+        x: 102
+        y: 62
+        width: 16
+        height: 16
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: fdb177067af959350800000000000000
+      internalID: 6022895617904679903
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: wee_portraits_2_18
+      rect:
+        serializedVersion: 2
+        x: 2
+        y: 42
+        width: 16
+        height: 16
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: fd1966e92abe43c80800000000000000
+      internalID: -8343785125935935009
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: wee_portraits_2_19
+      rect:
+        serializedVersion: 2
+        x: 22
+        y: 42
+        width: 16
+        height: 16
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: b490a38a43787b1d0800000000000000
+      internalID: -3335048338814138037
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: wee_portraits_2_20
+      rect:
+        serializedVersion: 2
+        x: 42
+        y: 42
+        width: 16
+        height: 16
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 53a2c2c54cfdddeb0800000000000000
+      internalID: -4693349202197206475
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: wee_portraits_2_21
+      rect:
+        serializedVersion: 2
+        x: 62
+        y: 42
+        width: 16
+        height: 16
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: a0a2accb18e2c89c0800000000000000
+      internalID: -3923710040593520118
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: wee_portraits_2_22
+      rect:
+        serializedVersion: 2
+        x: 82
+        y: 42
+        width: 16
+        height: 16
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 8f097cce1ea927130800000000000000
+      internalID: 3563080550334304504
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: wee_portraits_2_23
+      rect:
+        serializedVersion: 2
+        x: 102
+        y: 42
+        width: 16
+        height: 16
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: f5698ffb23c9497f0800000000000000
+      internalID: -606688308005136801
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: wee_portraits_2_24
+      rect:
+        serializedVersion: 2
+        x: 2
+        y: 22
+        width: 16
+        height: 16
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 520b0ea8ae080c010800000000000000
+      internalID: 1207106444975976485
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: wee_portraits_2_25
+      rect:
+        serializedVersion: 2
+        x: 22
+        y: 22
+        width: 16
+        height: 16
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: c47884c7aebd82a90800000000000000
+      internalID: -7338373792646265012
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: wee_portraits_2_26
+      rect:
+        serializedVersion: 2
+        x: 42
+        y: 22
+        width: 16
+        height: 16
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 3c7c0fd6f1f908bc0800000000000000
+      internalID: -3782848729653917757
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: wee_portraits_2_27
+      rect:
+        serializedVersion: 2
+        x: 62
+        y: 22
+        width: 16
+        height: 16
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 95c417b5f73c519b0800000000000000
+      internalID: -5109963250419544999
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: wee_portraits_2_28
+      rect:
+        serializedVersion: 2
+        x: 82
+        y: 22
+        width: 16
+        height: 16
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 3497f6a7538c3a2c0800000000000000
+      internalID: -4421470277134747325
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: wee_portraits_2_29
+      rect:
+        serializedVersion: 2
+        x: 102
+        y: 22
+        width: 16
+        height: 16
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 239e63408ed4cb2a0800000000000000
+      internalID: -6720410885045163726
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: wee_portraits_2_30
+      rect:
+        serializedVersion: 2
+        x: 2
+        y: 2
+        width: 16
+        height: 16
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: a82ba4ee595d45e70800000000000000
+      internalID: 9103135586747331210
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: wee_portraits_2_31
+      rect:
+        serializedVersion: 2
+        x: 22
+        y: 2
+        width: 16
+        height: 16
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: b0cb8e99bf7f48140800000000000000
+      internalID: 4721170969382140939
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    outline: []
+    physicsShape: []
+    bones: []
+    spriteID: 5e97eb03825dee720800000000000000
+    internalID: 0
+    vertices: []
+    indices: 
+    edges: []
+    weights: []
+    secondaryTextures: []
+  spritePackingTag: 
+  pSDRemoveMatte: 0
+  pSDShowRemoveMatteOption: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 

@@ -1,0 +1,14 @@
+fileFormatVersion: 2
+guid: a0cece0686c971d498086651e59fffe5
+MonoImporter:
+  externalObjects: {}
+  serializedVersion: 2
+  defaultReferences:
+  - idleSprite: {instanceID: 0}
+  - hoverSprite: {instanceID: 0}
+  - backgroundImage: {instanceID: 0}
+  executionOrder: 0
+  icon: {instanceID: 0}
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 

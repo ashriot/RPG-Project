@@ -128,7 +128,9 @@ public class GameMenu : MonoBehaviour {
         mainMenuButtonImage.sprite = buttonReadySprite;
         mainMenuButtonText.text = "Menu";
         GameManager.instance.menuButtonsOpen = false;
-        PlayerController.instance.uiOpen = false;
+        if (PlayerController.instance != null) {
+            PlayerController.instance.uiOpen = false;
+        }
     }
 
     public void CloseWindow(int windowId) {

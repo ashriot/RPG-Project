@@ -187,12 +187,8 @@ public class PlayerController : MonoBehaviour {
                     isMoving = true;
                     StartCoroutine(SmoothMovement(this.gameObject, endTile));
     
-                    // endTile = startTile;
-                    // var prevStartTile = new Vector3();
                     for (var i = 0; i < partyMembers.Count; i++) {
-                        // prevStartTile = new Vector3(partyMembers[i].transform.position.x, partyMembers[i].transform.position.y, 0f);
                         StartCoroutine(SmoothMovement(partyMembers[i], endTiles[i]));
-                        // endTile = prevStartTile;
                     }
                 }
                 else {

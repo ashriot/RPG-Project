@@ -20,6 +20,7 @@ public class AudioManager : MonoBehaviour {
     }
 
     public void PlayBgm(string name) {
+        Debug.Log(name);
         if (name == "dungeon") {
             PlayBgmId(0);
         } else if (name == "battle") {
@@ -30,6 +31,8 @@ public class AudioManager : MonoBehaviour {
             PlayBgmId(3);
         } else if (name == "epilogue") {
             PlayBgmId(4);
+        } else if (name == "prologue") {
+            PlayBgmId(5);
         }
     }
 
@@ -37,6 +40,7 @@ public class AudioManager : MonoBehaviour {
         if (!bgms[id].isPlaying) {
             StopMusic();
             if (id < bgms.Length) {
+                bgms[id].volume = 0.2f;
                 bgms[id].Play();
             } else {
                 Debug.LogError("BGM id '" + id + "' does not exist!");

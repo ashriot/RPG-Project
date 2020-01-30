@@ -100,6 +100,10 @@ public class BattleManager : MonoBehaviour {
         if (canvas.gameObject.activeInHierarchy) {
             canvas.gameObject.SetActive(false);
         }
+
+        if (battleScene.activeInHierarchy) {
+            battleScene.SetActive(false);
+        }
     }
 
     public void BattleStart(string[] enemyIds, bool unableToFlee) {
@@ -174,16 +178,22 @@ public class BattleManager : MonoBehaviour {
                 enemyStatWindows[i].tempHpSlider.fillAmount = (float)newEnemy.deflect / newEnemy.hp.maximum;
                 enemyStatWindows[i].mpSlider.fillAmount = newEnemy.mp.percent;
                 combatants.Add(newEnemy);
-                Debug.Log(xpEarned);
+                DeclareEnemy(newEnemy);
                 xpEarned += newEnemy.xp;
             }
         }
+
         partySizeOffset = combatants.Where(c => c.isPlayer).Count();
         OpenTargetMenu();
         SetInitialTicks();
         battleWaiting = true;
         UpdateUiStats();
         CountdownTicks();
+    }
+
+    private void DeclareEnemy(BattleCombatant enemy) {
+        var position = Camera.main.WorldToScreenPoint(enemy.transform.position + new Vector3(0,.8f, 0f));
+        Instantiate(battleActionDisplay, position, enemy.transform.rotation, canvas.transform).SetText("Lv.1");
     }
 
     private BattleCombatant GetEnemyPrefabById(string enemyId) {

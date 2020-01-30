@@ -1,0 +1,119 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!1 &1981699746568912446
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1981699746568912444}
+  - component: {fileID: 1981699746568912447}
+  m_Layer: 0
+  m_Name: Thief
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1981699746568912444
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1981699746568912446}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1981699746568912447
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1981699746568912446}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a899e1fa9d87d4446aeb2e8444feadd2, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  id: thief
+  name: Tasslehoff
+  className: Thief
+  classDescription: Thief\nA melee class that fights from the shadows.
+  unitAnimator: {fileID: 0}
+  unitAnimatorController: {fileID: 9100000, guid: 661c0db88e5b33f47a650671a09b2dda,
+    type: 2}
+  portraitAnimatorController: {fileID: 9100000, guid: 7dad5b351f42f2542bedb811028429a1,
+    type: 2}
+  portrait: {fileID: 0}
+  aliveSprite: {fileID: 0}
+  deadSprite: {fileID: 0}
+  isActive: 0
+  classSkillName: Thievery
+  classSkillDescription: Thievery\nSpecializes in assassination and stealing techniques.
+  weaponActions: []
+  classActions: []
+  spells: []
+  hp:
+    current: 0
+    baseMax: 30
+    bonus: 0
+  mp:
+    current: 0
+    baseMax: 15
+    bonus: 0
+  constitution:
+    current: 0
+    baseMax: 3
+    bonus: 0
+  deflect: 0
+  barrier: 0
+  attack:
+    baseValue: 8
+    bonus: 0
+  defense:
+    baseValue: 4
+    bonus: 0
+  magic:
+    baseValue: 3
+    bonus: 0
+  speed:
+    baseValue: 6
+    bonus: 0
+  armor:
+    baseValue: 0
+    bonus: 0
+  resist:
+    baseValue: 0
+    bonus: 0
+  critPower:
+    baseValue: 150
+    bonus: 0
+  statBonuses: 0000000000000000000000000000000000000000000000000000000000000000
+  statusEffects: []
+  tpChanceBase: 0
+  tpChance: 0
+  bodyEquipment:
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  handEquipment:
+  - {fileID: 0}
+  - {fileID: 0}
+  attributeSkillValues: 
+  combatSkillValues: 
+  magicSkillValues: 
+  fieldSkillValues: 
+  xp: 0
+  sp: 0
+  totalSp: 0

@@ -327,7 +327,7 @@ PrefabInstance:
     - target: {fileID: 3010644234400862246, guid: e595aa9b9e37ca143b0ab63b3c9cb63b,
         type: 3}
       propertyPath: m_RootOrder
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 3010644234400862246, guid: e595aa9b9e37ca143b0ab63b3c9cb63b,
         type: 3}
@@ -342,6 +342,21 @@ PrefabInstance:
     - target: {fileID: 3010644234400862246, guid: e595aa9b9e37ca143b0ab63b3c9cb63b,
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3010644234400862247, guid: e595aa9b9e37ca143b0ab63b3c9cb63b,
+        type: 3}
+      propertyPath: m_SortingLayerID
+      value: 254992725
+      objectReference: {fileID: 0}
+    - target: {fileID: 3010644234400862247, guid: e595aa9b9e37ca143b0ab63b3c9cb63b,
+        type: 3}
+      propertyPath: m_SortingLayer
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 3010644234400862247, guid: e595aa9b9e37ca143b0ab63b3c9cb63b,
+        type: 3}
+      propertyPath: m_SortingOrder
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 3010644234400862267, guid: e595aa9b9e37ca143b0ab63b3c9cb63b,
@@ -515,12 +530,10 @@ Transform:
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
-  - {fileID: 2415520861938729773}
   - {fileID: 922157807}
-  - {fileID: 391726463}
-  - {fileID: 800186998}
   - {fileID: 975098562}
   - {fileID: 1499647538}
+  - {fileID: 3010644232666127224}
   - {fileID: 1255801255}
   m_Father: {fileID: 1179888757}
   m_RootOrder: 4
@@ -620,18 +633,6 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 1ab92657d694d374882bb809bdb58b7f, type: 3}
---- !u!114 &272244356 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 3010644234400862267, guid: c704478de59a73947bc0cc251e4ff851,
-    type: 3}
-  m_PrefabInstance: {fileID: 800186997}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 9c7492560dc471140967cd457357912b, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1 &284990316
 GameObject:
   m_ObjectHideFlags: 0
@@ -7049,176 +7050,6 @@ Transform:
     type: 3}
   m_PrefabInstance: {fileID: 1632855728}
   m_PrefabAsset: {fileID: 0}
---- !u!1001 &391726462
-PrefabInstance:
-  m_ObjectHideFlags: 0
-  serializedVersion: 2
-  m_Modification:
-    m_TransformParent: {fileID: 216647972}
-    m_Modifications:
-    - target: {fileID: 3010644234400862244, guid: c704478de59a73947bc0cc251e4ff851,
-        type: 3}
-      propertyPath: m_Name
-      value: Skeleton War (1)
-      objectReference: {fileID: 0}
-    - target: {fileID: 3010644234400862246, guid: c704478de59a73947bc0cc251e4ff851,
-        type: 3}
-      propertyPath: m_LocalPosition.x
-      value: 5.5
-      objectReference: {fileID: 0}
-    - target: {fileID: 3010644234400862246, guid: c704478de59a73947bc0cc251e4ff851,
-        type: 3}
-      propertyPath: m_LocalPosition.y
-      value: 1.5
-      objectReference: {fileID: 0}
-    - target: {fileID: 3010644234400862246, guid: c704478de59a73947bc0cc251e4ff851,
-        type: 3}
-      propertyPath: m_LocalPosition.z
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 3010644234400862246, guid: c704478de59a73947bc0cc251e4ff851,
-        type: 3}
-      propertyPath: m_LocalRotation.x
-      value: -0
-      objectReference: {fileID: 0}
-    - target: {fileID: 3010644234400862246, guid: c704478de59a73947bc0cc251e4ff851,
-        type: 3}
-      propertyPath: m_LocalRotation.y
-      value: -0
-      objectReference: {fileID: 0}
-    - target: {fileID: 3010644234400862246, guid: c704478de59a73947bc0cc251e4ff851,
-        type: 3}
-      propertyPath: m_LocalRotation.z
-      value: -0
-      objectReference: {fileID: 0}
-    - target: {fileID: 3010644234400862246, guid: c704478de59a73947bc0cc251e4ff851,
-        type: 3}
-      propertyPath: m_LocalRotation.w
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 3010644234400862246, guid: c704478de59a73947bc0cc251e4ff851,
-        type: 3}
-      propertyPath: m_RootOrder
-      value: 2
-      objectReference: {fileID: 0}
-    - target: {fileID: 3010644234400862246, guid: c704478de59a73947bc0cc251e4ff851,
-        type: 3}
-      propertyPath: m_LocalEulerAnglesHint.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 3010644234400862246, guid: c704478de59a73947bc0cc251e4ff851,
-        type: 3}
-      propertyPath: m_LocalEulerAnglesHint.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 3010644234400862246, guid: c704478de59a73947bc0cc251e4ff851,
-        type: 3}
-      propertyPath: m_LocalEulerAnglesHint.z
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 3010644234400862267, guid: c704478de59a73947bc0cc251e4ff851,
-        type: 3}
-      propertyPath: potentialBattles.Array.data[0].enemies.Array.size
-      value: 3
-      objectReference: {fileID: 0}
-    - target: {fileID: 3010644234400862267, guid: c704478de59a73947bc0cc251e4ff851,
-        type: 3}
-      propertyPath: potentialBattles.Array.size
-      value: 3
-      objectReference: {fileID: 0}
-    - target: {fileID: 3010644234400862267, guid: c704478de59a73947bc0cc251e4ff851,
-        type: 3}
-      propertyPath: potentialBattles.Array.data[1].enemies.Array.size
-      value: 2
-      objectReference: {fileID: 0}
-    - target: {fileID: 3010644234400862267, guid: c704478de59a73947bc0cc251e4ff851,
-        type: 3}
-      propertyPath: potentialBattles.Array.data[2].enemies.Array.size
-      value: 5
-      objectReference: {fileID: 0}
-    - target: {fileID: 3010644234400862267, guid: c704478de59a73947bc0cc251e4ff851,
-        type: 3}
-      propertyPath: potentialBattles.Array.data[0].enemies.Array.data[1]
-      value: skeletonWarrior
-      objectReference: {fileID: 0}
-    - target: {fileID: 3010644234400862267, guid: c704478de59a73947bc0cc251e4ff851,
-        type: 3}
-      propertyPath: potentialBattles.Array.data[0].enemies.Array.data[2]
-      value: skeletonWarrior
-      objectReference: {fileID: 0}
-    - target: {fileID: 3010644234400862267, guid: c704478de59a73947bc0cc251e4ff851,
-        type: 3}
-      propertyPath: potentialBattles.Array.data[0].enemies.Array.data[3]
-      value: skeletonWarrior
-      objectReference: {fileID: 0}
-    - target: {fileID: 3010644234400862267, guid: c704478de59a73947bc0cc251e4ff851,
-        type: 3}
-      propertyPath: potentialBattles.Array.data[0].enemies.Array.data[4]
-      value: skeletonWarrior
-      objectReference: {fileID: 0}
-    - target: {fileID: 3010644234400862267, guid: c704478de59a73947bc0cc251e4ff851,
-        type: 3}
-      propertyPath: potentialBattles.Array.data[0].enemies.Array.data[5]
-      value: skeletonWarrior
-      objectReference: {fileID: 0}
-    - target: {fileID: 3010644234400862267, guid: c704478de59a73947bc0cc251e4ff851,
-        type: 3}
-      propertyPath: potentialBattles.Array.data[0].enemies.Array.data[6]
-      value: skeletonWarrior
-      objectReference: {fileID: 0}
-    - target: {fileID: 3010644234400862267, guid: c704478de59a73947bc0cc251e4ff851,
-        type: 3}
-      propertyPath: potentialBattles.Array.data[0].xpReward
-      value: 10
-      objectReference: {fileID: 0}
-    - target: {fileID: 3010644234400862267, guid: c704478de59a73947bc0cc251e4ff851,
-        type: 3}
-      propertyPath: potentialBattles.Array.data[1].enemies.Array.data[0]
-      value: skeletonWarrior
-      objectReference: {fileID: 0}
-    - target: {fileID: 3010644234400862267, guid: c704478de59a73947bc0cc251e4ff851,
-        type: 3}
-      propertyPath: potentialBattles.Array.data[1].enemies.Array.data[1]
-      value: skeletonWarrior
-      objectReference: {fileID: 0}
-    - target: {fileID: 3010644234400862267, guid: c704478de59a73947bc0cc251e4ff851,
-        type: 3}
-      propertyPath: potentialBattles.Array.data[1].enemies.Array.data[2]
-      value: skeletonWarrior
-      objectReference: {fileID: 0}
-    - target: {fileID: 3010644234400862267, guid: c704478de59a73947bc0cc251e4ff851,
-        type: 3}
-      propertyPath: potentialBattles.Array.data[2].enemies.Array.data[0]
-      value: skeletonWarrior
-      objectReference: {fileID: 0}
-    - target: {fileID: 3010644234400862267, guid: c704478de59a73947bc0cc251e4ff851,
-        type: 3}
-      propertyPath: potentialBattles.Array.data[2].enemies.Array.data[1]
-      value: skeletonWarrior
-      objectReference: {fileID: 0}
-    - target: {fileID: 3010644234400862267, guid: c704478de59a73947bc0cc251e4ff851,
-        type: 3}
-      propertyPath: potentialBattles.Array.data[2].enemies.Array.data[2]
-      value: skeletonWarrior
-      objectReference: {fileID: 0}
-    - target: {fileID: 3010644234400862267, guid: c704478de59a73947bc0cc251e4ff851,
-        type: 3}
-      propertyPath: potentialBattles.Array.data[2].enemies.Array.data[3]
-      value: skeletonWarrior
-      objectReference: {fileID: 0}
-    - target: {fileID: 3010644234400862267, guid: c704478de59a73947bc0cc251e4ff851,
-        type: 3}
-      propertyPath: potentialBattles.Array.data[2].enemies.Array.data[4]
-      value: skeletonWarrior
-      objectReference: {fileID: 0}
-    m_RemovedComponents: []
-  m_SourcePrefab: {fileID: 100100000, guid: c704478de59a73947bc0cc251e4ff851, type: 3}
---- !u!4 &391726463 stripped
-Transform:
-  m_CorrespondingSourceObject: {fileID: 3010644234400862246, guid: c704478de59a73947bc0cc251e4ff851,
-    type: 3}
-  m_PrefabInstance: {fileID: 391726462}
-  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &446008486
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -9070,176 +8901,6 @@ Transform:
     type: 3}
   m_PrefabInstance: {fileID: 696239305}
   m_PrefabAsset: {fileID: 0}
---- !u!1001 &800186997
-PrefabInstance:
-  m_ObjectHideFlags: 0
-  serializedVersion: 2
-  m_Modification:
-    m_TransformParent: {fileID: 216647972}
-    m_Modifications:
-    - target: {fileID: 3010644234400862244, guid: c704478de59a73947bc0cc251e4ff851,
-        type: 3}
-      propertyPath: m_Name
-      value: Skeleton War (2)
-      objectReference: {fileID: 0}
-    - target: {fileID: 3010644234400862246, guid: c704478de59a73947bc0cc251e4ff851,
-        type: 3}
-      propertyPath: m_LocalPosition.x
-      value: 7.5
-      objectReference: {fileID: 0}
-    - target: {fileID: 3010644234400862246, guid: c704478de59a73947bc0cc251e4ff851,
-        type: 3}
-      propertyPath: m_LocalPosition.y
-      value: 6.5
-      objectReference: {fileID: 0}
-    - target: {fileID: 3010644234400862246, guid: c704478de59a73947bc0cc251e4ff851,
-        type: 3}
-      propertyPath: m_LocalPosition.z
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 3010644234400862246, guid: c704478de59a73947bc0cc251e4ff851,
-        type: 3}
-      propertyPath: m_LocalRotation.x
-      value: -0
-      objectReference: {fileID: 0}
-    - target: {fileID: 3010644234400862246, guid: c704478de59a73947bc0cc251e4ff851,
-        type: 3}
-      propertyPath: m_LocalRotation.y
-      value: -0
-      objectReference: {fileID: 0}
-    - target: {fileID: 3010644234400862246, guid: c704478de59a73947bc0cc251e4ff851,
-        type: 3}
-      propertyPath: m_LocalRotation.z
-      value: -0
-      objectReference: {fileID: 0}
-    - target: {fileID: 3010644234400862246, guid: c704478de59a73947bc0cc251e4ff851,
-        type: 3}
-      propertyPath: m_LocalRotation.w
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 3010644234400862246, guid: c704478de59a73947bc0cc251e4ff851,
-        type: 3}
-      propertyPath: m_RootOrder
-      value: 3
-      objectReference: {fileID: 0}
-    - target: {fileID: 3010644234400862246, guid: c704478de59a73947bc0cc251e4ff851,
-        type: 3}
-      propertyPath: m_LocalEulerAnglesHint.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 3010644234400862246, guid: c704478de59a73947bc0cc251e4ff851,
-        type: 3}
-      propertyPath: m_LocalEulerAnglesHint.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 3010644234400862246, guid: c704478de59a73947bc0cc251e4ff851,
-        type: 3}
-      propertyPath: m_LocalEulerAnglesHint.z
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 3010644234400862267, guid: c704478de59a73947bc0cc251e4ff851,
-        type: 3}
-      propertyPath: potentialBattles.Array.data[0].enemies.Array.size
-      value: 3
-      objectReference: {fileID: 0}
-    - target: {fileID: 3010644234400862267, guid: c704478de59a73947bc0cc251e4ff851,
-        type: 3}
-      propertyPath: potentialBattles.Array.size
-      value: 3
-      objectReference: {fileID: 0}
-    - target: {fileID: 3010644234400862267, guid: c704478de59a73947bc0cc251e4ff851,
-        type: 3}
-      propertyPath: potentialBattles.Array.data[1].enemies.Array.size
-      value: 2
-      objectReference: {fileID: 0}
-    - target: {fileID: 3010644234400862267, guid: c704478de59a73947bc0cc251e4ff851,
-        type: 3}
-      propertyPath: potentialBattles.Array.data[2].enemies.Array.size
-      value: 5
-      objectReference: {fileID: 0}
-    - target: {fileID: 3010644234400862267, guid: c704478de59a73947bc0cc251e4ff851,
-        type: 3}
-      propertyPath: potentialBattles.Array.data[0].enemies.Array.data[1]
-      value: skeletonWarrior
-      objectReference: {fileID: 0}
-    - target: {fileID: 3010644234400862267, guid: c704478de59a73947bc0cc251e4ff851,
-        type: 3}
-      propertyPath: potentialBattles.Array.data[0].enemies.Array.data[2]
-      value: skeletonWarrior
-      objectReference: {fileID: 0}
-    - target: {fileID: 3010644234400862267, guid: c704478de59a73947bc0cc251e4ff851,
-        type: 3}
-      propertyPath: potentialBattles.Array.data[0].enemies.Array.data[3]
-      value: skeletonWarrior
-      objectReference: {fileID: 0}
-    - target: {fileID: 3010644234400862267, guid: c704478de59a73947bc0cc251e4ff851,
-        type: 3}
-      propertyPath: potentialBattles.Array.data[0].enemies.Array.data[4]
-      value: skeletonWarrior
-      objectReference: {fileID: 0}
-    - target: {fileID: 3010644234400862267, guid: c704478de59a73947bc0cc251e4ff851,
-        type: 3}
-      propertyPath: potentialBattles.Array.data[0].enemies.Array.data[5]
-      value: skeletonWarrior
-      objectReference: {fileID: 0}
-    - target: {fileID: 3010644234400862267, guid: c704478de59a73947bc0cc251e4ff851,
-        type: 3}
-      propertyPath: potentialBattles.Array.data[0].enemies.Array.data[6]
-      value: skeletonWarrior
-      objectReference: {fileID: 0}
-    - target: {fileID: 3010644234400862267, guid: c704478de59a73947bc0cc251e4ff851,
-        type: 3}
-      propertyPath: potentialBattles.Array.data[0].xpReward
-      value: 10
-      objectReference: {fileID: 0}
-    - target: {fileID: 3010644234400862267, guid: c704478de59a73947bc0cc251e4ff851,
-        type: 3}
-      propertyPath: potentialBattles.Array.data[1].enemies.Array.data[0]
-      value: skeletonWarrior
-      objectReference: {fileID: 0}
-    - target: {fileID: 3010644234400862267, guid: c704478de59a73947bc0cc251e4ff851,
-        type: 3}
-      propertyPath: potentialBattles.Array.data[1].enemies.Array.data[1]
-      value: skeletonWarrior
-      objectReference: {fileID: 0}
-    - target: {fileID: 3010644234400862267, guid: c704478de59a73947bc0cc251e4ff851,
-        type: 3}
-      propertyPath: potentialBattles.Array.data[1].enemies.Array.data[2]
-      value: skeletonWarrior
-      objectReference: {fileID: 0}
-    - target: {fileID: 3010644234400862267, guid: c704478de59a73947bc0cc251e4ff851,
-        type: 3}
-      propertyPath: potentialBattles.Array.data[2].enemies.Array.data[0]
-      value: skeletonWarrior
-      objectReference: {fileID: 0}
-    - target: {fileID: 3010644234400862267, guid: c704478de59a73947bc0cc251e4ff851,
-        type: 3}
-      propertyPath: potentialBattles.Array.data[2].enemies.Array.data[1]
-      value: skeletonWarrior
-      objectReference: {fileID: 0}
-    - target: {fileID: 3010644234400862267, guid: c704478de59a73947bc0cc251e4ff851,
-        type: 3}
-      propertyPath: potentialBattles.Array.data[2].enemies.Array.data[2]
-      value: skeletonWarrior
-      objectReference: {fileID: 0}
-    - target: {fileID: 3010644234400862267, guid: c704478de59a73947bc0cc251e4ff851,
-        type: 3}
-      propertyPath: potentialBattles.Array.data[2].enemies.Array.data[3]
-      value: skeletonWarrior
-      objectReference: {fileID: 0}
-    - target: {fileID: 3010644234400862267, guid: c704478de59a73947bc0cc251e4ff851,
-        type: 3}
-      propertyPath: potentialBattles.Array.data[2].enemies.Array.data[4]
-      value: skeletonWarrior
-      objectReference: {fileID: 0}
-    m_RemovedComponents: []
-  m_SourcePrefab: {fileID: 100100000, guid: c704478de59a73947bc0cc251e4ff851, type: 3}
---- !u!4 &800186998 stripped
-Transform:
-  m_CorrespondingSourceObject: {fileID: 3010644234400862246, guid: c704478de59a73947bc0cc251e4ff851,
-    type: 3}
-  m_PrefabInstance: {fileID: 800186997}
-  m_PrefabAsset: {fileID: 0}
 --- !u!4 &805994263 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 7025182946466074900, guid: 96bc5fccde813c041b0099cdefddcff4,
@@ -9483,7 +9144,7 @@ PrefabInstance:
     - target: {fileID: 3010644234400862246, guid: e595aa9b9e37ca143b0ab63b3c9cb63b,
         type: 3}
       propertyPath: m_RootOrder
-      value: 4
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 3010644234400862246, guid: e595aa9b9e37ca143b0ab63b3c9cb63b,
         type: 3}
@@ -9498,6 +9159,21 @@ PrefabInstance:
     - target: {fileID: 3010644234400862246, guid: e595aa9b9e37ca143b0ab63b3c9cb63b,
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3010644234400862247, guid: e595aa9b9e37ca143b0ab63b3c9cb63b,
+        type: 3}
+      propertyPath: m_SortingLayerID
+      value: 254992725
+      objectReference: {fileID: 0}
+    - target: {fileID: 3010644234400862247, guid: e595aa9b9e37ca143b0ab63b3c9cb63b,
+        type: 3}
+      propertyPath: m_SortingLayer
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 3010644234400862247, guid: e595aa9b9e37ca143b0ab63b3c9cb63b,
+        type: 3}
+      propertyPath: m_SortingOrder
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 3010644234400862267, guid: e595aa9b9e37ca143b0ab63b3c9cb63b,
@@ -9804,60 +9480,6 @@ Tilemap:
   m_GameObject: {fileID: 991161080}
   m_Enabled: 1
   m_Tiles:
-  - first: {x: -33, y: -16, z: 0}
-    second:
-      serializedVersion: 2
-      m_TileIndex: 1
-      m_TileSpriteIndex: 1
-      m_TileMatrixIndex: 0
-      m_TileColorIndex: 0
-      m_TileObjectToInstantiateIndex: 65535
-      m_AllTileFlags: 1073741825
-  - first: {x: -30, y: -15, z: 0}
-    second:
-      serializedVersion: 2
-      m_TileIndex: 1
-      m_TileSpriteIndex: 1
-      m_TileMatrixIndex: 0
-      m_TileColorIndex: 0
-      m_TileObjectToInstantiateIndex: 65535
-      m_AllTileFlags: 1073741825
-  - first: {x: -28, y: -15, z: 0}
-    second:
-      serializedVersion: 2
-      m_TileIndex: 1
-      m_TileSpriteIndex: 1
-      m_TileMatrixIndex: 0
-      m_TileColorIndex: 0
-      m_TileObjectToInstantiateIndex: 65535
-      m_AllTileFlags: 1073741825
-  - first: {x: -30, y: -13, z: 0}
-    second:
-      serializedVersion: 2
-      m_TileIndex: 1
-      m_TileSpriteIndex: 1
-      m_TileMatrixIndex: 0
-      m_TileColorIndex: 0
-      m_TileObjectToInstantiateIndex: 65535
-      m_AllTileFlags: 1073741825
-  - first: {x: -28, y: -13, z: 0}
-    second:
-      serializedVersion: 2
-      m_TileIndex: 1
-      m_TileSpriteIndex: 1
-      m_TileMatrixIndex: 0
-      m_TileColorIndex: 0
-      m_TileObjectToInstantiateIndex: 65535
-      m_AllTileFlags: 1073741825
-  - first: {x: 13, y: -7, z: 0}
-    second:
-      serializedVersion: 2
-      m_TileIndex: 1
-      m_TileSpriteIndex: 1
-      m_TileMatrixIndex: 0
-      m_TileColorIndex: 0
-      m_TileObjectToInstantiateIndex: 65535
-      m_AllTileFlags: 1073741825
   - first: {x: -2, y: -5, z: 0}
     second:
       serializedVersion: 2
@@ -9895,15 +9517,6 @@ Tilemap:
       m_TileObjectToInstantiateIndex: 65535
       m_AllTileFlags: 1073741825
   - first: {x: -8, y: -4, z: 0}
-    second:
-      serializedVersion: 2
-      m_TileIndex: 1
-      m_TileSpriteIndex: 1
-      m_TileMatrixIndex: 0
-      m_TileColorIndex: 0
-      m_TileObjectToInstantiateIndex: 65535
-      m_AllTileFlags: 1073741825
-  - first: {x: 13, y: -4, z: 0}
     second:
       serializedVersion: 2
       m_TileIndex: 1
@@ -10011,29 +9624,20 @@ Tilemap:
       m_TileColorIndex: 0
       m_TileObjectToInstantiateIndex: 65535
       m_AllTileFlags: 1073741825
-  - first: {x: -7, y: 4, z: 0}
-    second:
-      serializedVersion: 2
-      m_TileIndex: 1
-      m_TileSpriteIndex: 1
-      m_TileMatrixIndex: 0
-      m_TileColorIndex: 0
-      m_TileObjectToInstantiateIndex: 65535
-      m_AllTileFlags: 1073741825
   m_AnimatedTiles: {}
   m_TileAssetArray:
   - m_RefCount: 0
     m_Data: {fileID: 0}
-  - m_RefCount: 24
+  - m_RefCount: 16
     m_Data: {fileID: 11400000, guid: f043db026fbc16a4aa0cee11732689c6, type: 2}
   m_TileSpriteArray:
   - m_RefCount: 0
     m_Data: {fileID: 0}
-  - m_RefCount: 24
+  - m_RefCount: 16
     m_Data: {fileID: 9067233583431043777, guid: 8c500e45b904a74468ea62831fc2b0dc,
       type: 3}
   m_TileMatrixArray:
-  - m_RefCount: 24
+  - m_RefCount: 16
     m_Data:
       e00: 1
       e01: 0
@@ -10052,7 +9656,7 @@ Tilemap:
       e32: 0
       e33: 1
   m_TileColorArray:
-  - m_RefCount: 24
+  - m_RefCount: 16
     m_Data: {r: 1, g: 1, b: 1, a: 1}
   m_TileObjectToInstantiateArray: []
   m_AnimationFrameRate: 1
@@ -10404,7 +10008,7 @@ PrefabInstance:
     - target: {fileID: 3010644234400862246, guid: e595aa9b9e37ca143b0ab63b3c9cb63b,
         type: 3}
       propertyPath: m_RootOrder
-      value: 6
+      value: 4
       objectReference: {fileID: 0}
     - target: {fileID: 3010644234400862246, guid: e595aa9b9e37ca143b0ab63b3c9cb63b,
         type: 3}
@@ -10419,6 +10023,21 @@ PrefabInstance:
     - target: {fileID: 3010644234400862246, guid: e595aa9b9e37ca143b0ab63b3c9cb63b,
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3010644234400862247, guid: e595aa9b9e37ca143b0ab63b3c9cb63b,
+        type: 3}
+      propertyPath: m_SortingLayerID
+      value: 254992725
+      objectReference: {fileID: 0}
+    - target: {fileID: 3010644234400862247, guid: e595aa9b9e37ca143b0ab63b3c9cb63b,
+        type: 3}
+      propertyPath: m_SortingLayer
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 3010644234400862247, guid: e595aa9b9e37ca143b0ab63b3c9cb63b,
+        type: 3}
+      propertyPath: m_SortingOrder
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 3010644234400862267, guid: e595aa9b9e37ca143b0ab63b3c9cb63b,
@@ -10622,18 +10241,6 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 8
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &1197910171 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 3010644234400862267, guid: c704478de59a73947bc0cc251e4ff851,
-    type: 3}
-  m_PrefabInstance: {fileID: 595130012595507979}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 9c7492560dc471140967cd457357912b, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!4 &1255801255 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 3010644234400862246, guid: e595aa9b9e37ca143b0ab63b3c9cb63b,
@@ -11186,7 +10793,7 @@ PrefabInstance:
     - target: {fileID: 3010644234400862246, guid: e595aa9b9e37ca143b0ab63b3c9cb63b,
         type: 3}
       propertyPath: m_RootOrder
-      value: 5
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 3010644234400862246, guid: e595aa9b9e37ca143b0ab63b3c9cb63b,
         type: 3}
@@ -11201,6 +10808,21 @@ PrefabInstance:
     - target: {fileID: 3010644234400862246, guid: e595aa9b9e37ca143b0ab63b3c9cb63b,
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3010644234400862247, guid: e595aa9b9e37ca143b0ab63b3c9cb63b,
+        type: 3}
+      propertyPath: m_SortingLayerID
+      value: 254992725
+      objectReference: {fileID: 0}
+    - target: {fileID: 3010644234400862247, guid: e595aa9b9e37ca143b0ab63b3c9cb63b,
+        type: 3}
+      propertyPath: m_SortingLayer
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 3010644234400862247, guid: e595aa9b9e37ca143b0ab63b3c9cb63b,
+        type: 3}
+      propertyPath: m_SortingOrder
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 3010644234400862267, guid: e595aa9b9e37ca143b0ab63b3c9cb63b,
@@ -20768,18 +20390,6 @@ Transform:
     type: 3}
   m_PrefabInstance: {fileID: 96338625}
   m_PrefabAsset: {fileID: 0}
---- !u!114 &1727144097 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 3010644234400862267, guid: c704478de59a73947bc0cc251e4ff851,
-    type: 3}
-  m_PrefabInstance: {fileID: 391726462}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 9c7492560dc471140967cd457357912b, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!114 &1790549694 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 3010644234400862267, guid: e595aa9b9e37ca143b0ab63b3c9cb63b,
@@ -22189,170 +21799,6 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: cacb0043d892ba849b16990941d1d748, type: 3}
---- !u!1001 &595130012595507979
-PrefabInstance:
-  m_ObjectHideFlags: 0
-  serializedVersion: 2
-  m_Modification:
-    m_TransformParent: {fileID: 216647972}
-    m_Modifications:
-    - target: {fileID: 3010644234400862244, guid: c704478de59a73947bc0cc251e4ff851,
-        type: 3}
-      propertyPath: m_Name
-      value: Skeleton War
-      objectReference: {fileID: 0}
-    - target: {fileID: 3010644234400862246, guid: c704478de59a73947bc0cc251e4ff851,
-        type: 3}
-      propertyPath: m_LocalPosition.x
-      value: -16.5
-      objectReference: {fileID: 0}
-    - target: {fileID: 3010644234400862246, guid: c704478de59a73947bc0cc251e4ff851,
-        type: 3}
-      propertyPath: m_LocalPosition.y
-      value: -5.5
-      objectReference: {fileID: 0}
-    - target: {fileID: 3010644234400862246, guid: c704478de59a73947bc0cc251e4ff851,
-        type: 3}
-      propertyPath: m_LocalPosition.z
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 3010644234400862246, guid: c704478de59a73947bc0cc251e4ff851,
-        type: 3}
-      propertyPath: m_LocalRotation.x
-      value: -0
-      objectReference: {fileID: 0}
-    - target: {fileID: 3010644234400862246, guid: c704478de59a73947bc0cc251e4ff851,
-        type: 3}
-      propertyPath: m_LocalRotation.y
-      value: -0
-      objectReference: {fileID: 0}
-    - target: {fileID: 3010644234400862246, guid: c704478de59a73947bc0cc251e4ff851,
-        type: 3}
-      propertyPath: m_LocalRotation.z
-      value: -0
-      objectReference: {fileID: 0}
-    - target: {fileID: 3010644234400862246, guid: c704478de59a73947bc0cc251e4ff851,
-        type: 3}
-      propertyPath: m_LocalRotation.w
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 3010644234400862246, guid: c704478de59a73947bc0cc251e4ff851,
-        type: 3}
-      propertyPath: m_RootOrder
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 3010644234400862246, guid: c704478de59a73947bc0cc251e4ff851,
-        type: 3}
-      propertyPath: m_LocalEulerAnglesHint.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 3010644234400862246, guid: c704478de59a73947bc0cc251e4ff851,
-        type: 3}
-      propertyPath: m_LocalEulerAnglesHint.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 3010644234400862246, guid: c704478de59a73947bc0cc251e4ff851,
-        type: 3}
-      propertyPath: m_LocalEulerAnglesHint.z
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 3010644234400862267, guid: c704478de59a73947bc0cc251e4ff851,
-        type: 3}
-      propertyPath: potentialBattles.Array.data[0].enemies.Array.size
-      value: 3
-      objectReference: {fileID: 0}
-    - target: {fileID: 3010644234400862267, guid: c704478de59a73947bc0cc251e4ff851,
-        type: 3}
-      propertyPath: potentialBattles.Array.size
-      value: 3
-      objectReference: {fileID: 0}
-    - target: {fileID: 3010644234400862267, guid: c704478de59a73947bc0cc251e4ff851,
-        type: 3}
-      propertyPath: potentialBattles.Array.data[1].enemies.Array.size
-      value: 2
-      objectReference: {fileID: 0}
-    - target: {fileID: 3010644234400862267, guid: c704478de59a73947bc0cc251e4ff851,
-        type: 3}
-      propertyPath: potentialBattles.Array.data[2].enemies.Array.size
-      value: 5
-      objectReference: {fileID: 0}
-    - target: {fileID: 3010644234400862267, guid: c704478de59a73947bc0cc251e4ff851,
-        type: 3}
-      propertyPath: potentialBattles.Array.data[0].enemies.Array.data[1]
-      value: skeletonWarrior
-      objectReference: {fileID: 0}
-    - target: {fileID: 3010644234400862267, guid: c704478de59a73947bc0cc251e4ff851,
-        type: 3}
-      propertyPath: potentialBattles.Array.data[0].enemies.Array.data[2]
-      value: skeletonWarrior
-      objectReference: {fileID: 0}
-    - target: {fileID: 3010644234400862267, guid: c704478de59a73947bc0cc251e4ff851,
-        type: 3}
-      propertyPath: potentialBattles.Array.data[0].enemies.Array.data[3]
-      value: skeletonWarrior
-      objectReference: {fileID: 0}
-    - target: {fileID: 3010644234400862267, guid: c704478de59a73947bc0cc251e4ff851,
-        type: 3}
-      propertyPath: potentialBattles.Array.data[0].enemies.Array.data[4]
-      value: skeletonWarrior
-      objectReference: {fileID: 0}
-    - target: {fileID: 3010644234400862267, guid: c704478de59a73947bc0cc251e4ff851,
-        type: 3}
-      propertyPath: potentialBattles.Array.data[0].enemies.Array.data[5]
-      value: skeletonWarrior
-      objectReference: {fileID: 0}
-    - target: {fileID: 3010644234400862267, guid: c704478de59a73947bc0cc251e4ff851,
-        type: 3}
-      propertyPath: potentialBattles.Array.data[0].enemies.Array.data[6]
-      value: skeletonWarrior
-      objectReference: {fileID: 0}
-    - target: {fileID: 3010644234400862267, guid: c704478de59a73947bc0cc251e4ff851,
-        type: 3}
-      propertyPath: potentialBattles.Array.data[0].xpReward
-      value: 10
-      objectReference: {fileID: 0}
-    - target: {fileID: 3010644234400862267, guid: c704478de59a73947bc0cc251e4ff851,
-        type: 3}
-      propertyPath: potentialBattles.Array.data[1].enemies.Array.data[0]
-      value: skeletonWarrior
-      objectReference: {fileID: 0}
-    - target: {fileID: 3010644234400862267, guid: c704478de59a73947bc0cc251e4ff851,
-        type: 3}
-      propertyPath: potentialBattles.Array.data[1].enemies.Array.data[1]
-      value: skeletonWarrior
-      objectReference: {fileID: 0}
-    - target: {fileID: 3010644234400862267, guid: c704478de59a73947bc0cc251e4ff851,
-        type: 3}
-      propertyPath: potentialBattles.Array.data[1].enemies.Array.data[2]
-      value: skeletonWarrior
-      objectReference: {fileID: 0}
-    - target: {fileID: 3010644234400862267, guid: c704478de59a73947bc0cc251e4ff851,
-        type: 3}
-      propertyPath: potentialBattles.Array.data[2].enemies.Array.data[0]
-      value: skeletonWarrior
-      objectReference: {fileID: 0}
-    - target: {fileID: 3010644234400862267, guid: c704478de59a73947bc0cc251e4ff851,
-        type: 3}
-      propertyPath: potentialBattles.Array.data[2].enemies.Array.data[1]
-      value: skeletonWarrior
-      objectReference: {fileID: 0}
-    - target: {fileID: 3010644234400862267, guid: c704478de59a73947bc0cc251e4ff851,
-        type: 3}
-      propertyPath: potentialBattles.Array.data[2].enemies.Array.data[2]
-      value: skeletonWarrior
-      objectReference: {fileID: 0}
-    - target: {fileID: 3010644234400862267, guid: c704478de59a73947bc0cc251e4ff851,
-        type: 3}
-      propertyPath: potentialBattles.Array.data[2].enemies.Array.data[3]
-      value: skeletonWarrior
-      objectReference: {fileID: 0}
-    - target: {fileID: 3010644234400862267, guid: c704478de59a73947bc0cc251e4ff851,
-        type: 3}
-      propertyPath: potentialBattles.Array.data[2].enemies.Array.data[4]
-      value: skeletonWarrior
-      objectReference: {fileID: 0}
-    m_RemovedComponents: []
-  m_SourcePrefab: {fileID: 100100000, guid: c704478de59a73947bc0cc251e4ff851, type: 3}
 --- !u!1001 &1531688356225247554
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -22422,12 +21868,75 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 0ba68ff26724f3640aa9b8f856c5f8c2, type: 3}
---- !u!4 &2415520861938729773 stripped
-Transform:
-  m_CorrespondingSourceObject: {fileID: 3010644234400862246, guid: c704478de59a73947bc0cc251e4ff851,
-    type: 3}
-  m_PrefabInstance: {fileID: 595130012595507979}
-  m_PrefabAsset: {fileID: 0}
+--- !u!1001 &2312726631728250529
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    m_TransformParent: {fileID: 216647972}
+    m_Modifications:
+    - target: {fileID: 711428436414686681, guid: 378f34688486c4148a9506b444235d07,
+        type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 8.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 711428436414686681, guid: 378f34688486c4148a9506b444235d07,
+        type: 3}
+      propertyPath: m_LocalPosition.y
+      value: -3.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 711428436414686681, guid: 378f34688486c4148a9506b444235d07,
+        type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 711428436414686681, guid: 378f34688486c4148a9506b444235d07,
+        type: 3}
+      propertyPath: m_LocalRotation.x
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 711428436414686681, guid: 378f34688486c4148a9506b444235d07,
+        type: 3}
+      propertyPath: m_LocalRotation.y
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 711428436414686681, guid: 378f34688486c4148a9506b444235d07,
+        type: 3}
+      propertyPath: m_LocalRotation.z
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 711428436414686681, guid: 378f34688486c4148a9506b444235d07,
+        type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 711428436414686681, guid: 378f34688486c4148a9506b444235d07,
+        type: 3}
+      propertyPath: m_RootOrder
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 711428436414686681, guid: 378f34688486c4148a9506b444235d07,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 711428436414686681, guid: 378f34688486c4148a9506b444235d07,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 711428436414686681, guid: 378f34688486c4148a9506b444235d07,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 711428436414686683, guid: 378f34688486c4148a9506b444235d07,
+        type: 3}
+      propertyPath: m_Name
+      value: Gob Mage
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: 378f34688486c4148a9506b444235d07, type: 3}
 --- !u!1001 &2479810651711133387
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -22571,6 +22080,12 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: e0c9a9d8f45822440a6d227f88e8bf50, type: 3}
+--- !u!4 &3010644232666127224 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 711428436414686681, guid: 378f34688486c4148a9506b444235d07,
+    type: 3}
+  m_PrefabInstance: {fileID: 2312726631728250529}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &5667134866050826909
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -23207,7 +22722,7 @@ PrefabInstance:
         type: 3}
       propertyPath: enemies.Array.data[0]
       value: 
-      objectReference: {fileID: 1197910171}
+      objectReference: {fileID: 0}
     - target: {fileID: 12824833782655610, guid: 7687ed015578f2742b98740f2c0ce327,
         type: 3}
       propertyPath: enemies.Array.data[1]
@@ -23217,12 +22732,12 @@ PrefabInstance:
         type: 3}
       propertyPath: enemies.Array.data[2]
       value: 
-      objectReference: {fileID: 1727144097}
+      objectReference: {fileID: 0}
     - target: {fileID: 12824833782655610, guid: 7687ed015578f2742b98740f2c0ce327,
         type: 3}
       propertyPath: enemies.Array.data[3]
       value: 
-      objectReference: {fileID: 272244356}
+      objectReference: {fileID: 0}
     - target: {fileID: 12824833782655610, guid: 7687ed015578f2742b98740f2c0ce327,
         type: 3}
       propertyPath: enemies.Array.data[4]
